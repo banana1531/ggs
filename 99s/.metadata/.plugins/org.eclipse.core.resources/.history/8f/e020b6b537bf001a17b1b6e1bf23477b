@@ -1,0 +1,39 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1> myInfoModify 들어왔다~</h1>
+	
+	<div class='container'>
+		<form class='form-inline' action="#">
+			<div class='form-group'>
+				아이디 : <input type="text" class='form-control'>
+			</div>
+			<div class='form-group'>
+				비밀번호 : <input type="text" class='form-control'>
+				 <input type="button" name="비밀번호 변경하기">
+			</div>
+			<div class='form-group'>
+				이름 : <input type="text" class='form-control'>
+			</div>
+			<div class='form-group'>
+				생년월일 : <input type="text" class='form-control'>
+			</div>
+			<div class='form-group'>
+				성별 : <input type="text" class='form-control'>
+			</div>
+			<div class='form-group'>
+				선호팀 : <input type="text" class='form-control'>
+			</div>
+		</form>
+		
+	
+	</div>
+	
+</body>
+</html>

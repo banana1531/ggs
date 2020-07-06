@@ -1,0 +1,13 @@
+package com.ggs.DAO;
+
+import com.ggs.DTO.TeamInfo;
+
+public class TeamInfoDAO {
+	
+	public TeamInfo getTeamInfo() {
+		TeamInfo myTeam = new TeamInfo();
+		
+		return myTeam;
+	}
+	
+}

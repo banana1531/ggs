@@ -1,0 +1,52 @@
+package com.ggs.mypage;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class MDController {
+	
+	
+	//마이페이지 메인가기
+	@RequestMapping("mypage/mypageMain.gg")
+	public String mypagemain() {
+		
+		return "myPage/MainMypage";
+	}
+	
+	//마이팀 상세정보 보고
+	@RequestMapping("mypage/myTeamDetail.gg")
+	public String myTeamDetail() {
+		return "myPage/MyTeamDetail";
+	}
+	
+	//마이팀 경기일정 보기
+	@RequestMapping("mypage/myTeamSchedule.gg")
+	public String myTeamSchedule() {
+		return "myPage/MyTeamSchedule";
+	}
+	
+	//내정보 수정 보여주기
+	@RequestMapping("mypage/myInfoModifyForm.gg")
+	public String myInfoModifyForm() {
+		return "myPage/myInfoModify";
+	}
+	
+	//내정보 수정하기
+	@RequestMapping("mypage/myInfoModify.gg")
+	public String myInfoModify() {
+		return "myPage/myInfoModify";
+	}
+	
+	//회원탈퇴
+	@RequestMapping("mypage/leave.gg")
+	public String leave() {
+		return "myPage/leave";
+	}
+	
+	//회원탈퇴 성공
+	@RequestMapping("mypage/leaveSuccess.gg")
+	public String leaveSuccess() {
+		return "myPage/leaveSuccess";
+	}
+}

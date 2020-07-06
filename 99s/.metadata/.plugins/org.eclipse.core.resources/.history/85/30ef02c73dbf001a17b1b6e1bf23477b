@@ -1,0 +1,17 @@
+package com.ggs.DTO;
+
+import java.sql.Date;
+
+public class membersDTO {
+	
+	private String id;  	//아이디
+	private String name;   	//이름
+	private String birth;	//생년월일
+	private String fteam;	//선호팀
+	private String password;//비밀번호
+	private String gender;	//성별
+	private String email;	//이메일
+	private int boardM;		//게시판 조작 권한
+	private int boardV;		//게시판 조회 권한
+	private int login;		//로그인권한
+}

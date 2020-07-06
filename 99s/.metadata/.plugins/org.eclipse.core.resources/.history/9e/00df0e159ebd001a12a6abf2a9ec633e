@@ -1,0 +1,14 @@
+package com.ggs.mypage;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("mypage")
+public class MDController {
+	
+	@RequestMapping("")
+	public String mypagemain() {
+		
+	}
+	
+	
+}
