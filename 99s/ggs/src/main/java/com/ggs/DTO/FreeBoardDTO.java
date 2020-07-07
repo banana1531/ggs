@@ -2,6 +2,7 @@ package com.ggs.DTO;
 
 import java.sql.Date;
 
+//자유게시판 테이블  DTO
 public class FreeBoardDTO {
 	
 	private int 	wno; 		//글 관리번호

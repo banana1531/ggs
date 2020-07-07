@@ -1,6 +1,6 @@
 package com.ggs.DTO;
 
-
+//회원 테이블 DTO
 public class MembersDTO {
 	
 	private String id;  	//아이디

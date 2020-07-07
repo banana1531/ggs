@@ -1,6 +1,7 @@
 package com.ggs.DTO;
 
-public class TeamInfo {
+//팀정보 테이블 DTO
+public class TeamInfoDTO {
 	
 	private String teamName; 	//팀이름
 	private String tel;			//전화/팩스번호

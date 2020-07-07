@@ -2,6 +2,7 @@ package com.ggs.DTO;
 
 import java.sql.Date;
 
+//공지사항게시판 테이블 DTO
 public class NoticeBoardDTO {
 	
 	private int 	wno; 		//글 관리번호

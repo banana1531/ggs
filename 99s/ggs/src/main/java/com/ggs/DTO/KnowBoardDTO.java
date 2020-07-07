@@ -2,6 +2,7 @@ package com.ggs.DTO;
 
 import java.sql.Date;
 
+//지식 게시판 테이블 DTO
 public class KnowBoardDTO {
 	
 	private int 	wno; 		//글 관리번호
