@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +20,15 @@
 				<td>제목</td>
 				<td>작성일</td>
 			</tr>
-		
+			<c:forEach items="${mylist}" var="list">
+				<tr>
+					<td>자유게시판</td>
+					<td>${list.wno }글번호</td>
+					<td>${list.title }글제목</td>
+					<td>${list.writedate }작성일</td>
+				</tr>
+			</c:forEach>
+			
 		</table>
 	</div>
 	
@@ -35,7 +44,15 @@
 				<td>내가 예측한 결과</td>
 				<td>포인트 증감</td>
 			</tr>
-		
+			<c:forEach items="${myprelist}" var="plist">
+				<tr>
+					<td>${plist.gdate }</td>
+					<td>${plist.ateamname} vs ${plist.bteamname}</td>
+					<td>${plist.ascore } : ${plist.bscore }</td>
+					<td>${plist.predict }</td>
+					<td>${plist.ppoint }</td>
+				</tr>
+			</c:forEach>
 		</table>
 	</div>
 	
@@ -43,15 +60,13 @@
 	<div class="container">
 		<p>My Team 예정 경기</p>
 		  <div class="btn-group btn-group-justified">
-			    <a href="#" class="btn btn-primary">1경기일자<br/>시간<br/>상대팀</a>
-			    <a href="#" class="btn btn-primary">1경기일자<br/>시간<br/>상대팀</a>
-			    <a href="#" class="btn btn-primary">1경기일자<br/>시간<br/>상대팀</a>
-			    <a href="#" class="btn btn-primary">1경기일자<br/>시간<br/>상대팀</a>
-			    <a href="#" class="btn btn-primary">1경기일자<br/>시간<br/>상대팀</a>
+		   	<c:forEach items="${teamSchedule}" var="schedule">
+			    <a href="#" class="btn btn-primary">${schedule.gdate}
+			    <br/>${schedule.gtime}
+			    <br/>${schedule.ateamname} vs ${schedule.bteamname}
+			    <br/>${schedule.stadium}</a>
+			</c:forEach>
 		  </div>
-	</div>
-	
-	
-	
+	</div>	
 </body>
 </html>

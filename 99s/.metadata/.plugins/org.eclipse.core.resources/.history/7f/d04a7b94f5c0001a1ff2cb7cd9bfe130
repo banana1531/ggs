@@ -1,0 +1,83 @@
+package com.ggs.mypage;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.MembersDAO;
+import com.ggs.DAO.PreResultDAO;
+import com.ggs.DAO.TeamInfoDAO;
+import com.ggs.DTO.FreeBoardDTO;
+import com.ggs.DTO.MembersDTO;
+import com.ggs.DTO.PreResultDTO;
+
+@Service
+public class MyPageService {
+	
+	@Autowired
+	private TeamInfoDAO dao;
+	
+	@Autowired
+	private PreResultDAO preResultDAO;
+	
+	@Autowired
+	private MembersDAO membersDAO;
+	
+	//내가 쓴글 가져오기
+	
+	//내가 참여한 승부예측 가져오기
+	public List<PreResultDTO> getMyPreList(String id){
+		
+		return preResultDAO.getMyPreList(id);
+	}
+	
+	
+	
+	//내팀 정보 가져오기	
+	public void getMyTeamInfo() {
+		System.out.println("MyPageService.getMyTeamInfo() 진입");
+		//session 정보를 넘긴다.
+		dao.getTeamInfo();	
+			
+	}
+
+	//내가 쓴글 가져오기
+	public List<FreeBoardDTO> getMyArticle(String id) {
+		return dao.getMyArticle(id);
+	}
+
+
+
+	public MembersDTO getMyInfo(String id) {
+		
+		return membersDAO.getMyInfo(id);
+	}
+
+
+
+	public void updatePw(String id, String newPw) {
+		
+		MembersDTO memberDTO = new MembersDTO();
+		memberDTO.setPw(newPw);
+		
+		
+		membersDAO.updatePw(memberDTO);
+	}
+
+
+
+	public void getMyteamSchedule(String id) {
+		
+		
+	}
+
+
+
+	//내팀 경기일정 가져오기
+	
+	
+	
+}

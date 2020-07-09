@@ -1,0 +1,24 @@
+package com.ggs.mypage;
+
+import com.ggs.DTO.TeamInfoDTO;
+
+public class MyPageService {
+	
+	
+	//내가 쓴글 가져오기
+	
+	//내가 참여한 승부예측 가져오기
+	
+	//내팀 정보 가져오기	
+	public void getMyTeamInfo() {
+		
+		//session 정보를 넘긴다.
+		TeamInfoDTO myteam = new TeamInfoDTO();	
+			
+	}
+	
+	//내팀 경기일정 가져오기
+	
+	
+	
+}

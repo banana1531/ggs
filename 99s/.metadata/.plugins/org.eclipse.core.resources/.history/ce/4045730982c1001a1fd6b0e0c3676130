@@ -1,0 +1,19 @@
+package com.ggs.admin;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.ggs.DTO.FreeBoardDTO;
+
+@Service
+public class AdminService {
+
+	
+	public List<FreeBoardDTO> getBoardList(){
+		
+		return null;
+	}
+	
+		
+}

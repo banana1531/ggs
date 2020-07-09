@@ -1,22 +1,94 @@
 package com.ggs.mypage;
 
-import com.ggs.DTO.TeamInfo;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.MembersDAO;
+import com.ggs.DAO.PreResultDAO;
+import com.ggs.DAO.TeamInfoDAO;
+import com.ggs.DAO.TeamRecordDAO;
+import com.ggs.DTO.FreeBoardDTO;
+import com.ggs.DTO.MembersDTO;
+import com.ggs.DTO.PreResultDTO;
+import com.ggs.DTO.TeamInfoDTO;
+import com.ggs.DTO.TeamRecordDTO;
+
+@Service
 public class MyPageService {
+	
+	@Autowired
+	private TeamInfoDAO teamInfodao;
+	
+	@Autowired
+	private PreResultDAO preResultDAO;
+	
+	@Autowired
+	private MembersDAO membersDAO;
+	
+	@Autowired
+	private TeamRecordDAO teamRecordDAO;
 	
 	
 	//내가 쓴글 가져오기
-	
+	public List<FreeBoardDTO> getMyArticle(String id) {
+		return teamInfodao.getMyArticle(id);
+	}
+
 	//내가 참여한 승부예측 가져오기
-	
-	//내팀 정보 가져오기	
-	public void getMyTeamInfo() {
-		
-		//session 정보를 넘긴다.
-		TeamInfo myteam = new TeamInfo();	
-			
+	public List<PreResultDTO> getMyPreList(String id){
+		return preResultDAO.getMyPreList(id);
 	}
 	
+	//내팀 경기일정 가져오기
+	public List<TeamRecordDTO> getMyteamSchedule(String id) {
+		String myteam="SK";
+		return teamRecordDAO.getMyTeamSchedule(myteam);
+	}
+	
+	//내팀 정보 가져오기	
+	public TeamInfoDTO getMyTeamInfo() {
+		System.out.println("MyPageService.getMyTeamInfo() 진입");
+		//session 정보를 넘긴다.
+		return teamInfodao.getTeamInfo();	
+	}
+
+	
+	//내정보 가져오기
+	public MembersDTO getMyInfo(String id) {
+		
+		return membersDAO.getMyInfo(id);
+	}
+	
+	//비교팀 정보 가져오기
+
+	//비밀번호 수정하기
+	public void updatePw(String id, String newPw) {
+		
+		MembersDTO memberDTO = new MembersDTO();
+		memberDTO.setPw(newPw);
+		membersDAO.updatePw(memberDTO);
+		
+	}
+
+	//비밀번호 확인하기
+	public boolean checkPw(String id, String newPw) {
+		
+		String oldPw = membersDAO.getPw(id);
+		
+		return oldPw.equals(newPw);
+	}
+	
+	
+	//월단위 경기 일정 가져오기
+	//받은 월 정보를 DB에 적용이 가능하도록 변환한다.
+	public void getMonthlySchedule(String team, int i) {
+		
+		System.out.println("i="+i);
+	}
+	
+
 	//내팀 경기일정 가져오기
 	
 	

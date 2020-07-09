@@ -1,0 +1,34 @@
+package com.ggs.mypage;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.TeamInfoDAO;
+import com.ggs.DTO.TeamInfoDTO;
+
+
+@Service
+public class MyPageService {
+	
+	@Autowired
+	private TeamInfoDAO teamInfoDAO;
+	
+	
+	//내가 쓴글 가져오기
+	
+	//내가 참여한 승부예측 가져오기
+	
+	//내팀 정보 가져오기	
+	public TeamInfoDTO getMyTeamInfo() {
+		
+		//session 정보를 넘긴다.
+			
+		return teamInfoDAO.getTeamInfo();	
+	}
+	
+	//내팀 경기일정 가져오기
+	
+	
+	
+}

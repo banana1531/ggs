@@ -7,12 +7,21 @@ public class MembersDTO {
 	private String name;   	//이름
 	private String birth;	//생년월일
 	private String fteam;	//선호팀
-	private String password;//비밀번호
+	private String pw;//비밀번호
 	private String gender;	//성별
 	private String email;	//이메일
 	private int boardM;		//게시판 조작 권한
 	private int boardV;		//게시판 조회 권한
 	private int login;		//로그인권한
+	private int ppoint;     //승부예측 누적 포인트
+	
+	
+	public int getPpoint() {
+		return ppoint;
+	}
+	public void setPpoint(int ppoint) {
+		this.ppoint = ppoint;
+	}
 	public String getId() {
 		return id;
 	}
@@ -37,11 +46,12 @@ public class MembersDTO {
 	public void setFteam(String fteam) {
 		this.fteam = fteam;
 	}
-	public String getPassword() {
-		return password;
+	
+	public String getPw() {
+		return pw;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
 	public String getGender() {
 		return gender;
@@ -75,9 +85,9 @@ public class MembersDTO {
 	}
 	@Override
 	public String toString() {
-		return "membersDTO [id=" + id + ", name=" + name + ", birth=" + birth + ", fteam=" + fteam + ", password="
-				+ password + ", gender=" + gender + ", email=" + email + ", boardM=" + boardM + ", boardV=" + boardV
-				+ ", login=" + login + "]";
+		return "MembersDTO [id=" + id + ", name=" + name + ", birth=" + birth + ", fteam=" + fteam + ", pw=" + pw
+				+ ", gender=" + gender + ", email=" + email + ", boardM=" + boardM + ", boardV=" + boardV + ", login="
+				+ login + ", ppoint=" + ppoint + "]";
 	}
 	
 	

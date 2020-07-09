@@ -14,30 +14,29 @@
 			<table class='form-group'>
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" class='form-control'></td>
+					<td>${myinfo.id }</td>
 				</tr>
 				<tr>
 					<td>비밀번호 : </td>
 					<td>						
-						<input type="text" class='form-control'> 
-						<input type="button" id='chPw' value="비밀번호 변경하기">
+						<a href="/mypage/updatePwForm.gg"><input type="button" id='chPw' value="비밀번호 변경하기"></a>
 					</td>
 				</tr>
 				<tr>
 					<td>이름 : </td>
-					<td><input type="text" class='form-control'></td>					
+					<td>${myinfo.name}</td>					
 				</tr>
 				<tr>
 					<td>생년월일 : </td>
-					<td><input type="text" class='form-control'></td>				
+					<td>${myinfo.birth }</td>				
 				</tr>
 				<tr>
 					<td>성별 : </td>
-					<td><input type="text" class='form-control'></td>
+					<td>${myinfo.gender }</td>
 				</tr>
 				<tr>
 					<td>선호팀 : </td>
-					<td><input type="text" class='form-control'></td>
+					<td><input type="text" value="${myinfo.fteam }" class='form-control'></td>
 				</tr>
 				
 				<tr>

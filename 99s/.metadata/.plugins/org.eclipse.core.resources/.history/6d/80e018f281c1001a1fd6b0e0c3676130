@@ -1,0 +1,23 @@
+package com.ggs.DAO;
+
+import java.util.List;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ggs.DTO.FreeBoardDTO;
+
+@Repository
+public class FreeBoardDAO {
+	
+	@Autowired
+	private SqlSessionTemplate session;
+	
+	
+	//최근 등록된 글 가져오기 - 자유게시판, 정보오류 게시판
+	public List<FreeBoardDTO> getBoardList(){
+			
+		return session.selectList("");
+	}
+}

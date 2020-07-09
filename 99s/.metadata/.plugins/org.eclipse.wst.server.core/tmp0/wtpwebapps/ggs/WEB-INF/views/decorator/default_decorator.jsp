@@ -80,15 +80,26 @@ article {
 			<ul class="nav nav-tabs" role="tablist">
 				<li class="active"><a href="#">Home</a></li>
 				<li><a href="#">About</a></li>
-
 				<li class="dropdown"><a class="dropdown-toggle"
-					data-toggle="dropdown" > My Page <span class="caret"></span></a>
+					data-toggle="dropdown" href="/mypage/mypageMain.gg"> My Page <span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<li><a href="/mypage/mypageMain.gg">My Page</a></li>
 						<li><a href="/mypage/myTeamDetail.gg">My Team 정보</a></li>
 						<li><a href="/mypage/myTeamSchedule.gg">My Team 경기일정</a></li>
-						<li><a href="/mypage/myInfoModifyForm.gg">내정보 수정</a></li>
-					</ul></li>
+						<li><a href="/mypage/checkPw.gg">내정보 수정</a></li>
+					</ul>
+				</li>
+					
+				<li class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="/admin/adminMain.gg">관리자 페이지<span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/admin/adminMain.gg">전체현황</a></li>
+						<li><a href="/admin/deSummary.gg">신고처리</a></li>
+						<li><a href="/admin/memberSummary.gg">회원관리</a></li>
+						<li><a href="/admin/dataMain.gg">data관리</a></li>
+						
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</header>

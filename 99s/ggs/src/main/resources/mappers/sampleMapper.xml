@@ -4,7 +4,22 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="memberMapper">
-
+	
+	<select id="board" resultType="com.ggs.DTO.FreeBoardDTO">
+	
+	 	SELECT @rownum :=@rownum+1 AS writeno, t.id, t.title, t.writedate,t.views 
+			FROM
+			(
+				SELECT id,title, writedate, views, isvisible 
+				FROM freeboard 
+				WHERE id=#{uid} 
+				UNION SELECT id,title, writedate, views, isvisible 
+				FROM inforerrorboard 
+				WHERE id=#{uid} 
+				ORDER BY writedate DESC
+			) t
+			WHERE t.isvisible=1 LIMIT 5 ;
+	</select>
 
 </mapper>
 
