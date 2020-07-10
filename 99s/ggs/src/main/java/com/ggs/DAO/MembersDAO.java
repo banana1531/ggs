@@ -27,6 +27,14 @@ public class MembersDAO {
 
 		return session.selectOne("members.getPw", uid);
 	}
-	
+
+		
+	//로그인 처리
+	public HashMap loginProc(HashMap map) {
+		System.out.println("loginProc DAO 진입");		
+		HashMap result= (HashMap)session.selectOne("members.loginProc",map);
+		System.out.println("result="+result);
+		return result;
+	}
 	
 }
