@@ -1,7 +1,5 @@
 package com.ggs.member;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +33,11 @@ public class LoginController {
 		System.out.println("요청 함수 loginloginProc()!"); 
 		//1.파라미터 받기
 		String id=mdto.getId();
-		String password=mdto.getPassword();
-		System.out.println("요청 함수 loginloginProc()id/pw= "+id+"/"+password); 
+		String pw=mdto.getPw();
+		System.out.println("요청 함수 loginloginProc()id/pw= "+id+"/"+pw); 
 					
 		//2.비즈니스로직 -> Service ->DAO ->DB
-		HashMap result = mService.loginProc(mdto,session);
+		MembersDTO result = mService.loginProc(mdto,session);
 		if (result != null) { 
 		//로그인 성공
 			RedirectView rv=new RedirectView("../"); //main으로 이동하기로 변경예정
@@ -50,6 +48,13 @@ public class LoginController {
 			mv.addObject("msg","fail");
 		}
 		return mv;
+	}
+	
+	//아이디 찾기 폼 보여주기 
+	@RequestMapping("/idFindFrm")	
+	public String idFindFrm(){
+		System.out.println("요청 함수 idFindFrm()!"); 
+		return "member/idFindFrm";
 	}
 
 }

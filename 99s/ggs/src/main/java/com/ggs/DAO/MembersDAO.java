@@ -30,10 +30,9 @@ public class MembersDAO {
 
 		
 	//로그인 처리
-	public HashMap loginProc(HashMap map) {
+	public MembersDTO loginProc(MembersDTO mdto) {
 		System.out.println("loginProc DAO 진입");		
-		HashMap result= (HashMap)session.selectOne("members.loginProc",map);
-		System.out.println("result="+result);
+		MembersDTO result= (MembersDTO)session.selectOne("members.loginProc",mdto);
 		return result;
 	}
 	

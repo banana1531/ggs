@@ -18,11 +18,11 @@
 	 	SELECT pw FROM members WHERE id=#{uid}
 	</select>
 
-	<select id="loginProc" resultType="java.util.HashMap"
-		parameterType="java.util.HashMap">
-		select id,name,team,email,grantm,grants,grantlogin
+	<select id="loginProc" resultType="com.ggs.DTO.MembersDTO"
+		parameterType="com.ggs.DTO.MembersDTO">
+		select id,name,team,email,grantm,grants,grantlogin,ppoint
 		from members
-		where id=#{id} and pw=#{password}
+		where id=#{id} and pw=#{pw}
 	</select>
 
 	

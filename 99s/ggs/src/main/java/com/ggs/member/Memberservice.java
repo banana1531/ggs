@@ -16,28 +16,26 @@ public class Memberservice {
 	MemberDAO mDAO;
 	
 	//로그인처리
-	public HashMap loginProc(MembersDTO mdto, HttpSession session) {
-		System.out.println("Memberservice-loginloginProc()!");
-		HashMap map =new HashMap();
-		map.put("id",mdto.getId());
-		map.put("password",mdto.getPassword()); 						
+	public MembersDTO loginProc(MembersDTO mdto, HttpSession session) {
+		System.out.println("Memberservice-loginloginProc()!");						
 		
-		HashMap result = mDAO.loginProc(map);
+		MembersDTO result = mDAO.loginProc(mdto);
 		
 		//로그인 실패시
-		if(result==null || result.size()==0) {
+		if(result==null) {
 			System.out.println("회원X");
 		}else {
 		//로그인 성공시 ->로그인한 유저의 정보를 세션에 저장
 			System.out.println("회원O");
-			session.setAttribute("UID",result.get("id"));
-			session.setAttribute("UNAME",result.get("name"));
-			session.setAttribute("UTEAM",result.get("team"));
-			session.setAttribute("UEMAIL",result.get("email"));
-			session.setAttribute("UBOARDM",result.get("grantm"));
-			session.setAttribute("UBOARDV",result.get("grants"));
-			session.setAttribute("ULOGIN",result.get("grantlogin"));
-			System.out.println("로그인 성공 회원의 아이디는"+session.getAttribute("UID"));
+			session.setAttribute("UID",result.getId());
+			session.setAttribute("UNAME",result.getName());
+			session.setAttribute("UTEAM",result.getFteam());
+			session.setAttribute("UEMAIL",result.getEmail());
+			session.setAttribute("UBOARDM",result.getBoardM());
+			session.setAttribute("UBOARDV",result.getBoardV());
+			session.setAttribute("ULOGIN",result.getLogin());
+			session.setAttribute("UPOINT",result.getPpoint());
+			System.out.println("로그인 성공 "+session.getAttribute("UID")+"/"+session.getAttribute("UEMAIL"));
 		}
 		return result;	
 	}
