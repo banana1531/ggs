@@ -23,7 +23,7 @@ public class NoticeBoardService {
 	public PageUtil getPageInfo(int nowPage) {
 		System.out.println("페이징관련 service");
 		int totalCount = nbDAO.getTotalCnt();
-		System.out.println(totalCount);
+//		System.out.println(totalCount);
 		PageUtil pInfo = new PageUtil(nowPage, totalCount);
 		return pInfo;
 	}
@@ -40,11 +40,14 @@ public class NoticeBoardService {
 		pg.setEndPage(end);
 		
 		NoticeBoardDTO nbDTO = new NoticeBoardDTO();
-//		nbDTO.setStart(start);
-//		nbDTO.setEnd(end);
 
 		ArrayList<NoticeBoardDTO> list = nbDAO.getListView(nbDTO);
 		return list;
 	}
 
+	//상세보기
+	public NoticeBoardDTO detailView(int writeno) {
+		NoticeBoardDTO nbDTO = nbDAO.detailView(writeno);
+		return nbDTO;
+	}
 }

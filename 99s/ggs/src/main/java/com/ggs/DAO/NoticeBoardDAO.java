@@ -21,12 +21,13 @@ public class NoticeBoardDAO {
 	// 전체게시물 수 조회
 	public int getTotalCnt() {
 		System.out.println("DAO--------------------------------------");
-//		int result = session.selectOne("NoticeBoard.totalCnt");
-//		System.out.println("result="+ result);
-//		return result;
 		int k = session.selectOne("NoticeBoard.totalCnt");
-		System.out.println("k="+k);
 		return k;
+	}
+	
+	// 상세보기
+	public NoticeBoardDTO detailView(int writerno) {
+		return (NoticeBoardDTO)session.selectOne("NoticeBoard.detailView", writerno);
 	}
 
 }

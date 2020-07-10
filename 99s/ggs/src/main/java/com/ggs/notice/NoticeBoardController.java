@@ -28,7 +28,7 @@ public class NoticeBoardController {
 		// 1.파라미터받기 nowPage=
 		// 2.비즈니스로직 <->Service<->DAO<->SQL.xml->DB
 		// 2-1) 페이징관련 정보준비
-		System.out.println("nowPage=" + nowPage);
+//		System.out.println("nowPage=" + nowPage);
 		PageUtil pInfo = nservice.getPageInfo(nowPage);
 
 		// 2-2) 해당 페이지에 출력할 목록조회
