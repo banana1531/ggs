@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ggs.DAO.TeamInfoDAO;
+import com.ggs.DTO.TeamRecordDTO;
+
 @Service
 public class TeamService {
 
 	@Autowired
-	TeamDAO tDao;
+	TeamInfoDAO tDao;
 
 	TeamRecordDTO trDto = new TeamRecordDTO();
 	
