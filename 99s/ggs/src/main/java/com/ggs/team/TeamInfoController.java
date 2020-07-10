@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ggs.DTO.TeamInfoDTO;
 import com.ggs.DTO.TeamRecordDTO;
 
 
@@ -14,13 +15,13 @@ import com.ggs.DTO.TeamRecordDTO;
 
 @Controller
 @RequestMapping("/team")
-public class TeamController {
+public class TeamInfoController {
 
 	@Autowired
-	TeamService tService;
+	TeamInfoService tService;
 
-	@RequestMapping("/ListView")
-	public ModelAndView TeamlistView(ModelAndView mv) {
+	@RequestMapping("/list")
+	public ModelAndView Teamlist(ModelAndView mv) {
 		
 		//1.파라미터받기
 		
@@ -167,17 +168,18 @@ public class TeamController {
 		mv.addObject("HHLoss", HHLoss);
 		
 		//4.View
-		mv.setViewName("team/listView");
+		mv.setViewName("TeamInfo/list");
 
 		return mv;
 	}
 	
-	@RequestMapping("/DetailView")
+	@RequestMapping("/KIA")
 	public ModelAndView TeamDetailView(ModelAndView mv) {
 		
 		//1.파라미터받기
 		
 		//2.비즈니스로직(->Service->DAO->db)
+//		ArrayList<TeamInfoDTO> KIAWin = tService.getInfoKIA();
 		
 		//3.Model(실제조회목록)
 		

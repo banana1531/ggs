@@ -9,7 +9,7 @@ import com.ggs.DAO.TeamInfoDAO;
 import com.ggs.DTO.TeamRecordDTO;
 
 @Service
-public class TeamService {
+public class TeamInfoService {
 
 	@Autowired
 	TeamInfoDAO tDao;
