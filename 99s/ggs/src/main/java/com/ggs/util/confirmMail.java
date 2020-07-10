@@ -19,8 +19,8 @@ public class confirmMail {
 	public int sendMail(String mailAddress){
 		
 		String host 	= "smtp.naver.com";   		//네이버 메일 이용
-		String user 	= "desertfish@naver.com";   //보내는 사람 네이버 메일 주소
-		String password = "dlwns8304";              //보내는 사람 네이버 비밀번호
+		String user 	= "rnfhrnrlfjrl6@naver.com";   //보내는 사람 네이버 메일 주소
+		String password = "rlfjrlrnfhrn6";              //보내는 사람 네이버 비밀번호
 		
 		//String to = mailAddress;         			// 받은사람 메일 주소
 		
