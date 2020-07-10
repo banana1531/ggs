@@ -12,7 +12,22 @@
 	<!-- 이동버튼 -->
 	
 	<!-- 회원 보유 포인트 순위 -->
-	
+	<div class="container">
+	<p>승부예측</p>
+		<table class="table">
+		<td>순위</td>
+		<td>아이디</td>
+		<td>보유 포인트 현황</td>	
+	</tr>
+	<c:forEach items="${boardlist}" var="list">
+		<tr>
+		<td>1</td>
+		<td>${list.id}</td>
+		<td>${list.ppoint}</td>
+	</tr>
+	</c:forEach>
+	</table>
+	</div>
 	<!-- 금일 경기 리스트 -->
 	
 </body>

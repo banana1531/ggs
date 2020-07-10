@@ -6,6 +6,7 @@ public class TeampredictDTO {
 
 	private int gno;				//경기기록번호
 	private Date gdate; 		//일자
+	private String 	gtime;			//경기시간
 	private String hteamname;		//홈팀번호
 	private int hteamscore;		//홈팀점수
 	private String ateamname;		//어웨이팀번호
