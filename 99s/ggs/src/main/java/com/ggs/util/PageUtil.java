@@ -1,4 +1,4 @@
-package com.ggs.utill;
+package com.ggs.util;
 /*
  * 	페이지 이동 기능을 만들기 위해서 보조적으로 사용할 유틸리티 클래스
  */
