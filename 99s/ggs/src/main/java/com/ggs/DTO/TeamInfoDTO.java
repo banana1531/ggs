@@ -7,6 +7,7 @@ public class TeamInfoDTO {
 	private String homepage;
 	private String birth;
 	private String location;
+	private String stadium;
 	private String owner;
 	private String ceo;
 	private String head;
@@ -43,6 +44,12 @@ public class TeamInfoDTO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	public String getStadium() {
+		return stadium;
+	}
+	public void setStadium(String stadium) {
+		this.stadium = stadium;
+	}
 	public String getOwner() {
 		return owner;
 	}
@@ -76,8 +83,9 @@ public class TeamInfoDTO {
 	
 	@Override
 	public String toString() {
-		return "TeamDTO [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
-				+ ", location=" + location + ", owner=" + owner + ", ceo=" + ceo + ", head=" + head + ", director="
-				+ director + ", history=" + history + "]";
+		return "TeamInfoDTO [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
+				+ ", location=" + location + ", stadium=" + stadium + ", owner=" + owner + ", ceo=" + ceo + ", head="
+				+ head + ", director=" + director + ", history=" + history + "]";
 	}
+	
 }

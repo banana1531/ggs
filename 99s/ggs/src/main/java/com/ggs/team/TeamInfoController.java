@@ -179,11 +179,23 @@ public class TeamInfoController {
 		//1.파라미터받기
 		
 		//2.비즈니스로직(->Service->DAO->db)
-//		ArrayList<TeamInfoDTO> KIAWin = tService.getInfoKIA();
+		ArrayList<TeamInfoDTO> InfoKIA = tService.getInfoKIA();
+		ArrayList<TeamRecordDTO> KIAWin = tService.getKIAWin();
+		ArrayList<TeamRecordDTO> KIADraw = tService.getKIADraw();
+		ArrayList<TeamRecordDTO> KIALose = tService.getKIALose();
+		ArrayList<TeamRecordDTO> KIAScore = tService.getKIAScore();
+		ArrayList<TeamRecordDTO> KIALoss = tService.getKIALoss();
 		
 		//3.Model(실제조회목록)
+		mv.addObject("InfoKIA", InfoKIA);
+		mv.addObject("KIAWin", KIAWin);
+		mv.addObject("KIADraw", KIADraw);
+		mv.addObject("KIALose", KIALose);
+		mv.addObject("KIAScore", KIAScore);
+		mv.addObject("KIALoss", KIALoss);
 		
 		//4.View
+		mv.setViewName("TeamInfo/InfoKIA");
 		
 		return mv;
 	}

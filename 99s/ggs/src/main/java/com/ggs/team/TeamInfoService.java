@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ggs.DAO.TeamInfoDAO;
+import com.ggs.DTO.TeamInfoDTO;
 import com.ggs.DTO.TeamRecordDTO;
 
 @Service
@@ -15,6 +16,7 @@ public class TeamInfoService {
 	TeamInfoDAO tDao;
 
 	TeamRecordDTO trDto = new TeamRecordDTO();
+	TeamInfoDTO tDto = new TeamInfoDTO();
 	
 	//KIA의 누적 승리수
 	public ArrayList<TeamRecordDTO> getKIAWin() {
@@ -269,6 +271,11 @@ public class TeamInfoService {
 	public ArrayList<TeamRecordDTO> getHHLoss() {
 		ArrayList<TeamRecordDTO> HHLoss = tDao.getHHLoss(trDto);
 		return HHLoss;
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoKIA() {
+		ArrayList<TeamInfoDTO> InfoKIA = tDao.getInfoKIA(tDto);
+		return InfoKIA;
 	}
 
 }

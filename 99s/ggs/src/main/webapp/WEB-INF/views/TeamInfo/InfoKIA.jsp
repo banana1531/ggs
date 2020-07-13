@@ -18,35 +18,31 @@
 </style>
 </head>
 <body>
-	<%-- mv.addObject("LIST", list);//실제조회목록
-  		 mv.addObject("PINFO",pInfo);//페이징관련 정보 --%>
-	조회목록=${LIST}
-	<br />
-	
 	<%-- 목록 출력 --%>
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
 				<th>팀이름</th>
-				<th>전화번호</th>
+				<th>전화/팩스</th>
 				<th>홈페이지</th>
-				<th>창단일</th>
-				<th>위치</th>
-				<th>소유자</th>
-				<th>CEO</th>
-				<th>헤드</th>
-				<th>디렉터</th>
-				<th>역사</th>
-				
+				<th>창단년도</th>
+				<th>연고지역</th>
+				<th>구장</th>
+				<th>구단주</th>
+				<th>대표이사</th>
+				<th>단장</th>
+				<th>감독</th>
+				<th>우승횟수(연도)</th>				
 			</tr>
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
-			<c:forEach items="${LIST}" var="dto">
+			<c:forEach items="${InfoKIA}" var="dto">
 				<tr>
 					<td>${dto.teamName}</td>
 					<td>${dto.tel}</td>
 					<td>${dto.homepage}</td>
 					<td>${dto.birth}</td>
 					<td>${dto.location}</td>
+					<td>${dto.stadium}</td>
 					<td>${dto.owner}</td>
 					<td>${dto.ceo}</td>
 					<td>${dto.head}</td>
@@ -56,6 +52,5 @@
 			</c:forEach>
 		</tbody>
 	</table>
-
 </body>
 </html>

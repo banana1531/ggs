@@ -345,6 +345,12 @@
 		WHERE ateamname="한화";
 	</select>
 	
+	<select id="getInfoKIA" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="KIA";
+	</select>
+	
 </mapper>
 
 

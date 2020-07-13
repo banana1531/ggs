@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.ggs.DTO.TeamInfoDTO;
 import com.ggs.DTO.TeamRecordDTO;
 
 @Repository
@@ -219,6 +220,10 @@ public class TeamInfoDAO {
 
 	public ArrayList getHHLoss(TeamRecordDTO trDto) {
 		return (ArrayList)session.selectList("team.getHHLoss", trDto);
+	}
+
+	public ArrayList getInfoKIA(TeamInfoDTO trDto) {
+		return (ArrayList)session.selectList("team.getInfoKIA", trDto);
 	}
 
 }
