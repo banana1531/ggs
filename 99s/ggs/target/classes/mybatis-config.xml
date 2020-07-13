@@ -5,5 +5,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
-	
+	<typeAliases>
+		<typeAlias type="com.ggs.DTO.TeamRecordDTO" alias="TeamRecordDTO" />
+		<typeAlias type="com.ggs.DTO.TeamInfoDTO" alias="TeamInfoDTO" />
+		<typeAlias type="java.lang.Integer" alias="int" />
+		<typeAlias type="java.lang.String" alias="string" />
+	</typeAliases>
 </configuration>
