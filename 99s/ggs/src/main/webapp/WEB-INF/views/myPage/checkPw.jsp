@@ -10,11 +10,12 @@
 	<h1> checkPw 들어왔다~</h1>
 	
 	<div class='container'>
-		<form class='form-inline'>
+		<form method="post" class='form-inline'>
 			<input type="text" name="newPw">
-			<button>확인</button>
+			<button type="submit">확인</button>
 			<button type="reset">취소</button>
 		</form>
+		${notmatch}
 	</div>	
 </body>
 </html>

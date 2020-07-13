@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ggs.DAO.FreeBoardDAO;
 import com.ggs.DAO.MembersDAO;
 import com.ggs.DAO.PreResultDAO;
 import com.ggs.DAO.TeamInfoDAO;
 import com.ggs.DAO.TeamRecordDAO;
-import com.ggs.DTO.FreeBoardDTO;
+import com.ggs.DTO.BoardDTO;
 import com.ggs.DTO.MembersDTO;
 import com.ggs.DTO.PreResultDTO;
 import com.ggs.DTO.TeamInfoDTO;
@@ -30,10 +31,13 @@ public class MyPageService {
 	@Autowired
 	private TeamRecordDAO teamRecordDAO;
 	
+	@Autowired
+	private FreeBoardDAO freeBoardDAO;
+	
 	
 	//내가 쓴글 가져오기
-	public List<FreeBoardDTO> getMyArticle(String id) {
-		return teamInfodao.getMyArticle(id);
+	public List<BoardDTO> getMyArticle(String id) {
+		return freeBoardDAO.getMyArticle(id);
 	}
 
 	//내가 참여한 승부예측 가져오기
@@ -54,10 +58,8 @@ public class MyPageService {
 		return teamInfodao.getTeamInfo();	
 	}
 
-	
 	//내정보 가져오기
 	public MembersDTO getMyInfo(String id) {
-		
 		return membersDAO.getMyInfo(id);
 	}
 	
@@ -65,17 +67,17 @@ public class MyPageService {
 
 	//비밀번호 수정하기
 	public void updatePw(String id, String newPw) {
-		
 		MembersDTO memberDTO = new MembersDTO();
 		memberDTO.setPw(newPw);
 		membersDAO.updatePw(memberDTO);
-		
 	}
 
 	//비밀번호 확인하기
 	public boolean checkPw(String id, String newPw) {
 		
 		String oldPw = membersDAO.getPw(id);
+		System.out.println("oldPw="+oldPw);
+		System.out.println("newPw="+newPw);
 		
 		return oldPw.equals(newPw);
 	}
@@ -84,8 +86,12 @@ public class MyPageService {
 	//월단위 경기 일정 가져오기
 	//받은 월 정보를 DB에 적용이 가능하도록 변환한다.
 	public void getMonthlySchedule(String team, int i) {
-		
 		System.out.println("i="+i);
+	}
+	
+	//내정보 수정하기
+	public int updateMyInfo(MembersDTO member) {
+		return membersDAO.updateMyInfo(member);
 	}
 	
 

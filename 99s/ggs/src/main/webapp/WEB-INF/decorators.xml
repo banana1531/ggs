@@ -8,6 +8,7 @@
 	<decorator name="main" page="default_decorator.jsp">
 		<pattern>/mypage/*</pattern>
 		<pattern>/admin/*</pattern>
+		<pattern>/member/*</pattern>
 	</decorator>
 	
 </decorators>

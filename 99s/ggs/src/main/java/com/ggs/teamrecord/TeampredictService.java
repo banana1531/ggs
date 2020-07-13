@@ -1,6 +1,5 @@
 package com.ggs.teamrecord;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.ggs.DAO.MembersDAO;
 import com.ggs.DAO.TeamRecordDAO;
 import com.ggs.DAO.TeampredictDAO;
-import com.ggs.DTO.FreeBoardDTO;
 
 @Service
 public class TeampredictService {

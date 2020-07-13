@@ -37,6 +37,7 @@ https://java.sun.com/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
   <filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>*.gg</url-pattern>
+		<url-pattern>/</url-pattern>
   </filter-mapping>
   
 </web-app>

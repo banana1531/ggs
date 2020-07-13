@@ -1,7 +1,6 @@
 package com.ggs.mypage;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,9 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ggs.util.confirmMail;
+import com.ggs.DTO.MembersDTO;
+import com.ggs.util.ConfirmMail;
 
 @Controller
 @RequestMapping("mypage")
@@ -28,8 +29,7 @@ public class MDController {
 		//파라미터
 		//회원정보(id)
 		HttpSession session = request.getSession();
-		
-		String id = (String)session.getAttribute("id");
+		String id = "test";//(String)session.getAttribute("id");
 		
 		//비즈니스
 		//내가쓴글가져오기
@@ -95,8 +95,6 @@ public class MDController {
 		//팀 이름과 월정보를 주면 해당 자료를 기준으로 경기일정을 가져온다.
 		service.getMonthlySchedule(team, cal.get(Calendar.MONTH));
 		
-		
-		
 		return "myPage/myTeamSchedule";
 	}
 	
@@ -127,28 +125,40 @@ public class MDController {
 		return "myPage/myInfoModify";
 	}
 	
-	//내정보 수정하기   --> ajax 적용 검토
-	@RequestMapping("/myInfoModify.gg")
-	public void myInfoModify() {
+	//내정보 수정하기 
+	@PostMapping("/myInfoModify.gg")
+	public String myInfoModify(Model model, MembersDTO member) {
+		if(service.updateMyInfo(member)>0)
+			model.addAttribute("result", "정보가 수정되었습니다.");
+		else model.addAttribute("result", "정보을 실패하였습니다.");
 		
-		//파라미터
-		//회원정보 - 수정된 또는 수정항목 전부
+		//모델 지정
+		model.addAttribute("myinfo", service.getMyInfo(member.getId()));
 		
-		//비즈니스
-		//내 수정 정보 db업데이트
+		return "/myPage/myInfoModify";
+	}
+	
+	//비밀번호 확인 폼 보여주기
+	@GetMapping("/checkPw.gg")
+	public String checkPw() {
+		return "myPage/checkPw";
 	}
 	
 	//비밀번호 확인
-	@GetMapping("/checkPw.gg")
+	@PostMapping("/checkPw.gg")
 	public String checkPw(Model model, String newPw) {
-		String Pw = newPw;
+		System.out.println("checkPw()-post.newPw:"+newPw);
 		String id = "test";
-		if(service.checkPw(id, newPw)) return "redirest:/mypage/myInfoModifyForm.gg";
+		if(service.checkPw(id, newPw)) {
+			return "redirect:/mypage/myInfoModifyForm.gg";
+		}
 		else {
 			model.addAttribute("notmatch", "비밀번호가 일치하지 않습니다.");
 			return "myPage/checkPw";
 			}
 	}
+	
+	
 	
 	//비밀번호 변경폼 보여주기
 	@RequestMapping("/updatePwForm.gg")
@@ -159,14 +169,9 @@ public class MDController {
 	//비밀번호 변경하기 
 	@RequestMapping("/updatePw.gg")
 	public String updatePw(String newPw) {
-		
 		//파라미터
-		//회원정보(id)
 		String id="test";
-		//비즈니스
-		//변경된 비밀번호 db업데이트
 		service.updatePw(id, newPw);
-		
 		return "myPage/updatePwSuccess";
 	}
 
@@ -186,7 +191,7 @@ public class MDController {
 	//인증번호 보내기  --> ajax로 구현
 	@RequestMapping("/sendNum.gg")
 	public void sendNum(Model model) {
-		confirmMail mail = new confirmMail();
+		ConfirmMail mail = new ConfirmMail();
 		model.addAttribute("num", mail.sendMail("desertfish@naver.com"));
 	}
 	

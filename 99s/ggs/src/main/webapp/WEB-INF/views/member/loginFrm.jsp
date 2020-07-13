@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head title="로그인">
-<head>
+</head>
 <body>
 	<h2>로그인</h2>
 	<hr />
@@ -30,12 +30,12 @@
 			</tr>
 			<tr class="center">
 				<td colspan="2">
-					<a href="${pageContext.request.contextPath}/member/idFindFrm">아이디 찾기</a>&nbsp;
-					<a href="${pageContext.request.contextPath}/member/pwFindFrm">비밀번호 찾기</a>&nbsp;
-					<a href="${pageContext.request.contextPath}/member/joinFrm">회원가입</a>
+					<a href="${pageContext.request.contextPath}/idFindFrm">아이디 찾기</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/pwFindFrm">비밀번호 찾기</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/joinFrm">회원가입</a>
 				</td>
 			</tr>
 		</table>
 	</form>
-<body>
+</body>
 </html> 

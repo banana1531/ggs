@@ -1,4 +1,6 @@
-﻿package com.ggs.DTO;
+package com.ggs.DTO;
+
+import java.util.Date;
 
 //회원 테이블 DTO
 public class MembersDTO {
@@ -6,22 +8,15 @@ public class MembersDTO {
 	private String id;  	//아이디
 	private String name;   	//이름
 	private String birth;	//생년월일
-	private String fteam;	//선호팀
-	private String pw;//비밀번호
+	private String team;	//선호팀
+	private String pw;		//비밀번호
 	private String gender;	//성별
 	private String email;	//이메일
 	private int boardM;		//게시판 조작 권한
 	private int boardV;		//게시판 조회 권한
 	private int login;		//로그인권한
 	private int ppoint;     //승부예측 누적 포인트
-	
-	
-	public int getPpoint() {
-		return ppoint;
-	}
-	public void setPpoint(int ppoint) {
-		this.ppoint = ppoint;
-	}
+	private Date joindate;  //가입일
 	public String getId() {
 		return id;
 	}
@@ -40,13 +35,12 @@ public class MembersDTO {
 	public void setBirth(String birth) {
 		this.birth = birth;
 	}
-	public String getFteam() {
-		return fteam;
+	public String getTeam() {
+		return team;
 	}
-	public void setFteam(String fteam) {
-		this.fteam = fteam;
+	public void setTeam(String team) {
+		this.team = team;
 	}
-	
 	public String getPw() {
 		return pw;
 	}
@@ -83,11 +77,23 @@ public class MembersDTO {
 	public void setLogin(int login) {
 		this.login = login;
 	}
+	public int getPpoint() {
+		return ppoint;
+	}
+	public void setPpoint(int ppoint) {
+		this.ppoint = ppoint;
+	}
+	public Date getJoindate() {
+		return joindate;
+	}
+	public void setJoindate(Date joindate) {
+		this.joindate = joindate;
+	}
 	@Override
 	public String toString() {
-		return "MembersDTO [id=" + id + ", name=" + name + ", birth=" + birth + ", fteam=" + fteam + ", pw=" + pw
+		return "MembersDTO [id=" + id + ", name=" + name + ", birth=" + birth + ", team=" + team + ", pw=" + pw
 				+ ", gender=" + gender + ", email=" + email + ", boardM=" + boardM + ", boardV=" + boardV + ", login="
-				+ login + ", ppoint=" + ppoint + "]";
+				+ login + ", ppoint=" + ppoint + ", joindate=" + joindate + "]";
 	}
 	
 	

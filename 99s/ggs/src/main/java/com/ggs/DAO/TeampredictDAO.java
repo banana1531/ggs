@@ -1,10 +1,11 @@
 package com.ggs.DAO;
 
-import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class TeampredictDAO {
 
 	@Autowired
@@ -14,7 +15,7 @@ public class TeampredictDAO {
 		return session.selectOne("members.myinfo",id);
 	}
 
-	public MembersDAO getMemberPoint(int ppoint) {
+	public int getMemberPoint(int ppoint) {
 		return session.selectOne("members.myinfo",ppoint);
 	}
 }

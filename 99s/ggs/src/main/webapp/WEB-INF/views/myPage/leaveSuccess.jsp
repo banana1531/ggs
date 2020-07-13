@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1> leaveSuccess  들어왔다~</h1>
+	
 </body>
 </html>
