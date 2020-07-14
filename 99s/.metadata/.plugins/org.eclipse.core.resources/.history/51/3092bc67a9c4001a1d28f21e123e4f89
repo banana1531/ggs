@@ -1,0 +1,30 @@
+package com.ggs.util;
+
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ggs.DAO.VisitCountDAO;
+
+//방문자수 카운트
+public class SessionCounter implements HttpSessionListener {
+
+	@Override
+	public void sessionCreated(HttpSessionEvent se) {
+		if(se.getSession().isNew()) excute(se);
+	}
+
+	private void excute(HttpSessionEvent se) {
+		
+		@Autowired
+		VisitCountDAO dao;
+		
+	}
+
+	@Override
+	public void sessionDestroyed(HttpSessionEvent se) {}
+	
+	
+	
+}

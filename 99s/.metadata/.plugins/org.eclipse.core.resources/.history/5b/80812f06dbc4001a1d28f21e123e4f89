@@ -1,0 +1,24 @@
+package com.ggs.DTO;
+
+public class weeklyCountDTO {
+	
+	private int cnt;
+	private int weekNum;
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public int getWeekNum() {
+		return weekNum;
+	}
+	public void setWeekNum(int weekNum) {
+		this.weekNum = weekNum;
+	}
+	@Override
+	public String toString() {
+		return "weeklyCountDTO [cnt=" + cnt + ", weekNum=" + weekNum + "]";
+	}
+	
+}

@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+   <h1>declDetail 들어왔다.</h1>
+   <div class="container">
+   <table class="table">
+   		<tr>
+   			<td>게시판 : ${detail.boardname}</td>
+   			<td>글번호 : ${detail.fno}</td>
+   		</tr>
+   		<tr>
+   			<td>작성자 : ${detail.writer}</td>
+   			<td>작성일 : ${detail.writedate}</td>
+   		</tr>
+   		<tr>
+   			<td>제목 : ${detail.title}</td>
+   		</tr>
+   		<tr>
+   			<td colspan="2">내용 : </td>
+   		</tr>
+   		<tr>
+   			<td colspan="2"><textarea readonly="readonly">${detail.content}</textarea></td>
+   		</tr>
+   		<tr>
+   			<td colspan="2">작성자 : ${detail.writer}</td>
+   		</tr>
+   </table>
+   	
+   </div>
+</body>
+</html>

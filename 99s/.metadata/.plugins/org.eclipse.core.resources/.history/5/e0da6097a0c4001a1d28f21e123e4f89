@@ -1,0 +1,47 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+	
+	//인증번호 발송하기
+	$('#getnum').click(function(){
+		location.href="/mypage/sendNum.gg";
+	});
+	
+	//인증번호 동일여부 확인하기
+	$().
+	
+});
+
+
+
+</script>
+</head>
+<body>
+	<h1> leave 들어왔다~</h1>
+	
+	<div class="container">
+		<form class="form-inline" action="/mypage/leave.gg">
+			<table class="table">
+				<tr>
+					<td><input type="text" id="chknum"><input type="button"
+						value="발송" class="btn" id="getnum">
+						<input type="hidden" id="confirmnum" value="${num}"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="탈퇴하기"  class="btn"></td>
+				</tr>
+			</table>
+			
+		</form>
+
+	</div>
+</body>
+</html>

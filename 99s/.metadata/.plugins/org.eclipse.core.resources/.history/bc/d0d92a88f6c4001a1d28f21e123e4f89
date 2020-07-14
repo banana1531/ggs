@@ -1,0 +1,6 @@
+package com.ggs.mypage;
+
+@Service
+public class MyInfoService {
+
+}

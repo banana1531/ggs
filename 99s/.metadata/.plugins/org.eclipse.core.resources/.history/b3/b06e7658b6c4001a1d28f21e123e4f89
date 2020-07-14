@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loginCount">
+	
+	<!-- 금일 접속자수 가져오기 -->
+	<select id="today" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM loginRecord WHERE loginTime = DATE(NOW());
+	</select>
+	
+	
+	<!-- 주간 단위 접속자수 가져오기 -->
+	<select id="weekly">
+		SELECT COUNT(*) AS cnt, weekofyear(loginTime) AS weekly 
+		FROM loginRecord 
+		WHERE weekofyear(loginTime) <= weekofyear(DATE(NOW())) 
+		GROUP BY weekly 
+		ORDER BY weekly DESC LIMIT 5;
+	</select>
+	
+</mapper>
+

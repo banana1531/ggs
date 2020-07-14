@@ -1,0 +1,8 @@
+package com.ggs.DAO;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class VisitCountDAO {
+
+}

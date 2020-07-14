@@ -1,0 +1,29 @@
+package com.ggs.DAO;
+
+
+import javax.inject.Inject;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.stereotype.Repository;
+
+import com.ggs.DTO.TeamInfoDTO;
+
+@Repository
+public class TeamInfoDAO {
+	
+	
+	@Inject
+	private SqlSessionTemplate sqlsession;
+	
+	
+	//session정보를 받아서 처리
+	public TeamInfoDTO getTeamInfo() {
+				
+		//session의 team이름을 추출하여 넣어준다.
+		TeamInfoDTO info =sqlsession.selectOne("TeamInfo.myteam");
+		System.out.println(info.toString());
+		
+		return info;
+	}
+	
+}

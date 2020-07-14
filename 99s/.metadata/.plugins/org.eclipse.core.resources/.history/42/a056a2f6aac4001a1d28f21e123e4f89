@@ -1,0 +1,20 @@
+package com.ggs.DAO;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.ggs.DTO.VisitCountDTO;
+
+@Repository
+public class VisitCountDAO {
+	
+	@Autowired
+	private SqlSessionTemplate session;
+	
+	
+	public int insertVisitor(VisitCountDTO dto) {
+		
+		return session.insert("", dto);
+	}
+}

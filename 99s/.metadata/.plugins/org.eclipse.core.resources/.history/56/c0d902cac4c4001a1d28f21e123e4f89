@@ -1,0 +1,98 @@
+package com.ggs.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.DeclarationDAO;
+import com.ggs.DAO.FreeBoardDAO;
+import com.ggs.DAO.LonginRecordDAO;
+import com.ggs.DAO.MembersDAO;
+import com.ggs.DTO.DeclarationDTO;
+import com.ggs.DTO.DeclarationDetailDTO;
+import com.ggs.DTO.DeclarationListDTO;
+import com.ggs.DTO.BoardDTO;
+import com.ggs.DTO.MembersDTO;
+
+@Service
+public class AdminService {
+
+	@Autowired
+	private FreeBoardDAO freeBoardDAO;
+	
+	@Autowired
+	private DeclarationDAO declarationDAO;
+	
+	@Autowired
+	private MembersDAO membersDAO;
+	
+	@Autowired
+	private LonginRecordDAO loninRecordDAO;
+	
+	//최근 등록글 가져오기
+	public List<BoardDTO> getBoardList(){
+		return freeBoardDAO.getBoardList();
+	}
+	
+	//신고 접수 목록 가져오기
+	public List<DeclarationListDTO> getDeclList() {
+		return declarationDAO.getList();
+	}
+
+	
+	//신고글 상세 내용 가져오기
+	public DeclarationDetailDTO getDetail(DeclarationDTO dto) {
+		
+		DeclarationDetailDTO re =declarationDAO.getDetail(dto); 
+		System.out.println(re);
+		return re;	
+	}
+	
+	
+	//신고글 처리 결과 업데이트 하기
+	public int updateBoard(BoardDTO dto) {
+		if(freeBoardDAO.updateBoard(dto)>0)
+			return declarationDAO.updateOutput(dto);
+		else return 0;		
+	}
+
+	//신고처리 완료된 목록 가져오기
+	public List<DeclarationListDTO> getdonDecList() {
+		List list = declarationDAO.getdonDecList();
+		System.out.println(list);
+		return list;	
+	}
+	
+	//회원 목록 가져오기
+	public List<MembersDTO> getMembersList() {
+		return membersDAO.getMembersList();		
+	}
+	
+	//신고 처리 완료글 검색해서 가져오기
+	public List<DeclarationListDTO> decSearch(String option, String name) {
+		
+		return declarationDAO.decSearch(option, name);
+	}
+
+	
+	
+	//회원 접속자, 주간 접속자, 전체 가입자 수 가져오기 가져오기
+	public String weeklyLogin() {
+		//금일 접속자수
+		loninRecordDAO.todayLogin();
+		//주간단위 접속자수
+		List list = loninRecordDAO.weeklyLogin();
+		String result = "[";
+		for(int i=list.size();i>0;i--) {
+			result += "['"+i+"week',"+list.get(i-1)+"],";
+		}
+		result=result.substring(0, result.length()-1)+"]";
+		System.out.println("result="+result);
+		
+		//전체 가입자수		
+		return result;
+	}
+	
+		
+}

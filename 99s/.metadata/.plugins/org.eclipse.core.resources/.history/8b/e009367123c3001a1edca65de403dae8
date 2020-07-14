@@ -1,0 +1,103 @@
+package com.ggs.teamrecord;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/matchpredict")
+public class TeampredictController {
+
+	@Autowired
+	private TeampredictService service;
+	
+	
+	
+	//승부예측 메인페이지 가기
+	@RequestMapping("/prematchMain.gg")
+	public String matchpredict(HttpServletRequest request, Model model) {
+		System.out.println("경기예측 메인페이지 matchpredict() 진입");
+	
+		
+		//읽어올 파라미터
+		
+		HttpSession session = request.getSession();
+		//회원정보(=id)
+		String id = (String)session.getAttribute("id");
+		//보유포인트 현황(=point)
+		int ppoint = (int)session.getAttribute("ppoint");
+		
+		//오늘 날짜
+		
+		//경기리스트
+		model.addAttribute("matchlist", service.getMatchList());
+		
+		//비즈니스
+		//회원정보테이블에서 아이디와 보유포인트 가져오기
+		model.addAttribute("");
+		//오늘날짜와 대조하여 경기리스트 보여주기
+		model.addAttribute("");
+	
+	return "prematch/prematchMain";
+}
+	
+	//---------------------------------------------------
+	
+	//경기일정 조회
+	
+	@RequestMapping("/schmatch.gg")
+	public String schmatch() {
+		
+		return "/prematch/schmatchList";	
+		
+	}
+	
+	
+	//경기결과 조회
+	
+	@RequestMapping("/rltmatch.gg")
+	public String rltmatch() {
+	
+		return "/prematch/rltmatchList";
+		
+	}
+	
+	
+	//---------------------------------------------------
+	
+	//승부예측 상세페이지 가기
+	@RequestMapping("/prematchdetail.gg")
+	public String prematchdetail() {
+		System.out.println("경기예측 상세페이지 matchpredictdetail() 진입");
+		
+		//파라미터
+
+		//오늘 날짜=todayDate
+		//경기일자=eventDate
+		//팀이름=teamName
+
+	
+		//비즈니스
+		//당일 경기일정 가져오기
+		
+		return "prematch/prematchdetail";
+	}
+	
+	//---------------------------------------------------
+	
+	
+	//투표하기
+	@RequestMapping("/electedmatch.gg")
+	public void electedmatch() {
+		
+		//파라미터
+		//
+		
+		//비즈니스
+		//투표결과 반영하여 prematchdetail에 반영된 결과 보여주기
+	}
+}

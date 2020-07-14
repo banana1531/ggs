@@ -1,0 +1,37 @@
+package com.ggs.util;
+
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+/**
+ * Application Lifecycle Listener implementation class SessionTestListener
+ *
+ */
+@WebListener
+public class SessionTestListener implements HttpSessionListener {
+
+    /**
+     * Default constructor. 
+     */
+    public SessionTestListener() {
+        // TODO Auto-generated constructor stub
+    	System.out.println("SessionTestListener 생성자");
+    }
+
+	/**
+     * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
+     */
+    public void sessionCreated(HttpSessionEvent se)  { 
+         // TODO Auto-generated method stub
+    	System.out.println("SessionTestListenver.sessionCreated()");
+    }
+
+	/**
+     * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+     */
+    public void sessionDestroyed(HttpSessionEvent se)  { 
+         // TODO Auto-generated method stub
+    }
+	
+}

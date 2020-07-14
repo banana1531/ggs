@@ -1,0 +1,97 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+<script>
+	google.charts.load('current', {
+		packages : ['corechart']});
+	google.charts.setOnLoadCallback(drawLineColors);
+
+	function drawLineColors() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'X');
+		data.addColumn('number', '접속자수');
+		//data.addColumn('number', '방문자수');
+		
+		data.addRows(${weekly});
+
+		var options = {
+			
+			hAxis : {
+				title : 'week'
+			},
+			vAxis : {
+				title : 'Count',
+				minValue : 0
+			},
+			colors : [ '#a52714', '#097138' ]
+		};
+
+		var chart = new google.visualization.LineChart(document
+				.getElementById('chart_div'));
+		chart.draw(data, options);
+	};
+</script>
+<script>
+	google.charts.load('current', {
+		packages : ['corechart']});
+	google.charts.setOnLoadCallback(drawLineColors);
+
+	function drawLineColors() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'X');
+		data.addColumn('number', '평균처리시간');
+		//data.addColumn('number', '방문자수');
+		
+		data.addRows(${avgTime});
+
+		var options = {
+			
+			hAxis : {
+				title : 'week'
+			},
+			vAxis : {
+				title : 'Count',
+				minValue : 0
+			},
+			colors : [ '#a52714', '#097138' ]
+		};
+
+		var chart = new google.visualization.LineChart(document
+				.getElementById('chart_div2'));
+		chart.draw(data, options);
+	};
+</script>
+</head>
+<body>
+   <h1>deSummary 들어왔다.</h1>
+   <div class="container">
+	   <button><a href="/admin/deSummary.gg">접수 현황</a></button>
+	   <button><a href="/admin/declList.gg">미처리 목록</a></button>
+	   <button><a href="/admin/dondeclList.gg">처리완료 목록</a></button>
+   </div>
+   
+   <div class="container">
+		<table class="table">
+			<tr>
+				<td>금일 접수건 : ${todayCnt }<br /> 미처리건 : ${toDoCnt }<br /> 금주 누적
+					접수건 : ${weekCnt }<br />
+				</td>
+			</tr>
+			<tr>
+
+				<td><!-- <div id="chart_div"> --></div>주간별 누적 점수건 그래프</td>
+				<td rowspan="2">접수사유별 점유율 그래프</td>
+			</tr>
+			<tr>
+				<td><div id="chart_div2">주간단위 평균 신고 처리 시간 그래프
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

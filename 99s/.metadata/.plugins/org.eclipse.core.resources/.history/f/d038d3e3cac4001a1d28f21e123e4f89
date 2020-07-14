@@ -1,0 +1,21 @@
+package com.ggs.util;
+
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public class ContextListenerTest implements ServletContextListener{
+
+	@Override
+	public void contextInitialized(ServletContextEvent sce) {
+		// TODO Auto-generated method stub
+		System.out.println("이거는 나오는거지?");
+		
+	}
+
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}	

@@ -1,0 +1,59 @@
+package com.ggs.admin;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/admin")
+public class AdminController {
+
+	
+	
+	//관리자페이지 메인화면 가기
+	@RequestMapping("/adminMain.gg")
+	public String adminMain() {
+		
+		return "/admin/adminMain";
+	}
+	
+	
+	//-------------------------------------------------
+	// 신고접수 현황
+	//접수 현황 보기
+	@RequestMapping("/deSummary.gg")
+	public String deSummary() {
+		
+		return "/admin/deSummary";
+	}
+	
+	//미처리건 화면 보기
+	@RequestMapping("/declList.gg")
+	public String declList() {
+		
+		return "/admin/declList";
+	}
+	
+	//미처리건 - 신고처리 화면보기
+	@RequestMapping("/declDetail.gg")
+	public String declDetail() {
+		
+		return "/admin/declDetail";
+	}
+	
+	//미처리건 - 신고처리 하기
+	@RequestMapping("/declUpdate.gg")
+	public String declUpdate() {
+		
+		return "/admin/declUpdate";
+	}
+	
+	//신고처리 완료 목록 보기
+	@RequestMapping("/dondeclList.gg")
+	public String dondeclList() {
+		
+		return "/admin/dondeclList";
+	}
+	
+	
+	
+}

@@ -1,0 +1,37 @@
+package com.ggs.admin;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/admin")
+public class DataManageController {
+	
+	@Autowired
+	private AdminService service;	
+
+	/*** ==========================================
+	 * data관리
+	 * ***/	
+	
+	//data관리 메인화면보기
+	@RequestMapping("/dataMain.gg")
+	public String dataMain() {
+		return "/admin/dataMain";
+	}
+	
+	
+	//팀 상세 정보 수정
+	@RequestMapping("/teamDetailUpdate.gg")
+	public String teamDetailUpdate() {
+		return "/admin/teamDetail";
+	}
+	
+	//팀 상세 정보 수정
+	@RequestMapping("/teamGameUpdate.gg")
+	public String teamGameUpdate() {
+		return "/admin/teamDetail";
+	}
+	
+}

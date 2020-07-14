@@ -1,0 +1,23 @@
+package com.ggs.admin;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.FreeBoardDAO;
+import com.ggs.DTO.FreeBoardDTO;
+
+@Service
+public class AdminService {
+
+	@Autowired
+	private FreeBoardDAO freeBoardDAO;
+	
+	public List<FreeBoardDTO> getBoardList(){
+		
+		return freeBoardDAO.getBoardList();
+	}
+	
+		
+}

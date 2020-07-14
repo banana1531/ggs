@@ -1,0 +1,46 @@
+package com.ggs.member;
+
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ggs.DAO.MemberDAO;
+import com.ggs.DTO.MembersDTO;
+
+@Service
+public class Memberservice {
+	@Autowired
+	MemberDAO mDAO;
+	
+	//로그인처리
+	public HashMap loginProc(MembersDTO mdto, HttpSession session) {
+		System.out.println("Memberservice-loginloginProc()!");
+		HashMap map =new HashMap();
+		map.put("id",mdto.getId());
+		map.put("password",mdto.getPw()); 						
+		
+		HashMap result = mDAO.loginProc(map);
+		
+		//로그인 실패시
+		if(result==null || result.size()==0) {
+			System.out.println("회원X");
+		}else {
+		//로그인 성공시 ->로그인한 유저의 정보를 세션에 저장
+			System.out.println("회원O");
+			session.setAttribute("UID",result.get("id"));
+			session.setAttribute("UNAME",result.get("name"));
+			session.setAttribute("UTEAM",result.get("team"));
+			session.setAttribute("UEMAIL",result.get("email"));
+			session.setAttribute("UBOARDM",result.get("grantm"));
+			session.setAttribute("UBOARDV",result.get("grants"));
+			session.setAttribute("ULOGIN",result.get("grantlogin"));
+			System.out.println("로그인 성공 회원의 아이디는"+session.getAttribute("UID"));
+		}
+		return result;	
+	}
+
+
+}
