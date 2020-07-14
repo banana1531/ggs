@@ -1,6 +1,5 @@
-package com.ggs.DAO;
+﻿package com.ggs.DAO;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -44,11 +43,10 @@ public class MembersDAO {
 	}
 	
 	//로그인 처리
-	public MembersDTO loginProc(HashMap map) {
-		System.out.println("loginProc DAO 진입");
-		MembersDTO dto = session.selectOne("members.loginProc",map);
-		System.out.println("dto="+dto);
-		return dto;
+	public MembersDTO loginProc(MembersDTO mdto) {
+		System.out.println("loginProc DAO 진입");		
+		MembersDTO result= (MembersDTO)session.selectOne("members.loginProc",mdto);
+		return result;
 	}
 
 	//가입자수 조회
