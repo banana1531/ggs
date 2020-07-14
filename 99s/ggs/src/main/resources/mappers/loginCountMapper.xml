@@ -20,5 +20,15 @@
 		ORDER BY weekofyear(loginTime) DESC LIMIT 5
 	</select>
 	
+	<!-- 최종 로그인 정보 가져오기 -->
+	<select id="chkLastLogin" resultType="java.lang.Integer">
+		SELECT DATEDIFF(NOW(), max(loginTime)) FROM loginRecord WHERE id=#{uid}
+	</select>
+	
+	<!-- 로그인 일자 삽입 -->
+	<insert id="insertLoginDate">
+		insert into loginRecord(id, loginTime) values(#{uid}, now())
+	</insert>
+	
 </mapper>
 

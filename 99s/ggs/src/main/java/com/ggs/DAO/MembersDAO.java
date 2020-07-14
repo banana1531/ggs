@@ -1,4 +1,4 @@
-﻿package com.ggs.DAO;
+package com.ggs.DAO;
 
 import java.util.List;
 
@@ -14,44 +14,71 @@ public class MembersDAO {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	//내정보 가져오기
+
+	// 내정보 가져오기
 	public MembersDTO getMyInfo(String uid) {
 		return session.selectOne("members.myinfo", uid);
 	}
-	
-	//비밀번호 변경하기
+
+	// 비밀번호 변경하기
 	public void updatePw(MembersDTO memberDTO) {
-		session.update("members.updatePw", memberDTO);		
+		session.update("members.updatePw", memberDTO);
 	}
 
-	//비밀번호 가져오기
+	// 비밀번호 가져오기
 	public String getPw(String uid) {
 		return session.selectOne("members.getPw", uid);
 	}
-	
-	//내정보 수정하기(선호팀)
+
+	// 내정보 수정하기(선호팀)
 	public int updateMyInfo(MembersDTO member) {
 		return session.update("members.updateTeam", member);
 	}
 	
-	//회원 목록 가져오기
-	public List<MembersDTO> getMembersList() {
-		List list = session.selectList("members.getMembersList");
-		System.out.println(list);
-		
-		return list;
+	//회원 권한 수정하기
+	public int updateGrant(MembersDTO member) {
+		System.out.println("MembersDAO updateGrant member="+member);
+		int k = session.update("members.updateGrant", member);
+		System.out.println("result="+k);
+		return k;
 	}
-	
-	//로그인 처리
+
+	// 회원 목록 가져오기
+	public List<MembersDTO> getMembersList() {
+		return session.selectList("members.getMembersList");
+	}
+
+	// 로그인 처리
 	public MembersDTO loginProc(MembersDTO mdto) {
-		System.out.println("loginProc DAO 진입");		
-		MembersDTO result= (MembersDTO)session.selectOne("members.loginProc",mdto);
+		System.out.println("loginProc DAO 진입");
+		MembersDTO result = (MembersDTO) session.selectOne("members.loginProc", mdto);
 		return result;
 	}
 
-	//가입자수 조회
+	// 가입자수 조회
 	public int totalCnt() {
 		return session.selectOne("members.totalCnt");
 	}
 
+	//최종 로그인 일자와 현재 로그인 일자 차이 가져오기
+	public int chkLastLogin(String uid) {
+		System.out.println("chkLastLogin. id="+uid);
+		Integer t = session.selectOne("loginCount.chkLastLogin", uid);
+		if(t==null) t=0;
+		return t;
+	}
+	
+	//로그인 기록 db 저장하기
+	public void insertLoginDate(String uid) {
+		session.insert("loginCount.insertLoginDate", uid);
+	}
+	
+	//회원 검색
+	public List<MembersDTO> memberSearch(MembersDTO search) {
+		return session.selectList("members.getMembersList", search);
+	}
+	
+	
+	
+	
 }

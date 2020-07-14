@@ -14,6 +14,11 @@
 				<tr>
 					<td colspan="2">아이디 또는 비밀번호가 일치하지 않습니다.</td>
 				</tr>
+			</c:if>	
+			<c:if test="${msg=='log'}">
+				<tr>
+					<td colspan="2">로그인이 정지된 사용자 입니다.</td>
+				</tr>
 			</c:if>
 			<tr>
 				<td>아이디</td>

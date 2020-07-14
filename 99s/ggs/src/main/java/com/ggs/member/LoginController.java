@@ -38,15 +38,19 @@ public class LoginController {
 					
 		//2.비즈니스로직 -> Service ->DAO ->DB
 		MembersDTO result = mService.loginProc(mdto,session);
-		if (result != null) { 
-		//로그인 성공
-			RedirectView rv=new RedirectView("../"); //main으로 이동하기로 변경예정
-			mv.setView(rv);}
-		else {
+		if(result==null){
 		//로그인 실패 
 			mv.setViewName("member/loginFrm");
 			mv.addObject("msg","fail");
-		}
+		}else if(result.getLogin()!=1) {
+			//로그인 권한이 없을 경우
+			mv.setViewName("member/loginFrm");
+			mv.addObject("msg","log");
+		}else{ 
+		//로그인 성공
+			RedirectView rv=new RedirectView("../"); //main으로 이동하기로 변경예정
+			mv.setView(rv);}
+		
 		return mv;
 	}
 	
