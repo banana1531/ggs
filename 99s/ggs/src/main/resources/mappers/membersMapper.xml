@@ -36,7 +36,7 @@
 	<select id="loginProc" resultType="com.ggs.DTO.MembersDTO"
 		parameterType="com.ggs.DTO.MembersDTO">
 		select
-		id,name,team,email,grantm,grants,grantlogin,ppoint
+		id,name,team,email,boardM,boardV,login,ppoint
 		from members
 		where
 		id=#{id} and pw=#{pw}
