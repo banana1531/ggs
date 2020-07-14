@@ -30,7 +30,7 @@
 			</tr>
 
 			<tr>
-				<th>KIA</th>
+				<th><a href="./KIA">KIA</a></th>
 				<c:forEach items="${KIAWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -49,7 +49,7 @@
 			</tr>
 
 			<tr>
-				<th>KT</th>
+				<th><a href="./KT">KT</a></th>
 				<c:forEach items="${KTWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -68,7 +68,7 @@
 			</tr>
 
 			<tr>
-				<th>LG</th>
+				<th><a href="./LG">LG</a></th>
 				<c:forEach items="${LGWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -87,7 +87,7 @@
 			</tr>
 
 			<tr>
-				<th>NC</th>
+				<th><a href="./NC">NC</th>
 				<c:forEach items="${NCWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -106,7 +106,7 @@
 			</tr>
 
 			<tr>
-				<th>SK</th>
+				<th><a href="./SK">SK</th>
 				<c:forEach items="${SKWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -125,7 +125,7 @@
 			</tr>
 
 			<tr>
-				<th>두산</th>
+				<th><a href="./DS">두산</th>
 				<c:forEach items="${DSWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -144,7 +144,7 @@
 			</tr>
 
 			<tr>
-				<th>롯데</th>
+				<th><a href="./LT">롯데</th>
 				<c:forEach items="${LTWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -163,7 +163,7 @@
 			</tr>
 
 			<tr>
-				<th>삼성</th>
+				<th><a href="./SS">삼성</th>
 				<c:forEach items="${SSWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -182,7 +182,7 @@
 			</tr>
 
 			<tr>
-				<th>키움</th>
+				<th><a href="./KU">키움</th>
 				<c:forEach items="${KUWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
@@ -201,7 +201,7 @@
 			</tr>
 
 			<tr>
-				<th>한화</th>
+				<th><a href="./HH">한화</th>
 				<c:forEach items="${HHWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>

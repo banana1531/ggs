@@ -1,18 +1,19 @@
 package com.ggs.DTO;
 
-//팀정보 테이블 DTO
 public class TeamInfoDTO {
+
+	private String teamName;
+	private String tel;
+	private String homepage;
+	private String birth;
+	private String location;
+	private String stadium;
+	private String owner;
+	private String ceo;
+	private String head;
+	private String director;
+	private String history;
 	
-	private String teamName; 	//팀이름
-	private String tel;			//전화/팩스번호
-	private String homepage;	//홈페이지
-	private String birth;		//창단년도
-	private String location;	//위치		
-	private String owner;		//구단주
-	private String ceo;			//대표이사
-	private String head;		//단장
-	private String director;	//감독		
-	private String history;		//우승기록
 	public String getTeamName() {
 		return teamName;
 	}
@@ -42,6 +43,12 @@ public class TeamInfoDTO {
 	}
 	public void setLocation(String location) {
 		this.location = location;
+	}
+	public String getStadium() {
+		return stadium;
+	}
+	public void setStadium(String stadium) {
+		this.stadium = stadium;
 	}
 	public String getOwner() {
 		return owner;
@@ -73,13 +80,12 @@ public class TeamInfoDTO {
 	public void setHistory(String history) {
 		this.history = history;
 	}
+	
 	@Override
 	public String toString() {
-		return "TeamInfo [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
-				+ ", location=" + location + ", owner=" + owner + ", ceo=" + ceo + ", head=" + head + ", director="
-				+ director + ", history=" + history + "]";
+		return "TeamInfoDTO [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
+				+ ", location=" + location + ", stadium=" + stadium + ", owner=" + owner + ", ceo=" + ceo + ", head="
+				+ head + ", director=" + director + ", history=" + history + "]";
 	}
-	
-	
 	
 }

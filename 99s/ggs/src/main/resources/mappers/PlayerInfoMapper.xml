@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="player">
+
+	<select id="getKIACnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="KIA"
+	</select>
+	
+	<select id="getListKIA" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="KIA"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+	
+	<select id="getKTCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="KT"
+	</select>
+	
+	<select id="getListKT" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="KT"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+	
+	<select id="getLGCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="LG"
+	</select>
+	
+	<select id="getListLG" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="LG"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+	
+	<select id="getNCCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="NC"
+	</select>
+	
+	<select id="getListNC" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="NC"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="getSKCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="SK"
+	</select>
+	
+	<select id="getListSK" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="SK"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+	
+	<select id="getDSCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="두산"
+	</select>
+	
+	<select id="getListDS" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="두산"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="getLTCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="롯데"
+	</select>
+	
+	<select id="getListLT" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="롯데"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="getSSCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="삼성"
+	</select>
+	
+	<select id="getListSS" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="삼성"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="getKUCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="키움"
+	</select>
+	
+	<select id="getListKU" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="키움"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="getHHCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname="한화"
+	</select>
+	
+	<select id="getListHH" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname="한화"
+		ORDER BY labelno ASC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="pitcher" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
+		SELECT *
+		FROM playerRecord
+		WHERE pno=#{pno}
+		ORDER BY gdate DESC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="batter" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
+		SELECT *
+		FROM playerRecord
+		WHERE pno=#{pno}
+		ORDER BY gdate DESC
+		LIMIT #{start}, 5
+	</select>
+
+	<select id="PlayerPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerRecord
+		WHERE pno=#{pno}
+	</select>
+
+</mapper>
+

@@ -38,7 +38,7 @@
 				<th>우승횟수(연도)</th>
 			</tr>
 			<%-- 반복문을 이용하여 줄출력 예정 --%>
-			<c:forEach items="${InfoKIA}" var="dto">
+			<c:forEach items="${InfoDS}" var="dto">
 				<tr>
 					<td>${dto.teamName}</td>
 					<td>${dto.tel}</td>
@@ -66,19 +66,19 @@
 				<th>실점</th>
 			</tr>
 			<tr>
-				<c:forEach items="${KIAWin}" var="dto">
+				<c:forEach items="${DSWin}" var="dto">
 					<th>${dto.win}</th>
 				</c:forEach>
-				<c:forEach items="${KIADraw}" var="dto">
+				<c:forEach items="${DSDraw}" var="dto">
 					<th>${dto.draw}</th>
 				</c:forEach>
-				<c:forEach items="${KIALose}" var="dto">
+				<c:forEach items="${DSLose}" var="dto">
 					<th>${dto.lose}</th>
 				</c:forEach>
-				<c:forEach items="${KIAScore}" var="dto">
+				<c:forEach items="${DSScore}" var="dto">
 					<th>${dto.score}</th>
 				</c:forEach>
-				<c:forEach items="${KIALoss}" var="dto">
+				<c:forEach items="${DSLoss}" var="dto">
 					<th>${dto.loss}</th>
 				</c:forEach>
 			</tr>
@@ -97,7 +97,7 @@
 				<th>구장</th>
 			</tr>
 			<tr>
-				<c:forEach items="${ScheduleKIA}" var="dto">
+				<c:forEach items="${ScheduleDS}" var="dto">
 					<tr>
 						<td>${dto.gdate}</td>
 						<td>${dto.gtime}</td>
@@ -121,11 +121,11 @@
 					</c:if>
 				
 					<c:if test="${PINFO.nowPage ne 1}">
-					<a href="../team/KIA?nowPage=${PINFO.nowPage-1}">[prev]</a> 
+					<a href="../team/DS?nowPage=${PINFO.nowPage-1}">[prev]</a> 
 					</c:if>
 					
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-					<a href="../team/KIA?nowPage=${pg}">[${pg}]</a> 
+					<a href="../team/DS?nowPage=${pg}">[${pg}]</a> 
 					</c:forEach>
 					
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -133,7 +133,7 @@
 					</c:if>
 					
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<a href="../team/KIA?nowPage=${PINFO.nowPage+1}">[next]</a>
+					<a href="../team/DS?nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if>
 				</td>
 			</tr>

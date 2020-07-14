@@ -1,31 +1,70 @@
 package com.ggs.DTO;
 
-import java.util.Date;
-
 //선수 경기 기록 DTO
 public class PlayerRecordDTO {
 	
 	private int pgno;			//기록관리번호
 	private int pno;			//선수번호
-	private String teamName;	//팀이름
-	private Date gdate;			//경기일자
-	private int win;			//승점
-	private int	lose;			//실점
-	private int	selected;		//선발
-	private int	innings_pitched;//이닝수
-	private int	runs_allowed;	//실점
-	private int	earned_runs;	//자책		
-	private int	batter;			//타자
-	private int at_bat;			//타수
-	private int hit;			//안타
-	private int ddouble;		//2타
-	private int triple;			//3타
-	private int home_run;		//홈런
-	private int base_on_balls;	//볼넷
-	private int intentional_base_on_balls;	//고4
-	private int deadball;		//사구
-	private int strikeout;		//삼진
-	private int pitch;			//투구
+	private String teamname;	//소속팀
+	private String ptype;		//포지션
+	private String gdate;		//경기일자
+	private String vs;			//상대팀
+	private String gresult;		//경기결과
+	private String sunbal;		//선발유무
+	private String ining;		//이닝
+	private String siljum;		//실점		
+	private String jachak;		//자책점
+	private String taja;		//상대한 타자수
+	private String tasu;		//상대한 타수
+	private String anta;		//피안타
+	private String eta;			//피2루타
+	private String samta;		//피3루타
+	private String home_run;	//피홈런
+	private String ball4;		//볼넷
+	private String go4;			//고의4구
+	private String sagu;		//사구
+	private String samjin;		//삼진
+	private String tugu;		//투구수
+	private String whip;		//
+	private String tayul;		//
+	private String culu;		//
+	private String ops;			//
+	private String era;			//
+	private String avli;		//
+	private String re24;		//
+	private String wpa;			//
+	private String gsc;			//
+	private String gdec;		//
+	private String gangyuk;		//
+	private String tasun;		//
+	private String p;			//
+	private String djum;		//
+	private String ruta;		//
+	private String tajum;		//
+	private String doru;		//
+	private String dosil;		//
+	private String byungsal;	//
+	private String hita;		//
+	private String hibi;		//
+	private String jangta;		//
+	
+	private int start;
+	private int end;
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
+	
 	public int getPgno() {
 		return pgno;
 	}
@@ -38,131 +77,285 @@ public class PlayerRecordDTO {
 	public void setPno(int pno) {
 		this.pno = pno;
 	}
-	public String getTeamName() {
-		return teamName;
+	public String getTeamname() {
+		return teamname;
 	}
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
 	}
-	public Date getGdate() {
+	public String getPtype() {
+		return ptype;
+	}
+	public void setPtype(String ptype) {
+		this.ptype = ptype;
+	}
+	public String getGdate() {
 		return gdate;
 	}
-	public void setGdate(Date gdate) {
+	public void setGdate(String gdate) {
 		this.gdate = gdate;
 	}
-	public int getWin() {
-		return win;
+	public String getVs() {
+		return vs;
 	}
-	public void setWin(int win) {
-		this.win = win;
+	public void setVs(String vs) {
+		this.vs = vs;
 	}
-	public int getLose() {
-		return lose;
+	public String getGresult() {
+		return gresult;
 	}
-	public void setLose(int lose) {
-		this.lose = lose;
+	public void setGresult(String gresult) {
+		this.gresult = gresult;
 	}
-	public int getSelected() {
-		return selected;
+	public String getSunbal() {
+		return sunbal;
 	}
-	public void setSelected(int selected) {
-		this.selected = selected;
+	public void setSunbal(String sunbal) {
+		this.sunbal = sunbal;
 	}
-	public int getInnings_pitched() {
-		return innings_pitched;
+	public String getIning() {
+		return ining;
 	}
-	public void setInnings_pitched(int innings_pitched) {
-		this.innings_pitched = innings_pitched;
+	public void setIning(String ining) {
+		this.ining = ining;
 	}
-	public int getRuns_allowed() {
-		return runs_allowed;
+	public String getSiljum() {
+		return siljum;
 	}
-	public void setRuns_allowed(int runs_allowed) {
-		this.runs_allowed = runs_allowed;
+	public void setSiljum(String siljum) {
+		this.siljum = siljum;
 	}
-	public int getEarned_runs() {
-		return earned_runs;
+	public String getJachak() {
+		return jachak;
 	}
-	public void setEarned_runs(int earned_runs) {
-		this.earned_runs = earned_runs;
+	public void setJachak(String jachak) {
+		this.jachak = jachak;
 	}
-	public int getBatter() {
-		return batter;
+	public String getTaja() {
+		return taja;
 	}
-	public void setBatter(int batter) {
-		this.batter = batter;
+	public void setTaja(String taja) {
+		this.taja = taja;
 	}
-	public int getAt_bat() {
-		return at_bat;
+	public String getTasu() {
+		return tasu;
 	}
-	public void setAt_bat(int at_bat) {
-		this.at_bat = at_bat;
+	public void setTasu(String tasu) {
+		this.tasu = tasu;
 	}
-	public int getHit() {
-		return hit;
+	public String getAnta() {
+		return anta;
 	}
-	public void setHit(int hit) {
-		this.hit = hit;
+	public void setAnta(String anta) {
+		this.anta = anta;
 	}
-	public int getDdouble() {
-		return ddouble;
+	public String getEta() {
+		return eta;
 	}
-	public void setDdouble(int ddouble) {
-		this.ddouble = ddouble;
+	public void setEta(String eta) {
+		this.eta = eta;
 	}
-	public int getTriple() {
-		return triple;
+	public String getSamta() {
+		return samta;
 	}
-	public void setTriple(int triple) {
-		this.triple = triple;
+	public void setSamta(String samta) {
+		this.samta = samta;
 	}
-	public int getHome_run() {
+	public String getHome_run() {
 		return home_run;
 	}
-	public void setHome_run(int home_run) {
+	public void setHome_run(String home_run) {
 		this.home_run = home_run;
 	}
-	public int getBase_on_balls() {
-		return base_on_balls;
+	public String getBall4() {
+		return ball4;
 	}
-	public void setBase_on_balls(int base_on_balls) {
-		this.base_on_balls = base_on_balls;
+	public void setBall4(String ball4) {
+		this.ball4 = ball4;
 	}
-	public int getIntentional_base_on_balls() {
-		return intentional_base_on_balls;
+	public String getGo4() {
+		return go4;
 	}
-	public void setIntentional_base_on_balls(int intentional_base_on_balls) {
-		this.intentional_base_on_balls = intentional_base_on_balls;
+	public void setGo4(String go4) {
+		this.go4 = go4;
 	}
-	public int getDeadball() {
-		return deadball;
+	public String getSagu() {
+		return sagu;
 	}
-	public void setDeadball(int deadball) {
-		this.deadball = deadball;
+	public void setSagu(String sagu) {
+		this.sagu = sagu;
 	}
-	public int getStrikeout() {
-		return strikeout;
+	public String getSamjin() {
+		return samjin;
 	}
-	public void setStrikeout(int strikeout) {
-		this.strikeout = strikeout;
+	public void setSamjin(String samjin) {
+		this.samjin = samjin;
 	}
-	public int getPitch() {
-		return pitch;
+	public String getTugu() {
+		return tugu;
 	}
-	public void setPitch(int pitch) {
-		this.pitch = pitch;
+	public void setTugu(String tugu) {
+		this.tugu = tugu;
 	}
+	public String getWhip() {
+		return whip;
+	}
+	public void setWhip(String whip) {
+		this.whip = whip;
+	}
+	public String getTayul() {
+		return tayul;
+	}
+	public void setTayul(String tayul) {
+		this.tayul = tayul;
+	}
+	public String getCulu() {
+		return culu;
+	}
+	public void setCulu(String culu) {
+		this.culu = culu;
+	}
+	public String getOps() {
+		return ops;
+	}
+	public void setOps(String ops) {
+		this.ops = ops;
+	}
+	public String getEra() {
+		return era;
+	}
+	public void setEra(String era) {
+		this.era = era;
+	}
+	public String getAvli() {
+		return avli;
+	}
+	public void setAvli(String avli) {
+		this.avli = avli;
+	}
+	public String getRe24() {
+		return re24;
+	}
+	public void setRe24(String re24) {
+		this.re24 = re24;
+	}
+	public String getWpa() {
+		return wpa;
+	}
+	public void setWpa(String wpa) {
+		this.wpa = wpa;
+	}
+	public String getGsc() {
+		return gsc;
+	}
+	public void setGsc(String gsc) {
+		this.gsc = gsc;
+	}
+	public String getGdec() {
+		return gdec;
+	}
+	public void setGdec(String gdec) {
+		this.gdec = gdec;
+	}
+	public String getGangyuk() {
+		return gangyuk;
+	}
+	public void setGangyuk(String gangyuk) {
+		this.gangyuk = gangyuk;
+	}
+	public String getTasun() {
+		return tasun;
+	}
+	public void setTasun(String tasun) {
+		this.tasun = tasun;
+	}
+	public String getP() {
+		return p;
+	}
+	public void setP(String p) {
+		this.p = p;
+	}
+	public String getDjum() {
+		return djum;
+	}
+	public void setDjum(String djum) {
+		this.djum = djum;
+	}
+	public String getRuta() {
+		return ruta;
+	}
+	public void setRuta(String ruta) {
+		this.ruta = ruta;
+	}
+	public String getTajum() {
+		return tajum;
+	}
+	public void setTajum(String tajum) {
+		this.tajum = tajum;
+	}
+	public String getDoru() {
+		return doru;
+	}
+	public void setDoru(String doru) {
+		this.doru = doru;
+	}
+	public String getDosil() {
+		return dosil;
+	}
+	public void setDosil(String dosil) {
+		this.dosil = dosil;
+	}
+	public String getByungsal() {
+		return byungsal;
+	}
+	public void setByungsal(String byungsal) {
+		this.byungsal = byungsal;
+	}
+	public String getHita() {
+		return hita;
+	}
+	public void setHita(String hita) {
+		this.hita = hita;
+	}
+	public String getHibi() {
+		return hibi;
+	}
+	public void setHibi(String hibi) {
+		this.hibi = hibi;
+	}
+	public String getJangta() {
+		return jangta;
+	}
+	public void setJangta(String jangta) {
+		this.jangta = jangta;
+	}
+	
 	@Override
 	public String toString() {
-		return "PlayerRecord [pgno=" + pgno + ", pno=" + pno + ", teamName=" + teamName + ", gdate=" + gdate + ", win="
-				+ win + ", lose=" + lose + ", selected=" + selected + ", innings_pitched=" + innings_pitched
-				+ ", runs_allowed=" + runs_allowed + ", earned_runs=" + earned_runs + ", batter=" + batter + ", at_bat="
-				+ at_bat + ", hit=" + hit + ", ddouble=" + ddouble + ", triple=" + triple + ", home_run=" + home_run
-				+ ", base_on_balls=" + base_on_balls + ", intentional_base_on_balls=" + intentional_base_on_balls
-				+ ", deadball=" + deadball + ", strikeout=" + strikeout + ", pitch=" + pitch + "]";
+		return "PlayerRecordDTO [pgno=" + pgno + ", pno=" + pno + ", teamname=" + teamname + ", ptype=" + ptype
+				+ ", gdate=" + gdate + ", vs=" + vs + ", gresult=" + gresult + ", sunbal=" + sunbal + ", ining=" + ining
+				+ ", siljum=" + siljum + ", jachak=" + jachak + ", taja=" + taja + ", tasu=" + tasu + ", anta=" + anta
+				+ ", eta=" + eta + ", samta=" + samta + ", home_run=" + home_run + ", ball4=" + ball4 + ", go4=" + go4
+				+ ", sagu=" + sagu + ", samjin=" + samjin + ", tugu=" + tugu + ", whip=" + whip + ", tayul=" + tayul
+				+ ", culu=" + culu + ", ops=" + ops + ", era=" + era + ", avli=" + avli + ", re24=" + re24 + ", wpa="
+				+ wpa + ", gsc=" + gsc + ", gdec=" + gdec + ", gangyuk=" + gangyuk + ", tasun=" + tasun + ", p=" + p
+				+ ", djum=" + djum + ", ruta=" + ruta + ", tajum=" + tajum + ", doru=" + doru + ", dosil=" + dosil
+				+ ", byungsal=" + byungsal + ", hita=" + hita + ", hibi=" + hibi + ", jangta=" + jangta + ", start="
+				+ start + ", end=" + end + ", getStart()=" + getStart() + ", getEnd()=" + getEnd() + ", getPgno()="
+				+ getPgno() + ", getPno()=" + getPno() + ", getTeamname()=" + getTeamname() + ", getPtype()="
+				+ getPtype() + ", getGdate()=" + getGdate() + ", getVs()=" + getVs() + ", getGresult()=" + getGresult()
+				+ ", getSunbal()=" + getSunbal() + ", getIning()=" + getIning() + ", getSiljum()=" + getSiljum()
+				+ ", getJachak()=" + getJachak() + ", getTaja()=" + getTaja() + ", getTasu()=" + getTasu()
+				+ ", getAnta()=" + getAnta() + ", getEta()=" + getEta() + ", getSamta()=" + getSamta()
+				+ ", getHome_run()=" + getHome_run() + ", getBall4()=" + getBall4() + ", getGo4()=" + getGo4()
+				+ ", getSagu()=" + getSagu() + ", getSamjin()=" + getSamjin() + ", getTugu()=" + getTugu()
+				+ ", getWhip()=" + getWhip() + ", getTayul()=" + getTayul() + ", getCulu()=" + getCulu() + ", getOps()="
+				+ getOps() + ", getEra()=" + getEra() + ", getAvli()=" + getAvli() + ", getRe24()=" + getRe24()
+				+ ", getWpa()=" + getWpa() + ", getGsc()=" + getGsc() + ", getGdec()=" + getGdec() + ", getGangyuk()="
+				+ getGangyuk() + ", getTasun()=" + getTasun() + ", getP()=" + getP() + ", getDjum()=" + getDjum()
+				+ ", getRuta()=" + getRuta() + ", getTajum()=" + getTajum() + ", getDoru()=" + getDoru()
+				+ ", getDosil()=" + getDosil() + ", getByungsal()=" + getByungsal() + ", getHita()=" + getHita()
+				+ ", getHibi()=" + getHibi() + ", getJangta()=" + getJangta() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
 	}
-
-	
-	
-	
 }

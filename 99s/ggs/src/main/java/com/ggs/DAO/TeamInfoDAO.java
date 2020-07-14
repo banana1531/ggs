@@ -1,6 +1,5 @@
 package com.ggs.DAO;
 
-
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -12,42 +11,31 @@ import com.ggs.DTO.TeamRecordDTO;
 
 @Repository
 public class TeamInfoDAO {
-	
+
 	@Autowired
-	private SqlSessionTemplate session;
-	
-	//session정보를 받아서 처리
-	public TeamInfoDTO getTeamInfo() {
-		System.out.println("TeamInfoDAO.getTeamInfo() 진입");
-		
-		String teamname = "SK";
-				
-		System.out.println(session.selectOne("TeamInfo.myteam").toString());
-		
-		return null;
-	}
-	
-	//KIA�쓽 �늻�쟻 �듅由ъ닔
+	SqlSessionTemplate session;
+
+	//KIA의 누적 승리수
 	public ArrayList getKIAWin (TeamRecordDTO trDto) {	
 		return (ArrayList)session.selectList("team.getKIAWin", trDto);
 	}
 
-	//KIA�쓽 �늻�쟻 臾댁듅遺��닔
+	//KIA의 누적 무승부수
 	public ArrayList getKIADraw(TeamRecordDTO trDto) {
 		return (ArrayList)session.selectList("team.getKIADraw", trDto);
 	}
 
-	//KIA�쓽 �늻�쟻 �뙣諛곗닔
+	//KIA의 누적 패배수
 	public ArrayList getKIALose(TeamRecordDTO trDto) {
 		return (ArrayList)session.selectList("team.getKIALose", trDto);
 	}
 
-	//KIA�쓽 �늻�쟻 �뱷�젏
+	//KIA의 누적 득점
 	public ArrayList getKIAScore(TeamRecordDTO trDto) {
 		return (ArrayList)session.selectList("team.getKIAScore", trDto);
 	}
 
-	//KIA�쓽 �늻�쟻 �떎�젏
+	//KIA의 누적 실점
 	public ArrayList getKIALoss(TeamRecordDTO trDto) {
 		return (ArrayList)session.selectList("team.getKIALoss", trDto);
 	}
@@ -232,9 +220,124 @@ public class TeamInfoDAO {
 		return (ArrayList)session.selectList("team.getHHLoss", trDto);
 	}
 
-	public ArrayList getInfoKIA(TeamInfoDTO trDto) {
-		return (ArrayList)session.selectList("team.getInfoKIA", trDto);
+	public ArrayList getInfoKIA(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoKIA", tDto);
+	}
+	
+	public int getKIACnt() {
+		return (Integer)session.selectOne("team.getKIACnt");
 	}
 
+	public ArrayList getScheduleKIA(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleKIA", trDto);
+	}
+
+	public ArrayList getInfoKT(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoKT", tDto);
+	}
+
+	public int getKTCnt() {
+		return (Integer)session.selectOne("team.getKTCnt");
+	}
 	
+	public ArrayList<TeamRecordDTO> getScheduleKT(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleKT", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoLG(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoLG", tDto);
+	}
+
+	public int getLGCnt() {
+		return (Integer)session.selectOne("team.getLGCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleLG(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleLG", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoNC(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoNC", tDto);
+	}
+
+	public int getNCCnt() {
+		return (Integer)session.selectOne("team.getNCCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleNC(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleNC", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoSK(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoSK", tDto);
+	}
+
+	public int getSKCnt() {
+		return (Integer)session.selectOne("team.getSKCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleSK(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleSK", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoDS(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoDS", tDto);
+	}
+
+	public int getDSCnt() {
+		return (Integer)session.selectOne("team.getDSCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleDS(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleDS", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoLT(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoLT", tDto);
+	}
+
+	public int getLTCnt() {
+		return (Integer)session.selectOne("team.getLTCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleLT(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleLT", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoSS(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoSS", tDto);
+	}
+
+	public int getSSCnt() {
+		return (Integer)session.selectOne("team.getSSCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleSS(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleSS", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoKU(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoKU", tDto);
+	}
+
+	public int getKUCnt() {
+		return (Integer)session.selectOne("team.getKUCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleKU(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleKU", trDto);
+	}
+
+	public ArrayList<TeamInfoDTO> getInfoHH(TeamInfoDTO tDto) {
+		return (ArrayList)session.selectList("team.getInfoHH", tDto);
+	}
+
+	public int getHHCnt() {
+		return (Integer)session.selectOne("team.getHHCnt");
+	}
+
+	public ArrayList<TeamRecordDTO> getScheduleHH(TeamRecordDTO trDto) {
+		return (ArrayList)session.selectList("team.getScheduleHH", trDto);
+	}
+
 }

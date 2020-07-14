@@ -1,18 +1,21 @@
 package com.ggs.DTO;
 
-//선수정보테이블 DTO
 public class PlayerInfoDTO {
+
+	private int		pno;
+	private String 	name;
+	private int 	labelno;
+	private String 	birth;
+	private String 	position;
+	private int 	height;
+	private int 	weight;
+	private String 	joinday;
+	private String 	teamName;
+	private int 	bmi;
 	
-	private int		pno;		//관리번호
-	private String 	name;		//선수이름
-	private int 	labelno;	//등번호
-	private String 	birth;		//생년월일
-	private String 	position;	//포지션
-	private int 	height;		//키
-	private int 	weight;		//몸무게
-	private String 	joinday;	//입단일
-	private String 	teamName;	//팀이름
-	private int 	bmi;		//bmi지수
+	private int start;
+	private int end;
+	
 	public int getPno() {
 		return pno;
 	}
@@ -73,12 +76,23 @@ public class PlayerInfoDTO {
 	public void setBmi(int bmi) {
 		this.bmi = bmi;
 	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	
 	@Override
 	public String toString() {
 		return "PlayerInfoDTO [pno=" + pno + ", name=" + name + ", labelno=" + labelno + ", birth=" + birth
 				+ ", position=" + position + ", height=" + height + ", weight=" + weight + ", joinday=" + joinday
-				+ ", teamName=" + teamName + ", bmi=" + bmi + "]";
+				+ ", teamName=" + teamName + ", bmi=" + bmi + ", start=" + start + ", end=" + end + "]";
 	}
-	
-	
 }
