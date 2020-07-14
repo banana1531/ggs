@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head title="로그인">
-<head>
+</head>
 <body>
 	<h2>로그인</h2>
 	<hr />
@@ -37,5 +37,5 @@
 			</tr>
 		</table>
 	</form>
-<body>
+</body>
 </html> 
