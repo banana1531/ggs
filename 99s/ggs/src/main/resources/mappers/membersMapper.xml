@@ -18,12 +18,10 @@
 		members; </select>
 
 	<!-- 아이디, 비번에 맞는 정보 가져오기 -->
-	<select resultType="com.ggs.DTO.MembersDTO" id="loginProc"> select * from
-		members where id=#{id} and pw=#{pw} </select>
+	<select resultType="com.ggs.DTO.MembersDTO" id="loginProc2"> select * from
+		members where id=#{id} and pw=#{pw} </select> 
 
 	<!-- 전체 회원수 조회 -->
-
-
 	<select resultType="java.lang.Integer" id="totalCnt"> SELECT COUNT(*) FROM
 		members </select>
 
