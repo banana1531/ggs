@@ -36,7 +36,7 @@
 				</tr>
 				<tr>
 					<td>선호팀 : </td>
-					<td><select name="fteam">
+					<td><select name="team">
 						<option value="없음">없음</option>
 						<option value="두산">두산</option>
 						<option value="롯데">롯데</option>
@@ -58,9 +58,8 @@
 					</td>
 				</tr>
 			</table>
-			
+			${result }
 		</form>
-		${result }
 	</div>	
 </body>
 </html>

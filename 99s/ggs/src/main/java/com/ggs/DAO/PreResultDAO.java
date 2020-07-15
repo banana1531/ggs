@@ -16,8 +16,6 @@ public class PreResultDAO {
 	
 	
 	public List<PreResultDTO> getMyPreList(String uid) {
-		System.out.println("PreResultDAO.getMyPreList()");		
-		uid="test";
 		return session.selectList("preresult.mypredict", uid);
 	}
 	

@@ -26,7 +26,7 @@ public class PlayerInfoController {
 	@Autowired
 	PlayerInfoService pService;
 
-	@RequestMapping("/list")
+	@RequestMapping("/list.gg")
 	public String PlayerList() {
 		return "PlayerInfo/list";
 	}

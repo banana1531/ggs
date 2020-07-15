@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class TeamRecordDTO {
 
-	private int gno;
-	private Date gdate;
-	private String gtime;
-	private String ateamname;
-	private String ascore;
-	private String bteamname;
-	private String bscore;
-	private String stadium;
+	private int 	gno;			//경기기록번호
+	private Date 	gdate; 			//일자
+	private String 	gtime;			//경기시간
+	private String 	ateamname;		//a팀번호
+	private String 	ascore;			//a팀점수
+	private String 	bteamname;		//b팀번호
+	private String 	bscore;			//b팀점수
+	private String 	stadium;		//경기장
 	
 	private String win;
 	private String draw;
@@ -19,9 +19,58 @@ public class TeamRecordDTO {
 	private String score;
 	private String loss;
 	
-	private int		start; 		//시작글번호
-	private	int		end;		//끝글번호
+	private int		start; 			//시작글번호
+	private	int		end;			//끝글번호
+	private int 	totalcnt;		//전체 데이터 숫자
 	
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
+	public String getWin() {
+		return win;
+	}
+	public void setWin(String win) {
+		this.win = win;
+	}
+	public String getDraw() {
+		return draw;
+	}
+	public void setDraw(String draw) {
+		this.draw = draw;
+	}
+	public String getLose() {
+		return lose;
+	}
+	public void setLose(String lose) {
+		this.lose = lose;
+	}
+	public String getScore() {
+		return score;
+	}
+	public void setScore(String score) {
+		this.score = score;
+	}
+	public String getLoss() {
+		return loss;
+	}
+	public void setLoss(String loss) {
+		this.loss = loss;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	public int getGno() {
 		return gno;
 	}
@@ -70,55 +119,14 @@ public class TeamRecordDTO {
 	public void setStadium(String stadium) {
 		this.stadium = stadium;
 	}
-	public String getWin() {
-		return win;
-	}
-	public void setWin(String win) {
-		this.win = win;
-	}
-	public String getDraw() {
-		return draw;
-	}
-	public void setDraw(String draw) {
-		this.draw = draw;
-	}
-	public String getLose() {
-		return lose;
-	}
-	public void setLose(String lose) {
-		this.lose = lose;
-	}
-	public String getScore() {
-		return score;
-	}
-	public void setScore(String score) {
-		this.score = score;
-	}
-	public String getLoss() {
-		return loss;
-	}
-	public void setLoss(String loss) {
-		this.loss = loss;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getEnd() {
-		return end;
-	}
-	public void setEnd(int end) {
-		this.end = end;
-	}
-	
 	@Override
 	public String toString() {
 		return "TeamRecordDTO [gno=" + gno + ", gdate=" + gdate + ", gtime=" + gtime + ", ateamname=" + ateamname
 				+ ", ascore=" + ascore + ", bteamname=" + bteamname + ", bscore=" + bscore + ", stadium=" + stadium
 				+ ", win=" + win + ", draw=" + draw + ", lose=" + lose + ", score=" + score + ", loss=" + loss
-				+ ", start=" + start + ", end=" + end + "]";
+				+ ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + "]";
 	}
+	
+	
 	
 }

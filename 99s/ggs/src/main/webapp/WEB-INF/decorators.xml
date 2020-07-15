@@ -9,6 +9,7 @@
 		<pattern>/mypage/*</pattern>
 		<pattern>/admin/*</pattern>
 		<pattern>/member/*</pattern>
+		<pattern>/team/*</pattern>
 	</decorator>
 	
 </decorators>

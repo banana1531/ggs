@@ -75,7 +75,7 @@
 	   <button><a href="/admin/dondeclList.gg">처리완료 목록</a></button>
    </div>
    
-   <div class="container">
+   <div class="container" id="container">
 		<table class="table">
 			<tr>
 				<td>금일 접수건 : ${todayCnt }<br /> 미처리건 : ${toDoCnt }<br /> 금주 누적

@@ -1,10 +1,10 @@
 package com.ggs.util;
 
-import java.util.Date;
-
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
+
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.ggs.DAO.VisitCountDAO;
 
@@ -15,7 +15,10 @@ import com.ggs.DAO.VisitCountDAO;
 @WebListener
 public class SessionCounter implements HttpSessionListener {
 	
-	//private VisitCountDAO visitCountDAO = VisitCountDAO.getInstance();
+	/*private VisitCountDAO visitCountDAO = VisitCountDAO.getInstance();*/
+	
+	/*@Autowired
+	private VisitCountDAO visitCountDAO;*/
 	
     public SessionCounter() {
     	System.out.println("SessionCounter.SessionCounter() 생성되었습니다.");
@@ -26,8 +29,7 @@ public class SessionCounter implements HttpSessionListener {
      */
     public void sessionCreated(HttpSessionEvent se)  { 
          System.out.println("SessionCounter.sessionCreated() 생성되었습니다.");
-         //Date date = new Date(); 
-         //visitCountDAO.insertVisitor(date);      
+        // visitCountDAO.insertVisitor();      
     }
 
 	/**

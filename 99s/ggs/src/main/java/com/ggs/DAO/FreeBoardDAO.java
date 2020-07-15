@@ -22,11 +22,7 @@ public class FreeBoardDAO {
 	}
 	
 	//최근 내가 쓴글 5개 가져오기
-	public List<BoardDTO> getMyArticle(String uid) {
-		
-		//id값으로 자유게시판 글목록 가져오기
-		uid="test";
-			
+	public List<BoardDTO> getMyArticle(String uid) {			
 		List<BoardDTO> list = session.selectList("memberMapper.board",uid);
 		System.out.println(list.toString());
 				

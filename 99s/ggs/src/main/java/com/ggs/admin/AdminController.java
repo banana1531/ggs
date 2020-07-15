@@ -5,9 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.ggs.DTO.DeclarationDTO;
-import com.ggs.DTO.BoardDTO;
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -25,5 +22,7 @@ public class AdminController {
 		model.addAttribute("boardlist", adminService.getBoardList());		//최근 등록 게시물 가져오기
 		model.addAttribute("declist", decService.getDeclList());			//신고 접수 목록 가져오기
 		return "/admin/adminMain";
+		
 	}
+	
 }

@@ -77,8 +77,5 @@ public class MembersDAO {
 	public List<MembersDTO> memberSearch(MembersDTO search) {
 		return session.selectList("members.getMembersList", search);
 	}
-	
-	
-	
-	
+
 }

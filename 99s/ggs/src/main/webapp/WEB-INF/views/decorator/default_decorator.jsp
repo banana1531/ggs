@@ -100,8 +100,8 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 팀/선수 정보 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">팀 정보</a></li>
-							<li><a href="#">선수 정보</a></li>
+							<li><a href="/team/teamlist.gg">팀 정보</a></li>
+							<li><a href="/player/list.gg">선수 정보</a></li>
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>

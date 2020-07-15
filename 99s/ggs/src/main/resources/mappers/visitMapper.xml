@@ -7,7 +7,7 @@
 	
 	<!-- 방문자 기록하기  -->
 	<insert id="insert">
-		insert INTO visit values(#{date})
+		insert INTO visit(acctime) values(NOW())
 	</insert>
 		
 </mapper>

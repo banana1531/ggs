@@ -95,7 +95,5 @@ public class MembersDTO {
 				+ ", gender=" + gender + ", email=" + email + ", boardM=" + boardM + ", boardV=" + boardV + ", login="
 				+ login + ", ppoint=" + ppoint + ", joindate=" + joindate + "]";
 	}
-	
-	
-	
+		
 }

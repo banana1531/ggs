@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +29,11 @@
 					<td>${list.writedate }작성일</td>
 				</tr>
 			</c:forEach>
-			
+
 		</table>
 	</div>
-	
-	
+
+
 	<!-- 내가 참여한 승부 예측 -->
 	<div class="container">
 		<p>내가 참여한 승부예측 목록</p>
@@ -47,26 +48,25 @@
 			<c:forEach items="${myprelist}" var="plist">
 				<tr>
 					<td>${plist.gdate }</td>
-					<td>${plist.ateamname} vs ${plist.bteamname}</td>
-					<td>${plist.ascore } : ${plist.bscore }</td>
+					<td>${plist.ateamname}vs ${plist.bteamname}</td>
+					<td>${plist.ascore }: ${plist.bscore }</td>
 					<td>${plist.predict }</td>
 					<td>${plist.ppoint }</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
-	
+
 	<!-- myteam 다음 경기 일정 -->
 	<div class="container">
 		<p>My Team 예정 경기</p>
-		  <div class="btn-group btn-group-justified">
-		   	<c:forEach items="${teamSchedule}" var="schedule">
-			    <a href="#" class="btn btn-primary">${schedule.gdate}
-			    <br/>${schedule.gtime}
-			    <br/>${schedule.ateamname} vs ${schedule.bteamname}
-			    <br/>${schedule.stadium}</a>
+		<div class="btn-group btn-group-justified">
+			<c:forEach items="${teamSchedule}" var="schedule">
+				<a href="#" class="btn btn-primary"><fmt:formatDate
+						value="${schedule.gdate}" pattern="yyyy-MM-dd" /> <br />${schedule.gtime}
+					<br />${schedule.ateamname} vs ${schedule.bteamname} <br />${schedule.stadium}</a>
 			</c:forEach>
-		  </div>
-	</div>	
+		</div>
+	</div>
 </body>
 </html>

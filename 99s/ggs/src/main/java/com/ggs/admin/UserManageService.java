@@ -52,4 +52,28 @@ public class UserManageService {
 		return loginRecordDAO.todayLogin();
 	}
 	
+	//회원 검색 하기
+	public List<MembersDTO> memberSearch(String search, String option) {
+		MembersDTO dto = new MembersDTO();
+		System.out.println("option="+option);
+		if(option.equals("id"))	dto.setId(search);
+		else if(option.equals("name")) dto.setName(search);
+		else if(option.equals("email")) dto.setEmail(search);
+		return membersDAO.memberSearch(dto);
+	}
+	
+	//회원 정보 상세 보기
+	public MembersDTO getMemberDetail(String id) {
+		return membersDAO.getMyInfo(id);		
+	}
+
+	//회원 권한 수정
+	public void updateGrant(MembersDTO dto) {
+		System.out.println("UserManageService.updateGrant");
+		membersDAO.updateGrant(dto);	
+	}
+	
+	//회원 정보 상세 보기
+	
+	
 }

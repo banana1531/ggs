@@ -4,7 +4,55 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="team">
-
+	
+	<!-- 팀 기본정보 가져오기 -->
+	<select id="teamDetail" resultType="com.ggs.DTO.TeamInfoDTO">
+		SELECT * FROM teaminfo where teamname=#{name}
+	</select>
+	
+	<!-- 팀 기본정보 목록 가져오기 -->
+	<select id="teamList" resultType="com.ggs.DTO.TeamInfoDTO">
+		select * from teaminfo where teamName !='없음';
+	</select>
+	
+	<!-- 팀 목록 가져오기 -->
+	<select id="getTeamList" resultType="com.ggs.DTO.TeamInfoDTO">
+	SELECT w.team AS teamName, win, score, lose, loss, draw 
+	FROM 
+		(SELECT team, sum(cnt) draw FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt 
+			FROM teamRecord 
+			WHERE ascore = bscore AND ascore &gt; -1 GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt 
+			FROM teamRecord 
+			WHERE bscore = ascore and ascore &gt; -1 GROUP BY bteamname) AS dd
+			GROUP BY team) AS d, 
+		(SELECT team, sum(cnt) lose, sum(score) loss FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
+			FROM teamRecord 
+			WHERE ascore &lt; bscore GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
+			FROM teamRecord 
+			WHERE bscore &lt; ascore GROUP BY bteamname) AS ll
+			GROUP BY team) AS l,
+		(SELECT team, sum(cnt) win, sum(score) score FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
+			FROM teamRecord 
+			WHERE ascore &gt; bscore GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
+			FROM teamRecord 
+			WHERE bscore &gt; ascore GROUP BY bteamname) AS ww
+			GROUP BY team) AS w 
+		WHERE w.team!='없음' AND w.team=d.team AND w.team=l.team 
+		GROUP BY teamName
+		ORDER BY teamName DESC;
+	</select>
+	
+	
+		
 	<select id="getKIAWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
 		SELECT count(*) as win
 		FROM teamRecord

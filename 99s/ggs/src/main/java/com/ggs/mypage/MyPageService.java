@@ -20,9 +20,6 @@ import com.ggs.DTO.TeamRecordDTO;
 public class MyPageService {
 	
 	@Autowired
-	private TeamInfoDAO teamInfodao;
-	
-	@Autowired
 	private PreResultDAO preResultDAO;
 	
 	@Autowired
@@ -46,57 +43,17 @@ public class MyPageService {
 	}
 	
 	//내팀 경기일정 가져오기
-	public List<TeamRecordDTO> getMyteamSchedule(String id) {
-		String myteam="SK";
-		return teamRecordDAO.getMyTeamSchedule(myteam);
+	public List<TeamRecordDTO> getMyteamSchedule(String team) {
+		return teamRecordDAO.getMyTeamSchedule(team);
 	}
 	
-	//내팀 정보 가져오기	
-	public TeamInfoDTO getMyTeamInfo() {
-		System.out.println("MyPageService.getMyTeamInfo() 진입");
-		//session 정보를 넘긴다.
-		return teamInfodao.getTeamInfo();	
-	}
-
+	
 	//내정보 가져오기
 	public MembersDTO getMyInfo(String id) {
 		return membersDAO.getMyInfo(id);
 	}
 	
 	//비교팀 정보 가져오기
-
-	//비밀번호 수정하기
-	public void updatePw(String id, String newPw) {
-		MembersDTO memberDTO = new MembersDTO();
-		memberDTO.setPw(newPw);
-		membersDAO.updatePw(memberDTO);
-	}
-
-	//비밀번호 확인하기
-	public boolean checkPw(String id, String newPw) {
-		
-		String oldPw = membersDAO.getPw(id);
-		System.out.println("oldPw="+oldPw);
-		System.out.println("newPw="+newPw);
-		
-		return oldPw.equals(newPw);
-	}
-	
-	
-	//월단위 경기 일정 가져오기
-	//받은 월 정보를 DB에 적용이 가능하도록 변환한다.
-	public void getMonthlySchedule(String team, int i) {
-		System.out.println("i="+i);
-	}
-	
-	//내정보 수정하기
-	public int updateMyInfo(MembersDTO member) {
-		return membersDAO.updateMyInfo(member);
-	}
-	
-
-	//내팀 경기일정 가져오기
-	
 	
 	
 }
