@@ -19,226 +19,6 @@ public class PlayerInfoService {
 	@Autowired
 	PlayerInfoDAO pDao;
 
-	public PageUtil getKIACnt(int nowPage) {
-		int totalCount = pDao.getKIACnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListKIA(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListKIA = pDao.getListKIA(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListKIA.get(i).getHeight();
-			float Weight = (float)getListKIA.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListKIA.get(i).setBmi(bmi);
-		}
-		return getListKIA;
-	}
-
-	public PageUtil getKTCnt(int nowPage) {
-		int totalCount = pDao.getKTCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListKT(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListKT = pDao.getListKT(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListKT.get(i).getHeight();
-			float Weight = (float)getListKT.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListKT.get(i).setBmi(bmi);
-		}
-		return getListKT;
-	}
-
-	public PageUtil getLGCnt(int nowPage) {
-		int totalCount = pDao.getLGCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListLG(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListLG = pDao.getListLG(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListLG.get(i).getHeight();
-			float Weight = (float)getListLG.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListLG.get(i).setBmi(bmi);
-		}
-		return getListLG;
-	}
-
-	public PageUtil getNCCnt(int nowPage) {
-		int totalCount = pDao.getNCCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListNC(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListNC = pDao.getListNC(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListNC.get(i).getHeight();
-			float Weight = (float)getListNC.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListNC.get(i).setBmi(bmi);
-		}
-		return getListNC;
-	}
-
-	public PageUtil getSKCnt(int nowPage) {
-		int totalCount = pDao.getSKCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListSK(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListSK = pDao.getListSK(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListSK.get(i).getHeight();
-			float Weight = (float)getListSK.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListSK.get(i).setBmi(bmi);
-		}
-		return getListSK;
-	}
-
-	public PageUtil getDSCnt(int nowPage) {
-		int totalCount = pDao.getDSCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListDS(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListDS = pDao.getListDS(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListDS.get(i).getHeight();
-			float Weight = (float)getListDS.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListDS.get(i).setBmi(bmi);
-		}
-		return getListDS;
-	}
-
-	public PageUtil getLTCnt(int nowPage) {
-		int totalCount = pDao.getLTCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListLT(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListLT = pDao.getListLT(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListLT.get(i).getHeight();
-			float Weight = (float)getListLT.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListLT.get(i).setBmi(bmi);
-		}
-		return getListLT;
-	}
-
-	public PageUtil getSSCnt(int nowPage) {
-		int totalCount = pDao.getSSCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListSS(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListSS = pDao.getListSS(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListSS.get(i).getHeight();
-			float Weight = (float)getListSS.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListSS.get(i).setBmi(bmi);
-		}
-		return getListSS;
-	}
-
-	public PageUtil getKUCnt(int nowPage) {
-		int totalCount = pDao.getKUCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListKU(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListKU = pDao.getListKU(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListKU.get(i).getHeight();
-			float Weight = (float)getListKU.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListKU.get(i).setBmi(bmi);
-		}
-		return getListKU;
-	}
-
-	public PageUtil getHHCnt(int nowPage) {
-		int totalCount = pDao.getHHCnt();
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
-		return pInfo;
-	}
-
-	public ArrayList<PlayerInfoDTO> getListHH(PageUtil pInfo) {
-		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
-		int end = start + pInfo.getLineCount() - 1;
-		PlayerInfoDTO pDto = new PlayerInfoDTO();
-		pDto.setStart(start-1);
-		pDto.setEnd(end);
-		ArrayList<PlayerInfoDTO> getListHH = pDao.getListHH(pDto);
-		for(int i=0; i<=4; i++) {
-			float Height = (float)getListHH.get(i).getHeight();
-			float Weight = (float)getListHH.get(i).getWeight();
-			int bmi = (int)(Weight/((Height/100)*(Height/100)));
-			getListHH.get(i).setBmi(bmi);
-		}
-		return getListHH;
-	}
-
 	public ArrayList<PlayerRecordDTO> pitcher(int pno, PageUtil pInfo) {
 		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
 		int end = start + pInfo.getLineCount() - 1;
@@ -267,6 +47,107 @@ public class PlayerInfoService {
 		return pInfo;
 	}
 
+	public ArrayList<PlayerRecordDTO> Ranking() {
+		ArrayList<PlayerRecordDTO> Ranking = pDao.Ranking();
+		for(int i=0; i<=4; i++) {
+			double beforetayul = Double.parseDouble(Ranking.get(i).getTayul());
+			double tayul = Math.round(beforetayul*1000)/1000.0;
+			Ranking.get(i).setTayul(Double.toString(tayul));
+		}
+		return Ranking;
+	}
 
+	public ArrayList<PlayerRecordDTO> Ranking2() {
+		ArrayList<PlayerRecordDTO> Ranking2 = pDao.Ranking2();
+		return Ranking2;
+	}
 
+	public ArrayList<PlayerRecordDTO> Ranking3() {
+		ArrayList<PlayerRecordDTO> Ranking3 = pDao.Ranking3();
+		return Ranking3;
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking4() {
+		ArrayList<PlayerRecordDTO> Ranking4 = pDao.Ranking4();
+		return Ranking4;
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking5() {
+		ArrayList<PlayerRecordDTO> Ranking5 = pDao.Ranking5();
+		return Ranking5;
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking6() {
+		ArrayList<PlayerRecordDTO> Ranking6 = pDao.Ranking6();
+		return Ranking6;
+	}
+
+	public ArrayList<PlayerInfoDTO> common(int pno) {
+		ArrayList<PlayerInfoDTO> common = pDao.common(pno);
+		return common;
+	}
+
+	public ArrayList<PlayerRecordDTO> pitcher2(int pno) {
+		ArrayList<PlayerRecordDTO> pitcher2 = pDao.pitcher2(pno);
+		ArrayList<PlayerRecordDTO> iningCount = pDao.iningCount(pno);
+		ArrayList<PlayerRecordDTO> ining = pDao.ining(pno);
+		
+		int IC = Integer.parseInt(iningCount.get(0).getGsc());
+		double ining3;
+		double ining4;
+		double sum = 0;
+		for(int i=0; i<=IC-1; i++) {
+			String ining2 = ining.get(i).getIning();
+			
+			if(ining2.contains(".1")) {
+				ining3 = Double.parseDouble(ining2);
+				ining4 = ining3 -0.1 + 0.333333333;
+			}
+			else if(ining2.contains(".2")) {
+				ining3 = Double.parseDouble(ining2);
+				ining4 = ining3 -0.2 + 0.666666666;
+			}
+			else {
+				ining4 = Double.parseDouble(ining2);
+			}
+			sum += ining4;
+		}
+		String sum2 = Double.toString(sum);
+		pitcher2.get(0).setIning(sum2);
+		
+		String jachak2 = pitcher2.get(0).getJachak();
+		double jachak3 = Double.parseDouble(jachak2);
+		double era = (jachak3)*9/sum;
+		double era2 = Math.round(era*100)/100.0;
+		String era3 = Double.toString(era2);
+		pitcher2.get(0).setEra(era3);
+		
+		return pitcher2;
+	}
+
+	public ArrayList<PlayerRecordDTO> batter2(int pno) {
+		ArrayList<PlayerRecordDTO> batter2 = pDao.batter2(pno);
+		double beforetayul = Double.parseDouble(batter2.get(0).getTayul());
+		double tayul = Math.round(beforetayul*1000)/1000.0;
+		batter2.get(0).setTayul(Double.toString(tayul));	
+		return batter2;
+	}
+
+	public PageUtil getTeamCnt(String teamname, int nowPage) {
+		int totalCount = pDao.getTeamCnt(teamname);
+		PageUtil pInfo = new PageUtil(nowPage, totalCount);
+		return pInfo;
+	}
+
+	public ArrayList<PlayerInfoDTO> getTeamList(String teamname, PageUtil pInfo) {
+		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
+		int end = start + pInfo.getLineCount() - 1;
+		PlayerInfoDTO pDto = new PlayerInfoDTO();
+		pDto.setStart(start-1);
+		pDto.setEnd(end);
+		pDto.setTeamname(teamname);
+		ArrayList<PlayerInfoDTO> getTeamList = pDao.getTeamList(pDto);
+		return getTeamList;
+	}
+	
 }

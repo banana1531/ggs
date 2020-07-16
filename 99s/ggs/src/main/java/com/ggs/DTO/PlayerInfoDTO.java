@@ -10,8 +10,8 @@ public class PlayerInfoDTO {
 	private int 	height;
 	private int 	weight;
 	private String 	joinday;
-	private String 	teamName;
-	private int 	bmi;
+	private String 	teamname;
+	private int bmi;
 	
 	private int start;
 	private int end;
@@ -64,11 +64,11 @@ public class PlayerInfoDTO {
 	public void setJoinday(String joinday) {
 		this.joinday = joinday;
 	}
-	public String getTeamName() {
-		return teamName;
+	public String getTeamname() {
+		return teamname;
 	}
-	public void setTeamName(String teamName) {
-		this.teamName = teamName;
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
 	}
 	public int getBmi() {
 		return bmi;
@@ -93,6 +93,6 @@ public class PlayerInfoDTO {
 	public String toString() {
 		return "PlayerInfoDTO [pno=" + pno + ", name=" + name + ", labelno=" + labelno + ", birth=" + birth
 				+ ", position=" + position + ", height=" + height + ", weight=" + weight + ", joinday=" + joinday
-				+ ", teamName=" + teamName + ", bmi=" + bmi + ", start=" + start + ", end=" + end + "]";
+				+ ", teamname=" + teamname + ", bmi=" + bmi + ", start=" + start + ", end=" + end + "]";
 	}
 }
