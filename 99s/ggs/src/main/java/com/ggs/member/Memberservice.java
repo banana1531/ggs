@@ -1,21 +1,21 @@
-﻿package com.ggs.member;
+package com.ggs.member;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ggs.DAO.MembersDAO;
+import com.ggs.DAO.MemberDAO;
 import com.ggs.DTO.MembersDTO;
 
 @Service
 public class Memberservice {
 	@Autowired
-	MembersDAO mDAO;
+	MemberDAO mDAO;
 	
 	//로그인처리
 	public MembersDTO loginProc(MembersDTO mdto, HttpSession session) {
-		System.out.println("Memberservice-loginloginProc()!");						
+		System.out.println("Memberservice-loginProc()!");						
 		
 		MembersDTO result = mDAO.loginProc(mdto);
 		
@@ -40,9 +40,32 @@ public class Memberservice {
 				mDAO.insertLoginDate(result.getId());
 				System.out.println(result.getId()+"의 최종 로그인 일자가 기록되었습니다.");
 			}
-						
 		}
 		return result;	
 	}
+	
+	//메일인증
+	public MembersDTO mailAuth(MembersDTO mdto) {
+		System.out.println("Memberservice-mailAuth()!");
+		MembersDTO result = mDAO.mailAuth(mdto);
+		return result;
+	}
+	//비밀번호 변경
+	public void updatePw(MembersDTO memberDTO) {
+		System.out.println("Memberservice-pwChgProc()!");
+		mDAO.updatePw(memberDTO);
+	}
+	//회원가입 - 아이디, 이메일 중복체크
+	public MembersDTO mailAuth1(MembersDTO mdto) {
+		System.out.println("Memberservice-mailAuth1()!");
+		MembersDTO result = mDAO.mailAuth1(mdto);
+		return result;
+	}
+	//회원가입 처리
+	public void joinProc(MembersDTO mdto) {
+		System.out.println("Memberservice-joinProc()!");
+		mDAO.joinProc(mdto);
+	}
+
 
 }

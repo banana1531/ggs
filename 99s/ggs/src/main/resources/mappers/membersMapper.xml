@@ -4,33 +4,39 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="members">
-
+	
 	<!-- 내정보 가져오기 -->
-	<select resultType="com.ggs.DTO.MembersDTO" id="myinfo"> select * from
-		members where id=#{uid} </select>
-
+	<select id="myinfo" resultType="com.ggs.DTO.MembersDTO"> select * from members where id=#{uid} </select>
+	
 	<!-- 비밀번호 가져오기 -->
-	<select resultType="java.lang.String" id="getPw"> SELECT pw FROM members
-		WHERE id=#{uid} </select>
-
+	<select id="getPw" resultType="java.lang.String"> SELECT pw FROM members WHERE id=#{uid} </select>
+	
 	<!-- 회원 목록 가져오기 -->
-	<select resultType="com.ggs.DTO.MembersDTO" id="getMembersList">
-		select * from
-		members
-		<choose>
-			<when test="id != null">where id=#{id}</when>
-			<when test="name != null">where name=#{name}</when>
-			<when test="email != null">where email=#{email}</when>
-		</choose>
+	<select id="getMembersList" resultType="com.ggs.DTO.MembersDTO">
+	select * from members 
+	
+	<choose>	
+	<when test="id != null">where id=#{id}</when>	
+	<when test="name != null">where name=#{name}</when>	
+	<when test="email != null">where email=#{email}</when>	
+	</choose>	
 	</select>
-
+	
 	<!-- 아이디, 비번에 맞는 정보 가져오기 -->
-	<select resultType="com.ggs.DTO.MembersDTO" id="loginProc2"> select * from
-		members where id=#{id} and pw=#{pw} </select> 
-
+	<select id="loginProc2" resultType="com.ggs.DTO.MembersDTO"> select * from members where id=#{id} and pw=#{pw} </select>
+	
 	<!-- 전체 회원수 조회 -->
-	<select resultType="java.lang.Integer" id="totalCnt"> SELECT COUNT(*) FROM
-		members </select>
+	<select id="totalCnt" resultType="java.lang.Integer"> SELECT COUNT(*) FROM members </select>
+	
+	<!-- 비밀번호 수정하기 -->
+	<update id="updatePw"> UPDATE members set pw=#{pw} WHERE id=#{id} </update>
+	
+	<!-- 선호팀 수정하기 -->
+	<update id="updateTeam"> UPDATE members set team=#{team} WHERE id=#{id} </update>
+	
+	<!-- 권한 수정하기 -->
+	<update id="updateGrant" parameterType="com.ggs.DTO.MembersDTO"> update members set boardM=#{boardM}, boardV=#{boardV}, login=#{login} where id=#{id} </update>
+	
 	
 	<!-- 로그인 처리하기 -->
 	<select id="loginProc" resultType="com.ggs.DTO.MembersDTO"
@@ -41,17 +47,26 @@
 		where
 		id=#{id} and pw=#{pw}
 	</select>
-
-	<!-- 비밀번호 수정하기 -->
-	<update id="updatePw"> UPDATE members set pw=#{pw} WHERE id=#{id} </update>
-
-	<!-- 선호팀 수정하기 -->
-	<update id="updateTeam"> UPDATE members set team=#{team} WHERE id=#{id}
-	</update>
 	
-	<!-- 권한 수정하기 -->	
-	<update id="updateGrant" parameterType="com.ggs.DTO.MembersDTO">
-		update members set boardM=#{boardM}, boardV=#{boardV}, login=#{login} where id=#{id}
-	</update>
+	<!-- 메일인증 : 이름-메일 / id-메일 매칭 -->
+	<select id="mailAuth" resultType="com.ggs.DTO.MembersDTO"
+		parameterType="com.ggs.DTO.MembersDTO">
+		select * from members
+		where (name=#{name} and email=#{email})OR (id=#{id} AND email=#{email})
+	</select>
+	
+	<!-- 회원가입 : 아이디, 이메일 중복체크 -->
+	<select id="mailAuth1" resultType="com.ggs.DTO.MembersDTO"
+		parameterType="com.ggs.DTO.MembersDTO">
+		select * from members
+		where id=#{id} or email=#{email}
+	</select>
+	<!-- 회원가입 처리 -->
+	<insert id="joinProc" parameterType="com.ggs.DTO.MembersDTO" >
+		insert into members
+		values(#{id},#{name},#{birth},#{team},#{pw},#{gender},#{email},1,1,1,0,NOW())
+	</insert>
+	
+	
 </mapper>
 

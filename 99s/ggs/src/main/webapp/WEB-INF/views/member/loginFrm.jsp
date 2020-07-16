@@ -8,13 +8,13 @@
 <body>
 	<h2>로그인</h2>
 	<hr />
-	<form id=loginFrm method="post" action="../member/loginProc">
+	<form id=loginFrm method="post" action="../member/loginProc.gg">
 		<table>
 			<c:if test="${msg=='fail'}">
 				<tr>
 					<td colspan="2">아이디 또는 비밀번호가 일치하지 않습니다.</td>
 				</tr>
-			</c:if>	
+			</c:if>
 			<c:if test="${msg=='log'}">
 				<tr>
 					<td colspan="2">로그인이 정지된 사용자 입니다.</td>
@@ -35,9 +35,9 @@
 			</tr>
 			<tr class="center">
 				<td colspan="2">
-					<a href="${pageContext.request.contextPath}/member/idFindFrm">아이디 찾기</a>&nbsp;
-					<a href="${pageContext.request.contextPath}/member/pwFindFrm">비밀번호 찾기</a>&nbsp;
-					<a href="${pageContext.request.contextPath}/member/joinFrm">회원가입</a>
+					<a href="${pageContext.request.contextPath}/member/idFindFrm.gg">아이디 찾기</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/member/pwFindFrm.gg">비밀번호 찾기</a>&nbsp;
+					<a href="${pageContext.request.contextPath}/member/joinFrm.gg">회원가입</a>
 				</td>
 			</tr>
 		</table>
