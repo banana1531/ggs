@@ -18,13 +18,17 @@
 </style>
 </head>
 <body>
-<a href="./KIA">KIA</a> <a href="./KT">KT</a> <a href="./LG">LG</a>
- <a href="./NC">NC</a> <a href="./SK">SK</a> <a href="./DS">두산</a>
- <a href="./LT">롯데</a> <a href="./SS">삼성</a> <a href="./KU">키움</a>
- <a href="./HH">한화</a><br/>
-	페이징관련 정보<br/>
-	nowPage=${PINFO.nowPage} / startPage=${PINFO.startPage} /
-	endPage=${PINFO.endPage}<br/>
+	<a href="../player/teamList?teamname=KIA">KIA</a>
+	<a href="../player/teamList?teamname=KT">KT</a>
+	<a href="../player/teamList?teamname=LG">LG</a>
+	<a href="../player/teamList?teamname=NC">NC</a>
+	<a href="../player/teamList?teamname=SK">SK</a>
+	<a href="../player/teamList?teamname=두산">두산</a>
+	<a href="../player/teamList?teamname=롯데">롯데</a>
+	<a href="../player/teamList?teamname=삼성">삼성</a>
+	<a href="../player/teamList?teamname=키움">키움</a>
+	<a href="../player/teamList?teamname=한화">한화</a>
+	<br/>
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
@@ -37,11 +41,10 @@
 				<th>몸무게</th>
 				<th>입단일</th>
 				<th>소속팀</th>
-				<th>bmi지수</th>
 			</tr>
-			<c:forEach items="${getListKU}" var="dto">
+			<c:forEach items="${getTeamList}" var="dto">
 				<tr>
-					<td>${dto.pno}</td>
+					<td><a href="../player/info?pno=${dto.pno}&position=${dto.position}">정보보기</a></td>
 					<td>${dto.name}</td>
 					<td>${dto.labelno}</td>
 					<td>${dto.birth}</td>
@@ -49,8 +52,7 @@
 					<td>${dto.height}</td>
 					<td>${dto.weight}</td>
 					<td>${dto.joinday}</td>
-					<td>${dto.teamName}</td>
-					<td>${dto.bmi}</td>
+					<td>${dto.teamname}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -61,15 +63,15 @@
 			<tr class="center">
 				<td>
 					<c:if test="${PINFO.nowPage eq 1}">
-					[prev] 
+					[prev]
 					</c:if>
 				
 					<c:if test="${PINFO.nowPage ne 1}">
-					<a href="../player/KU?nowPage=${PINFO.nowPage-1}">[prev]</a> 
+					<a href="../player/teamList?teamname=${PINFO.teamname}&nowPage=${PINFO.nowPage-1}">[prev]</a> 
 					</c:if>
 					
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-					<a href="../player/KU?nowPage=${pg}">[${pg}]</a> 
+					<a href="../player/teamList?teamname=${PINFO.teamname}&nowPage=${pg}">[${pg}]</a> 
 					</c:forEach>
 					
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -77,12 +79,12 @@
 					</c:if>
 					
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<a href="../player/KU?nowPage=${PINFO.nowPage+1}">[next]</a>
+					<a href="../player/teamList?teamname=${PINFO.teamname}&nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="./list">리스트로가기</a>
+	<a href="./list">리스트로 가기</a>
 </body>
 </html>

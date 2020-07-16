@@ -19,7 +19,7 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-		<table class="table" id="list">
+		<table class="table table-hover" id="list">
 			<tr>
 				<th>일자</th>
 				<th>팀이름</th>

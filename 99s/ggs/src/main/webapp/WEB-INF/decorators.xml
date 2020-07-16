@@ -10,6 +10,8 @@
 		<pattern>/admin/*</pattern>
 		<pattern>/member/*</pattern>
 		<pattern>/team/*</pattern>
+		<pattern>/teampredict/*</pattern>
+		<pattern>/player/*</pattern>
 	</decorator>
 	
 </decorators>

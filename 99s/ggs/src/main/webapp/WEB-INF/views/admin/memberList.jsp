@@ -13,6 +13,11 @@ $(function(){
 		var no = $(this).find('#id').text();
 		location="/admin/memberDetail.gg?id="+no
 	});
+
+	$(".btn").click(function(){
+		var pageNo = $(this).text();
+		location="/admin/memberList.gg?pageNo="+pageNo
+	})
 });	
 </script>
 </head>
@@ -21,10 +26,9 @@ $(function(){
 	   <button><a href="/admin/memberSummary.gg">회원 현황</a></button>
 	   <button><a href="/admin/memberList.gg">회원 목록</a></button>
    </div>
-   <div class="container">
+   <div class="container" id="body">
    
 	<p>회원 목록</p>
-	
 		<nav class="navbar navbar-right">
 			<form action="/admin/memberSearch.gg" class="form-inline">
 				<select name="option" class="form-control">
@@ -33,24 +37,25 @@ $(function(){
 					<option value="email">email</option>
 				</select> <input type="text" name="search" class="form-control">
 				<button class="btn">검색</button>
-
 			</form>
 		</nav>
-		<table class="table">
+		<table class="table table-hover">
+			<thead>
 			<tr align="center">
-				<td rowspan="2">id</td>
-				<td rowspan="2">이름</td>
-				<td rowspan="2">선호팀</td>
-				<td rowspan="2">성별</td>
-				<td rowspan="2">email</td>
-				<td rowspan="2">가입일</td>
-				<td colspan="3">권한</td>
+				<th rowspan="2">id</th>
+				<th rowspan="2">이름</th>
+				<th rowspan="2">선호팀</th>
+				<th rowspan="2">성별</th>
+				<th rowspan="2">email</th>
+				<th rowspan="2">가입일</th>
+				<th colspan="3">권한</th>
 			</tr>
 			<tr>
-				<td>글 조회</td>
-				<td>글 조작</td>
-				<td>로그인</td>
+				<th>글 조회</th>
+				<th>글 조작</th>
+				<th>로그인</th>
 			</tr>
+			</thead>
 			<c:forEach items="${memberList}" var="list">
 				<tr class="dto">
 					<td class="name" id="id">${list.id }</td>
@@ -74,7 +79,14 @@ $(function(){
 						</c:choose> </select></td>
 				</tr>
 			</c:forEach>
+				<tr>
+				<td colspan="9"><c:forEach var="i" begin="${pageInfo.startPage}"
+						end="${pageInfo.endPage}">
+					[<a class="btn">${i}</a>]
+				</c:forEach></td>
+			</tr>
 		</table>
+		
    </div>
 </body>
 </html>

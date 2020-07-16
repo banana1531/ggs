@@ -17,9 +17,9 @@ $(function(){
 </script>
 </head>
 <body>
-   <h1>teamList 들어왔다.</h1>
+   <h4>팀 목록</h4>
    <div class="container">
-   		<table class="table">
+   		<table class="table table-hover">
 			<tr>
 				<th>팀명</th>
 				<th>설립일</th>

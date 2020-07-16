@@ -15,13 +15,15 @@
 
 	<!-- 회원 목록 가져오기 -->
 	<select resultType="com.ggs.DTO.MembersDTO" id="getMembersList">
-		select * from
-		members
+		select id, name, team, gender, email, joindate, boardM, 
+		boardV, login, totalcnt  from
+		members, (SELECT COUNT(*) AS totalcnt FROM members) AS t 
 		<choose>
 			<when test="id != null">where id=#{id}</when>
 			<when test="name != null">where name=#{name}</when>
 			<when test="email != null">where email=#{email}</when>
 		</choose>
+			limit #{start}, 10
 	</select>
 
 	<!-- 아이디, 비번에 맞는 정보 가져오기 -->
@@ -53,5 +55,27 @@
 	<update id="updateGrant" parameterType="com.ggs.DTO.MembersDTO">
 		update members set boardM=#{boardM}, boardV=#{boardV}, login=#{login} where id=#{id}
 	</update>
+
+	<!-- 메일인증 : 이름-메일 / id-메일 매칭 -->
+	<select id="mailAuth" resultType="com.ggs.DTO.MembersDTO"
+		parameterType="com.ggs.DTO.MembersDTO">
+		select * from members
+		where (name=#{name} and
+		email=#{email})OR (id=#{id} AND email=#{email})
+	</select>
+
+	<!-- 회원가입 : 아이디, 이메일 중복체크 -->
+	<select id="mailAuth1" resultType="com.ggs.DTO.MembersDTO"
+		parameterType="com.ggs.DTO.MembersDTO">
+		select * from members
+		where id=#{id} or email=#{email}
+	</select>
+	<!-- 회원가입 처리 -->
+	<insert id="joinProc" parameterType="com.ggs.DTO.MembersDTO">
+		insert into members
+		values(#{id},#{name},#{birth},#{team},#{pw},#{gender},#{email},1,1,1,0,NOW())
+	</insert>
+	
+	
 </mapper>
 

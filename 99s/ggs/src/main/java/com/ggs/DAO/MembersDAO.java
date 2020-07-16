@@ -44,8 +44,9 @@ public class MembersDAO {
 	}
 
 	// 회원 목록 가져오기
-	public List<MembersDTO> getMembersList() {
-		return session.selectList("members.getMembersList");
+	public List<MembersDTO> getMembersList(MembersDTO dto) {
+		System.out.println("dto="+dto);
+		return session.selectList("members.getMembersList", dto);
 	}
 
 	// 로그인 처리
@@ -77,5 +78,24 @@ public class MembersDAO {
 	public List<MembersDTO> memberSearch(MembersDTO search) {
 		return session.selectList("members.getMembersList", search);
 	}
-
+	
+	//메일인증
+	public MembersDTO mailAuth(MembersDTO mdto) {
+		System.out.println("mailAuth DAO 진입");	
+		MembersDTO result= (MembersDTO)session.selectOne("members.mailAuth",mdto);
+		return result;
+	}
+	
+	//회원가입 - 아이디, 이메일 중복체크
+	public MembersDTO mailAuth1(MembersDTO mdto) {
+		System.out.println("mailAuth1 DAO 진입");	
+		MembersDTO result= (MembersDTO)session.selectOne("members.mailAuth1",mdto);
+		return result;
+	}
+	
+	//회원가입처리
+	public void joinProc(MembersDTO mdto) {
+		System.out.println("joinProc DAO 진입");	
+		session.insert("members.joinProc",mdto);
+	}
 }

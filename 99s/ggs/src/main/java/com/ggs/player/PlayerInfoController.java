@@ -26,208 +26,28 @@ public class PlayerInfoController {
 	@Autowired
 	PlayerInfoService pService;
 
-	@RequestMapping("/list.gg")
-	public String PlayerList() {
-		return "PlayerInfo/list";
-	}
-
-	@RequestMapping("/KIA")
-	public ModelAndView PlayerKIA(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getKIACnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListKIA = pService.getListKIA(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListKIA", getListKIA);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerKIA");
-
-		return mv;
-	}
-	
-	@RequestMapping("/KT")
-	public ModelAndView PlayerKT(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getKTCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListKT = pService.getListKT(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListKT", getListKT);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerKT");
-
-		return mv;
-	}
-	
-	@RequestMapping("/LG")
-	public ModelAndView PlayerLG(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getLGCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListLG = pService.getListLG(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListLG", getListLG);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerLG");
-
-		return mv;
-	}
-	
-	@RequestMapping("/NC")
-	public ModelAndView PlayerNC(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getNCCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListNC = pService.getListNC(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListNC", getListNC);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerNC");
-
-		return mv;
-	}
-	
-	@RequestMapping("/SK")
-	public ModelAndView PlayerSK(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getSKCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListSK = pService.getListSK(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListSK", getListSK);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerSK");
-
-		return mv;
-	}
-	
-	@RequestMapping("/DS")
-	public ModelAndView PlayerDS(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getDSCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListDS = pService.getListDS(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListDS", getListDS);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerDS");
-
-		return mv;
-	}
-	
-	@RequestMapping("/LT")
-	public ModelAndView PlayerLT(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getLTCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListLT = pService.getListLT(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListLT", getListLT);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerLT");
-
-		return mv;
-	}
-	
-	@RequestMapping("/SS")
-	public ModelAndView PlayerSS(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getSSCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListSS = pService.getListSS(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListSS", getListSS);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerSS");
-
-		return mv;
-	}
-	
-	@RequestMapping("/KU")
-	public ModelAndView PlayerKU(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getKUCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListKU = pService.getListKU(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListKU", getListKU);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerKU");
-
-		return mv;
-	}
-	
-	@RequestMapping("/HH")
-	public ModelAndView PlayerHH(@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
-			ModelAndView mv) {
-
-		// 1.파라미터받기
-
-		// 2.비즈니스로직(->Service->DAO->db)
-		PageUtil pInfo = pService.getHHCnt(nowPage);
-		ArrayList<PlayerInfoDTO> getListHH = pService.getListHH(pInfo);
-
-		// 3.Model(실제조회목록)
-		mv.addObject("getListHH", getListHH);// 실제조회목록
-		mv.addObject("PINFO", pInfo);// 페이징관련 정보
-
-		// 4.View
-		mv.setViewName("PlayerInfo/PlayerHH");
-
+	@RequestMapping("/list")
+	public ModelAndView PlayerList(ModelAndView mv) {
+		
+		//타자랭킹 타율,홈런,타점 & 투수랭킹 평균자책점,탈삼진,피안타율
+		ArrayList<PlayerRecordDTO> Ranking = pService.Ranking();
+		ArrayList<PlayerRecordDTO> Ranking2 = pService.Ranking2();
+		ArrayList<PlayerRecordDTO> Ranking3 = pService.Ranking3();
+		ArrayList<PlayerRecordDTO> Ranking4 = pService.Ranking4();
+		ArrayList<PlayerRecordDTO> Ranking5 = pService.Ranking5();
+		ArrayList<PlayerRecordDTO> Ranking6 = pService.Ranking6();
+		
+		//3. Model
+		mv.addObject("Ranking", Ranking);
+		mv.addObject("Ranking2", Ranking2);
+		mv.addObject("Ranking3", Ranking3);
+		mv.addObject("Ranking4", Ranking4);
+		mv.addObject("Ranking5", Ranking5);
+		mv.addObject("Ranking6", Ranking6);
+		
+		//4. View
+		mv.setViewName("PlayerInfo/list");
+		
 		return mv;
 	}
 	
@@ -238,21 +58,64 @@ public class PlayerInfoController {
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
 			ModelAndView mv) {
 		
+		ArrayList<PlayerInfoDTO> common = pService.common(pno);
+		
+		mv.addObject("common",common);
+		
 		if(position.contains("투수")) {
+			
+			//투수의 경기기록 & 페이징
 			PageUtil pInfo = pService.PlayerPage(nowPage, pno);
 			ArrayList<PlayerRecordDTO> pitcher = pService.pitcher(pno, pInfo);
+			
+			//투수의 통산스텟
+			ArrayList<PlayerRecordDTO> pitcher2 = pService.pitcher2(pno);
+
 			mv.addObject("pitcher", pitcher);
 			mv.addObject("PINFO", pInfo);
+			mv.addObject("pno",pno);
+			mv.addObject("position",position);
+			mv.addObject("pitcher2",pitcher2);
+			
 			mv.setViewName("PlayerInfo/pitcher");
 		}
 		else {
+			
+			//타자의 경기기록 & 페이징
 			PageUtil pInfo = pService.PlayerPage(nowPage, pno);
 			ArrayList<PlayerRecordDTO> batter = pService.batter(pno, pInfo);
+			
+			//타자의 통산스텟
+			ArrayList<PlayerRecordDTO> batter2 = pService.batter2(pno);
+			
 			mv.addObject("batter", batter);
 			mv.addObject("PINFO", pInfo);
+			mv.addObject("pno",pno);
+			mv.addObject("position",position);
+			mv.addObject("batter2",batter2);
+			
 			mv.setViewName("PlayerInfo/batter");
 		}
 	
+		return mv;
+	}
+	
+	@RequestMapping("/teamList")
+	public ModelAndView PlayerList2(
+			@RequestParam(value="teamname") String teamname,
+			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			ModelAndView mv) {
+		
+		//팀별 선수목록 & 페이징
+		PageUtil pInfo = pService.getTeamCnt(teamname, nowPage);
+		ArrayList<PlayerInfoDTO> getTeamList = pService.getTeamList(teamname, pInfo);
+		pInfo.setTeamname(teamname);
+		
+		mv.addObject("getTeamList", getTeamList);
+		mv.addObject("PINFO", pInfo);
+		
+		mv.setViewName("PlayerInfo/PlayerTeam");
+		
 		return mv;
 	}
 	

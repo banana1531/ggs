@@ -1,5 +1,6 @@
 package com.ggs.admin;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,13 +77,24 @@ public class DecService {
 		List list = declarationDAO.weeklyCnt();
 		String result = "[";
 		WeeklyCountDTO dto = new WeeklyCountDTO();
-		for(int i=list.size();i>0;i--) {
-			dto = (WeeklyCountDTO)list.get(i-1);
-			result += "['"+dto.getWeekNum()+"week',"+dto.getCnt()+"],";
+		int nowWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+		int week = nowWeek-4;
+		boolean re = false;
+		while (week <= nowWeek) {
+			for (int i = list.size(); i > 0; i--) {
+				dto = (WeeklyCountDTO) list.get(i - 1);
+				if (week == dto.getWeekNum()) {
+					result += "['" + dto.getWeekNum() + "week'," + dto.getCnt() + "],";
+					re = true;
+					break;
+				}
+			}
+			if (!re)
+				result += "['" + week + "week'," + calTime(dto.getCnt()) + "],";
+			week++;
+			re = false;
 		}
-		result=result.substring(0, result.length()-1)+"]";
-		System.out.println("result="+result);
-		
+		result=result.substring(0, result.length()-1)+"]";		
 		return result;
 	}
 	
@@ -91,10 +103,24 @@ public class DecService {
 		List list = declarationDAO.avgTime();
 		String result = "[";
 		WeeklyCountDTO dto = new WeeklyCountDTO();
-		for(int i=list.size();i>0;i--) {
-			dto = (WeeklyCountDTO)list.get(i-1);
-			result += "['"+dto.getWeekNum()+"week',"+calTime(dto.getCnt())+"],";
+		int nowWeek = Calendar.getInstance().get(Calendar.WEEK_OF_YEAR);
+		int week = nowWeek-4;
+		boolean re = false;
+		while(week<=nowWeek) {
+			for(int i=0;i<list.size();i++) {
+				dto = (WeeklyCountDTO)list.get(i);
+				if(week==dto.getWeekNum()) {
+					result += "['"+dto.getWeekNum()+"week',"+calTime(dto.getCnt())+"],";
+					re=true;
+					break;
+				}
+			}
+			if(!re) 
+				result += "['"+week+"week',"+calTime(dto.getCnt())+"],";
+			week++;
+			re=false;
 		}
+		
 		result=result.substring(0, result.length()-1)+"]";
 		return result;
 	}

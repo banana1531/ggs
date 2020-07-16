@@ -7,6 +7,32 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+	google.charts.load('current', {
+		packages : ['corechart']});
+	google.charts.setOnLoadCallback(drawLineColors);
+
+	function drawLineColors() {
+		var data = new google.visualization.DataTable();
+		data.addColumn('string', 'X');
+		data.addColumn('number', '접속자수');
+		data.addRows(${weekly});
+		var options = {
+			hAxis : {
+				title : 'week'
+			},
+			vAxis : {
+				title : 'Count',
+				minValue : 0
+			},
+			colors : [ '#a52714', '#097138' ]
+		};
+
+		var chart = new google.visualization.LineChart(document
+				.getElementById('chart_div'));
+		chart.draw(data, options);
+	};
+</script>
 <script type="text/javascript">
 $(function(){
 	$("#body").load("/admin/memberSummary.gg")

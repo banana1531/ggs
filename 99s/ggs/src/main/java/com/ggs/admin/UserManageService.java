@@ -21,8 +21,12 @@ public class UserManageService {
 	
 	
 	//회원 목록 가져오기
-	public List<MembersDTO> getMembersList() {
-		return membersDAO.getMembersList();		
+	public List<MembersDTO> getMembersList(String pageNo) {
+		int temp = Integer.parseInt(pageNo);
+		int start = (temp-1)*10;
+		MembersDTO dto = new MembersDTO();
+		dto.setStart(start);
+		return membersDAO.getMembersList(dto);		
 	}
 	
 	//회원 접속자, 주간 접속자, 전체 가입자 수 가져오기 가져오기

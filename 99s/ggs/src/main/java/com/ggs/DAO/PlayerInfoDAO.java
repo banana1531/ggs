@@ -1,6 +1,7 @@
 package com.ggs.DAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,86 +16,6 @@ public class PlayerInfoDAO {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	public int getKIACnt() {
-		return (Integer)session.selectOne("player.getKIACnt");
-	}
-
-	public ArrayList getListKIA(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListKIA", pDto);
-	}
-
-	public int getKTCnt() {
-		return (Integer)session.selectOne("player.getKTCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListKT(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListKT", pDto);
-	}
-
-	public int getLGCnt() {
-		return (Integer)session.selectOne("player.getLGCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListLG(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListLG", pDto);
-	}
-
-	public int getNCCnt() {
-		return (Integer)session.selectOne("player.getNCCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListNC(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListNC", pDto);
-	}
-
-	public int getSKCnt() {
-		return (Integer)session.selectOne("player.getSKCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListSK(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListSK", pDto);
-	}
-
-	public int getDSCnt() {
-		return (Integer)session.selectOne("player.getDSCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListDS(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListDS", pDto);
-	}
-
-	public int getLTCnt() {
-		return (Integer)session.selectOne("player.getLTCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListLT(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListLT", pDto);
-	}
-
-	public int getSSCnt() {
-		return (Integer)session.selectOne("player.getSSCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListSS(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListSS", pDto);
-	}
-
-	public int getKUCnt() {
-		return (Integer)session.selectOne("player.getKUCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListKU(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListKU", pDto);
-	}
-
-	public int getHHCnt() {
-		return (Integer)session.selectOne("player.getHHCnt");
-	}
-
-	public ArrayList<PlayerInfoDTO> getListHH(PlayerInfoDTO pDto) {
-		return (ArrayList)session.selectList("player.getListHH", pDto);
-	}
-	
 	public int PlayerPage(int pno) {
 		return (Integer)session.selectOne("player.PlayerPage", pno);
 	}
@@ -105,6 +26,63 @@ public class PlayerInfoDAO {
 
 	public ArrayList<PlayerRecordDTO> batter(PlayerRecordDTO prDto) {
 		return (ArrayList)session.selectList("player.batter", prDto);
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking() {
+		return (ArrayList)session.selectList("player.ranking");
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking2() {
+		return (ArrayList)session.selectList("player.ranking2");
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking3() {
+		return (ArrayList)session.selectList("player.ranking3");
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking4() {
+		return (ArrayList)session.selectList("player.ranking4");
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking5() {
+		return (ArrayList)session.selectList("player.ranking5");
+	}
+
+	public ArrayList<PlayerRecordDTO> Ranking6() {
+		return (ArrayList)session.selectList("player.ranking6");
+	}
+
+	public ArrayList<PlayerInfoDTO> common(int pno) {
+		return (ArrayList)session.selectList("player.common", pno);
+	}
+
+	public ArrayList<PlayerRecordDTO> pitcher2(int pno) {
+		return (ArrayList)session.selectList("player.pitcher2", pno);
+	}
+
+	public ArrayList<PlayerRecordDTO> batter2(int pno) {
+		return (ArrayList)session.selectList("player.batter2", pno);
+	}
+
+	public int getTeamCnt(String teamname) {
+		return (Integer)session.selectOne("player.getTeamCnt", teamname);
+	}
+
+	public ArrayList<PlayerInfoDTO> getTeamList(PlayerInfoDTO pDto) {
+		return (ArrayList)session.selectList("player.getTeamList", pDto);
+	}
+
+	public ArrayList<PlayerRecordDTO> ining(int pno) {
+		return (ArrayList)session.selectList("player.ining", pno);
+	}
+
+	public ArrayList<PlayerRecordDTO> iningCount(int pno) {
+		return (ArrayList)session.selectList("player.iningCount", pno);
+	}
+	
+	//선수 목록 가져오기(팀 무시)
+	public List<PlayerInfoDTO> playerList(PlayerInfoDTO dto) {
+		return session.selectList("player.playerList", dto);
 	}
 
 }

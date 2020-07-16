@@ -48,6 +48,15 @@ public class PlayerRecordDTO {
 	private String hibi;		//
 	private String jangta;		//
 	
+	private String name;
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	private int start;
 	private int end;
 	
@@ -340,22 +349,7 @@ public class PlayerRecordDTO {
 				+ ", culu=" + culu + ", ops=" + ops + ", era=" + era + ", avli=" + avli + ", re24=" + re24 + ", wpa="
 				+ wpa + ", gsc=" + gsc + ", gdec=" + gdec + ", gangyuk=" + gangyuk + ", tasun=" + tasun + ", p=" + p
 				+ ", djum=" + djum + ", ruta=" + ruta + ", tajum=" + tajum + ", doru=" + doru + ", dosil=" + dosil
-				+ ", byungsal=" + byungsal + ", hita=" + hita + ", hibi=" + hibi + ", jangta=" + jangta + ", start="
-				+ start + ", end=" + end + ", getStart()=" + getStart() + ", getEnd()=" + getEnd() + ", getPgno()="
-				+ getPgno() + ", getPno()=" + getPno() + ", getTeamname()=" + getTeamname() + ", getPtype()="
-				+ getPtype() + ", getGdate()=" + getGdate() + ", getVs()=" + getVs() + ", getGresult()=" + getGresult()
-				+ ", getSunbal()=" + getSunbal() + ", getIning()=" + getIning() + ", getSiljum()=" + getSiljum()
-				+ ", getJachak()=" + getJachak() + ", getTaja()=" + getTaja() + ", getTasu()=" + getTasu()
-				+ ", getAnta()=" + getAnta() + ", getEta()=" + getEta() + ", getSamta()=" + getSamta()
-				+ ", getHome_run()=" + getHome_run() + ", getBall4()=" + getBall4() + ", getGo4()=" + getGo4()
-				+ ", getSagu()=" + getSagu() + ", getSamjin()=" + getSamjin() + ", getTugu()=" + getTugu()
-				+ ", getWhip()=" + getWhip() + ", getTayul()=" + getTayul() + ", getCulu()=" + getCulu() + ", getOps()="
-				+ getOps() + ", getEra()=" + getEra() + ", getAvli()=" + getAvli() + ", getRe24()=" + getRe24()
-				+ ", getWpa()=" + getWpa() + ", getGsc()=" + getGsc() + ", getGdec()=" + getGdec() + ", getGangyuk()="
-				+ getGangyuk() + ", getTasun()=" + getTasun() + ", getP()=" + getP() + ", getDjum()=" + getDjum()
-				+ ", getRuta()=" + getRuta() + ", getTajum()=" + getTajum() + ", getDoru()=" + getDoru()
-				+ ", getDosil()=" + getDosil() + ", getByungsal()=" + getByungsal() + ", getHita()=" + getHita()
-				+ ", getHibi()=" + getHibi() + ", getJangta()=" + getJangta() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+				+ ", byungsal=" + byungsal + ", hita=" + hita + ", hibi=" + hibi + ", jangta=" + jangta + ", name="
+				+ name + ", start=" + start + ", end=" + end + "]";
 	}
 }
