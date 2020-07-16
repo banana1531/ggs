@@ -1,11 +1,15 @@
 package com.ggs.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ggs.DTO.MembersDTO;
+import com.ggs.util.PageUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -40,8 +44,12 @@ public class UserManageController {
 
 	// 회원목록 보기
 	@RequestMapping("/memberList.gg")
-	public String memberList(Model model) {
-		model.addAttribute("memberList", userManageService.getMembersList());
+	public String memberList(Model model, @RequestParam(value="pageNo", defaultValue="1") String pageNo) {
+		List list = userManageService.getMembersList(pageNo);
+		System.out.println(list);
+		model.addAttribute("pageInfo", 
+				new PageUtil(Integer.parseInt(pageNo), ((MembersDTO)list.get(0)).getTotalcnt(), 10, 10));
+		model.addAttribute("memberList", list);
 		return "/admin/memberList";
 	}
 

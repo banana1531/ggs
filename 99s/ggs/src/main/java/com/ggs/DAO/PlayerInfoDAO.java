@@ -1,6 +1,7 @@
 package com.ggs.DAO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +78,11 @@ public class PlayerInfoDAO {
 
 	public ArrayList<PlayerRecordDTO> iningCount(int pno) {
 		return (ArrayList)session.selectList("player.iningCount", pno);
+	}
+	
+	//선수 목록 가져오기(팀 무시)
+	public List<PlayerInfoDTO> playerList(PlayerInfoDTO dto) {
+		return session.selectList("player.playerList", dto);
 	}
 
 }

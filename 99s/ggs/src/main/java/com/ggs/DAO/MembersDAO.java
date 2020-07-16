@@ -1,4 +1,4 @@
-﻿package com.ggs.DAO;
+package com.ggs.DAO;
 
 import java.util.List;
 
@@ -44,8 +44,9 @@ public class MembersDAO {
 	}
 
 	// 회원 목록 가져오기
-	public List<MembersDTO> getMembersList() {
-		return session.selectList("members.getMembersList");
+	public List<MembersDTO> getMembersList(MembersDTO dto) {
+		System.out.println("dto="+dto);
+		return session.selectList("members.getMembersList", dto);
 	}
 
 	// 로그인 처리
@@ -77,6 +78,7 @@ public class MembersDAO {
 	public List<MembersDTO> memberSearch(MembersDTO search) {
 		return session.selectList("members.getMembersList", search);
 	}
+	
 	//메일인증
 	public MembersDTO mailAuth(MembersDTO mdto) {
 		System.out.println("mailAuth DAO 진입");	
@@ -96,5 +98,4 @@ public class MembersDAO {
 		System.out.println("joinProc DAO 진입");	
 		session.insert("members.joinProc",mdto);
 	}
-
 }

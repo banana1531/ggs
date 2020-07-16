@@ -15,7 +15,14 @@ public class PlayerInfoDTO {
 	
 	private int start;
 	private int end;
+	private int totalcnt;   //전체 선수
 	
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
 	public int getPno() {
 		return pno;
 	}
@@ -93,6 +100,7 @@ public class PlayerInfoDTO {
 	public String toString() {
 		return "PlayerInfoDTO [pno=" + pno + ", name=" + name + ", labelno=" + labelno + ", birth=" + birth
 				+ ", position=" + position + ", height=" + height + ", weight=" + weight + ", joinday=" + joinday
-				+ ", teamname=" + teamname + ", bmi=" + bmi + ", start=" + start + ", end=" + end + "]";
+				+ ", teamname=" + teamname + ", bmi=" + bmi + ", start=" + start + ", end=" + end + ", totalcnt="
+				+ totalcnt + "]";
 	}
 }

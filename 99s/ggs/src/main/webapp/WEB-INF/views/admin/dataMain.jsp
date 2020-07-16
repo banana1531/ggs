@@ -8,18 +8,21 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 $(function(){
-	$("#body").load("/admin/teamList")
+	/* $("#body").load("/admin/teamList") */
 	$("#teamlist").click(function(){
 		$("#body").load("/admin/teamList")
 	})
+	$("#playlist").click(function(){
+		$("#body").load("/admin/playerList")
+	})
+	
 })
 </script>
 </head>
 <body>
-   <h1>dataMain 들어왔다.</h1>
    <div class="container">
 	   <button id="teamlist">팀 목록</a></button>
-	   <button><a href="#">선수 목록</a></button>
+	   <button id="playlist">선수 목록</a></button>
 	   <button><a href="#">경기일정 목록</a></button>
    </div>
    <div class="container" id="body">

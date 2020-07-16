@@ -17,9 +17,20 @@ public class PageUtil {
 	private	int	startPage;		//	페이지 이동 기능이 몇페이지 부터 만들지를 지정한다.
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
+	private String teamname;    //  팀이름
+	
+	public String getTeamname() {
+		return teamname;
+	}
+
+	public void setTeamname(String teamname) {
+		this.teamname = teamname;
+	}
+
 	public PageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 5, 5);
 	}
+	
 	public PageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {
 		this.nowPage 	= nowPage;
 		this.totalCount = totalCount;
@@ -29,8 +40,7 @@ public class PageUtil {
 		calcStartPage();
 		calcEndPage();
 	}
-	
-	
+		
 	//	1.총 페이지수 계산
 	private	void calcTotalPage() {
 		//	총 페이지 수는 전체 게시물 개수를 한페이지당 보여줄 개수로 나눈 결과이다.

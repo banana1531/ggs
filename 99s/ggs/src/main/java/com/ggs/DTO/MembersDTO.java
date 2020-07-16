@@ -17,6 +17,21 @@ public class MembersDTO {
 	private int login;		//로그인권한
 	private int ppoint;     //승부예측 누적 포인트
 	private Date joindate;  //가입일
+	private int start;		//리스트 시작 번호
+	private int totalcnt;	//전체 회원수
+	
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
 	public String getId() {
 		return id;
 	}
@@ -93,7 +108,8 @@ public class MembersDTO {
 	public String toString() {
 		return "MembersDTO [id=" + id + ", name=" + name + ", birth=" + birth + ", team=" + team + ", pw=" + pw
 				+ ", gender=" + gender + ", email=" + email + ", boardM=" + boardM + ", boardV=" + boardV + ", login="
-				+ login + ", ppoint=" + ppoint + ", joindate=" + joindate + "]";
+				+ login + ", ppoint=" + ppoint + ", joindate=" + joindate + ", start=" + start + ", totalcnt="
+				+ totalcnt + "]";
 	}
 		
 }

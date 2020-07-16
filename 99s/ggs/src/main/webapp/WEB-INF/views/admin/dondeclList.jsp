@@ -28,7 +28,7 @@
 
 			</form>
 		</nav>
-		<table class="table">
+		<table class="table table-hover">
 			<tr>
 				<td>게시판</td>
 				<td>글번호</td>

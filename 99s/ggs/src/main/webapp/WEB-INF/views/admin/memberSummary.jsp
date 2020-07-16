@@ -15,12 +15,8 @@
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'X');
 		data.addColumn('number', '접속자수');
-		//data.addColumn('number', '방문자수');
-		
 		data.addRows(${weekly});
-
 		var options = {
-			
 			hAxis : {
 				title : 'week'
 			},

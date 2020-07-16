@@ -1,6 +1,7 @@
 package com.ggs.player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.ggs.DAO.PlayerInfoDAO;
 import com.ggs.DTO.PlayerInfoDTO;
 import com.ggs.DTO.PlayerRecordDTO;
-import com.ggs.DTO.TeamRecordDTO;
 import com.ggs.util.PageUtil;
 
 
@@ -148,6 +148,14 @@ public class PlayerInfoService {
 		pDto.setTeamname(teamname);
 		ArrayList<PlayerInfoDTO> getTeamList = pDao.getTeamList(pDto);
 		return getTeamList;
+	}
+
+	public List<PlayerInfoDTO> playerList(String pageNo) {
+		int temp = Integer.parseInt(pageNo);
+		int start = (temp-1)*10;
+		PlayerInfoDTO dto = new PlayerInfoDTO();
+		dto.setStart(start);
+		return pDao.playerList(dto);
 	}
 	
 }

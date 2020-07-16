@@ -26,7 +26,7 @@ $(function(){
    </div>
    <div class="container">
 	<p>최근등록 게시물</p>
-		<table class="table">
+		<table class="table table-hover">
 			<tr>
 				<td>게시판</td>
 				<td>글번호</td>

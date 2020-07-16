@@ -6,6 +6,7 @@
 <head title="로그인">
 </head>
 <body>
+	<div class="container" align="center">
 	<h2>로그인</h2>
 	<hr />
 	<form id=loginFrm method="post" action="../member/loginProc.gg">
@@ -30,7 +31,7 @@
 			</tr>
 			<tr class="center">
 				<td colspan="2">
-					<input id="login" type="submit" value="로그인" />
+					<input class="btn btn-block btn-primary" id="login" type="submit" value="로그인" />
 				</td>
 			</tr>
 			<tr class="center">
@@ -42,5 +43,6 @@
 			</tr>
 		</table>
 	</form>
+	</div>
 </body>
 </html> 

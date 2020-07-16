@@ -218,7 +218,6 @@ public class LoginController {
 				mv.setViewName("member/pwFindFrm");
 				mv.addObject("msg","fail");
 			}
-			
 		}
 		return mv;
 	}

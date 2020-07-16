@@ -94,8 +94,9 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown">경기 일정<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">경기 일정</a></li>
-							<li><a href="#">경기 결과</a></li>
+							<li><a href="/teampredict/prematchMain.gg">승부예측</a></li>
+							<li><a href="/teampredict/schmatchList.gg">경기 일정</a></li>
+							<li><a href="/teampredict/rltmatchList.gg">경기 결과</a></li>
 						</ul></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 팀/선수 정보 <span class="caret"></span></a>
@@ -134,11 +135,11 @@ article {
 					</c:choose>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-user"></span>
+					<li><a href="/member/joinFrm.gg"><span class="glyphicon glyphicon-user"></span>
 							Sign Up</a></li>
 					<c:choose>
 						<c:when test="${UID != null }">
-							<li><a href="/member/loginFrm.gg"><span
+							<li><a href="/member/logout.gg"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 						</c:when>
 						<c:otherwise>
