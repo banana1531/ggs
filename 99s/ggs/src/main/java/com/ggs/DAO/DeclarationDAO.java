@@ -19,13 +19,11 @@ public class DeclarationDAO {
 	@Autowired
 	private SqlSessionTemplate session;
 
-	
 	//현재 미처리된 신고된 글 가져오기
 	public List<DeclarationListDTO> getList() {
 		return session.selectList("declaration.getList");
 	}
 
-	
 	//신고접수글 상세 내용 가져오기
 	public DeclarationDetailDTO getDetail(DeclarationDTO dto) {
 		int no = dto.getWriteno();

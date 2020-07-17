@@ -23,6 +23,7 @@ public class TeamRecordDAO {
 	
 	//팀 경기 이력 가져오기
 	public List<TeamRecordDTO> teamRecord(TeamRecordDTO teamRecordDTO) {
+		System.out.println("TeamRecordDAO.teamRecord. teamRecordDTO= "+teamRecordDTO);
 		return session.selectList("teamRecord.teamRecord", teamRecordDTO);
 	}
 	

@@ -40,9 +40,8 @@ public class TeampredictService {
 	//해당하는 경기리스트 출력해주기
 	
 	//경기리스트 오름차순으로 출력하기
-	public List<TeamRecordDTO> getschmatchList(Date gdate,String gtime,String ateamname,String ascore,String bscore,String bteamname,String stadium){
-		
-		return schmatchdao.getschmatchList(gdate, gtime, ateamname, ascore, bscore, bteamname, stadium);
+	public List<TeamRecordDTO> getschmatchList(){
+		return schmatchdao.getschmatchList();
 	}
 }
 

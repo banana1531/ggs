@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> myInfoModify 들어왔다~</h1>
 	
-	<div class='container'>
+	<div class='container' align="center">
 		<form class='form-inline' action="/mypage/myInfoModify.gg" method="post">
 			<table class='form-group'>
 				<tr>

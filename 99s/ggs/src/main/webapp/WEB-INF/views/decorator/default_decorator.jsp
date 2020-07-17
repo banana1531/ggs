@@ -13,9 +13,9 @@
 <title>99s:<decorator:title /></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -129,20 +129,23 @@ article {
 									<li><a href="/admin/adminMain.gg">전체현황</a></li>
 									<li><a href="/admin/deSummary.gg">신고처리</a></li>
 									<li><a href="/admin/memberSummary.gg">회원관리</a></li>
-									<li><a href="/admin/dataMain.gg">data관리</a></li>
+									<li><a href="/admin/teamList.gg">data관리</a></li>
 								</ul></li>
 						</c:otherwise>
 					</c:choose>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a href="/member/joinFrm.gg"><span class="glyphicon glyphicon-user"></span>
-							Sign Up</a></li>
+					
 					<c:choose>
 						<c:when test="${UID != null }">
+							<li><a href="/mypage/mypageMain.gg"><span
+									class="glyphicon glyphicon-user"></span>환영합니다. ${UID}님</a></li>
 							<li><a href="/member/logout.gg"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 						</c:when>
 						<c:otherwise>
+						<li><a href="/member/joinFrm.gg"><span class="glyphicon glyphicon-user"></span>
+							Sign Up</a></li>
 							<li><a href="/member/loginFrm.gg"><span
 									class="glyphicon glyphicon-log-in"></span> Login</a></li>
 						</c:otherwise>
@@ -152,7 +155,7 @@ article {
 		
 		</nav>
 	</header>
-	<article>
+	<article style="margin-bottom: 150px">
 		<decorator:body />
 	</article>
 	<footer class="container-fluid text-center navbar navbar-inverse navbar-fixed-bottom">

@@ -54,6 +54,7 @@ $(function(){
 				<th>글 조회</th>
 				<th>글 조작</th>
 				<th>로그인</th>
+				<th></th>
 			</tr>
 			</thead>
 			<c:forEach items="${memberList}" var="list">
@@ -80,10 +81,14 @@ $(function(){
 				</tr>
 			</c:forEach>
 				<tr>
-				<td colspan="9"><c:forEach var="i" begin="${pageInfo.startPage}"
-						end="${pageInfo.endPage}">
+				<td colspan="9">
+				<c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
+				<c:forEach var="i"
+						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
 					[<a class="btn">${i}</a>]
-				</c:forEach></td>
+				</c:forEach>
+				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+				</td>
 			</tr>
 		</table>
 		

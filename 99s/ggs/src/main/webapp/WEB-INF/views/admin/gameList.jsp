@@ -11,7 +11,7 @@
 $(function(){
 	$(".team").click(function(){
 		var name=$(this).find("#name").text()
-		location="/admin/teamDetail.gg?name="+name
+		$("#body").load("/admin/teamDetail?name="+name)
 	})	
 })
 </script>
@@ -22,25 +22,15 @@ $(function(){
 	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
 	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
    </div>
-   <h4>팀 목록</h4>
-   <div class="container" id="body">
+   <h4>경기 일정/결과</h4>
+   <div class="container">
    		<table class="table table-hover">
 			<tr>
-				<th>팀명</th>
-				<th>설립일</th>
-				<th>지역</th>
-				<th>경기장</th>
-				<th>감독</th>
-				<th>홈페이지</th>
+				<th>경기 번호</th>
 			</tr>
-			<c:forEach items="${list }" var="team">
-				<tr class="team">
-					<td id="name">${team.teamName }</td>
-					<td>${team.birth }</td>
-					<td>${team.location }</td>
-					<td>${team.stadium }</td>
-					<td>${team.director }</td>
-					<td>${team.homepage }</td>
+			<c:forEach items="${list }" var="game">
+				<tr >
+					<td>${game.gno }</td>
 				</tr>
 			</c:forEach>
 		</table>

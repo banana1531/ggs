@@ -26,7 +26,7 @@ public class PlayerInfoController {
 	@Autowired
 	PlayerInfoService pService;
 
-	@RequestMapping("/list")
+	@RequestMapping("/list.gg")
 	public ModelAndView PlayerList(ModelAndView mv) {
 		
 		//타자랭킹 타율,홈런,타점 & 투수랭킹 평균자책점,탈삼진,피안타율
@@ -51,7 +51,7 @@ public class PlayerInfoController {
 		return mv;
 	}
 	
-	@RequestMapping("/info")
+	@RequestMapping("/info.gg")
 	public ModelAndView PlayerInfo(
 			@RequestParam(value="pno") int pno,
 			@RequestParam(value="position") String position,
@@ -100,7 +100,7 @@ public class PlayerInfoController {
 		return mv;
 	}
 	
-	@RequestMapping("/teamList")
+	@RequestMapping("/teamList.gg")
 	public ModelAndView PlayerList2(
 			@RequestParam(value="teamname") String teamname,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,

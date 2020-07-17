@@ -16,8 +16,7 @@ public class SchMatchDAO {
 	private SqlSessionTemplate session;
 	
 	//경기리스트 가져오기
-	public List<TeamRecordDTO> getschmatchList(Date gdate,String gtime,String ateamname,String ascore,
-			String bscore,String bteamname,String stadium){
+	public List<TeamRecordDTO> getschmatchList(){
 		return session.selectList("schmatch.schmatch");
 	}
 }

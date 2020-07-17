@@ -6,10 +6,9 @@
 <mapper namespace="schmatch">
 	
 	<select id="schmatch" resultType="com.ggs.DTO.TeamRecordDTO">
-SELECT *,DATE_FORMAT(gdate,'%y.%m.%d')
-		FROM teamRecord 
-		ORDER BY gdate ASC 
-		;
+		SELECT *
+		FROM teamRecord
+		ORDER BY gdate
 	</select>
 	
 </mapper>

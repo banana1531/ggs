@@ -28,5 +28,8 @@ public class TeamInfoDAO {
 	public List<TeamInfoDTO> teamList(){
 		return session.selectList("team.teamList");
 	}
+	public int updateInfo(TeamInfoDTO teamInfoDTO) {
+		return session.update("team.updateInfo", teamInfoDTO);
+	}
 	
 }

@@ -24,14 +24,11 @@ public class DecController {
 		//금일 접수건수
 		model.addAttribute("todayCnt", service.todayCnt());
 		//미처리건수
-		
 		model.addAttribute("toDoCnt", service.toDoCnt());
 		//주간 누적 접수건수
 		model.addAttribute("weekCnt", service.weekCnt());
-				
 		//접수건 trendChart
 		model.addAttribute("weekly", service.weeklyCnt());
-		
 		//주간별 평균 처리 시간 trendchart
 		model.addAttribute("avgTime", service.avgTime());
 		

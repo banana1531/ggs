@@ -26,20 +26,9 @@ public class MyTeamDetailController {
 		//마이팀 상세정보 보기
 		@RequestMapping("/myTeamDetail.gg")
 		public String myTeamDetail(Model model, HttpServletRequest request) {
-			System.out.println("MDController.myTeamDetail() 진입");
-			
-			
-			//파라미터
-			//회원정보(id)
-			
-			//비즈니스
-			//내팀 정보 가져오기  
-			//비교팀 정보 가져오기 -> 현시간 기준 다음 경기 상대팀
-			/*** 팀정보게시판 service 활용검토 ***/
 			HttpSession sess = request.getSession();
 			String name = (String)sess.getAttribute("UTEAM");
-			teamInfoService.teamDetail(name);
-			
+			model.addAttribute("team", teamInfoService.teamDetail(name));
 			return "myPage/myTeamDetail";
 		}
 		

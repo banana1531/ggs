@@ -18,14 +18,15 @@
 </style>
 </head>
 <body>
-	<a href="../player/teamList?teamname=KIA">KIA</a>
-	<a href="../player/teamList?teamname=KT">KT</a>
-	<a href="../player/teamList?teamname=LG">LG</a>
-	<a href="../player/teamList?teamname=NC">NC</a>
-	<a href="../player/teamList?teamname=SK">SK</a>
-	<a href="../player/teamList?teamname=두산">두산</a>
-	<a href="../player/teamList?teamname=롯데">롯데</a>
-	<a href="../player/teamList?teamname=삼성">삼성</a>
+<div class="container">
+	<a href="../player/teamList.gg?teamname=KIA">KIA</a>
+	<a href="../player/teamList.gg?teamname=KT">KT</a>
+	<a href="../player/teamList.gg?teamname=LG">LG</a>
+	<a href="../player/teamList.gg?teamname=NC">NC</a>
+	<a href="../player/teamList.gg?teamname=SK">SK</a>
+	<a href="../player/teamList.gg?teamname=두산">두산</a>
+	<a href="../player/teamList.gg?teamname=롯데">롯데</a>
+	<a href="../player/teamList.gg?teamname=삼성">삼성</a>
 	<a href="../player/teamList?teamname=키움">키움</a>
 	<a href="../player/teamList?teamname=한화">한화</a>
 	<br/>	
@@ -151,11 +152,11 @@
 					</c:if>
 				
 					<c:if test="${PINFO.nowPage ne 1}">
-					<a href="../player/info?pno=${pno}&&position=${position}&nowPage=${PINFO.nowPage-1}">[prev]</a> 
+					<a href="../player/info.gg?pno=${pno}&&position=${position}&nowPage=${PINFO.nowPage-1}">[prev]</a> 
 					</c:if>
 					
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-					<a href="../player/info?pno=${pno}&&position=${position}&nowPage=${pg}">[${pg}]</a> 
+					<a href="../player/info.gg?pno=${pno}&&position=${position}&nowPage=${pg}">[${pg}]</a> 
 					</c:forEach>
 					
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -163,12 +164,13 @@
 					</c:if>
 					
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<a href="../player/info?pno=${pno}&&position=${position}&nowPage=${PINFO.nowPage+1}">[next]</a>
+					<a href="../player/info.gg?pno=${pno}&&position=${position}&nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if>
 				</td>
 			</tr>
 		</tbody>
 	</table>
-	<a href="./list">리스트로 가기</a>
+	<a href="./list.gg">리스트로 가기</a>
+	</div>
 </body>
 </html>

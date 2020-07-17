@@ -82,7 +82,28 @@ public class PlayerInfoDAO {
 	
 	//선수 목록 가져오기(팀 무시)
 	public List<PlayerInfoDTO> playerList(PlayerInfoDTO dto) {
+		System.out.println("PlayerInfoDAO.playerList");
 		return session.selectList("player.playerList", dto);
+	}
+	
+	//선수 상세 정보 가져오기
+	public PlayerInfoDTO playerDetail(PlayerInfoDTO playerInfoDTO) {
+		return session.selectOne("player.playerDetail", playerInfoDTO);
+	}
+	
+	//선수 정보 수정하기
+	public int playerUpdate(PlayerInfoDTO playerDTO) {
+		return session.update("player.playerUpdate", playerDTO);
+	}
+	
+	//선수 경기 상세 보기
+	public PlayerRecordDTO playerRecordDetail(PlayerRecordDTO playerRecordDTO) {
+		return session.selectOne("player.playerRecordDetail", playerRecordDTO);
+	}
+	
+	//선수 경기 기록 수정하기
+	public int playerRecordUpdate(PlayerRecordDTO playerRecordDTO) {
+		return session.update("player.playerRecordUpdate", playerRecordDTO);
 	}
 
 }

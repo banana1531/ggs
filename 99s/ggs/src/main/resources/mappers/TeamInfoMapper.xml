@@ -592,7 +592,17 @@
         ORDER BY gno DESC
         LIMIT #{start}, 5
 	</select>
-	
+
+	<!-- 팀 상세 정보 수정 -->
+	<update id="updateInfo">
+		UPDATE teaminfo SET
+		tel=#{tel}, homepage=#{homepage},
+		birth=#{birth},location=#{location},
+		stadium=#{stadium},towner=#{towner},
+		ceo=#{ceo},head=#{head},director=#{director},
+		history=#{history}
+		WHERE teamName=#{teamName};
+	</update>
 </mapper>
 
 

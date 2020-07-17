@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>declDetail 들어왔다.</h1>
    <div class="container">
    <form class="form" action="/admin/declUpdate.gg">
    <table class="table">

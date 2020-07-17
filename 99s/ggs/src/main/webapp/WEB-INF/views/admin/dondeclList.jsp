@@ -8,13 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>dondeclList 들어왔다.</h1>
     <div class="container">
 	   <button><a href="/admin/deSummary.gg">접수 현황</a></button>
 	   <button><a href="/admin/declList.gg">미처리 목록</a></button>
 	   <button><a href="/admin/dondeclList.gg">처리완료 목록</a></button>
    </div>
    <div class="container">
+   신고처리 완료 목록
 		<nav class="navbar navbar-right">
 			<form action="/admin/declSearch.gg" class="form-inline">
 				<select name="option" class="form-control">

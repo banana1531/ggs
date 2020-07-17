@@ -15,7 +15,9 @@ $(function(){
 	$("#playlist").click(function(){
 		$("#body").load("/admin/playerList")
 	})
-	
+	$("#gamelist").click(function(){
+		$("#body").load("/admin/gameList")
+	})	
 })
 </script>
 </head>
@@ -23,7 +25,7 @@ $(function(){
    <div class="container">
 	   <button id="teamlist">팀 목록</a></button>
 	   <button id="playlist">선수 목록</a></button>
-	   <button><a href="#">경기일정 목록</a></button>
+	   <button id="gamelist">경기 목록</a></button>
    </div>
    <div class="container" id="body">
    </div>

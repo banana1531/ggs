@@ -68,7 +68,6 @@
 </script>
 </head>
 <body>
-   <h1>deSummary 들어왔다.</h1>
    <div class="container">
 	   <button><a href="/admin/deSummary.gg">접수 현황</a></button>
 	   <button><a href="/admin/declList.gg">미처리 목록</a></button>
@@ -76,6 +75,7 @@
    </div>
    
    <div class="container" id="container">
+   신고 처리 현황
 		<table class="table">
 			<tr>
 				<td>금일 접수건 : ${todayCnt }<br /> 미처리건 : ${toDoCnt }<br /> 금주 누적

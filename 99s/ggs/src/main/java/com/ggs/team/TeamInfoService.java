@@ -14,7 +14,7 @@ import com.ggs.DTO.TeamRecordDTO;
 public class TeamInfoService {
 
 	@Autowired
-	private TeamInfoDAO tDao;
+	private TeamInfoDAO teamInfoDAO;
 
 	@Autowired
 	private TeamRecordDAO teamRecordDAO; 
@@ -26,13 +26,13 @@ public class TeamInfoService {
 	
 	//팀 기본정보 목록 가져오기
 	public List<TeamInfoDTO> teamList() {
-		return tDao.teamList();
+		return teamInfoDAO.teamList();
 	}
 	
 	//팀 기본 정보 가져오기
 	public TeamInfoDTO teamDetail(String name) {
 		//기본정보 가져오기
-		TeamInfoDTO teamDetail = tDao.teamDetail(name);
+		TeamInfoDTO teamDetail = teamInfoDAO.teamDetail(name);
 		//실적가져오기
 		TeamInfoDTO teamRecord = teamRecordDAO.teamScore(name);
 		System.out.println(teamRecord);
@@ -47,6 +47,7 @@ public class TeamInfoService {
 	
 	//팀 경기 이력 가져오기
 	public List<TeamRecordDTO> teamRecord(String name, String pageNo) {
+		System.out.println("TeamInfoService.teamRecord");
 		int temp = Integer.parseInt(pageNo);
 		int start = (temp-1)*5;
 		TeamRecordDTO teamRecordDTO = new TeamRecordDTO();
@@ -54,14 +55,11 @@ public class TeamInfoService {
 		teamRecordDTO.setStart(start);
 		return teamRecordDAO.teamRecord(teamRecordDTO);
 	}
-
-	//팀 경기 이력 페이지 정보 처리하기
-	public int totalpage(List list) {
-		TeamRecordDTO dto = (TeamRecordDTO)list.get(0);
-		int totalcnt = dto.getTotalcnt();
-		int totalpage = totalcnt/5;
-		if(totalcnt%5>0) totalpage++;
-		return totalpage;
+	
+	//팀 상세 정보 수정하기
+	public int updateInfo(TeamInfoDTO teamInfoDTO) {
+		System.out.println("TeamInfoService.updateInfo");
+		return teamInfoDAO.updateInfo(teamInfoDTO); 
 	}
 	
 }

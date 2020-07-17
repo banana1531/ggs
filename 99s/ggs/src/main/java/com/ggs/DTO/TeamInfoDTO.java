@@ -8,7 +8,7 @@ public class TeamInfoDTO {
 	private String homepage;	//홈페이지
 	private String birth;		//창단년도
 	private String location;	//위치		
-	private String owner;		//구단주
+	private String towner;		//구단주
 	private String ceo;			//대표이사
 	private String head;		//단장
 	private String director;	//감독		
@@ -19,44 +19,6 @@ public class TeamInfoDTO {
 	private int lose;			//패수
 	private int score;			//승점
 	private int loss;			//패점
-		
-	public String getStadium() {
-		return stadium;
-	}
-	public void setStadium(String stadium) {
-		this.stadium = stadium;
-	}
-	
-	public int getWin() {
-		return win;
-	}
-	public void setWin(int win) {
-		this.win = win;
-	}
-	public int getDraw() {
-		return draw;
-	}
-	public void setDraw(int draw) {
-		this.draw = draw;
-	}
-	public int getLose() {
-		return lose;
-	}
-	public void setLose(int lose) {
-		this.lose = lose;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
-	public int getLoss() {
-		return loss;
-	}
-	public void setLoss(int loss) {
-		this.loss = loss;
-	}
 	public String getTeamName() {
 		return teamName;
 	}
@@ -87,11 +49,11 @@ public class TeamInfoDTO {
 	public void setLocation(String location) {
 		this.location = location;
 	}
-	public String getOwner() {
-		return owner;
+	public String getTowner() {
+		return towner;
 	}
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setTowner(String towner) {
+		this.towner = towner;
 	}
 	public String getCeo() {
 		return ceo;
@@ -117,12 +79,48 @@ public class TeamInfoDTO {
 	public void setHistory(String history) {
 		this.history = history;
 	}
+	public String getStadium() {
+		return stadium;
+	}
+	public void setStadium(String stadium) {
+		this.stadium = stadium;
+	}
+	public int getWin() {
+		return win;
+	}
+	public void setWin(int win) {
+		this.win = win;
+	}
+	public int getDraw() {
+		return draw;
+	}
+	public void setDraw(int draw) {
+		this.draw = draw;
+	}
+	public int getLose() {
+		return lose;
+	}
+	public void setLose(int lose) {
+		this.lose = lose;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getLoss() {
+		return loss;
+	}
+	public void setLoss(int loss) {
+		this.loss = loss;
+	}
 	@Override
 	public String toString() {
 		return "TeamInfoDTO [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
-				+ ", location=" + location + ", owner=" + owner + ", ceo=" + ceo + ", head=" + head + ", director="
+				+ ", location=" + location + ", towner=" + towner + ", ceo=" + ceo + ", head=" + head + ", director="
 				+ director + ", history=" + history + ", stadium=" + stadium + ", win=" + win + ", draw=" + draw
 				+ ", lose=" + lose + ", score=" + score + ", loss=" + loss + "]";
 	}
-		
+	
 }

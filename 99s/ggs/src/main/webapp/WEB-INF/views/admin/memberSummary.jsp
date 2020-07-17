@@ -34,12 +34,12 @@
 </script>
 </head>
 <body>
-   <h1>memberSummary 들어왔다.</h1>
       <div class="container">
 	   <button><a href="/admin/memberSummary.gg">회원 현황</a></button>
 	   <button><a href="/admin/memberList.gg">회원 목록</a></button>
    </div>
    <div class="container">
+   회원 현황
    <table class="table">
 			<tr>
 				<td>금일 접속자수 :</td>

@@ -49,7 +49,16 @@ public class PlayerRecordDTO {
 	private String jangta;		//
 	
 	private String name;
+	private int start;	        //페이지 시작번호
+	private int end;            
+	private int totalcnt;       //전체 튜플수
 	
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
 	public String getName() {
 		return name;
 	}
@@ -57,8 +66,6 @@ public class PlayerRecordDTO {
 		this.name = name;
 	}
 
-	private int start;
-	private int end;
 	
 	public int getStart() {
 		return start;
@@ -350,6 +357,6 @@ public class PlayerRecordDTO {
 				+ wpa + ", gsc=" + gsc + ", gdec=" + gdec + ", gangyuk=" + gangyuk + ", tasun=" + tasun + ", p=" + p
 				+ ", djum=" + djum + ", ruta=" + ruta + ", tajum=" + tajum + ", doru=" + doru + ", dosil=" + dosil
 				+ ", byungsal=" + byungsal + ", hita=" + hita + ", hibi=" + hibi + ", jangta=" + jangta + ", name="
-				+ name + ", start=" + start + ", end=" + end + "]";
+				+ name + ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + "]";
 	}
 }

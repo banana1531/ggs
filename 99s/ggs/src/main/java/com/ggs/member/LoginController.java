@@ -51,10 +51,15 @@ public class LoginController {
 				//로그인 권한이 없을 경우
 				mv.setViewName("member/loginFrm");
 				mv.addObject("msg","log");
-			}else{ 
+			}else if(result.getId().equals("admin")) {
+				//관리자일경우
+				RedirectView rv=new RedirectView("../admin/adminMain.gg");
+				mv.setView(rv);
+			}else{
 			//로그인 성공
 				RedirectView rv=new RedirectView("../"); //main으로 이동하기로 변경예정
-				mv.setView(rv);}
+				mv.setView(rv);
+			}
 		return mv;
 	}
 	//로그아웃 처리 

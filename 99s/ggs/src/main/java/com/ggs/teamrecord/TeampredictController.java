@@ -49,7 +49,7 @@ public class TeampredictController {
 			String bscore,String bteamname,String stadium) {
 		System.out.println("경기일정 페이지 schmatchList() 진입");
 
-		model.addAttribute("SchMatchList",service.getschmatchList(gdate, gtime, ateamname, ascore, bscore, bteamname, stadium));
+		model.addAttribute("SchMatchList",service.getschmatchList());
 		
 		return "teampredict/schmatchList";	
 		

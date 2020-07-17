@@ -13,23 +13,18 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 $(function(){
-	$("#id").click(function(){
+	$(".team").click(function(){
 		var name = $(this).find("#name").text()
-		location = "/team/"+name+".gg"
+		location = "/team/teamDetail.gg?name="+name
 	})	
 })
 </script>
-<style>
-
-.center {
-	text-align: center;
-}
-</style>
 </head>
 <body>
 	<div class="container">
 		<p>팀 목록</p>
-		<table class="table">
+		<table class="table table-hover">
+			<thead>
 			<tr align="center">
 				<th>팀명</th>
 				<th>승</th>
@@ -38,8 +33,9 @@ $(function(){
 				<th>득점</th>
 				<th>실점</th>
 			</tr>
+			</thead>
 			<c:forEach items="${list }" var="team">
-				<tr id="team">
+				<tr class="team">
 					<td id="name">${team.teamName}</td>
 					<td>${team.win}</td>
 					<td>${team.draw}</td>

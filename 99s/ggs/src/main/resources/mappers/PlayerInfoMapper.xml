@@ -4,7 +4,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="player">
-
+	
+	
+	<!-- 투수 경기 기록 가져오기 -->
 	<select id="pitcher" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
 		SELECT *
 		FROM playerRecord
@@ -136,7 +138,42 @@
 		select pno, name, labelno, position, teamname, totalcnt from playerinfo, (
 		select count(*) as totalcnt from playerinfo
 		) as c
+		<choose>
+			<when test="name != null"> where name=#{name}</when>
+			<when test="position != null"> where position=#{position}</when>
+			<when test="teamname != null"> where teamname=#{teamname}</when>
+		</choose>
 		order by name limit #{start}, 10;
 	</select>
+	
+	<!-- 선수 상세 정보 가져오기 -->
+	<select id="playerDetail" resultType="com.ggs.DTO.PlayerInfoDTO">
+		SELECT * FROM playerinfo WHERE pno=#{pno}
+	</select>
+	
+	<!-- 선수 정보 업데이트 -->
+	<update id="playerUpdate">
+		update playerinfo set name=#{name},labelno=#labelno},
+		birth=#{birth},
+		position=#{position},
+		height=#{height},
+		weight=#{weight},
+		joinday=#{joinday},
+		teamname=#{teamname},
+		bmi=#{bmi}
+		where pno=#{pno}
+	</update>
+	
+	<!-- 선수 경기 상세 보기 -->
+	<select id="playerRecordDetail" resultType="com.ggs.DTO.PlayerRecordDTO">
+		select * from playerRecord where pgno=#{pgno}
+	</select>
+	
+	<!-- 선수 경기 수정하기 -->
+	<update id="playerRecordUpdate">
+		update playerRecord set gresult=#{gresult}
+		where pgno=#{pgno}
+	</update>
+	
 </mapper>
 

@@ -29,7 +29,7 @@ public class PlayerInfoService {
 		ArrayList<PlayerRecordDTO> pitcher = pDao.pitcher(prDto);
 		return pitcher;
 	}
-
+	
 	public ArrayList<PlayerRecordDTO> batter(int pno, PageUtil pInfo) {
 		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
 		int end = start + pInfo.getLineCount() - 1;
@@ -149,13 +149,43 @@ public class PlayerInfoService {
 		ArrayList<PlayerInfoDTO> getTeamList = pDao.getTeamList(pDto);
 		return getTeamList;
 	}
-
-	public List<PlayerInfoDTO> playerList(String pageNo) {
+	
+	//선수 목록 가져오기
+	public List<PlayerInfoDTO> playerList(String pageNo, String option, String search) {
+		System.out.println("PlayerInfoService.playerList");
+		System.out.println("pageNo"+pageNo);
+		System.out.println("option"+option);
+		System.out.println("search"+search);
+		PlayerInfoDTO dto = new PlayerInfoDTO();
+		if(option.equals("name")) dto.setName(search);
+		else if (option.equals("teamname")) dto.setTeamname(search);
+		else if (option.equals("position")) dto.setPosition(search);
 		int temp = Integer.parseInt(pageNo);
 		int start = (temp-1)*10;
-		PlayerInfoDTO dto = new PlayerInfoDTO();
 		dto.setStart(start);
 		return pDao.playerList(dto);
 	}
+
+	//선수 상세 정보 가져오기
+	public PlayerInfoDTO playerDetail(PlayerInfoDTO playerInfoDTO) {
+		return pDao.playerDetail(playerInfoDTO);
+	}
+	
+	//선수 정보 업데이트 하기
+	public int playerUpdate(PlayerInfoDTO playerDTO) {
+		
+		return pDao.playerUpdate(playerDTO);
+	}
+	
+	//선수 경기 상세 내용 보기
+	public PlayerRecordDTO playerRecordDetail(PlayerRecordDTO playerRecordDTO) {
+		return pDao.playerRecordDetail(playerRecordDTO);
+	}
+
+	//선수 경기 기록 수정하기
+	public int playerRecordUpdate(PlayerRecordDTO playerRecordDTO) {
+		return pDao.playerRecordUpdate(playerRecordDTO);
+	}
+	
 	
 }

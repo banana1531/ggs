@@ -55,8 +55,11 @@ public class UserManageController {
 
 	// 회원 권한 수정하기
 	@RequestMapping("/memberUpdate.gg")
-	public String memberUpdate(MembersDTO dto) {
+	public String memberUpdate(MembersDTO dto, @RequestParam(value="pageNo", defaultValue="1") String pageNo) {
+		
 		System.out.println("UserManageController.memberUpdate");
+		System.out.println(dto);
+		System.out.println(pageNo);
 		userManageService.updateGrant(dto);
 		return "redirect:/admin/memberList.gg";
 	}
@@ -75,4 +78,6 @@ public class UserManageController {
 		model.addAttribute("member", userManageService.getMemberDetail(id));
 		return "/admin/memberDetail";
 	}
+	
+	
 }

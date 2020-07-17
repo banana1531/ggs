@@ -18,14 +18,13 @@ $(function(){
 <title>Insert title here</title>
 </head>
 <body>
-   <h1>declList 들어왔다.</h1>
     <div class="container">
 	   <button><a href="/admin/deSummary.gg">접수 현황</a></button>
 	   <button><a href="/admin/declList.gg">미처리 목록</a></button>
 	   <button><a href="/admin/dondeclList.gg">처리완료 목록</a></button>
    </div>
    <div class="container">
-	<p>최근등록 게시물</p>
+	신고 접수 목록
 		<table class="table table-hover">
 			<tr>
 				<td>게시판</td>

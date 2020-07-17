@@ -17,16 +17,17 @@
 </style>
 </head>
 <body>
-	<a href="../player/teamList?teamname=KIA">KIA</a>
-	<a href="../player/teamList?teamname=KT">KT</a>
-	<a href="../player/teamList?teamname=LG">LG</a>
-	<a href="../player/teamList?teamname=NC">NC</a>
-	<a href="../player/teamList?teamname=SK">SK</a>
-	<a href="../player/teamList?teamname=두산">두산</a>
-	<a href="../player/teamList?teamname=롯데">롯데</a>
-	<a href="../player/teamList?teamname=삼성">삼성</a>
-	<a href="../player/teamList?teamname=키움">키움</a>
-	<a href="../player/teamList?teamname=한화">한화</a>
+<div class="container">
+	<a href="../player/teamList.gg?teamname=KIA">KIA</a>
+	<a href="../player/teamList.gg?teamname=KT">KT</a>
+	<a href="../player/teamList.gg?teamname=LG">LG</a>
+	<a href="../player/teamList.gg?teamname=NC">NC</a>
+	<a href="../player/teamList.gg?teamname=SK">SK</a>
+	<a href="../player/teamList.gg?teamname=두산">두산</a>
+	<a href="../player/teamList.gg?teamname=롯데">롯데</a>
+	<a href="../player/teamList.gg?teamname=삼성">삼성</a>
+	<a href="../player/teamList.gg?teamname=키움">키움</a>
+	<a href="../player/teamList.gg?teamname=한화">한화</a>
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
@@ -128,5 +129,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 </body>
 </html>
