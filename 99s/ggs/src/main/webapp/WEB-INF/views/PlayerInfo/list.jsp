@@ -18,18 +18,25 @@
 </head>
 <body>
 <div class="container">
-	<a href="../player/teamList.gg?teamname=KIA">KIA</a>
-	<a href="../player/teamList.gg?teamname=KT">KT</a>
-	<a href="../player/teamList.gg?teamname=LG">LG</a>
-	<a href="../player/teamList.gg?teamname=NC">NC</a>
-	<a href="../player/teamList.gg?teamname=SK">SK</a>
-	<a href="../player/teamList.gg?teamname=두산">두산</a>
-	<a href="../player/teamList.gg?teamname=롯데">롯데</a>
-	<a href="../player/teamList.gg?teamname=삼성">삼성</a>
-	<a href="../player/teamList.gg?teamname=키움">키움</a>
-	<a href="../player/teamList.gg?teamname=한화">한화</a>
-	<table border="1" width="800" class="center">
+	<button type="button" onclick="location.href='../player/teamList?teamname=KIA' ">KIA</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KT' ">KT</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=LG' ">LG</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=NC' ">NC</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=SK' ">SK</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=두산' ">두산</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=롯데' ">롯데</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=삼성' ">삼성</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=키움' ">키움</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=한화' ">한화</button>
+	<br/>
+	<hr/>
+	<h3>타자 순위 TOP5</h3>
+	<div style="width:33%; float:left;">
+	<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">타율왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -44,9 +51,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	<table border="1" width="800" class="center">
+	</div>
+	<div style="width:34%; float:left;">
+	<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">홈런왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -61,9 +72,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
- 
- 	<table border="1" width="800" class="center">
+	</div>
+	<div style="width:33%; float:left;">
+ 	<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">타점왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -78,9 +93,16 @@
 			</c:forEach>
 		</tbody>
 	</table>
- 
- 	<table border="1" width="800" class="center">
+	<br/>
+	</div>
+	<hr/>
+ 	<h3>투수 순위 TOP5</h3>
+ 	<div style="width:33%; float:left;">
+ 	<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">출장왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -95,9 +117,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
- 
- 	<table border="1" width="800" class="center">
+ 	</div>
+ 	<div style="width:34%; float:left;">
+ 	<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">삼진왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -112,9 +138,13 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-		<table border="1" width="800" class="center">
+	</div>
+	<div style="width:33%; float:left;">
+		<table border="1" width="300" class="center">
 		<tbody>
+			<tr>
+				<th colspan="3">피안타율왕 TOP5</th>
+			</tr>
 			<tr>
 				<th>소속팀</th>
 				<th>이름</th>
@@ -129,6 +159,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	</div>
 	</div>
 </body>
 </html>

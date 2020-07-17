@@ -19,17 +19,17 @@
 </head>
 <body>
 <div class="container">
-	<a href="../player/teamList.gg?teamname=KIA">KIA</a>
-	<a href="../player/teamList.gg?teamname=KT">KT</a>
-	<a href="../player/teamList.gg?teamname=LG">LG</a>
-	<a href="../player/teamList.gg?teamname=NC">NC</a>
-	<a href="../player/teamList.gg?teamname=SK">SK</a>
-	<a href="../player/teamList.gg?teamname=두산">두산</a>
-	<a href="../player/teamList.gg?teamname=롯데">롯데</a>
-	<a href="../player/teamList.gg?teamname=삼성">삼성</a>
-	<a href="../player/teamList.gg?teamname=키움">키움</a>
-	<a href="../player/teamList.gg?teamname=한화">한화</a>
-	<br/>
+	<button type="button" onclick="location.href='../player/teamList?teamname=KIA' ">KIA</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KT' ">KT</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=LG' ">LG</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=NC' ">NC</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=SK' ">SK</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=두산' ">두산</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=롯데' ">롯데</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=삼성' ">삼성</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=키움' ">키움</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=한화' ">한화</button>
+	<hr/>
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
@@ -86,7 +86,7 @@
 			</tr>
 		</tbody>
 	</table>
-	<a href="./list.gg">리스트로 가기</a>
+	<button type="button" onclick="location.href='./list.gg' ">메인(랭킹)으로 가기</button>
 	</div>
 </body>
 </html>
