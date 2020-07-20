@@ -44,7 +44,7 @@
 		<tr>
 		<td>${list.gdate}</td>
 		<td>${list.gtime}</td>
-		<td>${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</td>
+		<td><a href="/teampredict/rltmatchDetail.gg">${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</a></td>
 		<td>${list.stadium}</td>
 		</tr>
 	</c:forEach>

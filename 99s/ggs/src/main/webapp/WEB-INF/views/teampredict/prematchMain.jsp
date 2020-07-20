@@ -41,12 +41,12 @@
 	<!-- 금일 경기 리스트 -->
 	</hr>
 		<p>금일 경기 리스트</p>
-		<form action="post" action="/teampredict/prematchDetail.gg">
+		<form method="post" action="/teampredict/prematchDetail.gg">
 	<c:forEach items="${TodayMatch}" var="list3">
 		<tr>
-		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}">${list3.ateamname}</td>
+		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=한화&bteamname=두산">${list3.ateamname}</td>
 		<td>vs</td>
-		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}">${list3.bteamname}</td>
+		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=한화&bteamname=두산">${list3.bteamname}</td>
 		
 		</tr>
 	</c:forEach>

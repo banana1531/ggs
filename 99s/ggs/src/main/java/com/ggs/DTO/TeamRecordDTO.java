@@ -13,14 +13,14 @@ public class TeamRecordDTO {
 	private String 	bscore;			//b팀점수
 	private String 	stadium;		//경기장
 	
-	private String win;
-	private String draw;
-	private String lose;
-	private String score;
-	private String loss;
+	private int win;
+	private int draw;
+	private int lose;
+	private int score;
+	private int loss;
 	
-	private int		start; 			//시작글번호
-	private	int		end;			//끝글번호
+	private int	start; 			//시작글번호
+	private	int	end;			//끝글번호
 	private int 	totalcnt;		//전체 데이터 숫자
 	
 	public int getTotalcnt() {
@@ -29,34 +29,34 @@ public class TeamRecordDTO {
 	public void setTotalcnt(int totalcnt) {
 		this.totalcnt = totalcnt;
 	}
-	public String getWin() {
+	public int getWin() {
 		return win;
 	}
-	public void setWin(String win) {
+	public void setWin(int win) {
 		this.win = win;
 	}
-	public String getDraw() {
+	public int getDraw() {
 		return draw;
 	}
-	public void setDraw(String draw) {
+	public void setDraw(int draw) {
 		this.draw = draw;
 	}
-	public String getLose() {
+	public int getLose() {
 		return lose;
 	}
-	public void setLose(String lose) {
+	public void setLose(int lose) {
 		this.lose = lose;
 	}
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
 	}
-	public String getLoss() {
+	public int getLoss() {
 		return loss;
 	}
-	public void setLoss(String loss) {
+	public void setLoss(int loss) {
 		this.loss = loss;
 	}
 	public int getStart() {

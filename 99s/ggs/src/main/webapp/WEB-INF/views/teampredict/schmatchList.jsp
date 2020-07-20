@@ -39,16 +39,16 @@
 		<td>경기일정</td>
 		<td>구장</td>
 		</tr>
-	<c:forEach items="${SchMatchList}" var="list">
-		<tr>
-		<td>${list.gdate}</td>
-		<td>${list.gtime}</td>
-		<td>${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</td>
-		<td>${list.stadium}</td>
-		
-		
-		</tr>
+			<form method="get" action="/teampredict/schmatchDetail.gg">
+		<c:forEach items="${SchMatchList}" var="list">
+			<tr>
+				<td>${list.gdate}</td>
+				<td>${list.gtime}</td>
+				<td><a href="/teampredict/schmatchDetail.gg?gno=${list.gno}&ateamname=${list.ateamname}&bteamname=${list.bteamname}">${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</a></td>
+				<td>${list.stadium}</td>
+			</tr>
 	</c:forEach>
+	</form>
 	</table>
 	</div>
 

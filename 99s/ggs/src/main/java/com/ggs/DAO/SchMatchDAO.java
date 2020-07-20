@@ -15,13 +15,12 @@ public class SchMatchDAO {
 	@Autowired
 	private SqlSessionTemplate session;
 	
-	//경기일정 리스트 가져오기
-	public List<TeamRecordDTO> getschmatchList(int start){
-		return session.selectList("schmatch.schmatch", start);
+	//경기리스트 가져오기
+	public List<TeamRecordDTO> getschmatchList(){
+		return session.selectList("schmatch.schmatch");
 	}
 	
-	//경기결과 리스트 가져오기
-	public List<TeamRecordDTO> getrltmatchList(int start) {
-		return session.selectList("schmatch.getrltmatchList", start);
+	public List<TeamRecordDTO> getschmatchDetail(){
+		return session.selectList("schmatch.schmatchDetail");
 	}
 }
