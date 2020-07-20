@@ -79,6 +79,11 @@ public class PlayerInfoService {
 
 	public ArrayList<PlayerRecordDTO> Ranking6() {
 		ArrayList<PlayerRecordDTO> Ranking6 = pDao.Ranking6();
+		for (int i = 0; i <= 4; i++) {
+			double beforePAnta = Double.parseDouble(Ranking6.get(i).getSunbal());
+			double PAnta = Math.round(beforePAnta * 1000) / 1000.0;
+			Ranking6.get(i).setSunbal(Double.toString(PAnta));
+		}
 		return Ranking6;
 	}
 

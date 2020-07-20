@@ -20,9 +20,7 @@ public class AdminController {
 	public String adminMain(Model model) {
 		System.out.println("AdminController.adminMain()");
 		model.addAttribute("boardlist", adminService.getBoardList());		//최근 등록 게시물 가져오기
-		model.addAttribute("declist", decService.getDeclList());			//신고 접수 목록 가져오기
-		return "/admin/adminMain";
-		
+		model.addAttribute("declist", decService.getDeclList("0"));			//신고 접수 목록 가져오기
+		return "/admin/adminMain";		
 	}
-	
 }

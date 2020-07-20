@@ -8,8 +8,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>adminMain 들어왔다.</h1>
    <div class="container">
+   <h4>최근 게시물 목록</h4>
 	<p>최근등록 게시물</p>
 		<table class="table">
 			<tr>

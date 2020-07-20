@@ -42,14 +42,32 @@
 	
 	<!-- 신고 미처리 목록 가져오기 -->
 	<select id="getList" resultType="com.ggs.DTO.DeclarationListDTO">
-		SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title
+		SELECT * 
+		FROM (
+				SELECT COUNT(*) AS totalcnt FROM declaration WHERE outputdate IN('0000-00-00')
+			) AS c,
+			(
+				SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title
+				FROM declaration, freeboard 
+				WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno ) AND outputdate IN('0000-00-00')
+				UNION 
+				select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title
+				FROM declaration, inforerrorboard 
+				WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND outputdate IN('0000-00-00')
+				ORDER BY inputdate DESC
+			) as d LIMIT #{start},10;
+	</select>
+	
+	<!-- 최근 신고 등록글 5건 가져오기 -->
+	<select id="getRecList" resultType="com.ggs.DTO.DeclarationListDTO">
+		SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title 
 		FROM declaration, freeboard 
-		WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno ) AND outputdate IN('0000-00-00')
+		WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno) AND outputdate IN('0000-00-00')
 		UNION 
-		select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title
+		select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title 
 		FROM declaration, inforerrorboard 
 		WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND outputdate IN('0000-00-00')
-		ORDER BY inputdate DESC LIMIT 5;
+		ORDER BY inputdate DESC LIMIT 5
 	</select>
 	
 	<!-- 신고글 상세 보기 - 자유게시판 -->
@@ -74,18 +92,26 @@
 	
 	<!-- 신고처리 완료 목록 가져오기 -->
 	<select id="getdonDecList" resultType="com.ggs.DTO.DeclarationListDTO">
-		SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title 
-		FROM declaration, freeboard 
-		WHERE (declaration.boardname=freeboard.boardname) 
-			AND (declaration.fno=freeboard.writeno) 
-			AND outputdate not IN('0000-00-00')
-		UNION 
-		select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title 
-		FROM declaration, inforerrorboard 
-		WHERE (declaration.boardname=inforerrorboard.boardname) 
-			AND (declaration.fno=inforerrorboard.writeno ) 
-			AND outputdate not IN('0000-00-00')
-		ORDER BY inputdate DESC;
+		
+		SELECT * 
+		FROM 
+			(
+				SELECT COUNT(*) totalcnt FROM declaration WHERE outputdate not IN('0000-00-00')) AS c,	
+			(
+				SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title 
+				FROM declaration, freeboard 
+				WHERE (declaration.boardname=freeboard.boardname) 
+					AND (declaration.fno=freeboard.writeno) 
+					AND outputdate not IN('0000-00-00')
+				UNION 
+				select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title 
+				FROM declaration, inforerrorboard 
+				WHERE (declaration.boardname=inforerrorboard.boardname) 
+					AND (declaration.fno=inforerrorboard.writeno ) 
+					AND outputdate not IN('0000-00-00')
+				ORDER BY inputdate DESC
+			) as l 
+		 limit #{start}, 10;
 	</select>
 	
 	<!-- 신고처리 완료 목록 검색해서 가져오기 -->

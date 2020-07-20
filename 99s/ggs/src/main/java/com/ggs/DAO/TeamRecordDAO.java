@@ -17,7 +17,6 @@ public class TeamRecordDAO {
 	private SqlSessionTemplate session;
 	
 	public List<TeamRecordDTO> getMyTeamSchedule(String teamName){
-		
 		return session.selectList("teamRecord.myteam", teamName);
 	}
 	
@@ -33,9 +32,16 @@ public class TeamRecordDAO {
 		dto.setTeamName(name);
 		return session.selectOne("teamRecord.teamScore", dto);
 	}
-
+	
+	//팀 목록 가져오기
 	public List<TeamInfoDTO> teamScoreList() {
 		return session.selectList("teamRecord.teamScore");
+	}
+
+	
+	//팀 경기 일정 가져오기
+	public List schmatchList(TeamRecordDTO teamRecordDTO) {
+		return session.selectList("teamRecord.schmatchList", teamRecordDTO);
 	}
 	
 	

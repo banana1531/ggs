@@ -26,6 +26,16 @@
 	
 	<context:component-scan base-package="com.ggs" />
 	
-	
-	
+<!-- 인터셉터 관련한 설정 부분 -->
+   <interceptors>
+      <interceptor>
+         <!-- 인터셉트가 언제 처리될지 지정 -->
+         <mapping path="/member/idFindFrm.gg"/>
+         <mapping path="/admin/*.gg"/>
+         <mapping path="/mypage/*.gg"/>
+         <!--*.gr -->
+         <!-- 사용할 인터셉트 클래스 등록 -->
+         <beans:bean class="com.ggs.util.LoginCheck"/>
+      </interceptor>
+   </interceptors>
 </beans:beans>

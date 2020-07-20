@@ -11,7 +11,23 @@ public class DeclarationListDTO {
 	private String 		reason;		//사유
 	private String 		writer;		//글 작성자
 	private String 		title;		//글제목
+	private int 		totalcnt;   //전체 글 숫자			
+	private int 		start;		//시작 글 숫자
 	
+	
+	
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
 	public String getBoardname() {
 		return boardname;
 	}
@@ -57,7 +73,8 @@ public class DeclarationListDTO {
 	@Override
 	public String toString() {
 		return "DeclarationListDTO [boardname=" + boardname + ", fno=" + fno + ", uid=" + uid + ", inputdate="
-				+ inputdate + ", reason=" + reason + ", writer=" + writer + ", title=" + title + "]";
+				+ inputdate + ", reason=" + reason + ", writer=" + writer + ", title=" + title + ", totalcnt="
+				+ totalcnt + ", start=" + start + "]";
 	}
 	
 	

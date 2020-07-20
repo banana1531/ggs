@@ -24,8 +24,14 @@ public class DecService {
 	private FreeBoardDAO freeBoardDAO;
 	
 	// 신고 접수 목록 가져오기
-	public List<DeclarationListDTO> getDeclList() {
-		return declarationDAO.getList();
+	public List<DeclarationListDTO> getDeclList(String pageNo) {
+		System.out.println("getDeclList");
+		DeclarationListDTO dto = new DeclarationListDTO();
+		int temp = Integer.parseInt(pageNo);
+		if(temp==0) return declarationDAO.getRecList();
+		int start= (temp-1)*10;
+		dto.setStart(start);
+		return declarationDAO.getList(dto);
 	}
 
 	// 신고글 상세 내용 가져오기
@@ -45,10 +51,12 @@ public class DecService {
 	}
 
 	// 신고처리 완료된 목록 가져오기
-	public List<DeclarationListDTO> getdonDecList() {
-		List list = declarationDAO.getdonDecList();
-		System.out.println(list);
-		return list;
+	public List<DeclarationListDTO> getdonDecList(String pageNo) {
+		DeclarationListDTO dto = new DeclarationListDTO();
+		int temp = Integer.parseInt(pageNo);
+		int start = (temp-1)*10;
+		dto.setStart(start);
+		return declarationDAO.getdonDecList(dto);
 	}
 
 	// 신고 처리 완료글 검색해서 가져오기

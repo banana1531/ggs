@@ -8,19 +8,29 @@
 <script>
 $(function(){
 	var name=$("#name").text()
+	//경기 결과 목록 불러오기(default)
 	$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+1)
-	$(".btn").click(function(){
+	//경기 결과  목록 불러오기(선택)
+	$("#result").click(function(){
+		$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+1)
+	})
+	//경기 일정 목록 불러오기(선택)
+	$("#schedule").click(function(){
+		$("#list").load("/teampredict/schmatchList?name="+name+"&pageNo="+1)
+	})
+	//경기 일정 페이징 처리
+	$(".btn1").click(function(){
 		var pageNo = $(this).text()
-		$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+pageNo)
+		$("#list").load("/teampredict/schmatchList?name="+name+"&pageNo="+pageNo)
 	})
 })
 </script>
 </head>
 <body>
-	<h1> myTeamDetail 들어왔다~</h1>
-	<p> 실적비교 자료는 어디로??? </p>
 	<div class="container">
 		<table class="table">
+		<caption>내팀 정보</caption>
+		<div><img width="100" height="50" src="/resources/img/${team.teamName}.jpg"></div>
 			<tr>
 				<th>팀명</th>
 				<th>설립일</th>
@@ -35,7 +45,7 @@ $(function(){
 				<td>${team.location }</td>
 				<td>${team.stadium }</td>
 				<td>${team.director }</td>
-				<td>${team.homepage }</td>
+				<td><a href="http://${team.homepage }" target="_blank">${team.homepage }</a></td>
 			</tr>
 			<tr>
 				<th>승수</th>
@@ -54,6 +64,7 @@ $(function(){
 				<td>${team.win+team.draw+team.lose}</td>
 			</tr>
 		</table>
+		<button id="result">경기 결과</button><button id="schedule">경기 일정</button>
 		<table class="table" id="list">
 		</table>
 

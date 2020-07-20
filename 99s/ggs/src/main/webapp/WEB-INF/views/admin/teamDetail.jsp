@@ -27,6 +27,7 @@ $(function(){
 	<div class="container">
 		<form class="form form-inline" action="/admin/teamInfoUpdate.gg">
 		<table class="table">
+		<caption>팀 정보</caption>
 			<tr>
 				<th >팀명</th>
 				<th>전화번호</th>

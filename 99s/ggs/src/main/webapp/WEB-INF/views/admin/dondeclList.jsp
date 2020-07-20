@@ -6,6 +6,19 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+$(function(){
+	$(".dto").click(function(){
+		var no = $(this).find(".no").text();
+		var boardname = $(this).find(".bname").text();
+		location="/admin/declDetail.gg?boardname=" + boardname + "&writeno=" + no;
+	});
+	$(".page").click(function(){
+		var pageNo=$(this).text();
+		location="/admin/dondeclList.gg?pageNo="+pageNo
+	})
+});
+</script>
 </head>
 <body>
     <div class="container">
@@ -52,7 +65,14 @@
 				</tr>
 			</c:forEach>
 			<tr>
-				<td align="center" colspan="7">페이징 구간</td>
+				<td align="center" colspan="7">
+				<c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
+				<c:forEach var="i"
+						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+					[<a class="page">${i}</a>]
+				</c:forEach>
+				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+				</td>
 			</tr>
 		</table>
    </div>

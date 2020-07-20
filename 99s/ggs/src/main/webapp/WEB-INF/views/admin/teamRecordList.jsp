@@ -17,6 +17,7 @@
 </head>
 <body>
 		<table class="table table-hover" id="list">
+		<caption>경기 결과 목록</caption>
 			<tr>
 				<th>일자</th>
 				<th>팀이름</th>

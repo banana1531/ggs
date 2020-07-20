@@ -1,6 +1,6 @@
 package com.ggs.teamrecord;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -8,7 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.ggs.DTO.TeamRecordDTO;
+import com.ggs.team.TeamInfoService;
+import com.ggs.util.PageUtil;
 
 @Controller
 @RequestMapping("/teampredict")
@@ -17,6 +22,8 @@ public class TeampredictController {
 	@Autowired
 	private TeampredictService service;
 	
+	@Autowired
+	private TeamInfoService teamInfoService;
 
 	//---------------------------------------------------
 	
@@ -42,31 +49,47 @@ public class TeampredictController {
 	
 	//---------------------------------------------------
 	
-	//경기일정 조회
-	
-	@RequestMapping("/schmatchList.gg")
-	public String schmatchList(Model model,Date gdate,String gtime,String ateamname,String ascore,
-			String bscore,String bteamname,String stadium) {
-		System.out.println("경기일정 페이지 schmatchList() 진입");
+	//특정 팀 경기일정 조회 
+	@RequestMapping("/schmatchList")
+	public String schmatchList(String name, @RequestParam(value="pageNo", defaultValue="1") String pageNo, Model model) {
+		System.out.println("TeampredictController.schmatchList");
+		System.out.println("name="+name+"pageNo="+pageNo);
+		List list = teamInfoService.schmatchList(name, pageNo);
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt());
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("nowPage", pageNo);	System.out.println("경기일정 페이지 schmatchList() 진입");
 
-		model.addAttribute("SchMatchList",service.getschmatchList());
-		
-		return "teampredict/schmatchList";	
+		return "teampredict/teamScheduleList";	
 		
 	}
+	
+	
+	//경기 일정 조회
+	@RequestMapping("/schmatchList.gg")
+	public String schmatchList(@RequestParam(value="pageNo", defaultValue="1") String pageNo, Model model) {
+		List list = service.getschmatchList(pageNo);
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,5);
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("SchMatchList", list);
+		return "teampredict/teamschmatchList";
+	}
+	
 	
 	//---------------------------------------------------
 	
 	//경기결과 조회
 	
 	@RequestMapping("/rltmatchList.gg")
-	public String rltmatchList() {
+	public String rltmatchList(@RequestParam(value="pageNo", defaultValue="1") String pageNo, Model model) {
 		System.out.println("경기결과 메인페이지 rltmatchList() 진입");
-
-		
-	
-		
-		return "teampredict/rltmatchList";
+		List list = service.getrltmatchList(pageNo);
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,5);
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("SchMatchList", list);
+		return "teampredict/teamrltmatchList";
 		
 	}
 	

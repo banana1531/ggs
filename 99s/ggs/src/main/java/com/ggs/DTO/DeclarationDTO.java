@@ -13,6 +13,8 @@ public class DeclarationDTO {
 	private String 	reason;		//신고 사유
 	private String 	details;	//신고 사유 상세	
 	private Date 	outputdate;	//처리일
+	
+	
 	public int getWno() {
 		return wno;
 	}
@@ -63,7 +65,7 @@ public class DeclarationDTO {
 	}
 	@Override
 	public String toString() {
-		return "Declaration [wno=" + wno + ", boardname=" + boardname + ", writeno=" + writeno + ", id=" + id
+		return "DeclarationDTO [wno=" + wno + ", boardname=" + boardname + ", writeno=" + writeno + ", id=" + id
 				+ ", inputdate=" + inputdate + ", reason=" + reason + ", details=" + details + ", outputdate="
 				+ outputdate + "]";
 	}

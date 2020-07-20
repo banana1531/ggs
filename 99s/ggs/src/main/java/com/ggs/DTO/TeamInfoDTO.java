@@ -19,6 +19,15 @@ public class TeamInfoDTO {
 	private int lose;			//패수
 	private int score;			//승점
 	private int loss;			//패점
+	private float rate;			//승률
+	
+	
+	public float getRate() {
+		return rate;
+	}
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
 	public String getTeamName() {
 		return teamName;
 	}

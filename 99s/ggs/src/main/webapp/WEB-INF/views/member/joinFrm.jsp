@@ -1,4 +1,4 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -25,13 +25,7 @@
 		$('#mailAuth').click(function(){
 			var email = $('#email').val();
 			if(email.length >0){
-				var g = "@";
-				if(email.indexOf(g)!= -1){ 
 				$('#mailAuthFrm').submit();
-				}else{
-					window.alert("'@'를 포함한 이메일 형식으로 써주세요. 예: myemail-adress@naver.com ");
-					return false;
-				}
 			}else{
 				window.alert("이메일을 입력해주세요");
 				return false;

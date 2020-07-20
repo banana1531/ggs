@@ -20,8 +20,14 @@ public class DeclarationDAO {
 	private SqlSessionTemplate session;
 
 	//현재 미처리된 신고된 글 가져오기
-	public List<DeclarationListDTO> getList() {
-		return session.selectList("declaration.getList");
+	public List<DeclarationListDTO> getList(DeclarationListDTO dto) {
+		return session.selectList("declaration.getList", dto);
+	}
+	
+	//최근 신고 등록글 5개 가져오기
+	public List<DeclarationListDTO> getRecList() {
+		System.out.println("getRecList");
+		return session.selectList("declaration.getRecList");
 	}
 
 	//신고접수글 상세 내용 가져오기
@@ -39,8 +45,8 @@ public class DeclarationDAO {
 	}
 	
 	//신고처리 완료 목록 가져오기
-	public List<DeclarationListDTO> getdonDecList() {
-		return session.selectList("declaration.getdonDecList");
+	public List<DeclarationListDTO> getdonDecList(DeclarationListDTO dto) {
+		return session.selectList("declaration.getdonDecList",dto);
 	}
 
 	//신고처리 목록 검색해서 가져오기

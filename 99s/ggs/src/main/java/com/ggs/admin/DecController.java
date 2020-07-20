@@ -1,12 +1,17 @@
 package com.ggs.admin;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ggs.DTO.BoardDTO;
 import com.ggs.DTO.DeclarationDTO;
+import com.ggs.DTO.DeclarationListDTO;
+import com.ggs.util.PageUtil;
 
 @Controller
 @RequestMapping("/admin")
@@ -35,10 +40,16 @@ public class DecController {
 		return "/admin/deSummary";
 	}
 	
-	//미처리건 화면 보기
+	//미처리건 목록 보기
 	@RequestMapping("/declList.gg")
-	public String declList(Model model) {
-		model.addAttribute("declist", service.getDeclList());
+	public String declList(Model model, @RequestParam(value="pageNo", defaultValue="1") String pageNo) {
+		
+		List list = service.getDeclList(pageNo);
+		int totalCount = ((DeclarationListDTO)list.get(0)).getTotalcnt();
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), totalCount, 10, 10);
+		
+		model.addAttribute("declist", list);
+		model.addAttribute("pageInfo", pageInfo);
 		return "/admin/declList";
 	}
 	
@@ -61,8 +72,15 @@ public class DecController {
 	
 	//신고처리 완료 목록 보기
 	@RequestMapping("/dondeclList.gg")
-	public String dondeclList(Model model) {		
-		model.addAttribute("declist", service.getdonDecList());
+	public String dondeclList(Model model, @RequestParam(value="pageNo", defaultValue="1") String pageNo) {
+		List list = service.getdonDecList(pageNo);
+		int totalCount = ((DeclarationListDTO)list.get(0)).getTotalcnt();
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), totalCount, 10, 10);
+		
+		model.addAttribute("declist", list);
+		model.addAttribute("pageInfo", pageInfo);
+		
+		model.addAttribute("declist", list);
 		return "/admin/dondeclList";
 	}
 	

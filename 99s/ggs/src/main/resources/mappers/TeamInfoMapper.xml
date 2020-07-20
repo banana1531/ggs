@@ -12,7 +12,7 @@
 	
 	<!-- 팀 기본정보 목록 가져오기 -->
 	<select id="teamList" resultType="com.ggs.DTO.TeamInfoDTO">
-		select * from teaminfo where teamName !='없음';
+		select * from teaminfo where teamName !='경기없음';
 	</select>
 	
 	<!-- 팀 목록 가져오기 -->
@@ -46,7 +46,7 @@
 			FROM teamRecord 
 			WHERE bscore &gt; ascore GROUP BY bteamname) AS ww
 			GROUP BY team) AS w 
-		WHERE w.team!='없음' AND w.team=d.team AND w.team=l.team 
+		WHERE w.team!='경기없음' AND w.team=d.team AND w.team=l.team 
 		GROUP BY teamName
 		ORDER BY teamName DESC;
 	</select>

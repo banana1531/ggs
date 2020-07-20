@@ -6,9 +6,31 @@
 <mapper namespace="schmatch">
 	
 	<select id="schmatch" resultType="com.ggs.DTO.TeamRecordDTO">
-		SELECT *
-		FROM teamRecord
-		ORDER BY gdate
+		SELECT * FROM 
+			(
+				SELECT *
+				FROM teamRecord 
+				WHERE DATEDIFF(gdate, date(NOW()))&gt; 0 
+					AND  ateamname != '경기없음'
+				ORDER BY gdate LIMIT #{start}, 10
+			) AS s, 
+			(
+				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE DATEDIFF(gdate, date(NOW()))&gt;0 
+			) AS c
 	</select>
 	
+	
+	<select id="getrltmatchList" resultType="com.ggs.DTO.TeamRecordDTO">
+		SELECT * FROM 
+			(
+				SELECT *
+				FROM teamRecord 
+				WHERE DATEDIFF(gdate, date(NOW()))&lt; 0 
+					AND  ateamname != '경기없음'
+				ORDER BY gdate desc LIMIT #{start}, 10
+			) AS s, 
+			(
+				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE DATEDIFF(gdate, date(NOW()))&lt;0 
+			) AS c
+	</select>
 </mapper>

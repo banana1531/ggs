@@ -23,25 +23,30 @@ $(function(){
 <body>
 	<div class="container">
 		<p>팀 목록</p>
-		<table class="table table-hover">
+		<table class="table table-hover table-bordered">
 			<thead>
 			<tr align="center">
-				<th>팀명</th>
+				<th colspan="2">팀명</th>
+				<th>경기수</th>
 				<th>승</th>
 				<th>무</th>
 				<th>패</th>
 				<th>득점</th>
 				<th>실점</th>
+				<th>승률</th>
 			</tr>
 			</thead>
 			<c:forEach items="${list }" var="team">
 				<tr class="team">
+					<td><img width="50" height="30" src="/resources/img/${team.teamName}.jpg"></td>
 					<td id="name">${team.teamName}</td>
+					<td>${team.win+team.draw+team.lose}</td>
 					<td>${team.win}</td>
 					<td>${team.draw}</td>
 					<td>${team.lose}</td>
 					<td>${team.score}</td>
 					<td>${team.loss}</td>
+					<td>${team.rate}</td>
 				</tr>
 			</c:forEach>
 		</table>

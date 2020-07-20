@@ -33,6 +33,9 @@ public class DataManageController {
 	@Autowired
 	private TeampredictService teampredicService;
 	
+	@Autowired
+	private DataManageService dataManageService;
+	
 	
 	/*** ==========================================
 	 * data관리
@@ -41,8 +44,14 @@ public class DataManageController {
 	//data관리 메인화면보기
 	@RequestMapping("/dataMain.gg")
 	public String dataMain() {
+		
+	
+		
 		return "/admin/dataMain";
 	}
+	
+	
+	
 	
 	
 	/*** ==========================================
@@ -171,7 +180,7 @@ public class DataManageController {
 	//경기일정 목록 불러오기
 	@RequestMapping("/gameList.gg")
 	public String gameList(Model model, @RequestParam(value="pageNo", defaultValue="1" ) String pageNo) {
-		model.addAttribute("list", teampredicService.getschmatchList());
+		model.addAttribute("list", teampredicService.getschmatchList(pageNo));
 		return "/admin/gameList";
 	}
 	

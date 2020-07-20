@@ -83,11 +83,11 @@ article {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">99s</a>
+				<a class="navbar-brand" href="/teampredict/schmatchList.gg">99s</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="#">Home</a></li>
+					<li><a href="/teampredict/schmatchList.gg">Home</a></li>
 					<li><a href="#">공지사항</a></li>
 					<li><a href="#">자유 게시판</a></li>
 					<li><a href="#">정보 오류 신고</a></li>

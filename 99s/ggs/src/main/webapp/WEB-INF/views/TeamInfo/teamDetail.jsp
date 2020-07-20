@@ -20,8 +20,8 @@ $(function(){
 </script>
 </head>
 <body>
-   <h1>teamList 들어왔다.</h1>
 	<div class="container">
+	<h4>팀 상세 정보</h4>
 		<table class="table">
 			<tr>
 				<th>팀명</th>

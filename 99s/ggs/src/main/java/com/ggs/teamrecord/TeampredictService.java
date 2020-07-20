@@ -40,8 +40,23 @@ public class TeampredictService {
 	//해당하는 경기리스트 출력해주기
 	
 	//경기리스트 오름차순으로 출력하기
-	public List<TeamRecordDTO> getschmatchList(){
-		return schmatchdao.getschmatchList();
+	public List<TeamRecordDTO> getschmatchList(String pageNo){
+		System.out.println("TeamInfoService.schmatchList");
+		int temp = Integer.parseInt(pageNo);
+		int start = (temp-1)*5;
+		TeamRecordDTO teamRecordDTO = new TeamRecordDTO();
+		teamRecordDTO.setStart(start);		
+		return schmatchdao.getschmatchList(start);
+	}
+	
+	//경기결과 오름차순으로 출력하기
+	public List<TeamRecordDTO> getrltmatchList(String pageNo) {
+		System.out.println("TeamInfoService.getrltmatchList");
+		int temp = Integer.parseInt(pageNo);
+		int start = (temp-1)*5;
+		TeamRecordDTO teamRecordDTO = new TeamRecordDTO();
+		teamRecordDTO.setStart(start);
+		return schmatchdao.getrltmatchList(start);
 	}
 }
 
