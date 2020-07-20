@@ -5,23 +5,31 @@ import java.util.Date;
 //댓글 테이블 DTO
 public class ReplyDTO {
 
-	private int repno;		//댓글관리번호
-	private int writeno;	//게시글번호
-	private String id;		//작성자 id
-	private Date writeDate;	//작성일
-	private String content;	//내용
-	private int isvisible;	//노출/비노출
+	private int repno;
+	private int wno;
+	private String boardname;
+	private String id;
+	private Date writedate;
+	private String content;
+	private int isvisible;
+	
 	public int getRepno() {
 		return repno;
 	}
 	public void setRepno(int repno) {
 		this.repno = repno;
 	}
-	public int getWriteno() {
-		return writeno;
+	public int getWno() {
+		return wno;
 	}
-	public void setWriteno(int writeno) {
-		this.writeno = writeno;
+	public void setWno(int wno) {
+		this.wno = wno;
+	}
+	public String getBoardname() {
+		return boardname;
+	}
+	public void setBoardname(String boardname) {
+		this.boardname = boardname;
 	}
 	public String getId() {
 		return id;
@@ -29,11 +37,11 @@ public class ReplyDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getWriteDate() {
-		return writeDate;
+	public Date getWritedate() {
+		return writedate;
 	}
-	public void setWriteDate(Date writeDate) {
-		this.writeDate = writeDate;
+	public void setWritedate(Date writedate) {
+		this.writedate = writedate;
 	}
 	public String getContent() {
 		return content;
@@ -47,12 +55,27 @@ public class ReplyDTO {
 	public void setIsvisible(int isvisible) {
 		this.isvisible = isvisible;
 	}
+	
+	private int start;
+	private int end;
+	
+	
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
 	@Override
 	public String toString() {
-		return "Reply [repno=" + repno + ", writeno=" + writeno + ", id=" + id + ", writeDate=" + writeDate
-				+ ", content=" + content + ", isvisible=" + isvisible + "]";
+		return "ReplyDTO [repno=" + repno + ", wno=" + wno + ", boardname=" + boardname + ", id=" + id + ", writedate="
+				+ writedate + ", content=" + content + ", isvisible=" + isvisible + "]";
 	}
-	
-	
-	
+
 }

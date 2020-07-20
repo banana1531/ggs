@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ggs.DTO.NoticeDTO;
+import com.ggs.DTO.ReplyDTO;
 
 @Repository
 public class NoticeDAO {
@@ -48,6 +49,18 @@ public class NoticeDAO {
 
 	public int SearchPage(NoticeDTO nDTO) {
 		return (Integer)session.selectOne("notice.SearchPage", nDTO);
+	}
+
+	public ArrayList<ReplyDTO> noticeReply(ReplyDTO rDTO) {
+		return (ArrayList)session.selectList("notice.noticeReply", rDTO);
+	}
+
+	public void replyAdd(ReplyDTO rDTO) {
+		session.insert("notice.replyAdd", rDTO);
+	}
+
+	public int ReplyPage(int writeno) {
+		return (Integer)session.selectOne("notice.ReplyPage", writeno);
 	}
 
 }

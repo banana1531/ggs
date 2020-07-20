@@ -13,6 +13,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.ggs.DAO.NoticeDAO;
 import com.ggs.DTO.NoticeDTO;
+import com.ggs.DTO.ReplyDTO;
 import com.ggs.util.NoticePageUtil;
 
 @Controller
@@ -46,19 +47,42 @@ public class NoticeController {
 			@RequestParam(value="writeno") int writeno,
 			@RequestParam(value="nowPage") int nowPage,
 			@RequestParam(value="views") int views,
+			@RequestParam(value = "nowPage2", required = false, defaultValue = "1") int nowPage2,
 			ModelAndView mv) {
 		
 		nService.hit(views, writeno);
-		
 		ArrayList<NoticeDTO> noticeDetail = nService.noticeDetail(writeno, nowPage);
 		
+		NoticePageUtil pInfo = nService.ReplyPage(nowPage2, writeno);
+		ArrayList<ReplyDTO> noticeReply = nService.noticeReply(writeno, pInfo);
+		
 		mv.addObject("noticeDetail",noticeDetail);
+		mv.addObject("noticeReply",noticeReply);
+		mv.addObject("PINFO", pInfo);
 		
 		mv.setViewName("Notice/detail");
 		
 		return mv;
 		
 	}
+	
+	@PostMapping("/detail")
+	public ModelAndView noticeReply(
+			String id,
+			String content,
+			int wno,
+			int nowPage,
+			int views,
+			ModelAndView mv) {
+		
+		nService.replyAdd(id, content, wno);
+
+		RedirectView rv = new RedirectView("./detail?writeno="+wno+"&nowPage="+nowPage+"&views="+views);
+		mv.setView(rv);
+		
+		return mv;
+	}
+	
 	
 	@GetMapping("/write")
 	public String noticeWriteForm() {

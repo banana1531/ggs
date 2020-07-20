@@ -92,5 +92,25 @@
 		</trim>
 	</select>
 
+	<select id="noticeReply" parameterType="ReplyDTO" resultType="ReplyDTO">
+		SELECT *
+		FROM reply
+		WHERE boardname="notice" AND isvisible=1 AND wno=#{wno}
+		ORDER BY repno DESC
+		LIMIT #{start}, 5
+	</select>
+
+	<insert id="replyAdd" parameterType="ReplyDTO">
+		INSERT INTO reply(wno, boardname, id, content)
+		VALUES (#{wno},"notice",#{id},#{content})
+	</insert>
+
+	<select id="ReplyPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM
+		reply
+		WHERE isvisible=1 AND boardname="notice" AND wno=#{writeno}
+	</select>
+
 </mapper>
 

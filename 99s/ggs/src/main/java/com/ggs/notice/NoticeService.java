@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ggs.DAO.NoticeDAO;
 import com.ggs.DTO.NoticeDTO;
+import com.ggs.DTO.ReplyDTO;
 import com.ggs.util.NoticePageUtil;
 
 @Service
@@ -92,6 +93,31 @@ public class NoticeService {
 		int totalCount = nDAO.SearchPage(nDTO);
 		System.out.println(totalCount);
 		NoticePageUtil pInfo = new NoticePageUtil(nowPage, totalCount);
+		return pInfo;
+	}
+
+	public ArrayList<ReplyDTO> noticeReply(int writeno, NoticePageUtil pInfo) {
+		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
+		int end = start + pInfo.getLineCount() - 1;
+		ReplyDTO rDTO = new ReplyDTO();
+		rDTO.setStart(start-1);
+		rDTO.setEnd(end);
+		rDTO.setWno(writeno);
+		ArrayList<ReplyDTO> noticeReply = nDAO.noticeReply(rDTO);
+		return noticeReply;
+	}
+
+	public void replyAdd(String id, String content, int wno) {
+		ReplyDTO rDTO = new ReplyDTO();
+		rDTO.setId(id);
+		rDTO.setContent(content);
+		rDTO.setWno(wno);
+		nDAO.replyAdd(rDTO);
+	}
+
+	public NoticePageUtil ReplyPage(int nowPage2, int writeno) {
+		int totalCount = nDAO.ReplyPage(writeno);
+		NoticePageUtil pInfo = new NoticePageUtil(nowPage2, totalCount);
 		return pInfo;
 	}
 
