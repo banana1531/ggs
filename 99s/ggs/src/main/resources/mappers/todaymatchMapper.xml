@@ -6,7 +6,7 @@
 <mapper namespace="todaymatch">
 
 	<select id="todaymatch" resultType="com.ggs.DTO.TeamRecordDTO">
-		SELECT gno,ateamname, bteamname
+		SELECT *
 		FROM teamRecord
 		WHERE gdate = date(NOW());
 	</select>
