@@ -2,7 +2,7 @@ import pymysql as my
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-#총 280명 중 2명(김태훈, 정도운)제외
+#총 280명 중 3명(김태훈, 정도운, 두산-최원준)제외
 #투수 마리아 디비에 데이터 넣기
 #1. db 연결
 conn= my.connect(host='umj7-015.cafe24.com', user='desert8304',
@@ -20,7 +20,7 @@ cur=conn.cursor(my.cursors.DictCursor)
 cur2=conn.cursor(my.cursors.DictCursor)
 cur3=conn.cursor(my.cursors.DictCursor)
 #3-1. select 쿼리문
-sql1='select pno,teamName  from playerinfo where name=%s and birth=%s'
+sql1="select pno,teamName  from playerinfo where name=%s and birth=%s and position like '%%투수%%' "
 sql2='select teamname from teaminfo where teamname=%s'
 # 3-2. insert 쿼리문 #29개 투수정보, 3개 선수정보
 sql3='''insert into playerRecord (
@@ -46,16 +46,16 @@ for i in range(0,280):
         # print(pbd)
         # print(type(pbd))
         url = url+'&birth='+pbd
-    # print(url)
+        # print(url)
         recvd=requests.get(url)
         dom=BeautifulSoup(recvd.text,'html.parser')
         # print(dom)
         div=dom.find('div',{'class':'box-body no-padding table-responsive'})
         # print(div)
         #oddrow
-        # divs=div.find_all('tr',{'class':'oddrow_stz0'})
+        divs=div.find_all('tr',{'class':'oddrow_stz0'})
         #evenrow
-        divs = div.find_all('tr', {'class': 'evenrow_stz0'})
+        # divs = div.find_all('tr', {'class': 'evenrow_stz0'})
         # print(divs)
         # print(divs)
         for div in divs:
@@ -73,7 +73,7 @@ for i in range(0,280):
 
 
             # print(len(templist))
-            if len(templist) >=30:
+            if len(templist) > 29:
                 continue
             gdate = templist[0][0]
             vs = templist[1][0]
@@ -106,32 +106,32 @@ for i in range(0,280):
             gangyuk= templist[28][0]
             #29개
 
-    # str1 = '{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(pname,pbd,
-    #                            gdate,vs,gresult,sunbal, ining, siljum, jachak,taja, tasu,anta, eta,samta, home_run,
-    #                            ball4,go4, sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24, wpa, gsc,
-    #                            gdec,gangyuk)
-    #
-    # print(str1)
-    cur.execute(sql1, (pname,pbd))
-    rows = cur.fetchall()
-    for row in rows:
-        pno = row['pno']
-        teamName1 = row['teamName']
-        ptype = '투수'
-        print(pno,teamName1,ptype)
-    cur2.execute(sql2,(teamName1,))
-    rows1 = cur2.fetchall()
-    for row in rows1:
-        teamName = row['teamname']
-        print(teamName)
-    print('#########',pno,teamName,ptype,gdate,vs,gresult,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
-                        samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
-                        wpa, gsc,gdec,gangyuk)
-    # insert
-    cur3.execute(sql3, (pno,teamName,ptype,gdate,vs,gresult,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
-                        samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
-                        wpa, gsc,gdec,gangyuk))
-    conn.commit()
+            # str1 = '{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}\n'.format(pname,pbd,
+            #                            gdate,vs,gresult,sunbal, ining, siljum, jachak,taja, tasu,anta, eta,samta, home_run,
+            #                            ball4,go4, sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24, wpa, gsc,
+            #                            gdec,gangyuk)
+            #
+            # print(str1)
+            cur.execute(sql1, (pname,pbd))
+            rows = cur.fetchall()
+            for row in rows:
+                pno = row['pno']
+                teamName1 = row['teamName']
+                ptype = '투수'
+                print(pno,teamName1,ptype)
+            cur2.execute(sql2,(teamName1,))
+            rows1 = cur2.fetchall()
+            for row in rows1:
+                teamName = row['teamname']
+                print(teamName)
+            print('#########',pno,teamName,ptype,gdate,vs,gresult,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
+                                samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
+                                wpa, gsc,gdec,gangyuk)
+            # insert
+            cur3.execute(sql3, (pno,teamName,ptype,gdate,vs,gresult,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
+                                samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
+                                wpa, gsc,gdec,gangyuk))
+            conn.commit()
 
 
 conn.close()

@@ -2,7 +2,7 @@ import pymysql as my
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
-#총 280명 중 2명(김태훈, 정도운)제외
+#총 280명 중 3명(김태훈, 정도운, 두산-최원준)제외
 #타자 마리아 디비에 데이터 넣기
 #1. db 연결
 conn= my.connect(host='umj7-015.cafe24.com', user='desert8304',
@@ -55,9 +55,9 @@ for i in range(0,280):
         div=dom.find('div',{'class':'box-body no-padding table-responsive'})
         # print(div)
         #oddrow
-        # divs=div.find_all('tr',{'class':'oddrow_stz0'})
+        divs=div.find_all('tr',{'class':'oddrow_stz0'})
         #evenrow
-        divs = div.find_all('tr', {'class': 'evenrow_stz0'})
+        # divs = div.find_all('tr', {'class': 'evenrow_stz0'})
         # print(divs)
         # print(divs)
         for div in divs:
