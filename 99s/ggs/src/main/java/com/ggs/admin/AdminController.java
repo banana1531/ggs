@@ -23,4 +23,9 @@ public class AdminController {
 		model.addAttribute("declist", decService.getDeclList("0"));			//신고 접수 목록 가져오기
 		return "/admin/adminMain";		
 	}
+	
+	//관리자 권한이 없는 사람
+	@RequestMapping("/fail.gg")
+	public void fail() {
+	}
 }

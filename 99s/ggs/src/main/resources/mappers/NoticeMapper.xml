@@ -11,14 +11,16 @@
 		notice
 		WHERE isvisible=1
 	</select>
-
+	
+	
+	<!-- 글 목록 가져오기 -->
 	<select id="noticeList" parameterType="NoticeDTO"
 		resultType="NoticeDTO">
 		SELECT *
 		FROM notice
-		WHERE isvisible=1
+		WHERE isvisible=1		
 		ORDER BY writeno DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="noticeDetail" parameterType="int"
@@ -92,16 +94,20 @@
 		</trim>
 	</select>
 
-	<select id="noticeReply" parameterType="ReplyDTO" resultType="ReplyDTO">
+
+	<select id="noticeReply" parameterType="ReplyDTO"
+		resultType="ReplyDTO">
 		SELECT *
 		FROM reply
-		WHERE boardname="notice" AND isvisible=1 AND wno=#{wno}
+		WHERE boardname="notice" AND isvisible=1
+		AND wno=#{wno}
 		ORDER BY repno DESC
 		LIMIT #{start}, 5
 	</select>
 
 	<insert id="replyAdd" parameterType="ReplyDTO">
-		INSERT INTO reply(wno, boardname, id, content)
+		INSERT INTO reply(wno,
+		boardname, id, content)
 		VALUES (#{wno},"notice",#{id},#{content})
 	</insert>
 
@@ -111,6 +117,5 @@
 		reply
 		WHERE isvisible=1 AND boardname="notice" AND wno=#{writeno}
 	</select>
-
 </mapper>
 

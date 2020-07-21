@@ -88,9 +88,9 @@ article {
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/teampredict/schmatchList.gg">Home</a></li>
-					<li><a href="#">공지사항</a></li>
-					<li><a href="#">자유 게시판</a></li>
-					<li><a href="#">정보 오류 신고</a></li>
+					<li><a href="/notice/list">공지사항</a></li>
+					<li><a href="/board/list?boardname=freeboard">자유 게시판</a></li>
+					<li><a href="/board/list?boardname=inforerrorboard">정보 오류 신고</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown">경기 일정<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -107,9 +107,9 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/history/hBoard.gg">역대 관중 현황</a></li>
-							<li><a href="/obesity/oBoard.gg">비만도와 실적관계</a></li>
-							<li><a href="/column/cBoard.gg">야구 지식 정보</a></li>
+							<li><a href="#">역대 관중 현황</a></li>
+							<li><a href="#">비만도와 실적관계</a></li>
+							<li><a href="/column/cBoard">야구 지식 정보</a></li>
 						</ul></li>
 					<c:choose>
 						<c:when test="${UID!='admin'}">

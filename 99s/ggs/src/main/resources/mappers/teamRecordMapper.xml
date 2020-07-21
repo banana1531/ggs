@@ -93,7 +93,7 @@
 				(
 					SELECT COUNT(*) AS totalcnt 
 					FROM teamRecord 
-					WHERE (ateamname = #{ateamname} OR Bteamname=#{ateamname}) AND (ascore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&gt;0)
+					WHERE (ateamname = #{ateamname} OR Bteamname=#{ateamname}) AND (ascore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&lt;0)
 				) AS c
 	</select>
 

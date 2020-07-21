@@ -38,20 +38,15 @@ public class DataManageController {
 	
 	
 	/*** ==========================================
-	 * data관리
+	 * data update
 	 * ***/	
 	
-	//data관리 메인화면보기
-	@RequestMapping("/dataMain.gg")
+	//data update하기 메인화면보기
+	@RequestMapping("/dataUpdate.gg")
 	public String dataMain() {
-		
-	
 		
 		return "/admin/dataMain";
 	}
-	
-	
-	
 	
 	
 	/*** ==========================================
@@ -61,9 +56,7 @@ public class DataManageController {
 	//팀 기본정보 목록 가져오기
 	@RequestMapping("/teamList.gg")
 	public String teamList(Model model) {
-		
-		model.addAttribute("list", teamInfoService.teamList());
-				
+		model.addAttribute("list", teamInfoService.teamList());		
 		return "/admin/teamList";
 	}
 	
@@ -113,10 +106,19 @@ public class DataManageController {
 			,@RequestParam(value="option", defaultValue="0") String option
 			,@RequestParam(value="search", defaultValue="0") String search) {
 		System.out.println("DataManageController.playList");
+		System.out.println("option="+option);
+		System.out.println("search="+search);
 		List list = playerInfoService.playerList(pageNo, option, search);
 		System.out.println("list.size="+list.size());
-		int totalcnt = ((PlayerInfoDTO)list.get(0)).getTotalcnt();
+		int totalcnt = 0;
+		try {
+			totalcnt = ((PlayerInfoDTO)list.get(0)).getTotalcnt();
+		}catch (Exception e) {
+			totalcnt = 0;
+			model.addAttribute("result", "검색 결과가 없습니다.");
+		}
 		if(search.equals("0")) search=null;
+		model.addAttribute("option", option);
 		model.addAttribute("search", search);
 		model.addAttribute("playerlist", list);
 		model.addAttribute("pageInfo", new PageUtil(Integer.parseInt(pageNo), totalcnt, 10, 10));
@@ -173,6 +175,12 @@ public class DataManageController {
 		return "/admin/playerRecordDetail";
 	}
 	
+	//선수 검색하기
+	
+	
+	
+	
+	
 	/*** ==========================================
 	 * 경기일정 data관리
 	 * ***/
@@ -180,7 +188,12 @@ public class DataManageController {
 	//경기일정 목록 불러오기
 	@RequestMapping("/gameList.gg")
 	public String gameList(Model model, @RequestParam(value="pageNo", defaultValue="1" ) String pageNo) {
-		model.addAttribute("list", teampredicService.getschmatchList(pageNo));
+		
+		List list = teampredicService.getschmatchList(pageNo);
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,10);
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("nowPage", pageNo);
 		return "/admin/gameList";
 	}
 	

@@ -1,41 +1,36 @@
 package com.ggs.DTO;
 
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 
 //자유게시판 테이블  DTO
 public class BoardDTO {
 	
-	private int 	writeno; 		//글 관리번호
-	private String 	id; 		//글쓴이
-	private String 	title;		//제목
-	private String 	content;	//내용
+	private int 		writeno; 	//글 관리번호
+	private String 		id; 		//글쓴이
+	private String 		title;		//제목
+	private String 		content;	//내용
 	private Timestamp 	writedate;	//작성일
-	private int 	views;		//조회수
-	private int 	isvisible;	//노출,비노출
-	private String 	boardname;	//게시판 이름
+	private int 		views;		//조회수
+	private int 		isvisible;	//노출,비노출
+	private String 		boardname;	//게시판 이름
+	
+	private int start;				//시작글번호
+	private int totalcnt;			//전체 글 숫자
 	
 	
-	//------------------강동혁-------------------------------
 	
-	private int		rno;
-	
-	private int		start; 		//시작글번호
-	private	int		end;		//끝글번호
-	
-	private int		nowPage;	//보고싶은페이지
-
-	private String target;		//검색분야
-	private String word;		//검색어
-	
-	public String getwDate2() {
-		//필요한 조작을 하면 된다
-		SimpleDateFormat fmt = new SimpleDateFormat("yyyy년 MM-dd");
-		return fmt.format(writedate);
+	public int getStart() {
+		return start;
 	}
-	//----------------------------------------------
-	
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
 	public int getWriteno() {
 		return writeno;
 	}
@@ -91,67 +86,11 @@ public class BoardDTO {
 	public void setIsvisible(int isvisible) {
 		this.isvisible = isvisible;
 	}
-	
-	
-	
-	
-	//-------------------------------------------------------
-	public int getRno() {
-		return rno;
-	}
-
-	public void setRno(int rno) {
-		this.rno = rno;
-	}
-
-	public int getStart() {
-		return start;
-	}
-
-	public void setStart(int start) {
-		this.start = start;
-	}
-
-	public int getEnd() {
-		return end;
-	}
-
-	public void setEnd(int end) {
-		this.end = end;
-	}
-
-	public int getNowPage() {
-		return nowPage;
-	}
-
-	public void setNowPage(int nowPage) {
-		this.nowPage = nowPage;
-	}
-
-	public String getTarget() {
-		return target;
-	}
-
-	public void setTarget(String target) {
-		this.target = target;
-	}
-
-	public String getWord() {
-		return word;
-	}
-
-	public void setWord(String word) {
-		this.word = word;
-	}
-
-	//----------------------------------------------------
-	
 	@Override
 	public String toString() {
-		return "BoardDTO [writeno=" + writeno + ", id=" + id + ", title=" + title + ", content=" + content
+		return "FreeBoardDTO [writeno=" + writeno + ", id=" + id + ", title=" + title + ", content=" + content
 				+ ", writedate=" + writedate + ", views=" + views + ", isvisible=" + isvisible + ", boardname="
-				+ boardname + ", rno=" + rno + ", start=" + start + ", end=" + end + ", nowPage=" + nowPage
-				+ ", target=" + target + ", word=" + word + "]";
+				+ boardname + "]";
 	}
 	
 	

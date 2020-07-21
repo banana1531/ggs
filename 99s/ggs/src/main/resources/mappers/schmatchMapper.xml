@@ -15,11 +15,9 @@
 				ORDER BY gdate LIMIT #{start}, 10
 			) AS s, 
 			(
-				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE DATEDIFF(gdate, date(NOW()))&gt;0 
+				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE DATEDIFF(gdate, date(NOW()))&gt;0 AND  ateamname != '경기없음' 
 			) AS c
 	</select>
-	
-	
 	<select id="getrltmatchList" resultType="com.ggs.DTO.TeamRecordDTO">
 		SELECT * FROM 
 			(

@@ -19,58 +19,9 @@ public class TeamRecordDTO {
 	private int score;
 	private int loss;
 	
-	private int	start; 			//시작글번호
-	private	int	end;			//끝글번호
+	private int		start; 			//시작글번호
+	private	int		end;			//끝글번호
 	private int 	totalcnt;		//전체 데이터 숫자
-	
-	public int getTotalcnt() {
-		return totalcnt;
-	}
-	public void setTotalcnt(int totalcnt) {
-		this.totalcnt = totalcnt;
-	}
-	public int getWin() {
-		return win;
-	}
-	public void setWin(int win) {
-		this.win = win;
-	}
-	public int getDraw() {
-		return draw;
-	}
-	public void setDraw(int draw) {
-		this.draw = draw;
-	}
-	public int getLose() {
-		return lose;
-	}
-	public void setLose(int lose) {
-		this.lose = lose;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
-	public int getLoss() {
-		return loss;
-	}
-	public void setLoss(int loss) {
-		this.loss = loss;
-	}
-	public int getStart() {
-		return start;
-	}
-	public void setStart(int start) {
-		this.start = start;
-	}
-	public int getEnd() {
-		return end;
-	}
-	public void setEnd(int end) {
-		this.end = end;
-	}
 	public int getGno() {
 		return gno;
 	}
@@ -119,6 +70,54 @@ public class TeamRecordDTO {
 	public void setStadium(String stadium) {
 		this.stadium = stadium;
 	}
+	public int getWin() {
+		return win;
+	}
+	public void setWin(int win) {
+		this.win = win;
+	}
+	public int getDraw() {
+		return draw;
+	}
+	public void setDraw(int draw) {
+		this.draw = draw;
+	}
+	public int getLose() {
+		return lose;
+	}
+	public void setLose(int lose) {
+		this.lose = lose;
+	}
+	public int getScore() {
+		return score;
+	}
+	public void setScore(int score) {
+		this.score = score;
+	}
+	public int getLoss() {
+		return loss;
+	}
+	public void setLoss(int loss) {
+		this.loss = loss;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getEnd() {
+		return end;
+	}
+	public void setEnd(int end) {
+		this.end = end;
+	}
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
 	@Override
 	public String toString() {
 		return "TeamRecordDTO [gno=" + gno + ", gdate=" + gdate + ", gtime=" + gtime + ", ateamname=" + ateamname
@@ -126,6 +125,8 @@ public class TeamRecordDTO {
 				+ ", win=" + win + ", draw=" + draw + ", lose=" + lose + ", score=" + score + ", loss=" + loss
 				+ ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + "]";
 	}
+	
+	
 	
 	
 	

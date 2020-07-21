@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
@@ -26,13 +27,19 @@ $(function(){
 	<div class="container">
 		<table class="table table-hover" id="list">
 			<tr>
-				<th>이름</th>
+				<th>일자</th>
+				<th>상대팀</th>
+				<th>결과</th>
+				<th>선발</th>
 			</tr>
 			<c:forEach items="${list }" var="team">
 				<tr class="team">
 					<td>
 					<input id="pgno" type="hidden" value="${team.pgno}">
 					  ${team.gdate}</td>
+					  <td>${team.vs}</td>
+					  <td>${team.gresult}</td>
+					  <td>${team.sunbal}</td>
 				</tr>
 			</c:forEach>
 

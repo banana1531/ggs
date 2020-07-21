@@ -11,7 +11,9 @@
 $(function(){
 	$(".page").click(function(){
 		var pageNo=$(this).text();
-		location="/admin/playerList.gg?pageNo="+pageNo
+		var option=$("#option").val();
+		var search=$("#dsearch").val();
+		location="/admin/playerList.gg?pageNo="+pageNo+"&option="+option+"&search="+search
 	})
 	$(".dto").click(function(){
 		var pno=$(this).find("#pno").val();
@@ -31,11 +33,24 @@ $(function(){
    <div class="container" id="body">
    <nav class="navbar navbar-right">
 			<form class="form-inline" action="/admin/playerList.gg">
+			<input type="hidden" id="option" value="${option}">
 				<select id="option" name="option" class="form-control">
-					<option value="name">이름</option>
-					<option value="teamname">소속 팀</option>
-					<option value="position">포지션</option>
-				</select><input type="text" name="search" class="form-control">
+					<c:choose>
+						<c:when test="${option=='name'}"><option value="name" selected="selected">이름</option></c:when>
+						<c:otherwise><option value="name">이름</option></c:otherwise>
+					</c:choose>
+						<c:choose>
+						<c:when test="${option=='teamname'}"><option value="teamname" selected="selected">소속 팀</option></c:when>
+						<c:otherwise><option value="teamname">소속 팀</option></c:otherwise>
+					</c:choose>
+						<c:choose>
+						<c:when test="${option=='position'}"><option value="position" selected="selected">포지션</option></c:when>
+						<c:otherwise><option value="position">포지션</option></c:otherwise>
+					</c:choose>
+					<!-- <option value="teamname">소속 팀</option>
+					<option value="position">포지션</option> -->
+					
+				</select><input id="dsearch" type="text" name="search" class="form-control" value=" ${search }">
 				<button id="sOption" class="btn btn-default">검색</button>
 			</form>
 		</nav>
@@ -46,6 +61,8 @@ $(function(){
    			<th>등번호</th>
    			<th>포지션</th>   			
    		</tr>
+   		<c:choose>
+   		<c:when test="${result ==null }">
 			<c:forEach items="${playerlist}" var="player">
 				<tr class="dto">
 					<td><input id="pno" type="hidden" value="${player.pno}"> ${player.name}</td>
@@ -64,6 +81,9 @@ $(function(){
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
 				</td>
 			</tr>
+			</c:when>
+			<c:otherwise><tr><td colspan="4">${result }</td></tr></c:otherwise>
+			</c:choose>
 		</table>
    </div>
 </body>

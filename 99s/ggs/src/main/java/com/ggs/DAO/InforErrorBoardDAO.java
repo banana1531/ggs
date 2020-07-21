@@ -1,5 +1,6 @@
 package com.ggs.DAO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.ggs.DTO.BoardDTO;
 
 @Repository
-public class FreeBoardDAO {
+public class InforErrorBoardDAO {
 	
 	@Autowired
 	private SqlSessionTemplate session;
@@ -37,5 +38,29 @@ public class FreeBoardDAO {
 			return session.update("FreeBoard.updateinforerrorboard", dto);	
 	}
 
+	//글 목록 가져오기
+	public ArrayList<BoardDTO> boardList(BoardDTO dto) {
+		return null;
+	}
 	
+	//글 상세 내용 가져오기
+	public BoardDTO boardDetail(BoardDTO boardDTO) {
+		System.out.println("InforErrorBoardDAO.boardDetail");
+		return session.selectOne("inforErrorBoard.boardDetail", boardDTO);
+	}
+
+	//글 등록하기
+	public int boardWrite(BoardDTO boardDTO) {
+		return session.insert("inforErrorBoard.boardWrite", boardDTO);
+	}
+	
+	//글 수정하기
+	public int boardUpdate(BoardDTO boardDTO) {
+		return session.update("inforErrorBoard.boardUpdate", boardDTO);
+	}
+	
+	//글 삭제
+		public int boardDelete(BoardDTO boardDTO) {
+			return session.delete("inforErrorBoard.boardDelete", boardDTO);
+		}
 }

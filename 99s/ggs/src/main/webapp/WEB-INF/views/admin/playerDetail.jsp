@@ -35,8 +35,8 @@ $(function(){
 				<th>포지션</th>
 			</tr>
 			<tr>
-				<td><input type="hidden" id="pno" value="${player.pno }">
-				 <input type="text" name="teamname" value="${player.name }" readonly="readonly"></td>
+				<td><input type="text" id="pno" name="pno" value="${player.pno}">
+				 <input type="text" name="name" value="${player.name }" readonly="readonly"></td>
 				<td><input type="text" name="teamname" value="${player.teamname }"></td>
 				<td><input type="text" name="labelno" value="${player.labelno }"></td>
 				<td><input type="text" name="position" value="${player.position }"></td>

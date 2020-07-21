@@ -136,7 +136,12 @@
 	<!-- 선수 명단 가져오기 팀 무시 -->
 	<select id="playerList" resultType="com.ggs.DTO.PlayerInfoDTO">
 		select pno, name, labelno, position, teamname, totalcnt from playerinfo, (
-		select count(*) as totalcnt from playerinfo
+		select count(*) as totalcnt from playerinfo 
+			<choose>
+			<when test="name != null"> where name=#{name}</when>
+			<when test="position != null"> where position=#{position}</when>
+			<when test="teamname != null"> where teamname=#{teamname}</when>
+		</choose>
 		) as c
 		<choose>
 			<when test="name != null"> where name=#{name}</when>

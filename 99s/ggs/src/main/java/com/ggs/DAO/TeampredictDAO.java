@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ggs.DTO.MembersDTO;
-import com.ggs.DTO.TeamInfoDTO;
 import com.ggs.DTO.TeamRecordDTO;
 
 @Repository
@@ -39,6 +38,7 @@ public class TeampredictDAO {
 		return session.selectList("todaymatch.todaymatch");
 	
 	}
+	
 	public TeamRecordDTO getdetailView(int gno) {
 		return session.selectOne("matchdetail.matchdetail",gno);
 	}
@@ -50,15 +50,4 @@ public class TeampredictDAO {
 		return session.selectList("teamRecord.preteamScore",win);
 	}
 
-/*	public List<TeamRecordDTO> BpreteamScore() {
-		TeamRecordDTO btrdto = new TeamRecordDTO();
-		btrdto.getBteamname();
-		return session.selectList("teamRecord.preteamScore");
-	}*/
-	
-/*	public List<TeamRecordDTO> preteamScoreList() {
-		return session.selectList("teamRecord.preteamScore");
-	}*/
-	
-	
 }

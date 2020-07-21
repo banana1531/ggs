@@ -31,11 +31,17 @@
       <interceptor>
          <!-- 인터셉트가 언제 처리될지 지정 -->
          <mapping path="/member/idFindFrm.gg"/>
-         <mapping path="/admin/*.gg"/>
          <mapping path="/mypage/*.gg"/>
          <!--*.gr -->
          <!-- 사용할 인터셉트 클래스 등록 -->
          <beans:bean class="com.ggs.util.LoginCheck"/>
+      </interceptor>
+      <interceptor>
+         <!-- 인터셉트가 언제 처리될지 지정 -->
+         <mapping path="/admin/*.gg"/>
+         <!--*.gr -->
+         <!-- 사용할 인터셉트 클래스 등록 -->
+         <beans:bean class="com.ggs.util.AdminCheck"/>
       </interceptor>
    </interceptors>
 </beans:beans>

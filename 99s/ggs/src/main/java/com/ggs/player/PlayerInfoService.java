@@ -160,7 +160,9 @@ public class PlayerInfoService {
 		System.out.println("PlayerInfoService.playerList");
 		System.out.println("pageNo"+pageNo);
 		System.out.println("option"+option);
+		search = search.trim();
 		System.out.println("search"+search);
+		
 		PlayerInfoDTO dto = new PlayerInfoDTO();
 		if(option.equals("name")) dto.setName(search);
 		else if (option.equals("teamname")) dto.setTeamname(search);
@@ -178,7 +180,6 @@ public class PlayerInfoService {
 	
 	//선수 정보 업데이트 하기
 	public int playerUpdate(PlayerInfoDTO playerDTO) {
-		
 		return pDao.playerUpdate(playerDTO);
 	}
 	

@@ -12,7 +12,7 @@
 $(".btn1").click(function(){
 	var pageNo = $(this).text()
 	var name   = $("#names").text();
-	$("#list").load("/teampredict/schmatchList?name="+name+"&pageNo="+pageNo)
+	$("#list").load("/teampredict/schmatchList?name="+name+"&pageNo="+pageNo+"&perPage=5")
 })
 </script>
 </head>
@@ -54,6 +54,7 @@ $(".btn1").click(function(){
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if></td>
 			</tr>
 		</table>
+		${pageInfo }
 
 </body>
 </html>

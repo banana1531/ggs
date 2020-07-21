@@ -63,14 +63,16 @@ public class TeamInfoService {
 	}
 	
 	//팀 경기 일정 가져오기
-	public List schmatchList(String name, String pageNo) {
+	public List schmatchList(String name, String pageNo, String perPage) {
 		System.out.println("TeamInfoService.schmatchList");
 		int temp = Integer.parseInt(pageNo);
-		int start = (temp-1)*10;
+		int start = (temp-1)*Integer.parseInt(perPage);
 		TeamRecordDTO teamRecordDTO = new TeamRecordDTO();
 		teamRecordDTO.setAteamname(name);
 		teamRecordDTO.setStart(start);
 		return teamRecordDAO.schmatchList(teamRecordDTO);
 	}
+	
+	//마이페이지용
 	
 }

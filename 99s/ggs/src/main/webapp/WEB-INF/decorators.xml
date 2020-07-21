@@ -12,6 +12,9 @@
 		<pattern>/team/*</pattern>
 		<pattern>/teampredict/*</pattern>
 		<pattern>/player/*</pattern>
+		<pattern>/notice/*</pattern>
+		<pattern>/board/*</pattern>
+		<pattern>/column/*</pattern>
 	</decorator>
 	
 </decorators>

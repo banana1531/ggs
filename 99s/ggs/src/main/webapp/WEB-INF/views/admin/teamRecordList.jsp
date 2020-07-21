@@ -53,6 +53,5 @@
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if></td>
 			</tr>
 		</table>
-
 </body>
 </html>

@@ -95,7 +95,6 @@ public class ColumnService {
 	
 	BoardDTO bDTO = new BoardDTO();
 	bDTO.setStart(start-1);
-	bDTO.setEnd(end);
 	
 	ArrayList<BoardDTO> list = 
 			cDAO.getCBoard(bDTO);
