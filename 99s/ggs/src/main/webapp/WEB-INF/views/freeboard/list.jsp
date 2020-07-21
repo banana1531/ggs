@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공지사항 게시판</title>
+<title>자유 게시판</title>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -17,22 +17,21 @@
 </style>
 </head>
 <body>
-<div class="container">
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
 				<th>글번호</th>
-				<th>작성자</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${noticeList}" var="dto">
+			<c:forEach items="${freeboardList}" var="dto">
 				<tr>
 					<td>${dto.writeno}</td>
-					<td>${dto.id}</td>
 					<td><a href="./detail?writeno=${dto.writeno}&nowPage=${PINFO.nowPage}&views=${dto.views}">${dto.title}</a></td>
-					<td><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td>${dto.id}</td>
+					<td><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/></td>
 					<td>${dto.views}</td>
 				</tr>
 			</c:forEach>
@@ -48,11 +47,11 @@
 					</c:if>
 				
 					<c:if test="${PINFO.nowPage ne 1}">
-					<a href="../notice/list?nowPage=${PINFO.nowPage-1}">[prev]</a> 
+					<a href="./list?nowPage=${PINFO.nowPage-1}">[prev]</a> 
 					</c:if>
 					
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-					<a href="../notice/list?nowPage=${pg}">[${pg}]</a> 
+					<a href="./list?nowPage=${pg}">[${pg}]</a> 
 					</c:forEach>
 					
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -60,14 +59,14 @@
 					</c:if>
 					
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<a href="../notice/list?nowPage=${PINFO.nowPage+1}">[next]</a>
+					<a href="./list?nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if>
 				</td>
 			</tr>
 		</tbody>
 	</table>
 	<form action="./search">
-	<c:if test="${UID == 'admin'}"><button type="button" onclick="location.href='./write' ">글쓰기(관리자만)</button></c:if>
+	<button type="button" onclick="location.href='./write' ">글쓰기</button>
 		<select name="searchType" id="searchType">
 			<option value="title" selected="selected">제목</option>
 			<option value="content">내용</option>
@@ -76,6 +75,5 @@
 		<input type="text" name="keyword" id="keyword">
 		<input type="submit" id="search" value="검색">
 	</form>
-	</div>
 </body>
 </html>

@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>공지사항 게시판</title>
+<title>자유 게시판</title>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
@@ -26,7 +26,7 @@
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
-			<c:forEach items="${noticeSearch}" var="dto">
+			<c:forEach items="${freeboardSearch}" var="dto">
 				<tr>
 					<td>${dto.writeno}</td>
 					<td>${dto.id}</td>
@@ -47,11 +47,11 @@
 					</c:if>
 				
 					<c:if test="${PINFO.nowPage ne 1}">
-					<a href="../notice/search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${PINFO.nowPage-1}">[prev]</a> 
+					<a href="./search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${PINFO.nowPage-1}">[prev]</a> 
 					</c:if>
 					
 					<c:forEach var="pg"	 begin="${PINFO.startPage}" end="${PINFO.endPage}">
-					<a href="../notice/search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${pg}">[${pg}]</a> 
+					<a href="./search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${pg}">[${pg}]</a> 
 					</c:forEach>
 					
 					<c:if test="${PINFO.nowPage eq PINFO.totalPage}">
@@ -59,7 +59,7 @@
 					</c:if>
 					
 					<c:if test="${PINFO.nowPage ne PINFO.totalPage}">
-					<a href="../notice/search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${PINFO.nowPage+1}">[next]</a>
+					<a href="./search?searchType=${PINFO.searchType}&keyword=${PINFO.keyword}&nowPage=${PINFO.nowPage+1}">[next]</a>
 					</c:if>
 				</td>
 			</tr>

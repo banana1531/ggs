@@ -13,6 +13,7 @@
 		<typeAlias type="com.ggs.DTO.NoticeDTO" alias="NoticeDTO" />
 		<typeAlias type="com.ggs.DTO.BoardDTO"  alias="BoardDTO"/>
 		<typeAlias type="com.ggs.DTO.ReplyDTO" alias="ReplyDTO" />
+		<typeAlias type="com.ggs.DTO.FreeboardDTO" alias="FreeboardDTO" />
 		<typeAlias type="java.lang.Integer" alias="int" />
 		<typeAlias type="java.lang.String" alias="string" />
 	</typeAliases>
