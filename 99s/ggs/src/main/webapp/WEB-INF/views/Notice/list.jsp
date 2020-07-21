@@ -17,22 +17,21 @@
 </style>
 </head>
 <body>
-<div class="container">
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
 				<th>글번호</th>
-				<th>작성자</th>
 				<th>제목</th>
+				<th>작성자</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
 			<c:forEach items="${noticeList}" var="dto">
 				<tr>
 					<td>${dto.writeno}</td>
-					<td>${dto.id}</td>
 					<td><a href="./detail?writeno=${dto.writeno}&nowPage=${PINFO.nowPage}&views=${dto.views}">${dto.title}</a></td>
-					<td><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+					<td>${dto.id}</td>
+					<td><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd"/></td>
 					<td>${dto.views}</td>
 				</tr>
 			</c:forEach>
@@ -67,7 +66,7 @@
 		</tbody>
 	</table>
 	<form action="./search">
-	<c:if test="${UID == 'admin'}"><button type="button" onclick="location.href='./write' ">글쓰기(관리자만)</button></c:if>
+	<button type="button" onclick="location.href='./write' ">글쓰기(관리자만)</button>
 		<select name="searchType" id="searchType">
 			<option value="title" selected="selected">제목</option>
 			<option value="content">내용</option>
@@ -76,6 +75,5 @@
 		<input type="text" name="keyword" id="keyword">
 		<input type="submit" id="search" value="검색">
 	</form>
-	</div>
 </body>
 </html>

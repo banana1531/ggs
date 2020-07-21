@@ -18,7 +18,7 @@ public class NoticePageUtil {
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
 	public NoticePageUtil(int nowPage, int totalCount) {
-		this(nowPage, totalCount, 5, 5);
+		this(nowPage, totalCount, 10, 10);
 	}
 	public NoticePageUtil(int nowPage, int totalCount, int lineCount, int pageGroup) {
 		this.nowPage 	= nowPage;

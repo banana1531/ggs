@@ -1,6 +1,10 @@
 package com.ggs.notice;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +18,7 @@ import com.ggs.util.NoticePageUtil;
 public class NoticeService {
 	
 	@Autowired
-	private NoticeDAO nDAO;
+	NoticeDAO nDAO;
 
 	public NoticePageUtil noticePage(int nowPage) {
 		int totalCount = nDAO.noticePage();
@@ -87,7 +91,6 @@ public class NoticeService {
 		nDTO.setSearchType(searchType);
 		nDTO.setKeyword(keyword);
 		int totalCount = nDAO.SearchPage(nDTO);
-		System.out.println(totalCount);
 		NoticePageUtil pInfo = new NoticePageUtil(nowPage, totalCount);
 		return pInfo;
 	}

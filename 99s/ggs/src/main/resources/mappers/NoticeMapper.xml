@@ -11,14 +11,12 @@
 		notice
 		WHERE isvisible=1
 	</select>
-	
-	
-	<!-- 글 목록 가져오기 -->
+
 	<select id="noticeList" parameterType="NoticeDTO"
 		resultType="NoticeDTO">
 		SELECT *
 		FROM notice
-		WHERE isvisible=1		
+		WHERE isvisible=1
 		ORDER BY writeno DESC
 		LIMIT #{start}, 10
 	</select>
@@ -31,9 +29,8 @@
 	</select>
 
 	<insert id="noticeWrite" parameterType="NoticeDTO">
-		INSERT INTO notice(id,
-		title, content)
-		VALUES (#{id},#{title},#{content})
+		INSERT INTO notice(id, title, content, writedate)
+		VALUES (#{id},#{title},#{content}, now())
 	</insert>
 
 	<update id="noticeUpdate" parameterType="NoticeDTO">
@@ -73,7 +70,7 @@
 			</if>
 		</trim>
 		ORDER BY writeno DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="SearchPage" parameterType="NoticeDTO" resultType="int">
@@ -94,21 +91,17 @@
 		</trim>
 	</select>
 
-
-	<select id="noticeReply" parameterType="ReplyDTO"
-		resultType="ReplyDTO">
+	<select id="noticeReply" parameterType="ReplyDTO" resultType="ReplyDTO">
 		SELECT *
 		FROM reply
-		WHERE boardname="notice" AND isvisible=1
-		AND wno=#{wno}
+		WHERE boardname="notice" AND isvisible=1 AND wno=#{wno}
 		ORDER BY repno DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<insert id="replyAdd" parameterType="ReplyDTO">
-		INSERT INTO reply(wno,
-		boardname, id, content)
-		VALUES (#{wno},"notice",#{id},#{content})
+		INSERT INTO reply(wno, boardname, id, content, writedate)
+		VALUES (#{wno},"notice",#{id},#{content}, now())
 	</insert>
 
 	<select id="ReplyPage" resultType="int">
@@ -117,5 +110,6 @@
 		reply
 		WHERE isvisible=1 AND boardname="notice" AND wno=#{writeno}
 	</select>
+
 </mapper>
 
