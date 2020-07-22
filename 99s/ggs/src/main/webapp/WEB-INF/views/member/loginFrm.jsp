@@ -6,7 +6,7 @@
 <head title="로그인">
 </head>
 <body>
-	<div class="container" align="center">
+	<div class="container" align="center" style="margin-top: 200px">
 	<h2>로그인</h2>
 	<hr />
 	<form id=loginFrm method="post" action="../member/loginProc.gg">

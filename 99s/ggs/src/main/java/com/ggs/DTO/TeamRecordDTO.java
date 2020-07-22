@@ -22,6 +22,14 @@ public class TeamRecordDTO {
 	private int		start; 			//시작글번호
 	private	int		end;			//끝글번호
 	private int 	totalcnt;		//전체 데이터 숫자
+	private int		month;          //월단위 조회시
+	
+	public int getMonth() {
+		return month;
+	}
+	public void setMonth(int month) {
+		this.month = month;
+	}
 	public int getGno() {
 		return gno;
 	}

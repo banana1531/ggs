@@ -7,10 +7,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
-	<div class='container' align="center">
+	<div class="container" style="margin-bottom: 30px">
+	   <button><a href="/mypage/mypageMain.gg">My Page</a></button>
+	   <button><a href="/mypage/myTeamDetail.gg">My Team</a></button>
+	   <button><a href="/mypage/checkPw.gg">내 정보 수정</a></button>
+   </div>
+	<div class='container' align="center" style="margin-top: 150px">
 		<form class='form-inline' action="/mypage/myInfoModify.gg" method="post">
-			<table class='form-group'>
+			<table>
 				<tr>
 					<td>아이디 :</td>
 					<td><input type="text" name="id" readonly="readonly" value="${myinfo.id }"></td>

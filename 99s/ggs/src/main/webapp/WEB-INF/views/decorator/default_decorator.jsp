@@ -89,7 +89,7 @@ article {
 				<ul class="nav navbar-nav">
 					<li><a href="/teampredict/schmatchList.gg">Home</a></li>
 					<li><a href="/notice/list">공지사항</a></li>
-					<li><a href="/board/list?boardname=freeboard">자유 게시판</a></li>
+					<li><a href="/freeboard/list">자유 게시판</a></li>
 					<li><a href="/board/list?boardname=inforerrorboard">정보 오류 신고</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown">경기 일정<span class="caret"></span></a>
@@ -108,7 +108,7 @@ article {
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#">역대 관중 현황</a></li>
-							<li><a href="#">비만도와 실적관계</a></li>
+							<li><a href="/graph/bmi.gg">비만도와 실적관계</a></li>
 							<li><a href="/column/cBoard">야구 지식 정보</a></li>
 						</ul></li>
 					<c:choose>
@@ -118,7 +118,6 @@ article {
 								<ul class="dropdown-menu" role="menu">
 									<li><a href="/mypage/mypageMain.gg">My Page</a></li>
 									<li><a href="/mypage/myTeamDetail.gg">My Team 정보</a></li>
-									<li><a href="/mypage/myTeamSchedule.gg">My Team 경기일정</a></li>
 									<li><a href="/mypage/checkPw.gg">내정보 수정</a></li>
 								</ul></li>
 						</c:when>
@@ -155,7 +154,7 @@ article {
 		
 		</nav>
 	</header>
-	<article style="margin-bottom: 150px">
+	<article style="margin-bottom: 150px;margin-top: 10px">
 		<decorator:body />
 	</article>
 	<footer class="container-fluid text-center navbar navbar-inverse navbar-fixed-bottom">

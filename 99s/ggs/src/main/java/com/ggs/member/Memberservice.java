@@ -22,7 +22,7 @@ public class Memberservice {
 		//로그인 실패시
 		if(result==null) {
 			System.out.println("회원X");
-		}else {
+		}else {				
 		//로그인 성공시 ->로그인한 유저의 정보를 세션에 저장
 			System.out.println("회원O");
 			session.setAttribute("UID",result.getId());

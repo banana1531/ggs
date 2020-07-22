@@ -49,31 +49,43 @@ public class TeampredictController {
 	
 	//---------------------------------------------------
 	
-	//특정 팀 경기일정 조회  - 페이징 처리용
+	//특정 팀 경기일정 조회  - 관리자/마이페이지용
 	@RequestMapping("/schmatchList")
 	public String schmatchList(String name, Model model,
 			@RequestParam(value="pageNo", defaultValue="1") String pageNo,  
-			@RequestParam(value="perPage", defaultValue="10") String perPage) {
+			@RequestParam(value="perPage", defaultValue="10") String perPage,
+			@RequestParam(value="month", defaultValue="0") int month) {
 		System.out.println("TeampredictController.schmatchList");
 		System.out.println("name="+name+"pageNo="+pageNo);
-		List list = teamInfoService.schmatchList(name, pageNo, perPage);
+		List list = teamInfoService.schmatchList(name, pageNo, perPage, month);
 		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt());
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
-		model.addAttribute("nowPage", pageNo);	System.out.println("경기일정 페이지 schmatchList() 진입");
-		return "teampredict/teamScheduleList";	
+		model.addAttribute("nowPage", pageNo);
+		model.addAttribute("month", month);
+		return "teampredict/teamScheduleList";
 		
 	}
 	
 	
 	//경기 일정 조회 - 메인화면용
 	@RequestMapping("/schmatchList.gg")
-	public String schmatchList(@RequestParam(value="pageNo", defaultValue="1") String pageNo, Model model) {
-		List list = service.getschmatchList(pageNo);
-		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,5);
-		model.addAttribute("list", list);
-		model.addAttribute("pageInfo", pageInfo);
+	public String schmatchList(@RequestParam(value="pageNo", defaultValue="1") String pageNo,
+			@RequestParam(value="month",defaultValue="0") int month,
+			Model model) {
+		List list = service.getschmatchList(pageNo, month);
+		System.out.println("list="+list);
+		int totalcnt = 0;
+		try{
+			totalcnt = ((TeamRecordDTO)list.get(0)).getTotalcnt();
+		}catch (Exception e) {
+			totalcnt = 0;
+			model.addAttribute("error", month+"월 경기 일정은 없습니다.");
+		}
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), totalcnt,10,5);
 		model.addAttribute("SchMatchList", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("month", month);
 		return "teampredict/teamschmatchList";
 	}
 	
@@ -84,13 +96,21 @@ public class TeampredictController {
 	@RequestMapping("/rltmatchList.gg")
 	public String rltmatchList( Model model,
 			@RequestParam(value="pageNo", defaultValue="1") String pageNo,
-			@RequestParam(value="perPage", defaultValue="10") String perPage) {
+			@RequestParam(value="perPage", defaultValue="10") String perPage,
+			@RequestParam(value="month",defaultValue="0") int month) {
 		System.out.println("경기결과 메인페이지 rltmatchList() 진입");
-		List list = service.getrltmatchList(pageNo, perPage);
-		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,5);
-		model.addAttribute("list", list);
+		List list = service.getrltmatchList(pageNo, perPage, month);
+		int totalcnt = 0;
+		try{
+			totalcnt = ((TeamRecordDTO)list.get(0)).getTotalcnt();
+		}catch (Exception e) {
+			totalcnt = 0;
+			model.addAttribute("error", month+"월 경기 결과는 없습니다.");
+		}
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo),totalcnt ,10,5);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("SchMatchList", list);
+		model.addAttribute("month", month);
 		return "teampredict/teamrltmatchList";
 	}
 	
@@ -112,18 +132,6 @@ public class TeampredictController {
 	}
 	
 	//---------------------------------------------------
-	
-	
-	//투표하기
-/*	@RequestMapping("/electedMatch.gg")
-	public void electmatch() {
-		System.out.println("경기예측 메인페이지 matchpredict() 진입");*/
 
-		//파라미터
-		//
-		
-		//비즈니스
-		//투표결과 반영하여 prematchdetail에 반영된 결과 보여주기
-		
 
 }

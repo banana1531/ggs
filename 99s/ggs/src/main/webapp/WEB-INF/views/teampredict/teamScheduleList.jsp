@@ -54,7 +54,5 @@ $(".btn1").click(function(){
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if></td>
 			</tr>
 		</table>
-		${pageInfo }
-
 </body>
 </html>

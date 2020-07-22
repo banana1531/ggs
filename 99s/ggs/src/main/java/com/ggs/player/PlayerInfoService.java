@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ggs.DAO.PlayerInfoDAO;
 import com.ggs.DTO.PlayerInfoDTO;
 import com.ggs.DTO.PlayerRecordDTO;
-import com.ggs.util.PageUtil;
-
-
+import com.ggs.util.NoticePageUtil;
 
 @Service
 public class PlayerInfoService {
@@ -19,7 +17,7 @@ public class PlayerInfoService {
 	@Autowired
 	PlayerInfoDAO pDao;
 
-	public ArrayList<PlayerRecordDTO> pitcher(int pno, PageUtil pInfo) {
+	public ArrayList<PlayerRecordDTO> pitcher(int pno, NoticePageUtil pInfo) {
 		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
 		int end = start + pInfo.getLineCount() - 1;
 		PlayerRecordDTO prDto = new PlayerRecordDTO();
@@ -30,7 +28,7 @@ public class PlayerInfoService {
 		return pitcher;
 	}
 	
-	public ArrayList<PlayerRecordDTO> batter(int pno, PageUtil pInfo) {
+	public ArrayList<PlayerRecordDTO> batter(int pno, NoticePageUtil pInfo) {
 		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
 		int end = start + pInfo.getLineCount() - 1;
 		PlayerRecordDTO prDto = new PlayerRecordDTO();
@@ -41,9 +39,9 @@ public class PlayerInfoService {
 		return batter;
 	}
 
-	public PageUtil PlayerPage(int nowPage, int pno) {
+	public NoticePageUtil PlayerPage(int nowPage, int pno) {
 		int totalCount = pDao.PlayerPage(pno);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
+		NoticePageUtil pInfo = new NoticePageUtil(nowPage, totalCount);
 		return pInfo;
 	}
 
@@ -138,13 +136,13 @@ public class PlayerInfoService {
 		return batter2;
 	}
 
-	public PageUtil getTeamCnt(String teamname, int nowPage) {
+	public NoticePageUtil getTeamCnt(String teamname, int nowPage) {
 		int totalCount = pDao.getTeamCnt(teamname);
-		PageUtil pInfo = new PageUtil(nowPage, totalCount);
+		NoticePageUtil pInfo = new NoticePageUtil(nowPage, totalCount);
 		return pInfo;
 	}
 
-	public ArrayList<PlayerInfoDTO> getTeamList(String teamname, PageUtil pInfo) {
+	public ArrayList<PlayerInfoDTO> getTeamList(String teamname, NoticePageUtil pInfo) {
 		int start = (pInfo.getNowPage() - 1) * pInfo.getLineCount() + 1;
 		int end = start + pInfo.getLineCount() - 1;
 		PlayerInfoDTO pDto = new PlayerInfoDTO();

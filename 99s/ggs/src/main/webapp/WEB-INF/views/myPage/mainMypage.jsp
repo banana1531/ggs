@@ -9,8 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1> MainMyPage 들어왔다~</h1>
-	
+   <div class="container" style="margin-bottom: 30px">
+	   <button><a href="/mypage/mypageMain.gg">My Page</a></button>
+	   <button><a href="/mypage/myTeamDetail.gg">My Team</a></button>
+	   <button><a href="/mypage/checkPw.gg">내 정보 수정</a></button>
+   </div>
 	<!-- 내가 쓴글 -->
 	<div class="container">
 		<p>내가 쓴글 목록</p>
@@ -23,10 +26,13 @@
 			</tr>
 			<c:forEach items="${mylist}" var="list">
 				<tr>
-					<td>자유게시판</td>
-					<td>${list.wno }글번호</td>
-					<td>${list.title }글제목</td>
-					<td>${list.writedate }작성일</td>
+					<td><c:choose>
+						<c:when test="${list.boardname=='freeboard'}">자유게시판</c:when>
+						<c:when test="${list.boardname=='inforerrorboard'}">정보오류신고 게시판</c:when>
+					</c:choose> </td>
+					<td>${list.wno }</td>
+					<td>${list.title }</td>
+					<td><fmt:formatDate value="${list.writedate }"/> </td>
 				</tr>
 			</c:forEach>
 

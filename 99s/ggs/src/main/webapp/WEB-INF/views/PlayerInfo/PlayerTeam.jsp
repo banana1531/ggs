@@ -19,7 +19,7 @@
 </head>
 <body>
 <div class="container">
-	<button type="button" onclick="location.href='../player/teamList?teamname=KIA' ">KIA</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KIA' ">KIA</button>
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KT' ">KT</button>
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=LG' ">LG</button>
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=NC' ">NC</button>
@@ -33,7 +33,7 @@
 	<table border="1" width="800" class="center">
 		<tbody>
 			<tr>
-				<th>선수번호</th>
+				<th>상세정보</th>
 				<th>이름</th>
 				<th>등번호</th>
 				<th>생년월일</th>

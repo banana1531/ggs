@@ -2,9 +2,6 @@ package com.ggs.player;
 
 import java.util.ArrayList;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.ggs.DAO.PlayerInfoDAO;
 import com.ggs.DTO.PlayerInfoDTO;
 import com.ggs.DTO.PlayerRecordDTO;
+import com.ggs.util.NoticePageUtil;
 import com.ggs.util.PageUtil;
 
 @Controller
@@ -65,7 +63,7 @@ public class PlayerInfoController {
 		if(position.contains("투수")) {
 			
 			//투수의 경기기록 & 페이징
-			PageUtil pInfo = pService.PlayerPage(nowPage, pno);
+			NoticePageUtil pInfo = pService.PlayerPage(nowPage, pno);
 			ArrayList<PlayerRecordDTO> pitcher = pService.pitcher(pno, pInfo);
 			
 			//투수의 통산스텟
@@ -82,7 +80,7 @@ public class PlayerInfoController {
 		else {
 			
 			//타자의 경기기록 & 페이징
-			PageUtil pInfo = pService.PlayerPage(nowPage, pno);
+			NoticePageUtil pInfo = pService.PlayerPage(nowPage, pno);
 			ArrayList<PlayerRecordDTO> batter = pService.batter(pno, pInfo);
 			
 			//타자의 통산스텟
@@ -107,7 +105,8 @@ public class PlayerInfoController {
 			ModelAndView mv) {
 		
 		//팀별 선수목록 & 페이징
-		PageUtil pInfo = pService.getTeamCnt(teamname, nowPage);
+		NoticePageUtil pInfo = pService.getTeamCnt(teamname, nowPage);
+		pInfo.setLineCount(10);
 		ArrayList<PlayerInfoDTO> getTeamList = pService.getTeamList(teamname, pInfo);
 		pInfo.setTeamname(teamname);
 		

@@ -12,7 +12,8 @@
 $(function(){
 	$(".btn").click(function(){
 		var pageNo = $(this).text();
-		location = "/teampredict/schmatchList.gg?pageNo="+pageNo
+		var month = $("#month").val();
+		location = "/teampredict/schmatchList.gg?pageNo="+pageNo+"&month="+month
 	})
 	
 })
@@ -25,17 +26,17 @@ $(function(){
 		<button><a href="/teampredict/rltmatchList.gg">경기결과</a>	</button>
 	</div>
 	<div class="container" align="right">
-	<h3>경기일정</h3>
-	<form action="post" action="/teampredict/schmatchList.gg">
-			<select name="month">
-				<option value="">월</option>
-				<option value="">4</option>
-				<option value="">5</option>
-				<option value="">6</option>
-				<option value="">7</option>
-				<option value="">8</option>
-				<option value="">9</option>
-				<option value="">10</option>
+	
+	<form action="/teampredict/schmatchList.gg">
+			월별 조회<select name="month">
+				<option value="0">월</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
 		</select>
 	<input type="submit" value="조회" />
 	</form>
@@ -48,6 +49,8 @@ $(function(){
 				<td>경기일정</td>
 				<td>구장</td>
 			</tr>
+			<c:if test="${error!=null}">
+			<tr><td>${error }</td></tr></c:if>
 			<c:forEach items="${SchMatchList}" var="list">
 				<tr>
 					<td><fmt:formatDate value="${list.gdate}" pattern="yyyy-MM-dd" /></td>
@@ -66,6 +69,7 @@ $(function(){
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" id="month" value="${month }">
 	</div>
 
 </body>

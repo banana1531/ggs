@@ -9,6 +9,7 @@
 </head>
 <body>
    <div class="container">
+   <a href="/admin/location.gg">경로 확인</a>
    <h4>최근 게시물 목록</h4>
 	<p>최근등록 게시물</p>
 		<table class="table">
@@ -56,5 +57,6 @@
    <div class="container">
 	<p>회원 현황</p>
    </div>
+   ${path }
 </body>
 </html>

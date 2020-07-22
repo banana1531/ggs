@@ -35,7 +35,9 @@ version="3.1">
   <filter-mapping>
     <filter-name>sitemesh</filter-name>
     <url-pattern>*.gg</url-pattern>
-    <url-pattern>/*</url-pattern>
+   	<url-pattern>/notice/*</url-pattern>
+   	<url-pattern>/column/*</url-pattern>
+   	<url-pattern>/freeboard/*</url-pattern>
   </filter-mapping>
 
 	<!-- 스프링 한글처리 : 넘어오는 데이터만 해당 -->

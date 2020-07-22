@@ -15,7 +15,6 @@ $(function(){
 		var pageNo = $(this).text()
 		$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+pageNo)
 	})
-	
 })
 </script>
 </head>

@@ -15,6 +15,7 @@ import com.ggs.DTO.TeamRecordDTO;
 import com.ggs.player.PlayerInfoService;
 import com.ggs.team.TeamInfoService;
 import com.ggs.teamrecord.TeampredictService;
+import com.ggs.util.NoticePageUtil;
 import com.ggs.util.PageUtil;
 
 @Controller
@@ -148,7 +149,8 @@ public class DataManageController {
 	@RequestMapping("/playerRecord")
 	public String playerRecord(Model model, PlayerInfoDTO playerInfoDTO, @RequestParam(value="pageNo", defaultValue="1") String pageNo) {
 		System.out.println("pageNo="+pageNo);
-		PageUtil pageInfo = playerInfoService.PlayerPage(Integer.parseInt(pageNo), playerInfoDTO.getPno());
+		NoticePageUtil pageInfo = playerInfoService.PlayerPage(Integer.parseInt(pageNo), playerInfoDTO.getPno());
+		pageInfo.setLineCount(10);
 		List list = playerInfoService.pitcher(playerInfoDTO.getPno(), pageInfo);
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
@@ -189,7 +191,7 @@ public class DataManageController {
 	@RequestMapping("/gameList.gg")
 	public String gameList(Model model, @RequestParam(value="pageNo", defaultValue="1" ) String pageNo) {
 		
-		List list = teampredicService.getschmatchList(pageNo);
+		List list = teampredicService.getschmatchList(pageNo, 0);
 		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,10);
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);

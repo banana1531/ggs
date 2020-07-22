@@ -12,7 +12,7 @@
 		FROM playerRecord
 		WHERE pno=#{pno}
 		ORDER BY gdate DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="batter" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
@@ -20,7 +20,7 @@
 		FROM playerRecord
 		WHERE pno=#{pno}
 		ORDER BY gdate DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="PlayerPage" resultType="int">
@@ -117,7 +117,7 @@
 		FROM playerinfo
 		WHERE teamname=#{teamname}
 		ORDER BY labelno ASC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 	
 	<select id="ining" resultType="PlayerRecordDTO">
@@ -139,13 +139,13 @@
 		select count(*) as totalcnt from playerinfo 
 			<choose>
 			<when test="name != null"> where name=#{name}</when>
-			<when test="position != null"> where position=#{position}</when>
+			<when test="position != null"> where position like concat('%',#{position},'%')</when>
 			<when test="teamname != null"> where teamname=#{teamname}</when>
 		</choose>
 		) as c
 		<choose>
 			<when test="name != null"> where name=#{name}</when>
-			<when test="position != null"> where position=#{position}</when>
+			<when test="position != null"> where position  like concat('%',#{position},'%')</when>
 			<when test="teamname != null"> where teamname=#{teamname}</when>
 		</choose>
 		order by name limit #{start}, 10;

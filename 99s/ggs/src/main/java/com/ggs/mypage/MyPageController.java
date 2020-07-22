@@ -21,7 +21,7 @@ public class MyPageController {
 	@RequestMapping("/mypageMain.gg")
 	public String mypagemain(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		String id = (String)session.getAttribute("id");
+		String id = (String)session.getAttribute("UID");
 		String team = (String)session.getAttribute("UTEAM");
 		//내가쓴글가져오기
 		model.addAttribute("mylist", service.getMyArticle(id));

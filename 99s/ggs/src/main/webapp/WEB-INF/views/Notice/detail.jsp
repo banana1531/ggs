@@ -19,7 +19,8 @@
 </style>
 </head>
 <body>
-	<table border="1" width="800" class="center">
+<div class="container">
+	<table border="1" width="1000" class="center">
 		<tbody>
 			<c:forEach items="${noticeDetail}" var="dto">
 				<tr>
@@ -35,11 +36,17 @@
 					<td colspan="4"><h2>${fn:replace(dto.content, replaceChar, "<br/>")}</h2></td>
 				</tr>
 			</c:forEach>
+			<tr><td colspan="4" align="right"><c:forEach items="${noticeDetail}" var="dto">
+			<c:if test="${UID=='admin' }"><button type="button" onclick="location.href='./update?writeno=${dto.writeno}&nowPage=${dto.nowPage}&views=${dto.views}' ">수정하기</button>
+		<input type="button" value="삭제하기" onclick="button_event();"></c:if>
+		<button type="button" onclick="location.href='./list?nowPage=${dto.nowPage}' ">목록으로</button>
+	</c:forEach></td></tr>
 		</tbody>
 	</table>
+		
 	<hr/>
 	<h3>댓글</h3>
-		<table border="1" width="800" class="center">
+		<table border="1" width="1000" class="center">
 		<tbody>
 			<c:forEach items="${noticeReply}" var="dto">
 				<tr>
@@ -48,14 +55,9 @@
 					<td width="20%"><h5><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd HH:mm:ss"/></h5></td>
 				</tr>
 			</c:forEach>
-		</tbody>
-	</table>
-	<%-- 페이징 처리 --%>
-	<table border="1" width="800" class="center">
-		<tbody>
-	<c:forEach items="${noticeDetail}" var="dto">
+			<c:forEach items="${noticeDetail}" var="dto">
 			<tr class="center">
-				<td>
+				<td colspan="3">
 					<c:if test="${PINFO.nowPage eq 1}">
 					[prev]
 					</c:if>
@@ -78,24 +80,31 @@
 				</td>
 			</tr>
 	</c:forEach>
-		</tbody>
-	</table>
-	<form method="post">
 	<c:forEach items="${noticeDetail}" var="dto">
 		<input type="hidden" name="wno" id="wno" value="${dto.writeno}">
 		<input type="hidden" name=nowPage id="nowPage" value="${dto.nowPage}">
 		<input type="hidden" name=views id="views" value="${dto.views}">
 	</c:forEach>
-	<input type="text" name="id" id="id">
+	<tr><td>
+	<input type="text" name="id" id="id" value="${UID }"></td>
+	<td colspan="2"><input type="text" name="content" id="content" width="200px"><input type="submit" value="등록"></td>
+	</tr>
+	</form>
+	
+		</tbody>
+	</table>
+	<%-- 페이징 처리 --%>
+<%-- 	<form method="post">
+	<c:forEach items="${noticeDetail}" var="dto">
+		<input type="hidden" name="wno" id="wno" value="${dto.writeno}">
+		<input type="hidden" name=nowPage id="nowPage" value="${dto.nowPage}">
+		<input type="hidden" name=views id="views" value="${dto.views}">
+	</c:forEach>
+	<input type="text" name="id" id="id" value="${UID }">
 	<input type="text" name="content" id="content">
 	<input type="submit" value="등록">
-	</form>
+	</form> --%>
 	<hr/>
-	<c:forEach items="${noticeDetail}" var="dto">
-		<button type="button" onclick="location.href='./update?writeno=${dto.writeno}&nowPage=${dto.nowPage}&views=${dto.views}' ">수정하기(관리자만)</button>
-		<input type="button" value="삭제하기(관리자만)" onclick="button_event();">
-		<button type="button" onclick="location.href='./list?nowPage=${dto.nowPage}' ">목록으로</button>
-	</c:forEach>
 	<script>
 	function button_event(){
 		if (confirm("정말 삭제하시겠습니까?") == true){
@@ -108,5 +117,6 @@
 		}
 	}
 	</script>
+	</div>
 </body>
 </html>

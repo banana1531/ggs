@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ggs.DAO.FreeboardDAO;
+import com.ggs.DAO.FreeBoardDAO;
 import com.ggs.DTO.FreeboardDTO;
 import com.ggs.DTO.ReplyDTO;
 import com.ggs.util.NoticePageUtil;
@@ -14,7 +14,7 @@ import com.ggs.util.NoticePageUtil;
 public class FreeboardService {
 
 	@Autowired
-	FreeboardDAO fbDAO;
+	private FreeBoardDAO fbDAO;
 	
 	public NoticePageUtil freeboardPage(int nowPage) {
 		int totalCount = fbDAO.freeboardPage();

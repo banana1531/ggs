@@ -34,6 +34,7 @@ public class FreeboardController {
 		mv.addObject("freeboardList", freeboardList);
 		mv.addObject("PINFO", pInfo);
 		
+		System.out.println("FreeboardController.freeboardList");
 		mv.setViewName("Freeboard/list");
 		
 		return mv;

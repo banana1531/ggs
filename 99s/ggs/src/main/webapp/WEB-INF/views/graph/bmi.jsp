@@ -121,66 +121,83 @@ $(function(){
 </script>
 </head>
 <body>
-<table>
-	<td>
-	<%-- bmi 표 목록 출력 --%>
-	<table border="1" width="600" class="center">
-		<tbody>
-			<tr><h2>야구선수의 BMI지수와 성적 상관관계 분석</h2></tr>
-			<tr>BMI지수= 몸무게(kg) ÷ (신장(m) × 신장(m))<br/>
-				18.5 미만 - 저체중 (해당 선수 없음*)<br/>
-				18.5 이상 25 미만  - 정상 <br/>
-				25 이상 30 미만- 비만 <br/>
-				30 이상 - 고도 비만 <br/>
-				출처:대한비만학회
-			</tr>
-			<tr><th colspan="3">선수 이름 / BMI지수 </th></tr>
+	<div class="container" style="margin-left: 200px">
+		<table>
 			<tr>
-				<th width="200">정상</th>
-				<th width="200">비만</th>
-				<th width="200">고도비만</th>
+
+				<td>
+					<div class="container" style="width: 600px">
+						<%-- 팀별 bmi분포 그래프 출력 --%>
+						<figure class="highcharts-figure">
+							<div id="container"></div>
+							<p class="highcharts-description"></p>
+						</figure>
+						<h2 align="center">[BMI와 야구성적 상관관계 표]</h2>
+						<img alt="BMI와 야구성적 지수 상관관계 표"
+							src="${pageContext.request.contextPath}/resources/img/${img}"
+							width="600">
+
+					</div>
+				</td>
+				<td>
+					<%-- bmi 표 목록 출력 --%>
+					<div class="container"
+							style="position: left; overflow-y: scroll; width: 650px; height: 1800px;">
+						<table border="1" width="600px" class="center">
+							<tr>
+								<td colspan="3"><h2>야구선수의 BMI지수와 성적 상관관계 분석</h2></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="center">BMI지수= 몸무게(kg) ÷ (신장(m) ×
+									신장(m))<br /> 18.5 미만 - 저체중 (해당 선수 없음*)<br /> 18.5 이상 25 미만 -
+									정상 <br /> 25 이상 30 미만- 비만 <br /> 30 이상 - 고도 비만 <br />
+									출처:대한비만학회
+								</td>
+							</tr>
+							<tr>
+								<th colspan="3">선수 이름 / BMI지수</th>
+							</tr>
+							<tr>
+								<th width="200">정상</th>
+								<th width="200">비만</th>
+								<th width="200">고도비만</th>
+							</tr>
+						</table>
+						<table border="1" width="600px" class="center">
+								<%-- 선수 bmi List  --%>
+								<c:forEach items="${LIST}" var="dto">
+									<tr>
+										<td width="200">
+											<ul>
+												<c:if test="${dto.bmi lt 25}">
+													<li>${dto.name}/${dto.bmi}</li>
+												</c:if>
+											</ul>
+										</td>
+										<td width="200">
+											<ul>
+												<c:if test="${(dto.bmi lt 30)&&(dto.bmi ge 25)}">
+													<li>${dto.name}/${dto.bmi}</li>
+												</c:if>
+											</ul>
+										</td>
+										<td width="200">
+											<ul>
+												<c:if test="${dto.bmi ge 30}">
+													<li>${dto.name}/${dto.bmi}</li>
+												</c:if>
+											</ul>
+										</td>
+									</tr>
+								</c:forEach>
+							</table>
+						</div>
+				</td>
 			</tr>
-			<%-- 선수 bmi List  --%>
-			<c:forEach  items="${LIST}" var="dto">
-				<tr>
-						<td>
-							<ul>
-							<c:if test="${dto.bmi lt 25}">						
-								<li>${dto.name}/${dto.bmi}</li>						
-							</c:if>
-							</ul>
-						</td>
-						<td>
-							<ul>
-							<c:if test="${(dto.bmi lt 30)&&(dto.bmi ge 25)}">						
-								<li>${dto.name}/${dto.bmi}</li>					
-							</c:if>
-							</ul>
-						</td>
-						<td>
-							<ul>
-							<c:if test="${dto.bmi ge 30}">						
-							<li>${dto.name}/${dto.bmi}</li>						
-							</c:if>
-							</ul>
-						</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	</td>
-	<td width="600" style="vertical-align: top; margin:0px;">
-	<%-- 팀별 bmi분포 그래프 출력 --%>
-	<figure class="highcharts-figure">
-	  <div id="container"></div>
-	    <p class="highcharts-description"> 
-  		</p>
-	</figure>	
-	<h2 align="center">[BMI와 야구성적 상관관계 표]</h2>
-	<img alt="BMI와 야구성적 지수 상관관계 표" src="${pageContext.request.contextPath}/resources/img/${img}" width="600">
-	<h2 align="center">결론:BMI와  야구성적은 상관관계가 없다</h2>
-	</td>
-	<%-- bmi지수와 성적 상관관계 그래프 출력 --%>
-</table>
+			<tr>
+				<td colspan="2"><h2 align="center">결론:BMI와 야구성적은 상관관계가 없다</h2></td>
+			</tr>
+		</table>
+	</div>
 </body>
 </html>

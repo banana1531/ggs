@@ -50,6 +50,7 @@ public class LoginController {
 			}else if(result.getLogin()!=1) {
 				//로그인 권한이 없을 경우
 				mv.setViewName("member/loginFrm");
+				session.invalidate();
 				mv.addObject("msg","log");
 			}else if(result.getId().equals("admin")) {
 				//관리자일경우

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
    			<td>글번호 : <input type="text" name="writeno" value="${detail.fno}" readonly="readonly"></td>
    		</tr>
    		<tr><td>작성자 : ${detail.writer}</td></tr>
-   		<tr><td>작성일 : ${detail.writedate}</td></tr>
+   		<tr><td>작성일 : <fmt:formatDate value="${detail.writedate}"/> </td></tr>
    		
    		<tr>
    			<td>제목 : ${detail.title}</td>
@@ -32,7 +33,7 @@
    <table class="table">
    		<tr>
    			<td>신고자 : ${detail.id}</td>
-   			<td>신고일 : ${detail.inputdate}</td>
+   			<td>신고일 :  <fmt:formatDate value="${detail.inputdate}"/></td>
    			<td>신고사유 : ${detail.reason}</td>
    		</tr>
    		<tr>

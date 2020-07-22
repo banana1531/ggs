@@ -6,10 +6,10 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.ggs.DTO.TeamRecordDTO" alias="TeamRecordDTO" />
-		<typeAlias type="com.ggs.DTO.TeamInfoDTO" alias="TeamInfoDTO" />
-		<typeAlias type="com.ggs.DTO.PlayerInfoDTO" alias="PlayerInfoDTO" />
-		<typeAlias type="com.ggs.DTO.PlayerRecordDTO" alias="PlayerRecordDTO" />
+		<typeAlias type="com.ggs.DTO.TeamRecordDTO"	alias="TeamRecordDTO" />
+		<typeAlias type="com.ggs.DTO.TeamInfoDTO"	alias="TeamInfoDTO" />
+		<typeAlias type="com.ggs.DTO.PlayerInfoDTO"	alias="PlayerInfoDTO" />
+		<typeAlias type="com.ggs.DTO.PlayerRecordDTO"	alias="PlayerRecordDTO" />
 		<typeAlias type="com.ggs.DTO.NoticeDTO" alias="NoticeDTO" />
 		<typeAlias type="com.ggs.DTO.BoardDTO"  alias="BoardDTO"/>
 		<typeAlias type="com.ggs.DTO.ReplyDTO" alias="ReplyDTO" />

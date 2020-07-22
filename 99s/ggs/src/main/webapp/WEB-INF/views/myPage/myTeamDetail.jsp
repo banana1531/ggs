@@ -26,7 +26,12 @@ $(function(){
 })
 </script>
 </head>
-<body>
+<body> 
+  <div class="container" style="margin-bottom: 30px">
+	   <button><a href="/mypage/mypageMain.gg">My Page</a></button>
+	   <button><a href="/mypage/myTeamDetail.gg">My Team</a></button>
+	   <button><a href="/mypage/checkPw.gg">내 정보 수정</a></button>
+   </div>
 	<div class="container">
 		<table class="table">
 		<caption>내팀 정보</caption>

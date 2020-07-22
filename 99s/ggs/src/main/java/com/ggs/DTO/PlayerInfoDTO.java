@@ -12,14 +12,40 @@ public class PlayerInfoDTO {
 	private String 	joinday;
 	private String 	teamname;
 	private int bmi;
-	private int cntBmiN; //bmi 정상
-	private int cntBmiF; //bmi 비만
-	private int cntBmiHF; //bmi 고도비만
 	
 	private int start;
 	private int end;
 	private int totalcnt;   //전체 선수
 	
+	private int cntBmiN; //bmi 정상
+	private int cntBmiF; //bmi 비만
+	private int cntBmiHF; //bmi 고도비만
+	
+	
+	public int getCntBmiN() {
+		return cntBmiN;
+	}
+	public void setCntBmiN(int cntBmiN) {
+		this.cntBmiN = cntBmiN;
+	}
+	public int getCntBmiF() {
+		return cntBmiF;
+	}
+	public void setCntBmiF(int cntBmiF) {
+		this.cntBmiF = cntBmiF;
+	}
+	public int getCntBmiHF() {
+		return cntBmiHF;
+	}
+	public void setCntBmiHF(int cntBmiHF) {
+		this.cntBmiHF = cntBmiHF;
+	}
+	public int getTotalcnt() {
+		return totalcnt;
+	}
+	public void setTotalcnt(int totalcnt) {
+		this.totalcnt = totalcnt;
+	}
 	public int getPno() {
 		return pno;
 	}
@@ -93,40 +119,11 @@ public class PlayerInfoDTO {
 		this.end = end;
 	}
 	
-	
-	public int getCntBmiN() {
-		return cntBmiN;
-	}
-	public void setCntBmiN(int cntBmiN) {
-		this.cntBmiN = cntBmiN;
-	}
-	public int getCntBmiF() {
-		return cntBmiF;
-	}
-	public void setCntBmiF(int cntBmiF) {
-		this.cntBmiF = cntBmiF;
-	}
-	public int getCntBmiHF() {
-		return cntBmiHF;
-	}
-	public void setCntBmiHF(int cntBmiHF) {
-		this.cntBmiHF = cntBmiHF;
-	}
-	
-	public int getTotalcnt() {
-		return totalcnt;
-	}
-	public void setTotalcnt(int totalcnt) {
-		this.totalcnt = totalcnt;
-	}
 	@Override
 	public String toString() {
 		return "PlayerInfoDTO [pno=" + pno + ", name=" + name + ", labelno=" + labelno + ", birth=" + birth
 				+ ", position=" + position + ", height=" + height + ", weight=" + weight + ", joinday=" + joinday
-				+ ", teamname=" + teamname + ", bmi=" + bmi + ", cntBmiN=" + cntBmiN + ", cntBmiF=" + cntBmiF
-				+ ", cntBmiHF=" + cntBmiHF + ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + "]";
+				+ ", teamname=" + teamname + ", bmi=" + bmi + ", start=" + start + ", end=" + end + ", totalcnt="
+				+ totalcnt + ", cntBmiN=" + cntBmiN + ", cntBmiF=" + cntBmiF + ", cntBmiHF=" + cntBmiHF + "]";
 	}
-
-
-	
 }

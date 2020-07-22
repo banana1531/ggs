@@ -63,11 +63,13 @@ public class TeamInfoService {
 	}
 	
 	//팀 경기 일정 가져오기
-	public List schmatchList(String name, String pageNo, String perPage) {
+	public List schmatchList(String name, String pageNo, String perPage, int month) {
 		System.out.println("TeamInfoService.schmatchList");
 		int temp = Integer.parseInt(pageNo);
 		int start = (temp-1)*Integer.parseInt(perPage);
 		TeamRecordDTO teamRecordDTO = new TeamRecordDTO();
+		if(month>0) teamRecordDTO.setMonth(month);
+		System.out.println("month="+month);
 		teamRecordDTO.setAteamname(name);
 		teamRecordDTO.setStart(start);
 		return teamRecordDAO.schmatchList(teamRecordDTO);
