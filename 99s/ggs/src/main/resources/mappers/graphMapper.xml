@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="graph">
+	
+	<!-- bmi 리스트  -->
+	<select id="bmiList" resultType="com.ggs.DTO.PlayerInfoDTO"> 
+	select * from playerinfo 
+	</select>
+	<!-- 팀별 bmi분포 - 정상 -->
+	<select id="tBmi" resultType="com.ggs.DTO.PlayerInfoDTO">
+	SELECT teamname,COUNT(bmi) AS cntBmiN FROM playerinfo WHERE bmi &lt; 25 GROUP BY teamname
+	</select> 
+	<!-- 팀별 bmi분포 - 비만 -->
+	<select id="tBmi2" resultType="com.ggs.DTO.PlayerInfoDTO">
+	SELECT teamname,COUNT(bmi) AS cntBmiF FROM playerinfo WHERE bmi <![CDATA[>=]]> 25 and bmi &lt; 30 GROUP BY teamname
+	</select> 
+	<!-- 팀별 bmi분포 - 고도비만 -->
+	<select id="tBmi3" resultType="com.ggs.DTO.PlayerInfoDTO">
+	SELECT teamname,COUNT(bmi) AS cntBmiHF FROM playerinfo WHERE bmi <![CDATA[>=]]> 30 GROUP BY teamname
+	</select> 
+
+	
+</mapper>
+
