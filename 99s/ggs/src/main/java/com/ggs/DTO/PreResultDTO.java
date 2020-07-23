@@ -15,7 +15,14 @@ public class PreResultDTO {
 	private String 	bscore;		//홈팀점수
 	private String 	ateamname;	//어웨이팀번호
 	private String 	ascore;		//홈팀점수
-		
+	private int precount;		//투표 수
+	
+	public int getPrecount() {
+		return precount;
+	}
+	public void setPrecount(int precount) {
+		this.precount = precount;
+	}
 	public int getIno() {
 		return ino;
 	}
@@ -80,8 +87,8 @@ public class PreResultDTO {
 	public String toString() {
 		return "PreResultDTO [ino=" + ino + ", id=" + id + ", gno=" + gno + ", predict=" + predict + ", ppoint="
 				+ ppoint + ", gdate=" + gdate + ", bteamname=" + bteamname + ", bscore=" + bscore + ", ateamname="
-				+ ateamname + ", ascore=" + ascore + "]";
+				+ ateamname + ", ascore=" + ascore + ", precount=" + precount + "]";
 	}
-	
+
 	
 }

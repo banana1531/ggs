@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -11,5 +10,29 @@
 		where teamRecord.gno=preresult.gno AND id=#{uid};
 	</select>
 	
+	<insert id="preresult" parameterType="com.ggs.DTO.PreResultDTO">
+	INSERT into preresult(id,gno,predict)
+	VALUES (#{id},#{gno},#{predict});
+	</insert>
+	
+	<select id="predictcount" parameterType="com.ggs.DTO.PreResultDTO" resultType="com.ggs.DTO.PreResultDTO">
+SELECT *,COUNT(predict) AS precount
+	FROM
+	preresult
+	WHERE gno=#{gno} 
+		GROUP BY predict
+	
+	</select>
+	
+<select id="predictcountview" parameterType="com.ggs.DTO.PreResultDTO" resultType="com.ggs.DTO.PreResultDTO">
+SELECT *,COUNT(predict) AS precount
+	FROM
+	preresult
+	WHERE gno=#{gno}
+	GROUP BY predict
+	</select>
+
+
+
 </mapper>
 

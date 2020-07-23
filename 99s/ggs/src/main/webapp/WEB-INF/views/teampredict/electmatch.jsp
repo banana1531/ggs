@@ -1,21 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
+
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	google.charts.load('current', {
-		'packages' : [ 'bar' ]
-	});
+	google.charts.load('current', {	'packages' : [ 'bar' ]	});
 	google.charts.setOnLoadCallback(drawStuff);
 
 	function drawStuff() {
 		var data = new google.visualization.arrayToDataTable(${preCount});
-
+		
 		var options = {
 			width : 800,
 			legend : {
@@ -43,48 +43,61 @@
 		chart.draw(data, google.charts.Bar.convertOptions(options));
 	};
 </script>
-
 <title>Insert title here</title>
 </head>
 
-<body>
-	<h1>경기결과페이지 상세입니다</h1>
-	<div class="container">
-		<button><a href="/teampredict/prematchMain.gg">승부예측</a></button>
-		<button><a href="/teampredict/schmatchList.gg">경기일정</a></button>
-		<button><a href="/teampredict/rltmatchList.gg">경기결과</a></button>
-	</div>
-<p>경기결과</p>
-<table border="1" width="800">
-<tr>
-	<td>경기날짜</td>
-	<td>경기시간</td>
-	<td>경기</td>
-	<td>구장</td>
-</tr>
-<c:forEach items="${SchMatchDetail}" var="list">
-<tr>
 
-			<td colspan>${list.gdate}</td>
-			<td colspan>${list.gtime}</td>
-			<td colspan>${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</td>
-			<td>${list.stadium}</td>
-			</c:forEach>
-						
-	   <table border="1" width="800" class="center">
-      <tbody>
-         <tr>
-            <th>${TRDTO.ateamname}</th>
-            <th>vs</th>
-            <th>${TRDTO.bteamname}</th>
-         </tr>
-               
-					
+<body>
+		<c:forEach items="${TodayMatch}" var="list">
+	<form action="/teampredict/prematchDetail.gg?" method="get">
+	</form>
+	</c:forEach>
+		<h1>승부예측페이지 상세입니다</h1>
+		<hr>
+		<div class="container">
+			<button>
+				<a href="/teampredict/prematchMain.gg">승부예측</a>
+			</button>
+			<button>
+				<a href="/teampredict/schmatchList.gg">경기일정</a>
+			</button>
+			<button>
+				<a href="/teampredict/rltmatchList.gg">경기결과</a>
+			</button>
+		</div>
+		<hr>
+		<!-- 상세보기 내용 출력 -->
+		<table border="1" width="100%">
+			<tr>
+				<td>${TRDTO.ateamname}</td>
+				<td>vs</td>
+				<td>${TRDTO.bteamname}</td>
+			</tr>
+<%-- 			<tr>
+							<td colspan="3">${preCount.predict} 에 투표하셨습니다!</td>
+			</tr>
+			<tr>
+							<td colspan="3">득표 수 :  ${preCount.precount}</td>
+			</tr> --%>
+		<br> 
+		</form>
+		</table>
+
+		<hr>
+
 		<!-- 그래프 출력 -->
 
 		<div id="top_x_div" style="width: 800px; height: 600px;"></div>
 		<p>팀 실적</p>
-		
+
+		<form method="get">
+		   <table border="1" width="800" class="center">
+      <tbody>
+         <tr>
+            <td>${TRDTO.ateamname}</td>
+            <td>vs</td>
+            <td>${TRDTO.bteamname}</td>
+         </tr>        
             <tr>
 							<td>${atrDTO.win}</td>
 							<td>승</td>
@@ -110,20 +123,9 @@
 							<td>실점</td>
 							<td>${btrDTO.loss}</td>
 							</tr>
-							</tbody>
-				</table>
-<%-- 					<h3>댓글</h3>
-						<table border="1" width="800" class="center">
-							<tbody>
-								<c:forEach items="${InfoErrorBoardReply}" var="dto">
-						<tr>
-							<td width="20%"><h5>${dto.id}</h5></td>
-							<td><h4>${dto.content}</h4></td>
-							<td width="20%"><h5><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd HH:mm:ss"/></h5></td>
-				</tr> 
-			</c:forEach>--%>
-		</tbody>
-	</table>
-		</table>
+	     </tbody>
+         </table>
+      </form>
+		<hr>
 </body>
 </html>

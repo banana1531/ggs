@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>	
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -33,7 +32,7 @@
 	</form>
 	</p>
 	<div class="container">
-			<table class="table">
+<table border="1" 	class="table" width="800">
 		<td>경기날짜</td>
 		<td>경기시간</td>
 		<td>경기일정</td>
@@ -51,6 +50,5 @@
 	</form>
 	</table>
 	</div>
-
 </body>
 </html>

@@ -18,19 +18,19 @@
 	</div>
 	 </hr>
 	<!-- 회원 보유 포인트 순위 -->
-	<p>회원 보유 포인트 랭킹</p>
 	</hr>
+	<hr>
 	<div class="container">
-			<table class="table">
-		<td>순위</td>
-		<td>아이디</td>
-		<td>보유 포인트</td>
+			<table border="1" 	class="table" width="800">
+		<tr>
+	<td colspan="2">회원 보유 포인트 랭킹</td>
+	</tr>
+		<tr>
+			<td>아이디</td>
+			<td>보유 포인트</td>
 		</tr>
 		<c:forEach items="${RankingList}" var="list">
-				<tr>
-					<td>
-						??
-					</td>
+					<tr>
 					<td>${list.id}</td>
 					<td>${list.ppoint}</td>
 				</tr>
@@ -40,14 +40,20 @@
 </hr>
 	<!-- 금일 경기 리스트 -->
 	</hr>
-		<p>금일 경기 리스트</p>
+
+		</table>
+		<br>
+	<table border="1" 	width="800">
+		<tr>
+		<td colspan=3>금일 경기 리스트</td>
+		</tr>
 		<form method="post" action="/teampredict/prematchDetail.gg">
 	<c:forEach items="${TodayMatch}" var="list3">
 		<tr>
-		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=한화&bteamname=두산">${list3.ateamname}</td>
-		<td>vs</td>
-		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=한화&bteamname=두산">${list3.bteamname}</td>
-		
+		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=${list3.ateamname}&bteamname=${list3.bteamname}">${list3.ateamname}</td>
+		<td>vs</td> 
+		<td><a href="/teampredict/prematchDetail.gg?gno=${list3.gno}&ateamname=${list3.ateamname}&bteamname=${list3.bteamname}">${list3.bteamname}</td>
+		<!-- //묶기  -->
 		</tr>
 	</c:forEach>
 	</form>

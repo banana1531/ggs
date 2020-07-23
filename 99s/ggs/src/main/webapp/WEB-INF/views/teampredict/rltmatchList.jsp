@@ -15,12 +15,9 @@
 		<button><a href="/teampredict/schmatchList.gg">경기일정</a></button>
 		<button><a href="/teampredict/rltmatchList.gg">경기결과</a></button>
 	</div>
-	
 	<p>
 	<h3>경기결과</h3>
-	
 	<select name="month">
-	<form action="get" action="../teampredict/rltmatchList.gg">
 	<option value="">월</option>
 	<option value="4">4</option>
 	<option value="5">5</option>
@@ -30,26 +27,26 @@
 	<option value="9">9</option>
 	<option value="10">10</option>
 	</select>
-	<input type="submit" value="조회"/>
 	</form>
 	</p>
 	<div class="container">
-			<table class="table">
+<table border="1" 	class="table" width="800">
 		<td>경기 날짜</td>
 		<td>경기 시간</td>
 		<td>경기 결과</td>
 		<td>구장</td>
 		</tr>
-	<c:forEach items="${matchlist}" var="list">
-		<tr>
-		<td>${list.gdate}</td>
-		<td>${list.gtime}</td>
-		<td><a href="/teampredict/rltmatchDetail.gg">${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</a></td>
-		<td>${list.stadium}</td>
-		</tr>
-	</c:forEach>
+		<form method="get" action="/teampredict/rltmatchDetail.gg">
+		<c:forEach items="${RltMatchList}" var="list">
+			<tr>
+				<td>${list.gdate}</td>
+				<td>${list.gtime}</td>
+				<td><a href="/teampredict/rltmatchDetail.gg?gno=${list.gno}&ateamname=${list.ateamname}&bteamname=${list.bteamname}">${list.ateamname} ${list.ascore} vs ${list.bscore} ${list.bteamname}</a></td>
+				<td>${list.stadium}</td>
+			</tr>
+		</c:forEach>
+	</form>
 	</table>
 	</div>
-
 </body>
 </html>

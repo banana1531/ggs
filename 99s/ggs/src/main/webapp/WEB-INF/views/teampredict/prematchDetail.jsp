@@ -10,16 +10,15 @@
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-	google.charts.load('current', {
-		'packages' : [ 'bar' ]
-	});
+	
+	google.charts.load('current', {	'packages' : [ 'bar' ]	});
+
 	google.charts.setOnLoadCallback(drawStuff);
 
 	function drawStuff() {
-		var data = new google.visualization.arrayToDataTable([
-				[ 'Move', 'Percentage' ], [ "홈팀 승리", 44 ], [ "무승부", 31 ],
-				[ "어웨이팀 승리", 31 ], ]);
+		var data = new google.visualization.arrayToDataTable(${preCount});
 
+		
 		var options = {
 			width : 800,
 			legend : {
@@ -53,7 +52,10 @@
 
 
 <body>
-	<form action="/teampredict/electedMatch.gg" method="post">
+		<c:forEach items="${SchMatchDetail}" var="list">
+	<form action="/teampredict/prematchDetail.gg?" method="get">
+	</form>
+	</c:forEach>
 		<h1>승부예측페이지 상세입니다</h1>
 		<hr>
 		<div class="container">
@@ -69,22 +71,28 @@
 		</div>
 		<hr>
 		<!-- 상세보기 내용 출력 -->
-		<table border="0" width="100%">
+		<table border="1" width="800">
 			<tr>
 				<td>${TRDTO.ateamname}</td>
 				<td>vs</td>
 				<td>${TRDTO.bteamname}</td>
 			</tr>
-		</table>
+
 
 		<tr>
-			<td><input type="checkbox" name="match" value=1>${TRDTO.ateamname}
-				승</td>
-			<td><input type="checkbox" name="match" value=2>무승부</td>
-			<td><input type="checkbox" name="match" value=3>${TRDTO.bteamname}
-				승</td>
+			<form action="/teampredict/electmatch.gg?" method="get">
+			<td><input type="submit" name="predict" value="${TRDTO.ateamname}"/></td>
+			<td><input type="submit" name="predict" value="무승부"/></td>
+			<td><input type="submit" name="predict" value="${TRDTO.bteamname}"/></td>
+			<input type="hidden" name = "gno" value="${TRDTO.gno}"/>
+			<input type="hidden" name = "ateamname" value="${TRDTO.ateamname}"/>
+			<input type="hidden" name = "bteamname" value="${TRDTO.bteamname}"/>
+			</form>
 		</tr>
-		<br> <input type="submit" value="투표하기" />
+		<br> 
+		</form>
+		</table>
+
 		<hr>
 
 		<!-- 그래프 출력 -->
@@ -96,17 +104,38 @@
 		   <table border="1" width="800" class="center">
       <tbody>
          <tr>
-            <th>KT</th>
+            <th>${TRDTO.ateamname}</th>
             <th>vs</th>
-            <th>삼성</th>
+            <th>${TRDTO.bteamname}</th>
          </tr>
-         <c:forEach items="${atrDTO}" var="dto">
+               
             <tr>
-							<td>${dto.win}승 ${dto.draw}무 ${dto.score}패</td>
-							<td>누적승패</td>
-							<td></td>
-						</tr>
-         </c:forEach>
+							<td>${atrDTO.win}</td>
+							<td>승</td>
+							<td>${btrDTO.win}</td>
+							</tr>
+							<tr>
+							<td>${atrDTO.lose}</td>
+							<td>패</td>
+							<td>${btrDTO.lose}</td>
+							</tr>
+							<tr>
+							<td>${atrDTO.draw}</td>
+							<td>무</td>
+							<td>${btrDTO.draw}</td>
+							</tr>
+         			<tr>
+							<td>${atrDTO.score}</td>
+							<td>득점</td>
+							<td>${btrDTO.score}</td>
+							</tr>
+							<tr>
+							<td>${atrDTO.loss}</td>
+							<td>실점</td>
+							<td>${btrDTO.loss}</td>
+							</tr>
+ 							
+ 					
       </tbody>
          </table>
       </form>

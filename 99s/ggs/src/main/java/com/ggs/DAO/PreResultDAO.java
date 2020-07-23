@@ -18,5 +18,10 @@ public class PreResultDAO {
 	public List<PreResultDTO> getMyPreList(String uid) {
 		return session.selectList("preresult.mypredict", uid);
 	}
-	
+
+
+	public  List<PreResultDTO> predict(PreResultDTO dto) {
+		return session.selectList("preresult.predictcountview",dto);
+	}
+
 }
