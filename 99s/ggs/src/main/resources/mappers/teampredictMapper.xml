@@ -7,7 +7,8 @@
 
 	<!-- Integer타입으로 바꿔주어야한다 resultType="java.lang.Integer" -->
 	<select id="MembersRanking" resultType="com.ggs.DTO.MembersDTO"> 
-		SELECT id,ppoint FROM members 
+		SELECT * 
+		FROM members
 		ORDER BY ppoint DESC
 		LIMIT 5;
 	</select>
