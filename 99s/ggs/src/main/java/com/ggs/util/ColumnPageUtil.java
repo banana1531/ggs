@@ -16,6 +16,25 @@ public class ColumnPageUtil {
 	private	int	startPage;		//	페이지 이동 기능이 몇페이지 부터 만들지를 지정한다.
 	private	int	endPage;		//	페이지 이동 기능을 몇페이지까지 만들지를 지정한다.
 	
+	//-------------검색--------------
+	private String searchType;
+	private String keyword;
+
+	
+	
+	
+	public String getSearchType() {
+		return searchType;
+	}
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public ColumnPageUtil(int nowPage, int totalCount) {
 		this(nowPage, totalCount, 10,10 );
 	}
@@ -117,14 +136,8 @@ public class ColumnPageUtil {
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
-	public void setSearchType(String searchType) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void setKeyword(String keyword) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 
 	
 
