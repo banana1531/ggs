@@ -5,137 +5,122 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="column">
 	
-	
-		<sql id="isvisible">isvisible=1</sql>
-	<sql id="selectColumns">
-		knowboard.writeno     	as writeno,
-    title  						as title,
-    writedate   						as writedate,
-    views   						as views,
-    id							as id
-	</sql>
-
-<!-- 	<sql id="searchCondition">
-		동적sql문   
-			   MyBatis-3-User-Guide_ko.pdf에서 동적 SQL참조
-			   여기에서는 if문을 이용하여 조건에 따라 서로 다른 쿼리문을 준다
-		<if test='target eq "title"'>
-		title LIKE '%' || #{word} || '%'
-		</if>
-		<if test='target eq "content"'>
-		content LIKE '%' || #{word} || '%'
-		</if>
-		<if test='target eq "writer"'>
-		writer LIKE '%' || #{word} || '%'
-		</if>
-		<if test='target eq "all"'>
-		(title LIKE '%' || #{word} || '%' OR content LIKE '%' || #{word} || '%')
-		</if>
-	</sql> -->
-	
- 	<!-- 검색 -->
-	<!--<select id="boardSearch"	resultType="BoardDTO"
-					parameterType="BoardDTO">
-		SELECT
-			*
-		FROM
-			(SELECT
-				<include refid="selectColumns" />,
-				NVL(t.fileCnt, 0)   as fileCount,
-				ROW_NUMBER() OVER( order by knowboard.writeno desc ) AS rno
-			FROM
-				knowboard, member,
-				(SELECT    count(*) as fileCnt, writeno
-				 FROM 	fileInfo
-				 GROUP BY  writeno) t
-			WHERE
-				<include refid="searchCondition" />
-				AND 
-				writer=id
-				AND 
-				knowboard.writeno=t.writeno(+)
-				AND <include refid="isvisible" />)
-		WHERE
-			rno BETWEEN #{start} AND #{end}
-	</select> -->
-	
-	<!--	검색 결과 데이터 개수조회	 -->
-<!-- 	<select id="searchCount"	resultType="int"	
-					parameterType="BoardDTO">
-		SELECT
-			COUNT(*)	AS	cnt
-		FROM
-			knowboard
-		WHERE
-			<include refid="searchCondition" />
-	</select> -->
-	
-	
-	<!-- 삭제하기 -->
- 	<update id="delBoard" parameterType="BoardDTO">
-		UPDATE 	knowboard
-		SET 		isvisible=0
-		WHERE 	writeno=#{writeno}
-	</update> 
-	
-	
- 	<!-- 글수정 -->
-	<update id="modifyBoard" parameterType="BoardDTO">
-		UPDATE	knowboard
-		SET     title=#{title},
-				content=#{content}
-		WHERE	  writeno=#{writeno}
-	</update> 
-	
-	
-
-
-	<!-- 상세보기 -->	
-	<resultMap type="BoardDTO" id="clobContent">
-	<result  property="content"  column="Content"
-		         jdbcType="CLOB" javaType="string"/>
-	</resultMap> 
-	<select id="detailView" parameterType="int"
-	        resultMap="clobContent">
-		SELECT   <include refid="selectColumns"/>,
-						 content
-	  FROM     knowboard
-	  WHERE    writeno=#{writeno} 
-	  				 AND
-	  				 <include refid="isvisible" />
+	<select id="cBoardReply" parameterType="ReplyDTO" resultType="ReplyDTO">
+		SELECT *
+		FROM reply
+		WHERE boardname="knowboard" AND isvisible=1 AND wno=#{wno}
+		ORDER BY repno DESC
+		LIMIT #{start}, 10
 	</select>
 
-		<!-- 조회수 증가 -->
-	<update id="viewsUpdate" parameterType="int">
-		UPDATE knowboard 
-		SET    views = views+1 
-		WHERE  writeno  = #{writeno}
+	<insert id="replyAdd" parameterType="ReplyDTO">
+		INSERT INTO reply(wno, boardname, id, content, writedate)
+		VALUES (#{wno},"knowboard",#{id},#{content}, now())
+	</insert>
+
+	<select id="replyPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM
+		reply
+		WHERE isvisible=1 AND boardname="knowboard" AND wno=#{writeno}
+	</select>
+	
+	<select id="searchPage" parameterType="BoardDTO" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM knowboard
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='title'">
+					AND title like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='content'">
+					AND content like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='title,content'">
+					OR title	 like CONCAT('%', #{keyword}, '%')
+					OR content   like CONCAT('%', #{keyword}, '%')
+					
+				</if>
+			</if>
+		</trim>
+	</select>
+	
+	<select id="cBoardSearch" parameterType="BoardDTO" resultType="BoardDTO">
+		SELECT *
+		FROM knowboard
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="keyword != null and keyword != '' ">
+				<if test="searchType=='title'">
+					AND title like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='content'">
+					AND content like CONCAT('%', #{keyword}, '%')
+				</if>
+				<if test="searchType=='title,content'">
+					OR title	 like CONCAT('%', #{keyword}, '%')
+					OR content   like CONCAT('%', #{keyword}, '%')
+					
+				</if>
+			</if>
+			
+		</trim>
+		
+		ORDER BY writeno DESC
+		LIMIT #{start}, 10
+	</select>
+	
+	<update id="hit" parameterType="BoardDTO">
+		UPDATE knowboard
+		SET views=#{views}+1
+		WHERE writeno=#{writeno}
 	</update>
-
-			<!-- 목록조회 -->
-	<select id="cBoard" 
-					parameterType="BoardDTO"
-					resultType="BoardDTO">
-		SELECT <include refid="selectColumns"/> 
-		FROM knowboard 
-		WHERE isvisible = 1
-		ORDER BY writeno DESC LIMIT #{start},10
-	</select>
-
-			<!-- 전체게시물 수 조회 -->
-	<select id="totalCnt" resultType="int">
-		select  count(*) as cnt 
-		from 		knowboard 
-		where   <include refid="isvisible" />
-	</select>	
 	
-		<!-- 글쓰기 -->
-	<insert id="insertBoard" parameterType="BoardDTO">
+	<update id="cBoardDelete" parameterType="int">
+		UPDATE knowboard
+		SET
+		isvisible=0
+		WHERE writeno=#{writeno}
+	</update>
+	
+	<update id="cBoardUpdate" parameterType="BoardDTO">
+		UPDATE knowboard
+		SET
+		title=#{title}, content=#{content}
+		WHERE writeno=#{writeno}
+	</update>
+	
+	<!-- 상세보기 -->
+	<select id="cBoardDetail" parameterType="int"
+		resultType="BoardDTO">
+		SELECT *
+		FROM knowboard
+		WHERE writeno=#{writeno}
+	</select>
+	
+
+	<!-- 글쓰기 -->
+	<insert id="cBoardWrite" parameterType="BoardDTO">
 		<selectKey keyProperty="writeno" resultType="int" order="BEFORE">
 		select   ifnull(MAX(writeno),0)+1   from  knowboard
 		</selectKey>
 		insert into knowboard VALUES(#{writeno},#{id},#{title},#{content},NOW(),0,1,NULL,'knowboard')
 	</insert>
+	
+	<select id="cBoardPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM
+		knowboard
+		WHERE isvisible=1
+	</select>
+
+	<select id="cBoardList" parameterType="BoardDTO"
+		resultType="BoardDTO">
+		SELECT *
+		FROM knowboard
+		WHERE isvisible=1
+		ORDER BY writeno DESC
+		LIMIT #{start}, 10
+	</select>
 	
 
 </mapper>

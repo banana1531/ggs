@@ -107,9 +107,9 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">역대 관중 현황</a></li>
+							<li><a href="/crowd/crowdHistory.gg">역대 관중 현황</a></li>
 							<li><a href="/graph/bmi.gg">비만도와 실적관계</a></li>
-							<li><a href="/column/cBoard">야구 지식 정보</a></li>
+							<li><a href="/column/list.gg">야구 지식 정보</a></li>
 						</ul></li>
 					<c:choose>
 						<c:when test="${UID!='admin'}">

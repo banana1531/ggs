@@ -3,11 +3,12 @@ package com.ggs.DAO;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.mybatis.spring.support.SqlSessionDaoSupport;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ggs.DTO.BoardDTO;
+import com.ggs.DTO.ReplyDTO;
 
 
 @Repository
@@ -15,71 +16,63 @@ public class ColumnDAO {
 
 	//자동주입
 	@Autowired
-	private SqlSessionTemplate session;
+	SqlSessionTemplate session;
+	
+	public ArrayList<ReplyDTO> cBoardReply(ReplyDTO rDTO) {
+		return (ArrayList)session.selectList("column.cBoardReply", rDTO);
+	}
+
+	//댓글추가
+	public void replyAdd(ReplyDTO rDTO) {
+		System.out.println("columnDAO replyAdd 왔니");
+		session.insert("column.replyAdd", rDTO);
+	}
+
+	public int replyPage(int writeno) {
+		return (Integer)session.selectOne("column.replyPage", writeno);
+	}
+	
+	public ArrayList<BoardDTO> cBoardSearch(BoardDTO bDTO) {
+		return (ArrayList)session.selectList("column.cBoardSearch", bDTO);
+	}
+
+	public int searchPage(BoardDTO bDTO) {
+		return (Integer)session.selectOne("column.searchPage", bDTO);
+	}
+	
+	public void hit(BoardDTO bDTO) {
+		session.update("column.hit", bDTO);
+	}
+	
+	public void cBoardDelete(int writeno) {
+		session.update("column.cBoardDelete", writeno);
+	}
+	
+	public void cBoardUpdate(BoardDTO bDTO) {
+		session.update("column.cBoardUpdate", bDTO);
+	}
+	
+	public ArrayList<BoardDTO> cBoardDetail(int writeno) {
+		return (ArrayList)session.selectList("column.cBoardDetail", writeno);
+	}
+	
+	//글쓰기
+	public void cBoardWrite(BoardDTO bDTO) {
+		System.out.println("columnDAO의 cBoardWrite() ="+bDTO);
+		session.insert("column.cBoardWrite", bDTO);
+	}
+	
+	public int cBoardPage() {
+		return (Integer)session.selectOne("column.cBoardPage");
+	}
+
+	public ArrayList<BoardDTO> cBoardList(BoardDTO bDTO) {
+		return (ArrayList)session.selectList("column.cBoardList", bDTO);
+	}
+	
+	
 	
 
-	
-	//삭제하기
-	public void delBoard(BoardDTO bDTO) {
-		session.update("column.delBoard",bDTO);
-		System.out.println("ColumnDAO에 삭제요청함수 delBoard() 왔니");
-	}
-	
-
-	
-//	글 수정하기
-	public void modifyBoard(BoardDTO bDTO) {
-			session.update("column.modifyBoard", bDTO);
-			System.out.println("DAO 글수정 modifyBoard  "+bDTO.getWriteno());
-	}
-	
-
-//	상세보기
-	public BoardDTO detailView(int writeno) {
-		System.out.println("columnDAO에 detailView"+writeno);
-		return (BoardDTO)session.selectOne("column.detailView",writeno);
-	}
-	
-//	조회수증가
-	public void viewsUpdate(int writeno) {
-		session.update("column.viewsUpdate",writeno);
-		System.out.println("ColumnDAO 에서 viewsUpdate()진입");
-	}
-	
-	//목록조회
-	public ArrayList getCBoard(BoardDTO bDTO) {
-		return (ArrayList)session.selectList("column.cBoard", bDTO); 			
-		//파라미터:start와 end -> fbDTO에서 전달받아서 전해줌
-	}
-	
-//	전체게시물 수 조회
-	public int getTotalCnt() {
-		//select 실행결과로 리턴받는행수가 한개이면 selectOne()
-		//실행받는행수가한개이상이면 selectList()
-		return (Integer)session.selectOne("column.totalCnt");
-	}
-	
-	//글쓰기처리
-	public void insertBoard(BoardDTO bDTO, String hint) {
-		//session.insert(String 실행할 쿼리문);
-		//session.insert(String 실행할 쿼리문, 쿼리문안의 parameter);
-		//session.insert("네임스페이스명.쿼리문id값", Dto);
-		if(hint.equals("column")) {
-			session.insert("column.insertBoard", bDTO); //fileboard에 인서트
-		}
-		
-	}
-	
-//	//검색- 페이지정보처리
-//	public int searchCount(BoardDTO bDTO) {
-//		return (Integer) getSqlSession().selectOne("column.searchCount", bDTO);
-//	}
-//
-//
-//	//검색
-//	public ArrayList searchBoard(BoardDTO bDTO) {
-//		return (ArrayList)session.selectList("column.boardSearch", bDTO);
-//	}
 	
 	
 }
