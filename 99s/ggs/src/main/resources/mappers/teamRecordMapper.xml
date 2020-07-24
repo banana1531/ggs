@@ -5,12 +5,24 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="teamRecord">
 	
+	
+	<!-- 내팀 경기 일정 및 경기 결과 가져오기 -->
 	<select id="myteam" resultType="com.ggs.DTO.TeamRecordDTO">
-		SELECT * 
-		FROM teamRecord 
-		WHERE (ateamname=#{teamName} OR bteamname=#{teamName}) and ascore=' ' 
-		ORDER BY gdate ASC 
-		LIMIT 5;
+		select * from		
+		(
+			(SELECT * 
+			FROM teamRecord 
+			WHERE (ateamname=#{teamName} OR bteamname=#{teamName}) and (DATEDIFF(gdate, DATE(NOW())) &lt; -1)  
+			ORDER BY gdate desc
+			LIMIT 3)
+			union
+			(SELECT * 
+			FROM teamRecord 
+			WHERE (ateamname=#{teamName} OR bteamname=#{teamName}) and (DATEDIFF(gdate, DATE(NOW())) &gt; -1)  
+			ORDER BY gdate ASC 
+			LIMIT 3)
+		) as k
+		order by gdate
 	</select>
 
 	<!-- 팀 경기 이력 가져오기 -->
@@ -39,13 +51,13 @@
 	
 	<!-- 팀 실적 가져오기 -->
 	<select id="teamScore" resultType="com.ggs.DTO.TeamInfoDTO">
-	SELECT w.team AS teamName, win, score, lose, loss, draw 
+	SELECT w.team AS teamName, win, score, lose, loss, draw, (win)/(win+lose) AS rate
 	FROM 
 		(SELECT team, sum(cnt) lose, sum(score) loss FROM 
 			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
 			FROM teamRecord 
 			WHERE ascore &lt; bscore GROUP BY ateamname
-			union
+			union all
 			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
 			FROM teamRecord 
 			WHERE bscore &lt; ascore GROUP BY bteamname) AS ll
@@ -54,7 +66,7 @@
 			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
 			FROM teamRecord 
 			WHERE ascore &gt; bscore GROUP BY ateamname
-			union
+			union all
 			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
 			FROM teamRecord 
 			WHERE bscore &gt; ascore GROUP BY bteamname) AS ww
@@ -63,20 +75,43 @@
 			(SELECT ateamname team, COUNT(ateamname) cnt 
 			FROM teamRecord 
 			WHERE ascore = bscore AND ascore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&lt;0 GROUP BY ateamname
-			union
+			union all
 			SELECT bteamname team, COUNT(bteamname) cnt 
 			FROM teamRecord 
 			WHERE bscore = ascore and ascore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&lt;0 GROUP BY bteamname) AS dd
 			GROUP BY team) AS d ON w.team=d.team
-		WHERE w.team!='없음' AND w.team=l.team 
+		WHERE w.team!='경기없음' AND w.team=l.team 
 		GROUP BY teamName
-
 		<if test="teamName != null">having teamName = #{teamName}</if>
-		ORDER BY teamName DESC;
+		ORDER BY rate DESC;
 	</select>
 	
 	
-		<!-- 팀 실적 가져오기 -->
+	
+	<select id="schmatchList" resultType="com.ggs.DTO.TeamRecordDTO">
+		SELECT gno, gdate, gtime, team as ateamname, tscore as ascore, vteam as bteamname, vscore as bscore, stadium, totalcnt 
+		FROM
+			(
+				SELECT * FROM 
+				(
+					SELECT gno, gdate, gtime, ateamname AS team, ascore AS tscore, bteamname AS vteam, bscore AS vscore, stadium 
+					FROM teamRecord WHERE ateamname = #{ateamname}
+					union
+					SELECT gno, gdate, gtime, bteamname AS team, bscore AS tscore, ateamname AS vteam, ascore AS vscore,  stadium 
+					FROM teamRecord 
+					WHERE bteamname = #{ateamname}
+				) AS t 
+				WHERE tscore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&gt;-1 
+				order by gdate LIMIT #{start}, 5
+			) AS r,
+				(
+					SELECT COUNT(*) AS totalcnt 
+					FROM teamRecord 
+					WHERE (ateamname = #{ateamname} OR Bteamname=#{ateamname}) AND (ascore &gt; -1 AND DATEDIFF(gdate, date(NOW()))&lt;-1)
+				) AS c
+	</select>
+
+	<!-- 팀 실적 가져오기 -->
 	<select id="ApreteamScore" parameterType="com.ggs.DTO.TeamInfoDTO" resultType="com.ggs.DTO.TeamInfoDTO">
 	SELECT w.team AS teamName, win, score, lose, loss, draw 
 	FROM 
@@ -155,6 +190,17 @@
  		<!-- <if test="bteamname != null">having teamName = #{bteamname}</if>  -->
 		ORDER BY teamName DESC;
 	</select>
+	
+	<!-- 경기 정보수정하기 -->
+	<update id="gameUpdate" parameterType="com.ggs.DTO.TeamRecordDTO">
+		update teamRecord set gtime=#{gtime},
+		ateamname=#{ateamname},
+		ascore=#{ascore},
+		bscore=#{bscore},
+		bteamname=#{bteamname},
+		stadium=#{stadium}
+		where gno=#{gno} 
+	</update>
 	
 </mapper>
 

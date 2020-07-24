@@ -21,8 +21,6 @@
 		<h4>공지사항 게시판</h4>
 		<div class="container" align="right">
 			<form action="./search">
-
-
 				<select name="searchType" id="searchType">
 					<option value="title" selected="selected">제목</option>
 					<option value="content">내용</option>
@@ -31,7 +29,7 @@
 					type="submit" id="search" value="검색">
 			</form>
 		</div>
-		<table border="1" class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>글번호</th>
@@ -53,8 +51,12 @@
 						<td>${dto.views}</td>
 					</tr>
 				</c:forEach>
-				<tr class="center">
-					<td colspan="5"><c:if test="${PINFO.nowPage eq 1}">
+				
+			</tbody>
+		</table>
+		<table class="table">
+		<tr class="center">
+					<td><c:if test="${PINFO.nowPage eq 1}">
 					[prev]
 					</c:if> <c:if test="${PINFO.nowPage ne 1}">
 							<a href="../notice/list?nowPage=${PINFO.nowPage-1}">[prev]</a>
@@ -67,7 +69,6 @@
 							<a href="../notice/list?nowPage=${PINFO.nowPage+1}">[next]</a>
 						</c:if></td>
 				</tr>
-			</tbody>
 		</table>
 		<div class="container" align="right">
 			<c:if test="${UID=='admin'}">

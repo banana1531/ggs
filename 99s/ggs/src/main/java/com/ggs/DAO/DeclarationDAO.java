@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ListModel;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,9 +35,10 @@ public class DeclarationDAO {
 	//신고접수글 상세 내용 가져오기
 	public DeclarationDetailDTO getDetail(DeclarationDTO dto) {
 		int no = dto.getWriteno();
+		System.out.println("dto.getBoardname()="+dto.getBoardname());
 		if(dto.getBoardname().equals("freeboard"))
 			return session.selectOne("declaration.getDetailFreeboard", no);
-		else 
+		else
 			return session.selectOne("declaration.getDetailInforerrorboard", no);
 	}
 	
@@ -84,6 +87,16 @@ public class DeclarationDAO {
 	//주간별 평균 처리 시간
 	public List avgTime() {
 		return session.selectList("declaration.avgTime");
+	}
+	
+	//신고사유별 건수 가져오기
+	public List<DeclarationDTO> reason() {
+		return session.selectList("declaration.reason");		
+	}
+	
+	//신고글 등록하기
+	public int decInsert(DeclarationDTO declarationDTO) {
+		return session.insert("declaration.decInsert", declarationDTO);
 	}
 
 }

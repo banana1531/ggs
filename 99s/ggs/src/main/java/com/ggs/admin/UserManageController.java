@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ggs.DTO.MemberStaticDTO;
 import com.ggs.DTO.MembersDTO;
 import com.ggs.util.PageUtil;
 
@@ -21,24 +22,20 @@ public class UserManageController {
 	/*** ==========================================
 	 * 회원관리
 	 * ***/
-	
-	//회원관리 메인 가기
-	@RequestMapping("/memberMain.gg")
-	public String memberMain() {
-		return "/admin/memberMain";
-	}
-	
+
 	//회원 현황
 	@RequestMapping("/memberSummary.gg")
 	public String memberSummary(Model model) {
-		// 금일 접속자수
-		model.addAttribute("todayCnt", userManageService.todayLogin());
-
-		// 가입자수
-		model.addAttribute("totalCnt", userManageService.totalCnt());
-
+		
+		//접속,가입자수 통계 자료 가져오기		
+		model.addAttribute("dto", userManageService.memberSummary());
+		
 		// 주간단위 접속자수
 		model.addAttribute("weekly", userManageService.weeklyLogin());
+		
+		// 주간단위 가입자수
+		model.addAttribute("weeklyjoin", userManageService.weeklyJoin());
+		
 		return "/admin/memberSummary";
 	}
 

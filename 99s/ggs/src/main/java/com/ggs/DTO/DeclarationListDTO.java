@@ -4,18 +4,40 @@ import java.sql.Timestamp;
 
 public class DeclarationListDTO {
 	
+	private int			wNo;		//등록관리번호
 	private String 		boardname;	//게시판 이름
 	private int 		fno;		//게시판 글 등록번호
 	private String 		uid;		//신고자
 	private Timestamp 	inputdate;	//신고일
 	private String 		reason;		//사유
 	private String 		writer;		//글 작성자
+	private Timestamp	writedate;	//글 작성일
 	private String 		title;		//글제목
 	private int 		totalcnt;   //전체 글 숫자			
 	private int 		start;		//시작 글 숫자
+	private Timestamp   outputdate;	//처리일자
+		
 	
 	
 	
+	public Timestamp getOutputdate() {
+		return outputdate;
+	}
+	public void setOutputdate(Timestamp outputdate) {
+		this.outputdate = outputdate;
+	}
+	public int getwNo() {
+		return wNo;
+	}
+	public void setwNo(int wNo) {
+		this.wNo = wNo;
+	}
+	public Timestamp getWritedate() {
+		return writedate;
+	}
+	public void setWritedate(Timestamp writedate) {
+		this.writedate = writedate;
+	}
 	public int getTotalcnt() {
 		return totalcnt;
 	}
@@ -72,9 +94,10 @@ public class DeclarationListDTO {
 	}
 	@Override
 	public String toString() {
-		return "DeclarationListDTO [boardname=" + boardname + ", fno=" + fno + ", uid=" + uid + ", inputdate="
-				+ inputdate + ", reason=" + reason + ", writer=" + writer + ", title=" + title + ", totalcnt="
-				+ totalcnt + ", start=" + start + "]";
+		return "DeclarationListDTO [wNo=" + wNo + ", boardname=" + boardname + ", fno=" + fno + ", uid=" + uid
+				+ ", inputdate=" + inputdate + ", reason=" + reason + ", writer=" + writer + ", writedate=" + writedate
+				+ ", title=" + title + ", totalcnt=" + totalcnt + ", start=" + start + ", outputdate=" + outputdate
+				+ "]";
 	}
 	
 	

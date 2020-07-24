@@ -13,8 +13,15 @@ public class DeclarationDTO {
 	private String 	reason;		//신고 사유
 	private String 	details;	//신고 사유 상세	
 	private Date 	outputdate;	//처리일
+	private int 	cnt;		//reason count변수
 	
 	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public int getWno() {
 		return wno;
 	}

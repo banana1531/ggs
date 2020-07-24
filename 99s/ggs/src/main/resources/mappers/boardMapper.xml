@@ -9,9 +9,9 @@
 	
 	<!-- 최근 등록 게시물 5개 가져오기 -->
 	<select id="getRecentList" resultType="com.ggs.DTO.BoardDTO">
-		SELECT id,title, writedate, views 
+		SELECT * 
 		FROM freeboard 
-		UNION SELECT id,title, writedate, views 
+		UNION SELECT * 
 		FROM inforerrorboard
 		WHERE isvisible = 1
 		ORDER BY writedate DESC LIMIT 5;

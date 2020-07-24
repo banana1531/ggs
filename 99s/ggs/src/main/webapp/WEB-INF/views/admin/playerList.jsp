@@ -24,13 +24,14 @@ $(function(){
 
 </head>
 <body>
-   <div class="container">
-	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
-	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
-	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
+   <div class="container" style="margin-top: 20px">
+<a href="/admin/teamList.gg"><button>팀 목록</button></a>
+	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
+	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
    </div>
-<h4>선수 목록</h4>
+
    <div class="container" id="body">
+   <h4>선수 목록</h4>
    <nav class="navbar navbar-right">
 			<form class="form-inline" action="/admin/playerList.gg">
 			<input type="hidden" id="option" value="${option}">
@@ -63,25 +64,30 @@ $(function(){
    		</tr>
    		<c:choose>
    		<c:when test="${result ==null }">
-			<c:forEach items="${playerlist}" var="player">
-				<tr class="dto">
-					<td><input id="pno" type="hidden" value="${player.pno}"> ${player.name}</td>
-					<td>${player.teamname}</td>
-					<td>${player.labelno }</td>
-					<td>${player.position }</td>
-				</tr>
-			</c:forEach>
-			<tr>
-				<td colspan="4">
-				<c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
-				<c:forEach var="i"
-						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-					[<a class="page">${i}</a>]
-				</c:forEach>
-				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
-				</td>
-			</tr>
-			</c:when>
+					<c:forEach items="${playerlist}" var="player">
+						<tr class="dto">
+							<td><input id="pno" type="hidden" value="${player.pno}">
+								${player.name}</td>
+							<td>${player.teamname}</td>
+							<td>${player.labelno }</td>
+							<td>${player.position }</td>
+						</tr>
+					</c:forEach>
+					<tr align="center">
+						<td colspan="4"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
+							<c:forEach var="i" begin="${pageInfo.startPage}"
+								end="${pageInfo.endPage}">
+								<c:choose>
+									<c:when test="${pageInfo.nowPage==i}">
+										<b>[<a class="page">${i}</a>]
+										</b>
+									</c:when>
+									<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+								</c:choose>
+							</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+						</td>
+					</tr>
+				</c:when>
 			<c:otherwise><tr><td colspan="4">${result }</td></tr></c:otherwise>
 			</c:choose>
 		</table>

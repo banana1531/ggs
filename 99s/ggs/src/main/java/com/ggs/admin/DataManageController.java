@@ -1,5 +1,6 @@
 package com.ggs.admin;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +94,7 @@ public class DataManageController {
 		else 
 			model.addAttribute("result", "정보가 수정되지 않았습니다.");
 		model.addAttribute("team", teamInfoService.teamDetail(teamInfoDTO.getTeamName()));
-		return "redirect:/admin/teamDetail.gg?name="+teamInfoDTO.getTeamName();
+		return "/admin/teamDetail";
 	}
 	
 	
@@ -187,16 +188,40 @@ public class DataManageController {
 	 * 경기일정 data관리
 	 * ***/
 	
-	//경기일정 목록 불러오기
+	//경기 결과 목록 불러오기
 	@RequestMapping("/gameList.gg")
-	public String gameList(Model model, @RequestParam(value="pageNo", defaultValue="1" ) String pageNo) {
+	public String gameList(Model model,
+			@RequestParam(value="pageNo", defaultValue="1" ) String pageNo,
+			@RequestParam(value="month",defaultValue="0") int month) {
+		List list = teampredicService.getrltmatchList(pageNo,"10", month);
+		int totalcnt = 0;
+		if(list.size()>0) totalcnt= ((TeamRecordDTO)list.get(0)).getTotalcnt();
+		else model.addAttribute("result", "해당되는 경기가 없습니다.");
+		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), totalcnt, 10,10);
+		model.addAttribute("list", list);
+		model.addAttribute("pageInfo", pageInfo);
+		model.addAttribute("nowPage", pageNo);
+		model.addAttribute("month", month);
+		return "/admin/gameList";
+	}
+	
+	
+	//경기 정보 수정하기
+	@RequestMapping("/gameUpdate.gg")
+	public String gameUpdate(TeamRecordDTO dto, Model model,
+			@RequestParam(value="pageNo", defaultValue="1" ) String pageNo,
+			@RequestParam(value="month",defaultValue="0") int month) {
 		
-		List list = teampredicService.getschmatchList(pageNo, 0);
+		if(teampredicService.gameUpdate(dto)>0) model.addAttribute("result", "정보가 정상적으로 수정되었습니다.");
+		else model.addAttribute("result", "정보 수정에 실패하였습니다. 다시 시도해주시기 바랍니다.");
+		
+		List list = teampredicService.getrltmatchList(pageNo,"10", month);
 		PageUtil pageInfo = new PageUtil(Integer.parseInt(pageNo), ((TeamRecordDTO)list.get(0)).getTotalcnt(),10,10);
 		model.addAttribute("list", list);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("nowPage", pageNo);
-		return "/admin/gameList";
+		model.addAttribute("month", month);
+		
+		return "admin/gameList";
 	}
-	
 }

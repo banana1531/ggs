@@ -27,6 +27,7 @@
 					<td><a href="/mypage/myInfoModifyForm.gg"><input type="button" id='chPw' value="돌아가기"></a></td>
 				</tr>
 			</table>
+			${result }
 		</form>
 		
 	</div>

@@ -22,7 +22,7 @@ $(function(){
 </head>
 <body>
 	<div class="container">
-		<p>팀 목록</p>
+		<h4>팀 목록</h4>
 		<table class="table table-hover table-bordered">
 			<thead>
 			<tr align="center">

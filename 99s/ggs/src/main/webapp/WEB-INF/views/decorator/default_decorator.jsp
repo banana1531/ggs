@@ -31,6 +31,11 @@ pre {
 	border: 0px;
 }
 
+.container{
+	margin-top: 20px
+}
+
+
 /* Remove the navbar's default margin-bottom and rounded borders */
 .navbar {
 	margin-bottom: 0;
@@ -83,14 +88,14 @@ article {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/teampredict/schmatchList.gg">99s</a>
+				<a class="navbar-brand" href="/teampredict/schmatchList.gg" style="font-size: 50px">99s</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
 					<li><a href="/teampredict/schmatchList.gg">Home</a></li>
 					<li><a href="/notice/list">공지사항</a></li>
 					<li><a href="/freeboard/list">자유 게시판</a></li>
-					<li><a href="/board/list?boardname=inforerrorboard">정보 오류 신고</a></li>
+					<li><a href="/inforerrorboard/list">정보 오류 신고</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown">경기 일정<span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
@@ -107,9 +112,9 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="/crowd/crowdHistory.gg">역대 관중 현황</a></li>
+							<li><a href="#">역대 관중 현황</a></li>
 							<li><a href="/graph/bmi.gg">비만도와 실적관계</a></li>
-							<li><a href="/column/list.gg">야구 지식 정보</a></li>
+							<li><a href="/column/list">야구 지식 정보</a></li>
 						</ul></li>
 					<c:choose>
 						<c:when test="${UID!='admin'}">

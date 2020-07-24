@@ -139,4 +139,22 @@ public class DecService {
 		String result =""+hours;
 		return result;
 	}
+	
+	//신고 사유별 점유율
+	public String reason() {
+		String result = "[['reason','rate'],";
+		List<DeclarationDTO> list = declarationDAO.reason();
+		
+		for(DeclarationDTO dto : list) {
+			result += "['"+dto.getReason()+"',"+dto.getCnt()+"],";
+		}
+		result=result.substring(0, result.length()-1)+"]";
+		System.out.println("result="+result);
+		return result;
+	}
+	
+	//신고글 등록
+	public int decInsert(DeclarationDTO declarationDTO) {
+		return declarationDAO.decInsert(declarationDTO);
+	}
 }

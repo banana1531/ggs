@@ -53,6 +53,13 @@ public class MyPageService {
 		return membersDAO.getMyInfo(id);
 	}
 	
+	//탈퇴하기
+	public int leave(String id) {
+		MembersDTO membersDTO = new MembersDTO();
+		membersDTO.setId(id);
+		return membersDAO.leave(membersDTO);
+	}
+	
 	//비교팀 정보 가져오기
 	
 	

@@ -126,4 +126,6 @@ public class PlayerInfoDTO {
 				+ ", teamname=" + teamname + ", bmi=" + bmi + ", start=" + start + ", end=" + end + ", totalcnt="
 				+ totalcnt + ", cntBmiN=" + cntBmiN + ", cntBmiF=" + cntBmiF + ", cntBmiHF=" + cntBmiHF + "]";
 	}
+		
+	
 }

@@ -15,64 +15,170 @@ $(function(){
 	})
 })
 </script>
+<style>
+
+input {
+  width:120px;
+}
+
+
+</style>
 </head>
 <body>
-   <div class="container">
-	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
-	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
-	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
+   <div class="container" style="margin-top: 20px">
+	   <a href="/admin/teamList.gg"><button>팀 목록</button></a>
+	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
+	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
 	   <button id="back">앞으로 가기</button>
    </div>
 	<div class="container">
-	<form action="/admin/playerRecordUpdate.gg">
-			<input type="text" name="pgno" value="${player.pgno}" readonly="readonly">
-			<input type="text" name="pno" value="${player.pno}" readonly="readonly">
-			소속팀<input type="text" name="pno" value="${player.teamname}">
-			포시션<input type="text" name="pno" value="${player.ptype}">
-			경기일자<input type="text" name="pno" value="${player.gdate}">
-			상대팀<input type="text" name="pno" value="${player.vs}">
-			경기결과<input type="text" name="gresult" value="${player.gresult}">
-			선발유뮤<input type="text" name="pno" value="${player.sunbal}">
-			이닝<input type="text" name="pno" value="${player.ining}">
-			실점<input type="text" name="pno" value="${player.siljum}">
-			자책점<input type="text" name="pno" value="${player.jachak}">
-			상대한 타자수<input type="text" name="pno" value="${player.taja}">
-			상대한 타수<input type="text" name="pno" value="${player.tasu}">
-			피 안타<input type="text" name="pno" value="${player.anta}">
-			피 2루타<input type="text" name="pno" value="${player.eta}">
-			피 3루타<input type="text" name="pno" value="${player.samta}">
-			피 홈런<input type="text" name="pno" value="${player.home_run}">
-			볼넷<input type="text" name="pno" value="${player.ball4}">
-			고의 4구<input type="text" name="pno" value="${player.go4}">
-			사구<input type="text" name="pno" value="${player.sagu}">
-			삼진<input type="text" name="pno" value="${player.samjin}">
-			투구수<input type="text" name="pno" value="${player.tugu}">
-			<input type="text" name="pno" value="${player.whip}">
-			타율<input type="text" name="pno" value="${player.tayul}">
-			<input type="text" name="pno" value="${player.culu}">
-			<input type="text" name="pno" value="${player.ops}">
-			<input type="text" name="pno" value="${player.era}">
-			<input type="text" name="pno" value="${player.avli}">
-			<input type="text" name="pno" value="${player.re24}">
-			<input type="text" name="pno" value="${player.wpa}">
-			<input type="text" name="pno" value="${player.gsc}">
-			<input type="text" name="pno" value="${player.gdec}">
-			<input type="text" name="pno" value="${player.gangyuk}">
-			<input type="text" name="pno" value="${player.tasun}">
-			<input type="text" name="pno" value="${player.p}">
-			<input type="text" name="pno" value="${player.djum}">
-			<input type="text" name="pno" value="${player.ruta}">
-			<input type="text" name="pno" value="${player.tajum}">
-			<input type="text" name="pno" value="${player.doru}">
-			<input type="text" name="pno" value="${player.dosil}">
-			<input type="text" name="pno" value="${player.byungsal}">
-			<input type="text" name="pno" value="${player.hita}">
-			<input type="text" name="pno" value="${player.hibi}">
-			<input type="text" name="pno" value="${player.jangta}">
-			<input type="text" name="pno" value="${player.name}">
-			${player}
-			<button type="submit">정보 수정</button>
+	<form class="form-inline" action="/admin/playerRecordUpdate.gg">
+		<table >
+			<tr>
+				<td colspan="4">data 관리번호:<input type="text" name="pgno" value="${player.pgno}" readonly="readonly" style="border: none;"></td>
+				<td colspan="4">선수 관리번호:<input type="text" name="pno" value="${player.pno}" readonly="readonly" style="border: none;"></td>
+			</tr>
+			
+			<tr>
+				<td>소속팀</td>
+				<td>포지션</td>
+				<td>경기일자</td>
+				<td>상대팀</td>
+				<td>경기결과</td>
+				<td>선발유무</td>
+				<td>이닝</td>		
+				<td>실점</td>	
+			</tr>
+			
+			<tr>
+				<td><input type="text" name="pno" value="${player.teamname}"></td>
+				<td><input type="text" name="pno" value="${player.ptype}"></td>
+				<td><input type="text" name="pno" value="${player.gdate}"></td>
+				<td><input type="text" name="pno" value="${player.vs}"></td>
+				<td><input type="text" name="gresult" value="${player.gresult}"></td>
+				<td><input type="text" name="pno" value="${player.sunbal}"></td>
+				<td><input type="text" name="pno" value="${player.ining}"></td>
+				<td><input type="text" name="pno" value="${player.siljum}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			<tr>
+				
+				<td>자책점</td>
+				<td>상대한 타자수</td>
+				<td>상대한 타수</td>
+				<td>피 안타</td>
+				<td>피 2루타</td>
+				<td>피 3루타</td>	
+				<td>피 홈런</td>
+				<td>볼넷</td>		
+			</tr>
+			<tr>
+			
+				<td><input type="text" name="pno" value="${player.jachak}"></td>
+				<td><input type="text" name="pno" value="${player.taja}"></td>
+				<td><input type="text" name="pno" value="${player.tasu}"></td>
+				<td><input type="text" name="pno" value="${player.anta}"></td>
+				<td><input type="text" name="pno" value="${player.eta}"></td>
+				<td><input type="text" name="pno" value="${player.samta}"></td>
+				<td><input type="text" name="pno" value="${player.home_run}"></td>
+				<td><input type="text" name="pno" value="${player.ball4}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			<tr>
+				
+				<td>고의 4구</td>
+				<td>사구</td>
+				<td>삼진</td>
+				<td>투구수</td>
+				<td></td>	
+				<td>타율</td>
+			<td></td>
+			<td></td>		
+			</tr>
+			
+			
+			
+			<tr>
+				
+				<td><input type="text" name="pno" value="${player.go4}"></td>
+				<td><input type="text" name="pno" value="${player.sagu}"></td>
+				<td><input type="text" name="pno" value="${player.samjin}"></td>
+				<td><input type="text" name="pno" value="${player.tugu}"></td>
+				<td><input type="text" name="pno" value="${player.whip}"></td>
+				<td><input type="text" name="pno" value="${player.tayul}"></td>
+				<td><input type="text" name="pno" value="${player.culu}"></td>
+				<td><input type="text" name="pno" value="${player.ops}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>	
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>		
+			</tr>
+			
+			
+			<tr>
+				
+				<td><input type="text" name="pno" value="${player.era}"></td>
+				<td><input type="text" name="pno" value="${player.avli}"></td>
+				<td><input type="text" name="pno" value="${player.re24}"></td>
+				<td><input type="text" name="pno" value="${player.wpa}"></td>
+				<td><input type="text" name="pno" value="${player.gsc}"></td>
+				<td><input type="text" name="pno" value="${player.gdec}"></td>
+				<td><input type="text" name="pno" value="${player.gangyuk}"></td>
+				<td><input type="text" name="pno" value="${player.tasun}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>	
+				<td></td>			
+			</tr>
+			
+			
+			
+			<tr>
+				<td><input type="text" name="pno" value="${player.p}"></td>
+				<td><input type="text" name="pno" value="${player.djum}"></td>
+				<td><input type="text" name="pno" value="${player.ruta}"></td>
+				<td><input type="text" name="pno" value="${player.tajum}"></td>
+				<td><input type="text" name="pno" value="${player.doru}"></td>
+				<td><input type="text" name="pno" value="${player.dosil}"></td>
+				<td><input type="text" name="pno" value="${player.byungsal}"></td>
+				<td><input type="text" name="pno" value="${player.hita}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>				
+			</tr>
+			
+			
+			
+			
+			<tr>
+				<td><input type="text" name="pno" value="${player.hibi}"></td>
+				<td><input type="text" name="pno" value="${player.jangta}"></td>
+				<td><input type="text" name="pno" value="${player.name}"></td>
+			</tr>
+			<tr><td colspan="8"><hr/></td></tr>
+			<tr><td colspan="8" align="right"><button type="submit">정보 수정</button></td></tr>
+			</table>
+			
 			</form>
+			
 			${result }
 	</div>
 </body>

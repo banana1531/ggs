@@ -15,6 +15,16 @@ public class DeclarationDetailDTO {
 	private Date 	writedate;	//글작성일
 	private int 	views;		//조회수
 	private int 	invisible;	//노출/비노출
+	private Date	outputdate;		//조치여부
+	
+	
+
+	public Date getOutputdate() {
+		return outputdate;
+	}
+	public void setOutputdate(Date outputdate) {
+		this.outputdate = outputdate;
+	}
 	public String getBoardname() {
 		return boardname;
 	}
@@ -92,9 +102,7 @@ public class DeclarationDetailDTO {
 		return "DeclarationDetailDTO [boardname=" + boardname + ", fno=" + fno + ", id=" + id + ", inputdate="
 				+ inputdate + ", reason=" + reason + ", details=" + details + ", writer=" + writer + ", title=" + title
 				+ ", content=" + content + ", writedate=" + writedate + ", views=" + views + ", invisible=" + invisible
-				+ "]";
+				+ ", outputdate=" + outputdate + "]";
 	}
-	
-	
 	
 }

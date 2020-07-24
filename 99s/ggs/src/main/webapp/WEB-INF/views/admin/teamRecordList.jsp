@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script>
-	$(".btn").click(function(){
+	$(".page").click(function(){
 	var pageNo = $(this).text();
 	var name   = $("#names").text();
 	$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+pageNo);
@@ -44,11 +44,14 @@
 				</tr>
 			</c:forEach>
 
-			<tr>
+			<tr align="center">
 				<td colspan="7"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
 				<c:forEach var="i"
 						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-					[<a class="btn">${i}</a>]
+		<c:choose>
+							<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
+							<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+						</c:choose>
 				</c:forEach>
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if></td>
 			</tr>

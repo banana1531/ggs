@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 			<table>
 				<tr>
 					<td>아이디 :</td>
-					<td><input type="text" name="id" readonly="readonly" value="${myinfo.id }"></td>
+					<td><input type="text" name="id" readonly="readonly" value="${myinfo.id }" style="border: none;"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 : </td>
@@ -27,15 +28,24 @@
 				</tr>
 				<tr>
 					<td>이름 : </td>
-					<td><input type="text" name="name" readonly="readonly" value="${myinfo.name}"></td>					
+					<td><input type="text" readonly="readonly" value="${myinfo.name}" style="border: none;"></td>					
 				</tr>
 				<tr>
 					<td>생년월일 : </td>
-					<td><input type="text" name="birth" readonly="readonly" value="${myinfo.birth }"></td>				
+					<td><input type="text" readonly="readonly" value="${myinfo.birth }" style="border: none;"></td>				
 				</tr>
 				<tr>
 					<td>성별 : </td>
-					<td><input type="text" name="gender" readonly="readonly" value="${myinfo.gender }"></td>
+					<td><input type="text" readonly="readonly" value="${myinfo.gender }" style="border: none;"></td>
+				</tr>
+				<tr>
+					<td>가입일 : </td>
+					<td><fmt:formatDate value="${myinfo.joindate }"/></td>
+				</tr>
+					<tr>
+					<td>email : </td>
+					<td>
+					<input type="text" readonly="readonly" value="${myinfo.email }" style="border: none;"></td>
 				</tr>
 				<tr>
 					<td>선호팀 : </td>

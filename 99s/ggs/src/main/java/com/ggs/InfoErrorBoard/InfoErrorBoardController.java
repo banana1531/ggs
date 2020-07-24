@@ -44,7 +44,7 @@ public class InfoErrorBoardController {
 	@GetMapping("/detail")
 	public ModelAndView InfoErrorBoardDetail(
 			@RequestParam(value="writeno") int writeno,
-			@RequestParam(value="nowPage") int nowPage,
+			@RequestParam(value="nowPage", defaultValue="1") int nowPage,
 			@RequestParam(value="views") int views,
 			@RequestParam(value = "nowPage2", required = false, defaultValue = "1") int nowPage2,
 			ModelAndView mv) {

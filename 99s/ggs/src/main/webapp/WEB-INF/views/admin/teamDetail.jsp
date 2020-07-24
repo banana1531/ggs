@@ -19,7 +19,7 @@ $(function(){
 </script>
 </head>
 <body>
-   <div class="container">
+   <div class="container" style="margin-top: 20px">
 	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
 	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
 	   <button><a href="/admin/gameList.gg">경기 목록</a></button>

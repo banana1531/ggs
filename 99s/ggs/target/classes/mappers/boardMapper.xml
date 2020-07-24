@@ -5,27 +5,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="FreeBoard">
 	
+
 	
+	<!-- 최근 등록 게시물 5개 가져오기 -->
 	<select id="getRecentList" resultType="com.ggs.DTO.BoardDTO">
-		SELECT id,title, writedate, views 
+		SELECT * 
 		FROM freeboard 
-		UNION SELECT id,title, writedate, views 
+		UNION SELECT * 
 		FROM inforerrorboard
 		WHERE isvisible = 1
 		ORDER BY writedate DESC LIMIT 5;
 	</select>
 	
+	<!-- 글 노출/비노출 수정 -->
 	<update id="updateFreeboard">
 		UPDATE freeboard 
 		SET isvisible=#{isvisible} 
 		WHERE writeno=#{writeno};
 	</update>
 	
+	<!-- 글 노출/비노출 수정 -->
 	<update id="updateinforerrorboard">
 		UPDATE inforerrorboard 
 		SET isvisible=#{isvisible} 
 		WHERE writeno=#{writeno};
 	</update>
+	
+	
 	
 </mapper>
 

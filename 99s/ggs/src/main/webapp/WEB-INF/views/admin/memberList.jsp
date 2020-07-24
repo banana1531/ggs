@@ -14,7 +14,7 @@ $(function(){
 		location="/admin/memberDetail.gg?id="+no
 	});
 
-	$(".btn").click(function(){
+	$(".page").click(function(){
 		var pageNo = $(this).text();
 		location="/admin/memberList.gg?pageNo="+pageNo
 	})
@@ -23,12 +23,12 @@ $(function(){
 </head>
 <body>
    <div class="container">
-	   <button><a href="/admin/memberSummary.gg">회원 현황</a></button>
-	   <button><a href="/admin/memberList.gg">회원 목록</a></button>
+	   <a href="/admin/memberSummary.gg"> <button>회원 현황</button></a>
+	   <a href="/admin/memberList.gg"><button>회원 목록</button></a>
    </div>
    <div class="container" id="body">
    
-	<p>회원 목록</p>
+	<h4>회원 목록</h4>
 		<nav class="navbar navbar-right">
 			<form action="/admin/memberSearch.gg" class="form-inline">
 				<select name="option" class="form-control">
@@ -80,13 +80,19 @@ $(function(){
 						</c:choose> </select></td>
 				</tr>
 			</c:forEach>
-				<tr>
+				<tr align="center">
 				<td colspan="9">
 				<c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
-				<c:forEach var="i"
-						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-					[<a class="btn">${i}</a>]
-				</c:forEach>
+				<c:forEach var="i" begin="${pageInfo.startPage}"
+						end="${pageInfo.endPage}">
+						<c:choose>
+							<c:when test="${pageInfo.nowPage==i}">
+								<b>[<a class="page">${i}</a>]
+								</b>
+							</c:when>
+							<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
 				</td>
 			</tr>

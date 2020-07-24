@@ -19,13 +19,14 @@ $(function(){
 </script>
 </head>
 <body>
-   <div class="container">
+   <div class="container" style="margin-top: 20px">
 	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
 	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
 	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
    </div>
-<h4>선수 상세</h4>
+	
    <div class="container" id="body">
+   <h4>선수 상세</h4>
    <form action="/admin/playerUpdate.gg">
 		<table class="table table-hover">
 			<tr>

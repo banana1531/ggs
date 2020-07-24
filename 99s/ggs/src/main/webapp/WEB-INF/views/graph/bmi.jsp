@@ -119,9 +119,19 @@ $(function(){
 		});	
 });
 </script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 </head>
 <body>
-	<div class="container" style="margin-left: 200px">
+	<div class="container" align="center">
 		<table>
 			<tr>
 
@@ -132,72 +142,80 @@ $(function(){
 							<div id="container"></div>
 							<p class="highcharts-description"></p>
 						</figure>
-						<h2 align="center">[BMI와 야구성적 상관관계 표]</h2>
-						<img alt="BMI와 야구성적 지수 상관관계 표"
-							src="${pageContext.request.contextPath}/resources/img/${img}"
-							width="600">
 
 					</div>
 				</td>
 				<td>
 					<%-- bmi 표 목록 출력 --%>
-					<div class="container"
-							style="position: left; overflow-y: scroll; width: 650px; height: 1800px;">
+					<div class="container" style="width: 650px;">
 						<table border="1" width="600px" class="center">
-							<tr>
+							<tr align="center">
 								<td colspan="3"><h2>야구선수의 BMI지수와 성적 상관관계 분석</h2></td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center">BMI지수= 몸무게(kg) ÷ (신장(m) ×
-									신장(m))<br /> 18.5 미만 - 저체중 (해당 선수 없음*)<br /> 18.5 이상 25 미만 -
-									정상 <br /> 25 이상 30 미만- 비만 <br /> 30 이상 - 고도 비만 <br />
-									출처:대한비만학회
+								<td colspan="3" align="left">BMI지수= 몸무게(kg) ÷ (신장(m) ×
+									신장(m))<br /> - 18.5 미만 - 저체중 (해당 선수 없음*)<br /> - 18.5 이상 25
+									미만 - 정상 <br /> - 25 이상 30 미만- 비만 <br /> - 30 이상 - 고도 비만 <br />
+									*출처:대한비만학회
 								</td>
 							</tr>
-							<tr>
-								<th colspan="3">선수 이름 / BMI지수</th>
-							</tr>
-							<tr>
-								<th width="200">정상</th>
-								<th width="200">비만</th>
-								<th width="200">고도비만</th>
-							</tr>
 						</table>
-						<table border="1" width="600px" class="center">
+					</div>
+					<hr />
+					<div class="container"
+						style="position: left; overflow-y: scroll; width: 650px; height: 300px;">
+						<input class="form-control" id="myInput" type="text"
+							placeholder="검색하세요.">
+						<table class="table table-bordered table-striped" width="600px">
+							<thead>
+								<tr>
+									<th width="200">선수 이름</th>
+									<th width="200">BMI 지수</th>
+									<th width="200">결과</th>
+								</tr>
+							</thead>
+							<tbody id="myTable">
 								<%-- 선수 bmi List  --%>
 								<c:forEach items="${LIST}" var="dto">
 									<tr>
-										<td width="200">
-											<ul>
-												<c:if test="${dto.bmi lt 25}">
-													<li>${dto.name}/${dto.bmi}</li>
-												</c:if>
-											</ul>
-										</td>
-										<td width="200">
-											<ul>
-												<c:if test="${(dto.bmi lt 30)&&(dto.bmi ge 25)}">
-													<li>${dto.name}/${dto.bmi}</li>
-												</c:if>
-											</ul>
-										</td>
-										<td width="200">
-											<ul>
-												<c:if test="${dto.bmi ge 30}">
-													<li>${dto.name}/${dto.bmi}</li>
-												</c:if>
-											</ul>
-										</td>
+										<td>${dto.name }</td>
+										<td>${dto.bmi }</td>
+										<td><c:choose>
+												<c:when test="${dto.bmi<18.5 }">저체중</c:when>
+												<c:when test="${dto.bmi<25 }">정상</c:when>
+												<c:when test="${dto.bmi<30 }">비만</c:when>
+												<c:otherwise>고도비만</c:otherwise>
+											</c:choose></td>
 									</tr>
 								</c:forEach>
-							</table>
-						</div>
+							</tbody>
+						</table>
+					</div>
 				</td>
 			</tr>
+		</table>
+		<hr/>
+		<table>
 			<tr>
-				<td colspan="2"><h2 align="center">결론:BMI와 야구성적은 상관관계가 없다</h2></td>
+				<td colspan="3"><h2 align="center">[BMI와 야구성적 상관관계 표]</h2></td>
+			</tr>
+			<tr>
+
+				<td width="400"><img alt="BMI와 야구성적 지수 상관관계 표"
+					src="${pageContext.request.contextPath}/resources/img/cor1.jpg"
+					width="400"></td>
+				<td width="400"><img alt="BMI와 야구성적 지수 상관관계 표"
+					src="${pageContext.request.contextPath}/resources/img/cor3.jpg"
+					width="400"></td>
+				<td width="400"><img alt="BMI와 야구성적 지수 상관관계 표"
+					src="${pageContext.request.contextPath}/resources/img/cor4.jpg"
+					width="400"></td>
+			</tr>
+			<tr>
+				<td colspan="3"><h2 align="center">결론:BMI와 야구성적은 상관관계가 없다</h2></td>
 			</tr>
 		</table>
+		
 	</div>
 </body>
 </html>

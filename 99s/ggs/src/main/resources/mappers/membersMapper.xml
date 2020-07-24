@@ -30,10 +30,7 @@
 	<select resultType="com.ggs.DTO.MembersDTO" id="loginProc2"> select * from
 		members where id=#{id} and pw=#{pw} </select> 
 
-	<!-- 전체 회원수 조회 -->
-	<select resultType="java.lang.Integer" id="totalCnt"> SELECT COUNT(*) FROM
-		members </select>
-	
+
 	<!-- 로그인 처리하기 -->
 	<select id="loginProc" resultType="com.ggs.DTO.MembersDTO"
 		parameterType="com.ggs.DTO.MembersDTO">
@@ -75,6 +72,11 @@
 		insert into members
 		values(#{id},#{name},#{birth},#{team},#{pw},#{gender},#{email},1,1,1,0,NOW())
 	</insert>
+	
+	<!-- 회원탈퇴 처리 하기 -->
+	<update id="leave">
+		update members set login=0 where id=#{id}
+	</update>
 	
 	
 </mapper>

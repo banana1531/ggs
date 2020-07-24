@@ -51,6 +51,8 @@
 				<td>내가 예측한 결과</td>
 				<td>포인트 증감</td>
 			</tr>
+			<c:if test="${result != null }">
+			<tr><td>${result }</td></tr></c:if>
 			<c:forEach items="${myprelist}" var="plist">
 				<tr>
 					<td>${plist.gdate }</td>
@@ -60,7 +62,12 @@
 					<td>${plist.ppoint }</td>
 				</tr>
 			</c:forEach>
+			<tfoot>
+			<tr><td colspan="5"><p align="right">참여 경기 수 : ${totalcnt }, 총 포인트 : ${totalpp }</p></td></tr>
+			
+			</tfoot>
 		</table>
+		
 	</div>
 
 	<!-- myteam 다음 경기 일정 -->
@@ -70,7 +77,10 @@
 			<c:forEach items="${teamSchedule}" var="schedule">
 				<a href="#" class="btn btn-primary"><fmt:formatDate
 						value="${schedule.gdate}" pattern="yyyy-MM-dd" /> <br />${schedule.gtime}
-					<br />${schedule.ateamname} vs ${schedule.bteamname} <br />${schedule.stadium}</a>
+					<br />${schedule.ateamname} vs ${schedule.bteamname} <br />
+						${schedule.ascore} vs ${schedule.bscore} <br />	
+					
+					${schedule.stadium}</a>
 			</c:forEach>
 		</div>
 	</div>

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.ggs.DTO.MemberStaticDTO;
 import com.ggs.DTO.MembersDTO;
 
 @Repository
@@ -21,8 +22,9 @@ public class MembersDAO {
 	}
 
 	// 비밀번호 변경하기
-	public void updatePw(MembersDTO memberDTO) {
-		session.update("members.updatePw", memberDTO);
+	public int updatePw(MembersDTO memberDTO) {
+		System.out.println("MembersDTO="+memberDTO);
+		return session.update("members.updatePw", memberDTO);
 	}
 
 	// 비밀번호 가져오기
@@ -56,10 +58,6 @@ public class MembersDAO {
 		return result;
 	}
 
-	// 가입자수 조회
-	public int totalCnt() {
-		return session.selectOne("members.totalCnt");
-	}
 
 	//최종 로그인 일자와 현재 로그인 일자 차이 가져오기
 	public int chkLastLogin(String uid) {
@@ -97,5 +95,15 @@ public class MembersDAO {
 	public void joinProc(MembersDTO mdto) {
 		System.out.println("joinProc DAO 진입");	
 		session.insert("members.joinProc",mdto);
+	}
+	
+	//탈퇴하기
+	public int leave(MembersDTO membersDTO) {
+		return session.update("members.leave", membersDTO);
+	}
+
+	//접속,가입자수 통계 자료 가져오기
+	public MemberStaticDTO memberSummary() {
+		return session.selectOne("loginCount.memberSummary");
 	}
 }

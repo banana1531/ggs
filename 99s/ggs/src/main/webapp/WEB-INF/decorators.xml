@@ -17,6 +17,6 @@
 		<pattern>/column/*</pattern>
 		<pattern>/Freeboard/*</pattern>
 		<pattern>/graph/*</pattern>
+		<pattern>/inforerrorboard/*</pattern>
 	</decorator>
-	
 </decorators>

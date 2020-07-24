@@ -44,11 +44,12 @@ public class FreeboardController {
 	@GetMapping("/detail")
 	public ModelAndView freeboardDetail(
 			@RequestParam(value="writeno") int writeno,
-			@RequestParam(value="nowPage") int nowPage,
+			@RequestParam(value="nowPage", defaultValue="1") int nowPage,
 			@RequestParam(value="views") int views,
 			@RequestParam(value = "nowPage2", required = false, defaultValue = "1") int nowPage2,
+			String result,
 			ModelAndView mv) {
-		
+		System.out.println("freeboardDetail. result="+result);
 		fbService.hit(views,writeno);
 		
 		ArrayList<FreeboardDTO> freeboardDetail = fbService.freeboardDetail(writeno, nowPage);
@@ -59,6 +60,7 @@ public class FreeboardController {
 		mv.addObject("freeboardDetail",freeboardDetail);
 		mv.addObject("freeboardReply",freeboardReply);
 		mv.addObject("PINFO", pInfo);
+		mv.addObject("result", result);
 		
 		mv.setViewName("Freeboard/detail");
 		

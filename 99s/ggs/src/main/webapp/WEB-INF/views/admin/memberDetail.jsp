@@ -12,12 +12,12 @@
 </script>
 </head>
 <body>
-   <h1>memberDetail 들어왔다.</h1>
    <div class="container">
-	   <button><a href="/admin/memberSummary.gg">회원 현황</a></button>
-	   <button><a href="/admin/memberList.gg">회원 목록</a></button>
+	  <a href="/admin/memberSummary.gg"> <button>회원 현황</button></a>
+	   <a href="/admin/memberList.gg"><button>회원 목록</button></a>
    </div>
-   <div class="container">
+   <div class="container" >
+   <h4>회원 권한 수정</h4>
 		<form action="/admin/memberUpdate.gg">
 			<table class="table">
 				<tr>
@@ -52,18 +52,36 @@
 				<tr>
 					<td rowspan="3">권한 :</td>
 					<td>조회권한 : <select name="boardV">
-							<option value="1">가능</option>
-							<option value="0">불가</option></td>
+						<c:choose>
+							<c:when test="${member.boardV==1}">
+								<option value="1" selected="selected">가능</option>
+								<option value="0">불가</option></c:when>
+							<c:otherwise>
+								<option value="1">가능</option>
+								<option value="0" selected="selected">불가</option></c:otherwise>
+						</c:choose></select>
 				</tr>
 				<tr>
 					<td>입력/수정 권한 : <select name="boardM">
-							<option value="1">가능</option>
-							<option value="0">불가</option></td>
+									<c:choose>
+							<c:when test="${member.boardM==1}">
+								<option value="1" selected="selected">가능</option>
+								<option value="0">불가</option></c:when>
+							<c:otherwise>
+								<option value="1">가능</option>
+								<option value="0" selected="selected">불가</option></c:otherwise>
+						</c:choose></select></td>
 				</tr>
 				<tr>
 					<td>로그인 권한 : <select name="login">
-							<option value="1">가능</option>
-							<option value="0">불가</option></td>
+									<c:choose>
+							<c:when test="${member.login==1}">
+								<option value="1" selected="selected">가능</option>
+								<option value="0">불가</option></c:when>
+							<c:otherwise>
+								<option value="1">가능</option>
+								<option value="0" selected="selected">불가</option></c:otherwise>
+						</c:choose></select></td>
 				</tr>
 				<tr>
 					<td colspan="2">

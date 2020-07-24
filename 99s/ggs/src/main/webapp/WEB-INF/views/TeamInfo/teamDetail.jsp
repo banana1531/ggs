@@ -19,7 +19,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 	<h4>팀 상세 정보</h4>
 		<table class="table">
 			<tr>

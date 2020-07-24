@@ -5,10 +5,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="loginCount">
 	
-	<!-- 금일 접속자수 가져오기 -->
-	<select id="today" resultType="java.lang.Integer">
-		SELECT COUNT(*) FROM loginRecord WHERE loginTime = DATE(NOW());
+	<!-- 접속/가입자 집계 자료 -->
+	<select id="memberSummary" resultType="com.ggs.DTO.MemberStaticDTO">
+		SELECT * FROM 
+		(sELECT COUNT(*) AS today FROM loginRecord WHERE loginTime = DATE(NOW())) AS t,
+		(SELECT COUNT(*) as weeklylogin FROM loginRecord WHERE WEEKOFYEAR(loginTime) = WEEKOFYEAR(DATE(NOW()))) AS wl,
+		(sELECT COUNT(*) AS weeklyjoin FROM members WHERE WEEKOFYEAR(joindate) = WEEKOFYEAR(DATE(NOW()))) AS wj,
+		(SELECT COUNT(*) as totalmembers FROM members) AS tt;
 	</select>
+	
+	<!-- 주간 단위 가입자수 가져오기 -->
+	<select id="weeklyjoin" resultType="com.ggs.DTO.WeeklyCountDTO">
+		SELECT COUNT(*) AS cnt, weekofyear(joindate) As weeknum 
+		FROM members 
+		WHERE weekofyear(joindate) BETWEEN weekofyear(DATE(NOW()))-4 AND weekofyear(DATE(NOW()))
+		GROUP BY weekofyear(joindate) 
+		ORDER BY weekofyear(joindate) DESC LIMIT 5
+	</select>
+	
+	
 	
 	
 	<!-- 주간 단위 접속자수 가져오기 -->

@@ -18,12 +18,8 @@
 </style>
 </head>
 <body>
-	<a href="../admin/adminMain.gg">메인으로</a>
-	<div class="container" style="margin-top: 20px">
-		<h1>야구 지식 게시판</h1>
-		<h3>- 댓글 수정, 삭제</h3>
-		<h3>- 제목 옆에 댓글 수 표시</h3>
-		<h3>- 검색 결함 (삭제된글,제목+내용 검색시 비정상적 결과)</h3>
+	<div class="container">
+		<h4>야구 지식 게시판</h4>
 		<div class="container" align="right">
 			<form action="./search">
 				<select name="searchType" id="searchType">
@@ -36,11 +32,12 @@
 			</form>
 
 		</div>
-		<table border="1" class="table">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>글번호</th>
 					<th>제목</th>
+					<th>작성자</th>
 					<th>작성일</th>
 					<th>조회수</th>
 				</tr>
@@ -51,6 +48,7 @@
 						<td>${dto.writeno}</td>
 						<td><a
 							href="./detail?writeno=${dto.writeno}&nowPage=${CPINFO.nowPage}&views=${dto.views}">${dto.title}</a></td>
+							<td>admin</td>
 						<td><fmt:formatDate value="${dto.writedate}"
 								pattern="yyyy-MM-dd" /></td>
 						<td>${dto.views}</td>
@@ -58,16 +56,16 @@
 				</c:forEach>
 				<tr class="center">
 					<td colspan="5"><c:if test="${CPINFO.nowPage eq 1}">
-					[이전]
+					[prev]
 					</c:if> <c:if test="${CPINFO.nowPage ne 1}">
-							<a href="../column/list?nowPage=${CPINFO.nowPage-1}">[이전]</a>
+							<a href="../column/list?nowPage=${CPINFO.nowPage-1}">[prev]</a>
 						</c:if> <c:forEach var="pg" begin="${CPINFO.startPage}"
 							end="${CPINFO.endPage}">
 							<a href="../column/list?nowPage=${pg}">[${pg}]</a>
 						</c:forEach> <c:if test="${CPINFO.nowPage eq CPINFO.totalPage}">
-					[다음]
+					[next]
 					</c:if> <c:if test="${CPINFO.nowPage ne CPINFO.totalPage}">
-							<a href="../column/list?nowPage=${CPINFO.nowPage+1}">[다음]</a>
+							<a href="../column/list?nowPage=${CPINFO.nowPage+1}">[next]</a>
 						</c:if></td>
 				</tr>
 			</tbody>

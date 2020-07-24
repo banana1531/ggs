@@ -18,7 +18,7 @@
 		FROM notice
 		WHERE isvisible=1
 		ORDER BY writeno DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="noticeDetail" parameterType="int"
@@ -29,9 +29,8 @@
 	</select>
 
 	<insert id="noticeWrite" parameterType="NoticeDTO">
-		INSERT INTO notice(id,
-		title, content)
-		VALUES (#{id},#{title},#{content})
+		INSERT INTO notice(id, title, content, writedate)
+		VALUES (#{id},#{title},#{content}, now())
 	</insert>
 
 	<update id="noticeUpdate" parameterType="NoticeDTO">
@@ -68,10 +67,12 @@
 				<if test="searchType=='id'">
 					AND id like CONCAT('%', #{keyword}, '%')
 				</if>
+				and isvisible=1
 			</if>
+			
 		</trim>
 		ORDER BY writeno DESC
-		LIMIT #{start}, 5
+		LIMIT #{start}, 10
 	</select>
 
 	<select id="SearchPage" parameterType="NoticeDTO" resultType="int">
@@ -88,8 +89,29 @@
 				<if test="searchType=='id'">
 					AND id like CONCAT('%', #{keyword}, '%')
 				</if>
+				and isvisible=1
 			</if>
 		</trim>
+	</select>
+
+	<select id="noticeReply" parameterType="ReplyDTO" resultType="ReplyDTO">
+		SELECT *
+		FROM reply
+		WHERE boardname="notice" AND isvisible=1 AND wno=#{wno}
+		ORDER BY repno DESC
+		LIMIT #{start}, 10
+	</select>
+
+	<insert id="replyAdd" parameterType="ReplyDTO">
+		INSERT INTO reply(wno, boardname, id, content, writedate)
+		VALUES (#{wno},"notice",#{id},#{content}, now())
+	</insert>
+
+	<select id="ReplyPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM
+		reply
+		WHERE isvisible=1 AND boardname="notice" AND wno=#{writeno}
 	</select>
 
 </mapper>

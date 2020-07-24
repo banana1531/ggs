@@ -17,63 +17,64 @@
 </style>	
 </head>
 <body>
-	<a href="../admin/adminMain.gg">메인으로</a>
-	<table border="1" width="800" class="center">
-		<tbody>
-			<tr>
-				<th>글번호</th>
-				<th>제목</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-			<c:forEach items="${cBoardSearch}" var="dto">
+<div class="container">
+		<h4>야구 지식 게시판</h4>
+		<div class="container" align="right">
+			<form action="./search">
+				<select name="searchType" id="searchType">
+					<option value="title" selected="selected">제목</option>
+					<option value="content">내용</option>
+					<option value="title,content">제목+내용</option>
+				</select> 
+				<input type="text" name="keyword" id="keyword"> 
+				<input type="submit" id="search" value="검색">
+			</form>
+
+		</div>
+		<table class="table table-hover">
+			<thead>
 				<tr>
-					<td>${dto.writeno}</td>
-					<td><a href="./detail?writeno=${dto.writeno}&nowPage=${CPINFO.nowPage}&views=${dto.views}">${dto.title}</a></td>
-					<td><fmt:formatDate value="${dto.writedate}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-					<td>${dto.views}</td>
+					<th>글번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>조회수</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-		<%-- 페이징 처리 --%>
-	<table border="1" width="800" class="center">
-		<tbody>
-			<tr class="center">
-				<td>
-					<c:if test="${CPINFO.nowPage eq 1}">
-					[이전]
-					</c:if>
-				
-					<c:if test="${CPINFO.nowPage ne 1}">
-					<a href="../column/search?searchType=${CPINFO.searchType}&keyword=${CPINFO.keyword}&nowPage=${CPINFO.nowPage-1}">[이전]</a> 
-					</c:if>
-					
-					<c:forEach var="pg"	 begin="${CPINFO.startPage}" end="${CPINFO.endPage}">
-					<a href="../column/search?searchType=${CPINFO.searchType}&keyword=${CPINFO.keyword}&nowPage=${pg}">[${pg}]</a> 
-					</c:forEach>
-					
-					<c:if test="${CPINFO.nowPage eq CPINFO.totalPage}">
-					[다음]
-					</c:if>
-					
-					<c:if test="${CPINFO.nowPage ne CPINFO.totalPage}">
-					<a href="../column/search?searchType=${CPINFO.searchType}&keyword=${CPINFO.keyword}&nowPage=${CPINFO.nowPage+1}">[다음]</a>
-					</c:if>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<form action="./search">
-	<button type="button" onclick="location.href='./write' ">글쓰기(관리자만)</button>
-		<select name="searchType" id="searchType">
-			<option value="title" selected="selected">제목</option>
-			<option value="content">내용</option>
-			<option value="title,content">제목+내용</option>
-		</select>
-		<input type="text" name="keyword" id="keyword">
-		<input type="submit" id="search" value="검색">
-	</form>
+			</thead>
+			<tbody>
+				<c:forEach items="${cBoardSearch}" var="dto">
+					<tr>
+						<td>${dto.writeno}</td>
+						<td><a
+							href="./detail?writeno=${dto.writeno}&nowPage=${CPINFO.nowPage}&views=${dto.views}">${dto.title}</a></td>
+							<td>admin</td>
+						<td><fmt:formatDate value="${dto.writedate}"
+								pattern="yyyy-MM-dd" /></td>
+						<td>${dto.views}</td>
+					</tr>
+				</c:forEach>
+				<tr class="center">
+					<td colspan="5"><c:if test="${CPINFO.nowPage eq 1}">
+					[prev]
+					</c:if> <c:if test="${CPINFO.nowPage ne 1}">
+							<a href="../column/list?nowPage=${CPINFO.nowPage-1}">[prev]</a>
+						</c:if> <c:forEach var="pg" begin="${CPINFO.startPage}"
+							end="${CPINFO.endPage}">
+							<a href="../column/list?nowPage=${pg}">[${pg}]</a>
+						</c:forEach> <c:if test="${CPINFO.nowPage eq CPINFO.totalPage}">
+					[next]
+					</c:if> <c:if test="${CPINFO.nowPage ne CPINFO.totalPage}">
+							<a href="../column/list?nowPage=${CPINFO.nowPage+1}">[next]</a>
+						</c:if></td>
+				</tr>
+			</tbody>
+		</table>
+				<div class="container" align="right">
+			<c:if test="${UID=='admin'}">
+				<button type="button" onclick="location.href='./write' ">글쓰기</button>
+			</c:if>
+		</div>
+
+	</div>
 </body>
 </html>

@@ -18,15 +18,16 @@ $(function(){
 </head>
 <body>
    <div class="container">
-	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
-	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
-	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
+	<a href="/admin/teamList.gg"><button>팀 목록</button></a>
+	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
+	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
    </div>
-   <h4>팀 목록</h4>
+   
    <div class="container" id="body">
+   <h4>팀 목록</h4>
    		<table class="table table-hover">
 			<tr>
-				<th>팀명</th>
+				<th colspan="2">팀명</th>
 				<th>설립일</th>
 				<th>지역</th>
 				<th>경기장</th>
@@ -35,7 +36,8 @@ $(function(){
 			</tr>
 			<c:forEach items="${list }" var="team">
 				<tr class="team">
-					<td id="name">${team.teamName }</td>
+					<td width="50"><img width="50" height="30" src="/resources/img/${team.teamName}.jpg"> </td>
+					<td id="name">${team.teamName}</td>
 					<td>${team.birth }</td>
 					<td>${team.location }</td>
 					<td>${team.stadium }</td>

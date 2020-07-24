@@ -1,5 +1,8 @@
 package com.ggs.mypage;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +26,10 @@ public class MyInfoController {
 	//-------------------------------------------
 	// 내정보 수정 보여주기
 	@RequestMapping("/myInfoModifyForm.gg")
-	public String myInfoModifyForm(Model model) {
+	public String myInfoModifyForm(Model model, HttpServletRequest request) {
 
-		// 파라미터
-		// 회원정보(id)
-		String id = "test";
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("UID");
 		// 비즈니스
 		// 내 정보 가져오기
 		model.addAttribute("myinfo", myPageService.getMyInfo(id));
@@ -57,9 +59,10 @@ public class MyInfoController {
 
 	// 비밀번호 확인
 	@PostMapping("/checkPw.gg")
-	public String checkPw(Model model, String newPw) {
+	public String checkPw(Model model, String newPw, HttpServletRequest request) {
 		System.out.println("checkPw()-post.newPw:" + newPw);
-		String id = "test";
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("UID");
 		if (myInfoService.checkPw(id, newPw)) {
 			return "redirect:/mypage/myInfoModifyForm.gg";
 		} else {
@@ -76,11 +79,19 @@ public class MyInfoController {
 
 	// 비밀번호 변경하기
 	@RequestMapping("/updatePw.gg")
-	public String updatePw(String newPw) {
+	public String updatePw(Model model, String newPw, HttpServletRequest request) {
 		// 파라미터
-		String id = "test";
-		myInfoService.updatePw(id, newPw);
-		return "myPage/updatePwSuccess";
+		HttpSession session = request.getSession();
+		
+		String id = (String)session.getAttribute("UID");
+		System.out.println("id="+id);
+		if(myInfoService.updatePw(id, newPw)>0) {
+			model.addAttribute("result", "비밀번호가 정상적으로 변경되었습니다. 다시 로그인 해주시기 바랍니다.");
+			return "member/loginFrm";
+		}else {
+			model.addAttribute("result", "비밀번호 변경에 실패하였습니다. 다시 시도 해주시기 바랍니다.");
+			return "myPage/updatePw";
+		}
 	}
 
 	// -------------------------------------------
@@ -94,7 +105,7 @@ public class MyInfoController {
 		return "myPage/leave";
 	}
 
-	// 인증번호 보내기 --> ajax로 구현
+	// 인증번호 보내기
 	@RequestMapping("/sendNum.gg")
 	public String sendNum(Model model) {
 		ConfirmMail mail = new ConfirmMail();
@@ -104,14 +115,16 @@ public class MyInfoController {
 
 	// 회원탈퇴 하기
 	@RequestMapping("/leave.gg")
-	public String leave() {
-
-		// 파라미터
-		// 회원정보(id), 인증번호
-
-		// 비즈니스
-		// 인증번호 일치유무 확인
-
-		return "myPage/leaveSuccess";
+	public String leave(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		String id=(String)session.getAttribute("UID");
+		
+		if(myPageService.leave(id)>0){
+			model.addAttribute("result", "정상적으로 탈퇴되었습니다.");
+			return "member/loginFrm";
+		}else{
+			model.addAttribute("result", "회원 탈퇴를 실패하였습니다. 다시 시도 해주시기 바랍니다.");
+			return "myPage/leave";
+		}
 	}
 }

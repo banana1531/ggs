@@ -5,7 +5,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>    
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>   
+<script>
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable(${reason});
+
+        var options = {
+          title: 'My Daily Activities',
+          legend:{position: 'top', textStyle: {fontSize: 12}},
+          is3D:true
+          
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+      } 
+</script>
 <script>
 	google.charts.load('current', {
 		packages : ['corechart']});
@@ -14,18 +34,18 @@
 	function drawLineColors() {
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'X');
-		data.addColumn('number', '접속자수');
-		//data.addColumn('number', '방문자수');
-		
+		data.addColumn('number', '접수건');
+				
 		data.addRows(${weekly});
 
 		var options = {
-			
+			title:'주간별 누적 접수건',
+			legend:{position: 'top', textStyle: {fontSize: 12}},
 			hAxis : {
 				title : 'week'
 			},
 			vAxis : {
-				title : 'Count',
+				title : '건',
 				minValue : 0
 			},
 			colors : [ '#a52714', '#097138' ]
@@ -44,18 +64,17 @@
 	function drawLineColors() {
 		var data = new google.visualization.DataTable();
 		data.addColumn('string', 'X');
-		data.addColumn('number', '평균처리시간');
-		//data.addColumn('number', '방문자수');
-		
+		data.addColumn('number', '평균처리시간');		
 		data.addRows(${avgTime});
 
 		var options = {
-			
+			title:'주간단위 평균 신고 처리 시간',
+			legend:{position: 'top', textStyle: {fontSize: 12}},
 			hAxis : {
 				title : 'week'
 			},
 			vAxis : {
-				title : 'Count',
+				title : '시간',
 				minValue : 0
 			},
 			colors : [ '#a52714', '#097138' ]
@@ -69,9 +88,9 @@
 </head>
 <body>
    <div class="container">
-	   <button><a href="/admin/deSummary.gg">접수 현황</a></button>
-	   <button><a href="/admin/declList.gg">미처리 목록</a></button>
-	   <button><a href="/admin/dondeclList.gg">처리완료 목록</a></button>
+  <a href="/admin/deSummary.gg"><button>접수 현황</button></a>
+	  <a href="/admin/declList.gg"><button>미처리 목록</button></a>
+	  <a href="/admin/dondeclList.gg"><button>처리완료 목록</button></a>
    </div>
    
    <div class="container" id="container">
@@ -84,11 +103,12 @@
 			</tr>
 			<tr>
 
-				<td><div id="chart_div"></div>주간별 누적 점수건 그래프</td>
-				<td rowspan="2">접수사유별 점유율 그래프</td>
+				<td><div id="chart_div" style="width: 800px; height: 250px;"></div></td>
+				<td rowspan="2">
+				<div id="piechart" style="width: 400px; height: 500px;"></div></td>
 			</tr>
 			<tr>
-				<td><div id="chart_div2"></div>주간단위 평균 신고 처리 시간 그래프
+				<td><div id="chart_div2" style="width: 800px; height: 250px;"></div>
 				</td>
 			</tr>
 		</table>

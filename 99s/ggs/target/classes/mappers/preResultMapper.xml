@@ -6,10 +6,34 @@
 <mapper namespace="preresult">
 	
 	<select id="mypredict" resultType="com.ggs.DTO.PreResultDTO">
-		SELECT gdate, bteamname, bscore, ateamname, ascore, predict, id 
+		SELECT gdate, bteamname, bscore, ateamname, ascore, predict, id, count(*) as totalcnt, ppoint, sum(ppoint) as totalpp
 		from teamRecord, preresult 
 		where teamRecord.gno=preresult.gno AND id=#{uid};
 	</select>
+	
+	<insert id="preresult" parameterType="com.ggs.DTO.PreResultDTO">
+	INSERT into preresult(id,gno,predict)
+	VALUES (#{id},#{gno},#{predict});
+	</insert>
+	
+	<select id="predictcount" parameterType="com.ggs.DTO.PreResultDTO" resultType="com.ggs.DTO.PreResultDTO">
+SELECT *,COUNT(predict) AS precount
+	FROM
+	preresult
+	WHERE gno=#{gno} 
+		GROUP BY predict
+	
+	</select>
+	
+<select id="predictcountview" parameterType="com.ggs.DTO.PreResultDTO" resultType="com.ggs.DTO.PreResultDTO">
+SELECT *,COUNT(predict) AS precount
+	FROM
+	preresult
+	WHERE gno=#{gno}
+	GROUP BY predict
+	</select>
+
+	
 	
 </mapper>
 

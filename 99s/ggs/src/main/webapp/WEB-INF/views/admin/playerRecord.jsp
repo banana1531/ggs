@@ -11,7 +11,7 @@
 <script>
 $(function(){
 	var pno=$(this).find("#pno").val();
-	$(".btn").click(function(){
+	$(".page").click(function(){
 		var pageNo = $(this).text()
 		$("#list").load("/admin/playerRecord?pno="+pno+"&pageNo="+pageNo)
 	})
@@ -24,7 +24,7 @@ $(function(){
 </script>
 </head>
 <body>
-	<div class="container">
+	<div class="container" style="margin-top: 20px">
 		<table class="table table-hover" id="list">
 			<tr>
 				<th>일자</th>
@@ -44,10 +44,13 @@ $(function(){
 			</c:forEach>
 
 
-			<tr>
-				<td><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if> <c:forEach
+			<tr align="center">
+				<td colspan="4"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if> <c:forEach
 						var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-					[<a class="btn">${i}</a>]
+					<c:choose>
+							<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
+							<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+						</c:choose>
 				</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
 				</td>
 			</tr>

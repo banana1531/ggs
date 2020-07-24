@@ -5,21 +5,46 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="schmatch">
 	
-	<!-- 리스트형식으로 경기 출력하기 -->
+	<!-- 경기 일정 가져오기 -->
 	<select id="schmatch" resultType="com.ggs.DTO.TeamRecordDTO">
-SELECT *,DATE_FORMAT(gdate,'%y.%m.%d')
-		FROM teamRecord 
-		ORDER BY gdate ASC;
+		SELECT * FROM 
+			(
+				SELECT *
+				FROM teamRecord 
+				WHERE DATEDIFF(gdate, date(NOW()))&gt; 0 
+					AND  ateamname != '경기없음'
+				<if test="month!=0">and month(gdate)=#{month}</if>
+				ORDER BY gdate LIMIT #{start}, 10
+			) AS s, 
+			(
+				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE (DATEDIFF(gdate, date(NOW()))&gt;0 AND  ateamname != '경기없음')
+				<if test="month!=0">and month(gdate)=#{month}</if> 
+			) AS c
 	</select>
-
-
+	
+	<!-- 경기 결과 가져오기 -->
+	<select id="getrltmatchList" resultType="com.ggs.DTO.TeamRecordDTO">
+		SELECT * FROM 
+			(
+				SELECT *
+				FROM teamRecord 
+				WHERE DATEDIFF(gdate, date(NOW()))&lt; 0 
+					AND  ateamname != '경기없음'
+				<if test="month!=0">and month(gdate)=#{month}</if> 
+				ORDER BY gdate desc LIMIT #{start}, 10
+			) AS s, 
+			(
+				SELECT COUNT(*) AS totalcnt FROM teamRecord	WHERE DATEDIFF(gdate, date(NOW()))&lt;0
+				<if test="month!=0">and month(gdate)=#{month}</if>  
+			) AS c
+	</select>
+	
+	
 	<!-- 경기 상세조회 -->
 	<select id="schmatchDetail" parameterType="com.ggs.DTO.TeamRecordDTO" resultType="com.ggs.DTO.TeamRecordDTO">
 	SELECT *,DATE_FORMAT(gdate,'%y.%m.%d')
 	FROM teamRecord
-	WHERE gno=#{gno} AND ateamname = #{ateamname} AND bteamname = #{bteamname};
-		</select>
+	WHERE gno=#{gno};
+	</select>
 		
-
-	
 </mapper>

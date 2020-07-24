@@ -9,8 +9,7 @@
 	<select id="todayCnt" resultType="java.lang.Integer">
 		SELECT COUNT(*) 
 		FROM declaration 
-		WHERE date(inputdate) = date(NOW()) 
-			AND outputdate IN('0000-00-00') 
+		WHERE date(inputdate) = date(NOW())
 	</select>
 	
 	<!-- 미처리 건수 -->
@@ -40,40 +39,46 @@
 		order by weeknum
 	</select>
 	
+	<!-- 사유별 점유율 가져오기 -->
+	<select id="reason" resultType="com.ggs.DTO.DeclarationDTO">
+		SELECT reason, COUNT(*) AS cnt FROM declaration GROUP BY reason
+	</select>
+	
+	
 	<!-- 신고 미처리 목록 가져오기 -->
 	<select id="getList" resultType="com.ggs.DTO.DeclarationListDTO">
 		SELECT * 
 		FROM (
-				SELECT COUNT(*) AS totalcnt FROM declaration WHERE outputdate IN('0000-00-00')
+				SELECT COUNT(*) AS totalcnt FROM declaration WHERE (outputdate IN('0000-00-00') or outputdate is null)
 			) AS c,
 			(
-				SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title
+				SELECT wno, declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title, writeno, outputdate
 				FROM declaration, freeboard 
-				WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno ) AND outputdate IN('0000-00-00')
+				WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno) AND (outputdate IN('0000-00-00') or outputdate is null)
 				UNION 
-				select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title
+				select wno, declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title, writeno, outputdate
 				FROM declaration, inforerrorboard 
-				WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND outputdate IN('0000-00-00')
+				WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND  (outputdate IN('0000-00-00') or outputdate is null)
 				ORDER BY inputdate DESC
 			) as d LIMIT #{start},10;
 	</select>
 	
 	<!-- 최근 신고 등록글 5건 가져오기 -->
 	<select id="getRecList" resultType="com.ggs.DTO.DeclarationListDTO">
-		SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title 
+		SELECT wno, declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title, writedate 
 		FROM declaration, freeboard 
-		WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno) AND outputdate IN('0000-00-00')
+		WHERE (declaration.boardname=freeboard.boardname) AND (declaration.fno=freeboard.writeno) AND (outputdate IN('0000-00-00') or outputdate is null)
 		UNION 
-		select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title 
+		select wno, declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title, writedate 
 		FROM declaration, inforerrorboard 
-		WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND outputdate IN('0000-00-00')
+		WHERE (declaration.boardname=inforerrorboard.boardname) AND (declaration.fno=inforerrorboard.writeno ) AND (outputdate IN('0000-00-00') or outputdate is null)
 		ORDER BY inputdate DESC LIMIT 5
 	</select>
 	
 	<!-- 신고글 상세 보기 - 자유게시판 -->
 	<select id="getDetailFreeboard" resultType="com.ggs.DTO.DeclarationDetailDTO">
 		SELECT declaration.boardname, fno, declaration.id, inputdate, reason, details, 
-		 		freeboard.id AS writer, title, content, writedate, views, isvisible
+		 		freeboard.id AS writer, title, content, writedate, views, isvisible, outputdate
 		FROM declaration, freeboard
 		WHERE fno = writeno 
 			AND declaration.boardname=freeboard.boardname 
@@ -83,7 +88,7 @@
 	<!-- 신고글 상세 보기 - 정보오류 게시판 -->
 	<select id="getDetailInforerrorboard" resultType="com.ggs.DTO.DeclarationDetailDTO">
 		SELECT declaration.boardname, fno, declaration.id, inputdate, reason, details, 
-				 inforerrorboard.id AS writer, title, content, writedate, views, isvisible
+				 inforerrorboard.id AS writer, title, content, writedate, views, isvisible, outputdate
 		FROM declaration, inforerrorboard
 		WHERE fno = writeno 
 				AND declaration.boardname=inforerrorboard.boardname 
@@ -98,18 +103,18 @@
 			(
 				SELECT COUNT(*) totalcnt FROM declaration WHERE outputdate not IN('0000-00-00')) AS c,	
 			(
-				SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title 
+				SELECT declaration.boardname, fno, declaration.id AS uid, inputdate, reason, freeboard.id AS writer, title, outputdate 
 				FROM declaration, freeboard 
 				WHERE (declaration.boardname=freeboard.boardname) 
 					AND (declaration.fno=freeboard.writeno) 
 					AND outputdate not IN('0000-00-00')
 				UNION 
-				select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title 
+				select declaration.boardname, fno, declaration.id AS uid, inputdate, reason, inforerrorboard.id AS writer, title, outputdate 
 				FROM declaration, inforerrorboard 
 				WHERE (declaration.boardname=inforerrorboard.boardname) 
 					AND (declaration.fno=inforerrorboard.writeno ) 
 					AND outputdate not IN('0000-00-00')
-				ORDER BY inputdate DESC
+				ORDER BY outputdate DESC
 			) as l 
 		 limit #{start}, 10;
 	</select>
@@ -143,6 +148,12 @@
 		</choose>
 	ORDER BY inputdate DESC LIMIT 5;
 	</select>
+	
+	<!-- 신고 등록하기 -->
+	<insert id="decInsert">
+		insert into declaration(fno, boardname, id, inputdate, reason, details)
+		values(#{writeno}, #{boardname},#{id},now(),#{reason},#{details})
+	</insert>
 	
 	
 	<!-- 신고글 처리하기 -->

@@ -67,7 +67,9 @@
 				<if test="searchType=='id'">
 					AND id like CONCAT('%', #{keyword}, '%')
 				</if>
+				and isvisible=1
 			</if>
+			
 		</trim>
 		ORDER BY writeno DESC
 		LIMIT #{start}, 10
@@ -87,6 +89,7 @@
 				<if test="searchType=='id'">
 					AND id like CONCAT('%', #{keyword}, '%')
 				</if>
+				and isvisible=1
 			</if>
 		</trim>
 	</select>

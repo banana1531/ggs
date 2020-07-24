@@ -42,6 +42,7 @@
 				</td>
 			</tr>
 		</table>
+		${result}
 	</form>
 	</div>
 </body>

@@ -51,6 +51,7 @@ $(function(){
 			</table>
 		</form>
 		${num }
+		${result }
 	</div>
 </body>
 </html>

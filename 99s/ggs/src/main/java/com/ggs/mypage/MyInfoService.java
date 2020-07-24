@@ -13,10 +13,11 @@ public class MyInfoService {
 	private MembersDAO membersDAO;
 
 	//비밀번호 수정하기
-	public void updatePw(String id, String newPw) {
+	public int updatePw(String id, String newPw) {
 		MembersDTO memberDTO = new MembersDTO();
 		memberDTO.setPw(newPw);
-		membersDAO.updatePw(memberDTO);
+		memberDTO.setId(id);
+		return membersDAO.updatePw(memberDTO);
 	}
 
 	//비밀번호 확인하기

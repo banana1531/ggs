@@ -37,7 +37,6 @@
  </script>
 </head>
 <body>
-		<a href="../column/list">목록으로</a>
 <div class="container">
 	<table border="1" width="1000" class="center">
 		<tbody>

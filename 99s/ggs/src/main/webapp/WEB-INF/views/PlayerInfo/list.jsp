@@ -17,34 +17,35 @@
 </style>
 </head>
 <body>
-<div class="container">
-	<button type="button" onclick="location.href='../player/teamList?teamname=KIA' ">KIA</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KT' ">KT</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=LG' ">LG</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=NC' ">NC</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=SK' ">SK</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=두산' ">두산</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=롯데' ">롯데</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=삼성' ">삼성</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=키움' ">키움</button>
-	<button type="button" onclick="location.href='../player/teamList.gg?teamname=한화' ">한화</button>
+<div class="container" style="margin-top: 20px">
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KIA' "><img width="50" height="30" src="/resources/img/KIA.jpg"><br/>KIA</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=KT' "><img width="50" height="30" src="/resources/img/KT.jpg"><br/>KT</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=LG' "><img width="50" height="30" src="/resources/img/LG.jpg"><br/>LG</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=NC' "><img width="50" height="30" src="/resources/img/NC.jpg"><br/>NC</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=SK' "><img width="50" height="30" src="/resources/img/SK.jpg"><br/>SK</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=두산' "><img width="50" height="30" src="/resources/img/두산.jpg"><br/>두산</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=롯데' "><img width="50" height="30" src="/resources/img/롯데.jpg"><br/>롯데</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=삼성' "><img width="50" height="30" src="/resources/img/삼성.jpg"><br/>삼성</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=키움' "><img width="50" height="30" src="/resources/img/키움.jpg"><br/>키움</button>
+	<button type="button" onclick="location.href='../player/teamList.gg?teamname=한화' "><img width="50" height="30" src="/resources/img/한화.jpg"><br/>한화</button>
+	<button type="button" onclick="location.href='./list.gg' ">선수 Top5</button>
 	<br/>
 	<hr/>
 	<h3>타자 순위 TOP5</h3>
 	<div style="width:33%; float:left;">
+		<h4><b>타율왕 TOP5</b></h4>
 	<table border="1" width="300" class="center">
-		<tbody>
-			<tr>
-				<th colspan="3">타율왕 TOP5</th>
+		<thead>
+			<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>타율</th>
-			</tr>
+			</thead>
+			<tbody>
 			<c:forEach items="${Ranking}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td><img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.tayul}</td>
 				</tr>
@@ -53,19 +54,17 @@
 	</table>
 	</div>
 	<div style="width:34%; float:left;">
+		<h4><b>홈런왕 TOP5</b></h4>
 	<table border="1" width="300" class="center">
 		<tbody>
-			<tr>
-				<th colspan="3">홈런왕 TOP5</th>
-			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>홈런</th>
+		<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
 			<c:forEach items="${Ranking2}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td><img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.home_run}</td>
 				</tr>
@@ -74,19 +73,17 @@
 	</table>
 	</div>
 	<div style="width:33%; float:left;">
+		<h4><b>타점왕 TOP5</b></h4>
  	<table border="1" width="300" class="center">
 		<tbody>
-			<tr>
-				<th colspan="3">타점왕 TOP5</th>
-			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>타점</th>
+		<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
 			<c:forEach items="${Ranking3}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td><img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.tajum}</td>
 				</tr>
@@ -98,19 +95,17 @@
 	<hr/>
  	<h3>투수 순위 TOP5</h3>
  	<div style="width:33%; float:left;">
+ 		<h4><b>출장왕 TOP5</b></h4>
  	<table border="1" width="300" class="center">
 		<tbody>
-			<tr>
-				<th colspan="3">출장왕 TOP5</th>
-			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>경기수</th>
+			<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
 			<c:forEach items="${Ranking4}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td><img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.sunbal}</td>
 				</tr>
@@ -119,19 +114,17 @@
 	</table>
  	</div>
  	<div style="width:34%; float:left;">
+ 	<h4><b>삼진왕 TOP5</b></h4>
  	<table border="1" width="300" class="center">
 		<tbody>
-			<tr>
-				<th colspan="3">삼진왕 TOP5</th>
-			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>탈삼진</th>
+			<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
 			<c:forEach items="${Ranking5}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td>$<img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.samjin}</td>
 				</tr>
@@ -140,19 +133,17 @@
 	</table>
 	</div>
 	<div style="width:33%; float:left;">
+		<h4><b>피안타율왕 TOP5</b></h4>
 		<table border="1" width="300" class="center">
 		<tbody>
-			<tr>
-				<th colspan="3">피안타율왕 TOP5</th>
-			</tr>
-			<tr>
-				<th>소속팀</th>
-				<th>이름</th>
-				<th>피안타율</th>
+				<tr align="center">
+				<td><b>소속팀</b></td>
+				<td><b>이름</b></td>
+				<td><b>타율</b></td>
 			</tr>
 			<c:forEach items="${Ranking6}" var="dto">
 				<tr>
-					<td>${dto.teamname}</td>
+					<td><img width="50" height="30" src="/resources/img/${dto.teamname}.jpg"></td>
 					<td>${dto.name}</td>
 					<td>${dto.sunbal}</td>
 				</tr>
