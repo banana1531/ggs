@@ -27,8 +27,6 @@ public class TeampredictDAO {
 		
 	}
 	
-
-	
 	//해당날짜의 해당경기번호읽기
 	public List<TeamRecordDTO> getTodayMatchGno(Integer gno) {
 	
@@ -71,18 +69,20 @@ public class TeampredictDAO {
 	
 	
 	//댓글기능
-//	   public int ReplyPage(int writeno) {
-//		      return (Integer)session.selectOne("rltreply.rltReplyPage", writeno);
-//		   }
-//
-//		   public ArrayList<ReplyDTO> InfoErrorBoardReply(ReplyDTO rDTO) {
-//		      return (ArrayList)session.selectList("rltreply.rltmatchReply", rDTO);
-//		   }
-//
-//		   public void replyAdd(ReplyDTO rDTO) {
-//		      session.insert("rltreply.rltreplyAdd", rDTO);
-//		   }
 
-
+	//댓글 리스트 형태로 보기
+		public List<ReplyDTO> rltmatchReply(int gno,String id, String content) {
+		      ReplyDTO rDTO = new ReplyDTO();
+		      	rDTO.setId(id);
+		      	rDTO.setContent(content);
+		        rDTO.setWno(gno);
+		      return session.selectList("rltreply.rltmatchReply", gno);
+		   }
+		
+		   //댓글 등록하기
+		   public int  rltmatchReplyAdd(ReplyDTO rDTO) {
+				System.out.println("댓글 등록하기 DAO rDTO="+rDTO);
+			   return session.insert("rltreply.rltreplyAdd", rDTO);
+		   }
 	
 }

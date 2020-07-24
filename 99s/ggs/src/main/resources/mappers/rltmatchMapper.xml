@@ -8,15 +8,14 @@
     <select id="rltmatchReply" parameterType="com.ggs.DTO.ReplyDTO" resultType="com.ggs.DTO.ReplyDTO">
       SELECT *
       FROM reply
-      WHERE isvisible=1 AND wno=#{gno}
+      WHERE isvisible=1 AND wno=#{wno}
       ORDER BY repno DESC
    	</select>
   
  		<!-- 댓글 쓰기 -->
+
    <insert id="rltreplyAdd" parameterType="com.ggs.DTO.ReplyDTO">
 			INSERT INTO reply (wno,Id, content, writedate)
    		VALUE(#{wno},#{id},#{content},now())
    </insert>
-
-
 </mapper>
