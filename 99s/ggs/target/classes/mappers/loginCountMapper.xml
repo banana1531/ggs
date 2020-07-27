@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="loginCount">
+	
+	<!-- 접속/가입자 집계 자료 -->
+	<select id="memberSummary" resultType="com.ggs.DTO.MemberStaticDTO">
+		SELECT * FROM 
+		(sELECT COUNT(*) AS today FROM loginRecord WHERE loginTime = DATE(NOW())) AS t,
+		(SELECT COUNT(*) as weeklylogin FROM loginRecord WHERE WEEKOFYEAR(loginTime) = WEEKOFYEAR(DATE(NOW()))) AS wl,
+		(sELECT COUNT(*) AS weeklyjoin FROM members WHERE WEEKOFYEAR(joindate) = WEEKOFYEAR(DATE(NOW()))) AS wj,
+		(SELECT COUNT(*) as totalmembers FROM members) AS tt;
+	</select>
+	
+	<!-- 주간 단위 가입자수 가져오기 -->
+	<select id="weeklyjoin" resultType="com.ggs.DTO.WeeklyCountDTO">
+		SELECT COUNT(*) AS cnt, weekofyear(joindate) As weeknum 
+		FROM members 
+		WHERE weekofyear(joindate) BETWEEN weekofyear(DATE(NOW()))-4 AND weekofyear(DATE(NOW()))
+		GROUP BY weekofyear(joindate) 
+		ORDER BY weekofyear(joindate) DESC LIMIT 5
+	</select>
+	
+	
+	
+	
+	<!-- 주간 단위 접속자수 가져오기 -->
+	<select id="weekly" resultType="com.ggs.DTO.WeeklyCountDTO">
+		SELECT COUNT(*) AS cnt, weekofyear(loginTime) As weeknum 
+		FROM loginRecord 
+		WHERE weekofyear(loginTime) BETWEEN weekofyear(DATE(NOW()))-4 AND weekofyear(DATE(NOW()))
+		GROUP BY weekofyear(loginTime) 
+		ORDER BY weekofyear(loginTime) DESC LIMIT 5
+	</select>
+	
+	<!-- 최종 로그인 정보 가져오기 -->
+	<select id="chkLastLogin" resultType="java.lang.Integer">
+		SELECT DATEDIFF(NOW(), max(loginTime)) FROM loginRecord WHERE id=#{uid}
+	</select>
+	
+	<!-- 로그인 일자 삽입 -->
+	<insert id="insertLoginDate">
+		insert into loginRecord(id, loginTime) values(#{uid}, now())
+	</insert>
+	
+</mapper>
+

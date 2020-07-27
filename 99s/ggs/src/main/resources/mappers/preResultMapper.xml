@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="preresult">
+	
+	<select id="mypredict" resultType="com.ggs.DTO.PreResultDTO">
+		SELECT gdate, bteamname, bscore, ateamname, ascore, predict, id, count(*) as totalcnt, ppoint, sum(ppoint) as totalpp
+		from teamRecord, preresult 
+		where teamRecord.gno=preresult.gno AND id=#{uid};
+	</select>
+	
+	<insert id="preresult" parameterType="com.ggs.DTO.PreResultDTO">
+	INSERT into preresult(id,gno,predict)
+	VALUES (#{id},#{gno},#{predict});
+	</insert>
+	
+	<select id="predictcountview" parameterType="com.ggs.DTO.TeamRecordDTO" resultType="com.ggs.DTO.PreResultDTO">
+	SELECT * FROM
+		(SELECT COUNT(predict) AS totalcnt FROM preresult WHERE predict = #{ateamname} AND gno=#{gno}) AS a,
+		(SELECT COUNT(predict) AS totalpp FROM preresult WHERE predict = '무승부' AND gno=#{gno}) AS d,
+		(SELECT COUNT(predict) AS precount FROM preresult WHERE predict = #{bteamname} AND gno=#{gno}) AS b;
+	</select>
+
+	<select id="checkList" resultType="com.ggs.DTO.PreResultDTO">
+		select * from preresult where gno=#{gno} and id=#{id}
+	</select>
+	
+</mapper>
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+<!-- 작성자 : 이영환 -->
+<!-- 작성일 : 2020-06-03 -->
+<!-- 꾸미기(레이아웃)에 대한 선언 -->
+<decorators defaultdir="/WEB-INF/views/decorator">
+
+	<decorator name="main" page="default_decorator.jsp">
+		<pattern>/mypage/*</pattern>
+		<pattern>/admin/*</pattern>
+		<pattern>/member/*</pattern>
+		<pattern>/team/*</pattern>
+		<pattern>/teampredict/*</pattern>
+		<pattern>/player/*</pattern>
+		<pattern>/notice/*</pattern>
+		<pattern>/board/*</pattern>
+		<pattern>/column/*</pattern>
+		<pattern>/Freeboard/*</pattern>
+		<pattern>/graph/*</pattern>
+		<pattern>/inforerrorboard/*</pattern>
+	</decorator>
+</decorators>
