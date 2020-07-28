@@ -29,11 +29,16 @@
 <!-- 인터셉터 관련한 설정 부분 -->
    <interceptors>
    
+      <!-- 로그인 권한 -->
       <interceptor>
          <!-- 인터셉트가 언제 처리될지 지정 -->
          <mapping path="/mypage/*.gg"/>
          <!--*.gr -->
          <!-- 사용할 인터셉트 클래스 등록 -->
+         <beans:bean class="com.ggs.util.LoginCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/teampredict/*.gg"/>
          <beans:bean class="com.ggs.util.LoginCheck"/>
       </interceptor>
       
@@ -46,10 +51,34 @@
       </interceptor>
       
       <!-- 조작 권한 -->
-        <interceptor>
+      <interceptor>
          <!-- 인터셉트가 언제 처리될지 지정 -->
          <mapping path="/admin/*.gg"/>
          <!-- 사용할 인터셉트 클래스 등록 -->
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/freeboard/write"/>
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/inforerrorboard/write"/>
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/freeboard/update"/>
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/inforerrorboard/update"/>
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/freeboard/delete"/>
+         <beans:bean class="com.ggs.util.GrantMCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/inforerrorboard/delete"/>
          <beans:bean class="com.ggs.util.GrantMCheck"/>
       </interceptor>
       
@@ -60,5 +89,14 @@
          <!-- 사용할 인터셉트 클래스 등록 -->
          <beans:bean class="com.ggs.util.GrantVCheck"/>
       </interceptor>
+      <interceptor>
+         <mapping path="/freeboard/detail"/>
+         <beans:bean class="com.ggs.util.GrantVCheck"/>
+      </interceptor>
+      <interceptor>
+         <mapping path="/inforerrorboard/detail"/>
+         <beans:bean class="com.ggs.util.GrantVCheck"/>
+      </interceptor>
+
    </interceptors>
 </beans:beans>
