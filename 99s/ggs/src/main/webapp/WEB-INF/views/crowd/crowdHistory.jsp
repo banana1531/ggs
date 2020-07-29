@@ -1,77 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>역대 관중 현황</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
 <!-- jQuery CDN -->
-<script>
-$(function(){
-	
-});
-</script>
-<style type="text/css">
-
-#container1 {
-  height: 400px; 
-}
-#container {
-  height: 400px; 
-}
-
-.highcharts-figure, .highcharts-data-table table {
-  min-width: 310px; 
-  max-width: 600px;
-  margin: 1em auto;
-}
-
-.highcharts-data-table table {
-  font-family: Verdana, sans-serif;
-  border-collapse: collapse;
-  border: 1px solid #EBEBEB;
-  margin: 10px auto;
-  text-align: center;
-  width: 100%;
-  max-width: 500px;
-}
-.highcharts-data-table caption {
-  padding: 1em 0;
-  font-size: 1.2em;
-  color: #555;
-}
-.highcharts-data-table th {
-	font-weight: 600;
-  padding: 0.5em;
-}
-.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
-  padding: 0.5em;
-}
-.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
-  background: #f8f8f8;
-}
-.highcharts-data-table tr:hover {
-  background: #f1f7ff;
-}
-</style>
 </head>
+<style>
+
+</style>
 <body>
 	<a href="../admin/adminMain.gg">메인으로</a>
 	<h3>crowdHistory</h3>
-<div class="container" >
-<table>
-	<tr>
-		<td>
+	
+	<h3>연도별 관중 현황</h3>
+
+
+
+		<h3>연도별 팀 관중 </h3>
+	<h4>※숫자 세자리마다 쉼표를 찍어야 함</h4>
 			<%-- 역대관중현황 표  --%>
-			<div class="container"
-					style="position: left;  width: 650px; height: 1800px;">
-				<table border="1" width="1000px" >
+			<!--  <div class="container" style="position: left;  width: 650px; height: 1800px;"> -->
+				<table border="1" class="table" width="1000px" >
+					<thead>
 					<tr>
 						<td colspan=2>*괄호안은 평균 </td>
 					</tr>
@@ -90,27 +45,58 @@ $(function(){
 						<th width="200">KT</th>
 						<th width="200">계</th>
 					</tr>
+				</thead>
+			<!-- 	mv.addObject("HISTORYLIST",historyList);
+		mv.addObject("HISTORYLISTFOOT",historyListFoot); -->
 				
- 				<tr>
-				<c:forEach items="${historyList}" var="dto">
-					<td width="200">${dto.years }</td>
-				</c:forEach>
-				<c:forEach items="${historyList}" var="dto">
-					<td width="200">${dto.cno}</td>
-				</c:forEach>
-				
+				<tbody>
+				<c:forEach items="${HISTORYLIST}" var="dto">
 				<tr>
+					<td>${dto.years}</td>
+					<td>${dto.samsungt}<br>(${dto.samsunga})</td>
+					<td>${dto.kiat}<br>(${dto.kiaa})</td>
+					<td>${dto.lottet}<br>(${dto.lottea})</td>
+					<td>${dto.lgt}<br>(${dto.lga})</td>
+					<td>${dto.doosant}<br>(${dto.doosana})</td>
+					<td>${dto.hanwhat}<br>(${dto.hanwhaa})</td>
+					<td>${dto.skt}<br>(${dto.ska})</td>
+					<td>${dto.kiwoomt}<br>(${dto.kiwooma})</td>
+					<td>${dto.nct}<br>(${dto.nca})</td>
+					<td>${dto.ktt}<br>(${dto.kta})</td>
+					<td>${dto.totalt}<br>(${dto.totala})</td>
+				</tr>
+				</c:forEach>
+				</tbody>
+				<tfoot>
+				<c:forEach items="${HISTORYLISTFOOT}" var="dto">
+				<tr>
+					<td>계</td>
+					<td>${dto.totalsamsungt}<br>(${dto.avgsamsunga})</td>
+					<td>${dto.totalkiat}<br>(${dto.avgkiaa})</td>
+					<td>${dto.totallottet}<br>(${dto.avglottea})</td>
+					<td>${dto.totallgt}<br>(${dto.avglga})</td>
+					<td>${dto.totaldoosant}<br>(${dto.avgdoosana})</td>
+					<td>${dto.totalhanwhat}<br>(${dto.avghanwhaa})</td>
+					<td>${dto.totalskt}<br>(${dto.avgska})</td>
+					<td>${dto.totalkiwoomt}<br>(${dto.avgkiwooma})</td>
+					<td>${dto.totalnct}<br>(${dto.avgnca})</td>
+					<td>${dto.totalktt}<br>(${dto.avgkta})</td>
+					<td>${dto.totaltotalt}<br>(${dto.avgtotala})</td>
+				</tr>
+				</c:forEach>
+				</tfoot>
 				</table>
-			</div>
-		</td>
-	</tr>
-</table>
-</div>
+			<!--  </div> -->
+	
 </body>
 </html>
 
 
-
+<%-- 				<c:forEach items="${historyList}" var="dto">
+					<td width="200">${dto.cno}</td>
+				</c:forEach> --%>
+				
+				
 
 
 

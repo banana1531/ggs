@@ -15,6 +15,7 @@
 		<typeAlias type="com.ggs.DTO.ReplyDTO" alias="ReplyDTO" />
 		<typeAlias type="com.ggs.DTO.FreeboardDTO" alias="FreeboardDTO" />
 		<typeAlias type="com.ggs.DTO.InfoErrorBoardDTO" alias="InfoErrorBoardDTO" />
+		<typeAlias type="com.ggs.DTO.AhFiveDTO" alias="AhFiveDTO" />
 		<typeAlias type="java.lang.Integer" alias="int" />
 		<typeAlias type="java.lang.String" alias="string" />
 	</typeAliases>
