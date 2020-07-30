@@ -7,7 +7,7 @@
 	
 	<!-- bmi 리스트  -->
 	<select id="bmiList" resultType="com.ggs.DTO.PlayerInfoDTO"> 
-	select * from playerinfo order by name
+	select * from playerinfo 
 	</select>
 	<!-- 팀별 bmi분포 - 정상 -->
 	<select id="tBmi" resultType="com.ggs.DTO.PlayerInfoDTO">
@@ -21,7 +21,58 @@
 	<select id="tBmi3" resultType="com.ggs.DTO.PlayerInfoDTO">
 	SELECT teamname,COUNT(bmi) AS cntBmiHF FROM playerinfo WHERE bmi <![CDATA[>=]]> 30 GROUP BY teamname
 	</select> 
-
-	
+	<!-- playerRecord 중복데이터 체크 /투수-->
+	<select id="precordChk" resultType="java.lang.Integer" parameterType="java.util.List">
+	select count(*) AS cntr from playerRecord where pno=
+	<foreach collection="list" item="list" index="index" >	
+      <if test="index==28 ">     
+            #{list[28]} 
+      </if> 
+	</foreach>
+	AND gdate=
+		<foreach collection="list" item="list" index="index" >	
+      <if test="index==0 ">     
+            #{list[0]} 
+      </if> 
+	</foreach>
+	</select> 
+	<!-- playerRecord 중복데이터 체크 /타자-->
+	<select id="precordChkJ" resultType="java.lang.Integer" parameterType="java.util.List">
+	select count(*) AS cntr from playerRecord where pno=
+	<foreach collection="list" item="list" index="index" >	
+      <if test="index==30 ">     
+            #{list[30]} 
+      </if> 
+	</foreach>
+	AND gdate=
+		<foreach collection="list" item="list" index="index" >	
+      <if test="index==0 ">     
+            #{list[0]} 
+      </if> 
+	</foreach>
+	</select> 	
+	<!-- playerRecord insert /투수 -->
+	<insert id="prInsert" parameterType="java.util.List">
+		insert into playerRecord (gdate,vs,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
+								  samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
+								  wpa, gsc,gdec,gangyuk,pno,teamname,gresult,ptype)
+		values(
+		<foreach collection="list" item="list" index="index" separator="," >	         
+	            #{list}   
+		</foreach>
+		)
+	</insert>
+	<!-- playerRecord insert /타자 -->
+	<insert id="prInsertJ" parameterType="java.util.List">
+		insert into playerRecord (gdate,vs,tasun,p,sunbal,tasu,djum,anta,eta,samta,
+								  home_run,ruta,tajum,doru,dosil,ball4,go4,sagu,
+								  samjin,byungsal,hita,hibi,tayul,culu,jangta,ops,tugu,avli,re24,wpa,
+								  pno,teamname,gresult,ptype)
+		values(
+		<foreach collection="list" item="list" index="index" separator="," >	         
+	            #{list}   
+		</foreach>
+		)
+	</insert>	
 </mapper>
 
