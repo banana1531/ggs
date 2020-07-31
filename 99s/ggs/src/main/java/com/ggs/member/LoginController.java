@@ -4,16 +4,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.ggs.DTO.MembersDTO;
-import com.ggs.member.Memberservice;
 import com.ggs.util.ConfirmMail;
 
 
@@ -43,6 +44,9 @@ public class LoginController {
 					
 		//2.비즈니스로직 -> Service ->DAO ->DB
 		MembersDTO result = mService.loginProc(mdto,session);
+		
+		
+		//로그인 기록 체크
 		if(result==null){
 			//로그인 실패 
 				mv.setViewName("member/loginFrm");
@@ -58,7 +62,9 @@ public class LoginController {
 				mv.setView(rv);
 			}else{
 			//로그인 성공
-				RedirectView rv=new RedirectView("../"); //main으로 이동하기로 변경예정
+				int r = mService.loginChk(result);
+				System.out.println("r="+r);
+				RedirectView rv=new RedirectView("../mypage/mypageMain.gg?result="+r); //main으로 이동하기로 변경예정
 				mv.setView(rv);
 			}
 		return mv;
@@ -90,9 +96,8 @@ public class LoginController {
 	@RequestMapping("/idFindProc.gg")	
 	public ModelAndView idFindProc(MembersDTO mdto,ModelAndView mv){
 		System.out.println("요청 함수 idFindProc()!"); 
-		//1.파라미터 받기
-		String name=mdto.getName();
-		String email=mdto.getEmail();
+
+
 		//2.비즈니스 로직		
 		MembersDTO result = mService.mailAuth(mdto);
 		//3.Model & View
@@ -119,8 +124,7 @@ public class LoginController {
 	@RequestMapping("/pwChgProc.gg")	
 	public String pwChgProc(MembersDTO memberDTO){
 		System.out.println("요청 함수 pwChgProc()!"); 
-		//1.파라미터 받기
-		String id=memberDTO.getId();
+	
 		//2.비즈니스 로직		
 		mService.updatePw(memberDTO);
 		//3.Model & View
@@ -147,39 +151,29 @@ public class LoginController {
 
 	}
 	
-	//회원가입시 - 아이디 메일 중복체크, 인증번호 보내기
+	// 회원가입시 - 아이디 중복체크
 	@RequestMapping("/mailAuth1.gg")
-	public ModelAndView mailAuth1(Model model,MembersDTO mdto,ModelAndView mv) {
-		System.out.println("요청 함수 회원가입용 mailAuth1()!"); 
-		ConfirmMail mail = new ConfirmMail();
-		//1.파라미터 받기
-			String id= mdto.getId();
-			String email=mdto.getEmail();
-		//2.비즈니스 로직
+	public ModelAndView mailAuth1(Model model, MembersDTO mdto, ModelAndView mv) {
+		System.out.println("요청 함수 회원가입용 mailAuth1()!");
+
+		// 1.파라미터 받기
+		String id = mdto.getId();
+
+		// 2.비즈니스 로직
 		MembersDTO result = mService.mailAuth1(mdto);
-		if (id.length() > 0 && result == null) { 
-		//비회원 
+		if (id.length() > 0 && result == null) {
+			// 비회원
 			System.out.println("비회원 입니다");
 			mv.setViewName("member/joinFrm");
-			mv.addObject("msg","notmember");
-			mv.addObject("id",id);
-			
-			if(email != null && result == null) {
-			System.out.println("회원가입 메일 전송 email= "+email);
-			model.addAttribute("num", mail.sendMail(email));	
-			mv.setViewName("member/joinFrm");
-			mv.addObject("msg","notmember");
-			mv.addObject("id",id);
-			mv.addObject("email",email);
-			}
-		}
-		else {
-		//회원
+			mv.addObject("msg", "notmember");
+			mv.addObject("id", id);
+		} else {
+			// 회원
 			System.out.println("기존 회원 정보와 일치합니다");
 			mv.setViewName("member/joinFrm");
-			mv.addObject("msg","fail");
+			mv.addObject("msg", "fail");
 		}
-		
+
 		return mv;
 	}
 
@@ -190,9 +184,8 @@ public class LoginController {
 		System.out.println("요청 함수 mailAuth()!"); 
 		ConfirmMail mail = new ConfirmMail();
 		//1.파라미터 받기
-				String id= mdto.getId();
-				String name=mdto.getName();
-				String email=mdto.getEmail();
+		String id= mdto.getId();
+		String email=mdto.getEmail();
 		//2.비즈니스 로직
 		if(id==null) {		
 		MembersDTO result = mService.mailAuth(mdto);
@@ -227,5 +220,39 @@ public class LoginController {
 		}
 		return mv;
 	}
+	
+	
+	// 이메일 인증번호 보내기 - 회원가입
+		@ResponseBody
+		@RequestMapping("/mailAuth2")
+		public JSONObject emailAuth(MembersDTO mdto, Model model) {
+			System.out.println("회원가입 emailAuth() 진입");
+			ConfirmMail mail = new ConfirmMail();
+
+			// 1.파라미터 받기
+			String id = mdto.getId();
+			String email = mdto.getEmail();
+			System.out.println(id + "/" + email);
+			JSONObject obj = new JSONObject();
+
+			// 2.비즈니스 로직
+			MembersDTO result = mService.mailAuth1(mdto);
+			// System.out.println("result=="+result);
+
+			if (email != null && result == null) {
+				System.out.println("비회원 입니다");
+				System.out.println("회원가입 메일 전송 email= " + email);
+
+				obj.put("confirmNum", mail.sendMail(email));
+				obj.put("result", result);
+				// obj.put("email",email);
+
+			} else {
+				// 회원
+				System.out.println("기존 회원 정보와 일치합니다");
+				obj.put("result", result);
+			}
+			return obj;
+		}
 
 }

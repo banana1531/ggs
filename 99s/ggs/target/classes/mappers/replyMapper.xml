@@ -17,6 +17,17 @@
 		order by repno;	
 	</select>
 	
+	<insert id="insertReply">
+		INSERT INTO reply(wno, boardname, id, content, writedate)
+		VALUES (#{wno}, "freeboard", #{id}, #{content}, now())
+	</insert>
+	
+	<select id="listReply" resultType="ReplyDTO">
+		SELECT repno, wno, content, id, writedate
+		FROM reply
+		WHERE boardname="freeboard" AND isvisible=1 AND wno=#{wno}
+		ORDER BY repno DESC
+	</select>
 	
 </mapper>
 

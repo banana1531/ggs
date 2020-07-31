@@ -35,22 +35,22 @@ $(function(){
 </script>
 </head>
 <body>
-	<h1> leave 들어왔다~</h1>
-	
-	<div class="container">
+	<div class="container" align="center">
+		<h4 style="margin-top: 200px">탈퇴하기</h4>
 		<form class="form-inline">
-			<table class="table">
+			<table class="table" style="width: 300px">
 				<tr>
-					<td><input type="text" id="chkNum"><input type="button"
-						value="발송" class="btn" id="getnum">
-						<input type="hidden" id="conNum" value="${num}"></td>
+					<td>
+						<input type="text" id="chkNum">
+						<input type="button" value="발송" class="btn" id="getnum">
+						<input type="hidden" id="conNum" value="${num}">
+					</td>
 				</tr>
 				<tr>
-					<td><input type="button" value="탈퇴하기"  class="btn" id="leave"></td>
+					<td align="center"><input type="button" value="인증번호 확인/탈퇴하기"  class="btn" id="leave"></td>
 				</tr>
 			</table>
 		</form>
-		${num }
 		${result }
 	</div>
 </body>

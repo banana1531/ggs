@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,14 +29,17 @@ $(function(){
 </head>
 <body> 
   <div class="container" style="margin-bottom: 30px">
-	   <button><a href="/mypage/mypageMain.gg">My Page</a></button>
-	   <button><a href="/mypage/myTeamDetail.gg">My Team</a></button>
-	   <button><a href="/mypage/checkPw.gg">내 정보 수정</a></button>
+	   <a href="/mypage/mypageMain.gg"><button>My Page</button></a>
+	   <a href="/mypage/myTeamDetail.gg"><button>My Team</button></a>
+	   <a href="/mypage/checkPw.gg"><button>내 정보 수정</button></a>
    </div>
 	<div class="container">
+	<h4>내팀 정보</h4><hr/>
+	<c:choose>
+		<c:when test="${team.teamName=='없음'}">선호팀을 선택하지 않았습니다.</c:when>
+		<c:otherwise><span><img width="100" height="50" src="/resources/img/${team.teamName}.jpg"></span></c:otherwise>
+	</c:choose> 
 		<table class="table">
-		<caption>내팀 정보</caption>
-		<div><img width="100" height="50" src="/resources/img/${team.teamName}.jpg"></div>
 			<tr>
 				<th>팀명</th>
 				<th>설립일</th>
@@ -51,6 +55,9 @@ $(function(){
 				<td>${team.stadium }</td>
 				<td>${team.director }</td>
 				<td><a href="http://${team.homepage }" target="_blank">${team.homepage }</a></td>
+			</tr>
+			<tr>
+				<td colspan="6"><b>이번 시즌 성적</b></td>
 			</tr>
 			<tr>
 				<th>승수</th>

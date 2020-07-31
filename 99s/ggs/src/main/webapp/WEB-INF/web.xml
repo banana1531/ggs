@@ -39,6 +39,10 @@ version="3.1">
    	<url-pattern>/column/*</url-pattern>
    	<url-pattern>/freeboard/*</url-pattern>
    	<url-pattern>/inforerrorboard/*</url-pattern>
+   	<url-pattern>/home.gg</url-pattern>
+   	<url-pattern>/crowd/*</url-pattern>
+   	<url-pattern>/newboard/*</url-pattern>
+   	
   </filter-mapping>
 
 	<!-- 스프링 한글처리 : 넘어오는 데이터만 해당 -->

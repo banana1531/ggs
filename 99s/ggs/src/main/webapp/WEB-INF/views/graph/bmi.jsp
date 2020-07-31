@@ -127,6 +127,12 @@ $(document).ready(function(){
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
   });
+  $(".dto").click(function(){
+	  var pno = $(this).find("#pno").val();
+	  var position = $(this).find("#position").val();
+	  location = "/player/info.gg?pno="+pno+"&position="+position
+	  
+  })
 });
 </script>
 </head>
@@ -153,9 +159,11 @@ $(document).ready(function(){
 								<td colspan="3"><h2>야구선수의 BMI지수와 성적 상관관계 분석</h2></td>
 							</tr>
 							<tr>
-								<td colspan="3" align="left">BMI지수= 몸무게(kg) ÷ (신장(m) ×
-									신장(m))<br /> - 18.5 미만 - 저체중 (해당 선수 없음*)<br /> - 18.5 이상 25
-									미만 - 정상 <br /> - 25 이상 30 미만- 비만 <br /> - 30 이상 - 고도 비만 <br />
+								<td colspan="3" align="left">BMI지수= 몸무게(kg) ÷ (신장(m) ×	신장(m))<br />
+								 - 18.5 미만 - <b style="color: #0099FF">저체중</b> <br />
+								  - 18.5 이상 25미만 - <b style="color: #0000FF">정상</b> <br />
+								  - 25 이상 30 미만- <b style="color: #FF9900">비만</b> <br />
+								   - 30 이상 - <b style="color: #ff0000">고도비만</b> <br />
 									*출처:대한비만학회
 								</td>
 							</tr>
@@ -169,22 +177,32 @@ $(document).ready(function(){
 						<table class="table table-bordered table-striped" width="600px">
 							<thead>
 								<tr>
-									<th width="200">선수 이름</th>
-									<th width="200">BMI 지수</th>
-									<th width="200">결과</th>
+									<th>선수 이름</th>
+									<th>소속팀</th>
+									<th>Position</th>
+									<th>체중</th>
+									<th>키</th>
+									<th>BMI 지수</th>
+									<th>결과</th>
 								</tr>
 							</thead>
 							<tbody id="myTable">
 								<%-- 선수 bmi List  --%>
 								<c:forEach items="${LIST}" var="dto">
 									<tr>
-										<td>${dto.name }</td>
+										<td class="dto">${dto.name }
+										<input type="hidden" id="pno" value="${dto.pno }">
+										<input type="hidden" id="position" value="${dto.position }"> </td>
+										<td>${dto.teamname}</td>
+										<td>${dto.position }</td>
+										<td>${dto.weight}</td>
+										<td>${dto.height}</td>
 										<td>${dto.bmi }</td>
 										<td><c:choose>
-												<c:when test="${dto.bmi<18.5 }">저체중</c:when>
-												<c:when test="${dto.bmi<25 }">정상</c:when>
-												<c:when test="${dto.bmi<30 }">비만</c:when>
-												<c:otherwise>고도비만</c:otherwise>
+												<c:when test="${dto.bmi<18.5 }"><b style="color: #0099FF">저체중</b></c:when>
+												<c:when test="${dto.bmi<25 }"><b style="color: #0000FF">정상</b></c:when>
+												<c:when test="${dto.bmi<30 }"><b style="color: #FF9900">비만</b></c:when>
+												<c:otherwise><b style="color: #ff0000">고도비만</b></c:otherwise>
 											</c:choose></td>
 									</tr>
 								</c:forEach>
@@ -212,7 +230,31 @@ $(document).ready(function(){
 					width="400"></td>
 			</tr>
 			<tr>
-				<td colspan="3"><h2 align="center">결론:BMI와 야구성적은 상관관계가 없다</h2></td>
+				<td colspan="3">
+				<div class="container" align="center">
+				<h4><b>상관분석 판정 기준</b></h4>
+				<table border="1" style="width: 800px">
+				<tr align="center">
+					<td>-1.0 ~ -0.7</td>
+					<td>-0.7 ~ -0.3</td>
+					<td>-0.3 ~ -0.1</td>
+					<td><b style="color: red">-0.1 ~ +0.1</b></td>
+					<td>+0.1 ~ +0.3</td>
+					<td>+0.3 ~ +0.7</td>
+					<td>+0.7 ~ +0.1</td>
+				</tr>
+				<tr align="center">
+					<td>강한 음적 관계</td>
+					<td>뚜렷한 음적 관계</td>
+					<td>약한 음적 관계</td>
+					<td><b style="color: red">거의 관계 없음</b></td>
+					<td>약한 양적 관계</td>
+					<td>뚜렷한 양적 관계</td>
+					<td>강한 양적 관계</td>
+				</tr>
+				</table>
+				</div>
+				<h2 align="center">결론:BMI와 야구성적은 <b style="color: red">상관관계가 없다고 할 수 있다.</b></h2></td>
 			</tr>
 		</table>
 		

@@ -33,13 +33,8 @@ public class DeclarationDAO {
 	}
 
 	//신고접수글 상세 내용 가져오기
-	public DeclarationDetailDTO getDetail(DeclarationDTO dto) {
-		int no = dto.getWriteno();
-		System.out.println("dto.getBoardname()="+dto.getBoardname());
-		if(dto.getBoardname().equals("freeboard"))
-			return session.selectOne("declaration.getDetailFreeboard", no);
-		else
-			return session.selectOne("declaration.getDetailInforerrorboard", no);
+	public DeclarationDetailDTO getDetail(DeclarationDetailDTO dto) {
+		return session.selectOne("declaration.getDetail", dto);
 	}
 	
 	//신고접수 테이블 업데이트 하기

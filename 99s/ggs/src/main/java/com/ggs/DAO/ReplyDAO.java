@@ -2,9 +2,10 @@ package com.ggs.DAO;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.ggs.DTO.BoardDTO;
@@ -12,9 +13,19 @@ import com.ggs.DTO.ReplyDTO;
 
 @Repository
 public class ReplyDAO {
-	
-	@Autowired
-	private SqlSessionTemplate session;
+
+	@Inject
+	SqlSessionTemplate session;
+
+	// 댓글 작성
+	public void create(ReplyDTO rDTO) {
+		session.insert("reply.insertReply", rDTO);
+	}
+
+	// 댓글 목록
+	public List<ReplyDTO> list(int wno) {
+		return (List)session.selectList("reply.listReply", wno);
+	}
 	
 	//댓글 달기
 	public int reply(ReplyDTO dto) {

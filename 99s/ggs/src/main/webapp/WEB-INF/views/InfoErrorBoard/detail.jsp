@@ -61,7 +61,7 @@
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title" align="left">글 신고하기</h4>
 						</div>
-						<form class="form-inline" action="/admin/decInsert.gg">
+						<form class="form-inline" action="/decInsert.gg">
 							<div class="modal-body" align="left">
 								글번호 : <input name="writeno" value="${dto.writeno}"readonly="readonly" style="border: none;"><br /> 
 								게시판 :<input name="boardname" value="${dto.boardname}"readonly="readonly" style="border: none;"><br /> 

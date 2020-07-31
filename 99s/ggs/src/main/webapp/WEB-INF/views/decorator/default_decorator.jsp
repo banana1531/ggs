@@ -88,13 +88,13 @@ article {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/teampredict/schmatchList.gg" style="font-size: 50px">99s</a>
+				<a class="navbar-brand" href="/" style="font-size: 50px">99s</a>
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">
-					<li><a href="/teampredict/schmatchList.gg">Home</a></li>
+					<li><a href="/">Home</a></li>
 					<li><a href="/notice/list">공지사항</a></li>
-					<li><a href="/freeboard/list">자유 게시판</a></li>
+					<li><a href="/newboard/list">자유 게시판</a></li>
 					<li><a href="/inforerrorboard/list">정보 오류 신고</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown">경기 일정<span class="caret"></span></a>
@@ -112,7 +112,7 @@ article {
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown"> 통계 기록실 <span class="caret"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">역대 관중 현황</a></li>
+							<li><a href="/crowd/crowdHistory.gg">역대 관중 현황</a></li>
 							<li><a href="/graph/bmi.gg">비만도와 실적관계</a></li>
 							<li><a href="/column/list">야구 지식 정보</a></li>
 						</ul></li>
@@ -142,8 +142,8 @@ article {
 					
 					<c:choose>
 						<c:when test="${UID != null }">
-							<li><a href="/mypage/mypageMain.gg"><span
-									class="glyphicon glyphicon-user"></span>환영합니다. ${UID}님</a></li>
+							<li><a href="/mypage/mypageMain.gg"><!-- <span
+									class="glyphicon glyphicon-user"></span> -->환영합니다. ${UID}님</a></li>
 							<li><a href="/member/logout.gg"><span
 									class="glyphicon glyphicon-log-in"></span> Logout</a></li>
 						</c:when>
@@ -156,7 +156,6 @@ article {
 					</c:choose>
 				</ul>
 			</div>
-		
 		</nav>
 	</header>
 	<article style="margin-bottom: 150px;margin-top: 10px">

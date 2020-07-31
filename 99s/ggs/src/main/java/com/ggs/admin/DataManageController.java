@@ -1,6 +1,5 @@
 package com.ggs.admin;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ import com.ggs.util.PageUtil;
 @RequestMapping("/admin")
 public class DataManageController {
 	
-	@Autowired
-	private AdminService service;	
 	
 	@Autowired
 	private TeamInfoService teamInfoService;
@@ -35,9 +32,9 @@ public class DataManageController {
 	@Autowired
 	private TeampredictService teampredicService;
 	
+	
 	@Autowired
 	private DataManageService dataManageService;
-	
 	
 	/*** ==========================================
 	 * data update
@@ -45,9 +42,21 @@ public class DataManageController {
 	
 	//data update하기 메인화면보기
 	@RequestMapping("/dataUpdate.gg")
-	public String dataMain() {
+	public String dataMain(String uri, Model model) {
+		//업데이트 유무 확인하기
+		if(dataManageService.checkUpdateDate()) {
+		//경기 결과 업데이트 하기
+		int r = dataManageService.updateDBTeamRecord();
+		System.out.println("경기 데이터를 총 "+r+"건 업데이트 하였습니다.");
+		//승부예측 포인트 계산하기
+		int r2=dataManageService.calPoint();
+		System.out.println("preResult 테이블에 총 "+r2+"건의 데이터를 업데이트 하였습니다.");
+		}
 		
-		return "/admin/dataMain";
+		if(uri.equals("gamelist"))return "redirect:/admin/gameList.gg";
+		else if(uri.equals("playerlist"))return "redirect:/admin/playerList.gg";
+		else return "redirect:/admin/teamList.gg";
+		
 	}
 	
 	

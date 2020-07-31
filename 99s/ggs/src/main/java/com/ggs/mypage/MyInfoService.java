@@ -29,16 +29,10 @@ public class MyInfoService {
 		
 		return oldPw.equals(newPw);
 	}
-	
-	
-	
-	
+		
 	//내정보 수정하기
 	public int updateMyInfo(MembersDTO member) {
 		return membersDAO.updateMyInfo(member);
 	}
-	
 
-	
-	
 }

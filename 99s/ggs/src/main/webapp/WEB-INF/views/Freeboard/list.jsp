@@ -10,6 +10,14 @@
 <title>자유 게시판</title>
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+	var result= '${result}';
+	if(result!=''){
+		alert(result)
+	}
+})
+</script>
 <style>
 .center {
 	text-align: center;
@@ -30,7 +38,6 @@
 					type="submit" id="search" value="검색">
 			</form>
 		</div>
-
 		<table class="table table-hover">
 			<thead>
 			<tr>

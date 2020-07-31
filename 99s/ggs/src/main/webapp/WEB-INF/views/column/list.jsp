@@ -11,6 +11,14 @@
 
 <!-- jQuery CDN -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+	var result= '${result}';
+	if(result!=''){
+		alert(result)
+	}
+})
+</script>
 <style>
 .center {
 	text-align: center;

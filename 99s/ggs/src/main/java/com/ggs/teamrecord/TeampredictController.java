@@ -44,10 +44,7 @@ public class TeampredictController {
 
 		model.addAttribute("ppoint", service.getpointList(ppoint));
 
-		//오늘날짜와 대조하여 경기리스트 보여주기
-		model.addAttribute("TodayMatch",service.getTodayMatchGno(gno));
-		
-		model.addAttribute("TodayMatch",service.getTodayMatch(ateamname,bteamname));
+		model.addAttribute("TodayMatch",service.getTodayMatch());
 
 	return "teampredict/prematchMain";
 }
@@ -98,7 +95,7 @@ public class TeampredictController {
 	
 	//---------------------------------------------------
 	
-	//경기결과 조회
+	//경기결과 목록조회
 	@RequestMapping("/rltmatchList.gg")
 	public String rltmatchList( Model model,
 			@RequestParam(value="pageNo", defaultValue="1") String pageNo,
@@ -174,16 +171,20 @@ public class TeampredictController {
 	
 	//승부예측 상세페이지 출력
 	@RequestMapping("/prematchDetail.gg")
-	public String prematchdetail(PreResultDTO dto,Model mv) {
+	public String prematchdetail(PreResultDTO dto,Model mv,
+			@RequestParam(value="result", defaultValue="3") int result) {
 		System.out.println("경기예측 상세보기 요청함수 matchpredictdetail() 진입 dto="+dto);
 		
+		System.out.println("result="+result);
+		if(result==0)mv.addAttribute("result", "투표하긴 결과가 적용되었습니다. 회원님의 포인트가 10p 차감되었습니다.");
+		else if(result==1) mv.addAttribute("result", "이미 투표하신 경기 입니다.");
 		//2.비즈니스로직수행
 		TeamRecordDTO trDTO = service.getdetailView(dto.getGno());
 		System.out.println("prematchdetail() trDTO="+trDTO);
 		String prDTO = service.getpreteamCount(trDTO);
 		if(prDTO.length()<1) prDTO = "[['predict','precount'],['"
-		    	+dto.getAteamname()+"',"+0+",],['무승부',0,],['"
-		    	+dto.getBteamname()+"',"+0+",]]";
+		    	+trDTO.getAteamname()+"',"+0+"],['무승부',0],['"
+		    	+trDTO.getBteamname()+"',"+0+"]]";
 		
 		TeamInfoDTO atrDTO = service.getTeamScore(trDTO.getAteamname());
 		TeamInfoDTO btrDTO = service.getTeamScore(trDTO.getBteamname());
@@ -201,9 +202,9 @@ public class TeampredictController {
 		//---------------------------------------------------
 		//투표 처리
 	@RequestMapping("/electmatch.gg")
-	public String electmatch(PreResultDTO dto, Model mv) {
+	public String electmatch(PreResultDTO dto, Model mv, HttpServletRequest request) {
 		System.out.println("electedMatch() dto="+dto);
-		int result = service.insertRe(dto);		
+		int result = service.insertRe(dto, request);
 		return "redirect:/teampredict/prematchDetail.gg?gno="+dto.getGno()+"&result="+result;
 			
 	}

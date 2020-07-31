@@ -22,10 +22,42 @@
 		})
 
 		//email 중복체크 및 인증번호 발송 
-		$('#mailAuth').click(function(){
+		$('#emailBtn').click(function(){
+			var id= $('#id').val();
 			var email = $('#email').val();
+			
 			if(email.length >0){
-				$('#mailAuthFrm').submit();
+				var g = "@";
+				if(email.indexOf(g)!= -1){ 
+			        $.ajax({
+			            type : "POST",
+			            url : "../member/mailAuth2",
+			            dataType: "json",
+			            async: false,
+			            data : {id, email},
+			            success : function(data) {
+			               if(data.result==null){
+			            	   alert("인증번호를 발송하였습니다.");
+			                   confirmNum = data.confirmNum;
+			                   alert(confirmNum);
+
+			               }else {
+			                  alert("기존에 등록된 이메일 입니다.");
+			                  return false;
+			               }
+			            },
+			            error : function(data, jqXHR) {
+			            	//alert("에러가 발생했습니다. 잠시 후 다시 시도해주세요.\n발생 에러: "+jqXHR.statusText+"\njqXHR.responseText: "+jqXHR.responseText);
+			                
+			               alert("에러가 발생했습니다. 잠시 후 다시 시도해주세요.");
+			               return false;
+			            }
+			        });
+			
+				}else{
+					window.alert("'@'를 포함한 이메일 형식으로 써주세요. 예: myemail-adress@naver.com ");
+					return false;
+				}
 			}else{
 				window.alert("이메일을 입력해주세요");
 				return false;
@@ -33,20 +65,25 @@
 		})
 
 		//인증번호 일치 여부 확인 + null 값 확인 후 제출
-		$('#mailAuthChk').click(function(){
-			var chkNum= $('#chkNum').val();
-			var conNum = $('#conNum').val();
-			if(chkNum.length >0){
-					if(chkNum!=conNum){
+		$('#confirmChk').click(function(){
+			var emailNum = $("#emailNum").val();
+
+			if(emailNum.length >0){
+					if(emailNum != confirmNum){
 						window.alert("인증번호가 일치하지 않습니다.");
 						return false;
 					}else{
 						var r = confirm("인증번호가 일치합니다");
 						$('#joinProc').click(function(){
+							var id =$('#id').val();
 							var name =$('#name').val();
 							var pw = $('#pw').val();
 							var birth = $('#birth').val();
-							if (name.length == 0){
+							if(id.length == 0 ){
+							//ID null 값 여부 
+								window.alert("아이디 입력과 중복확인을 해주세요.");
+								return false;	
+							}else if (name.length == 0){
 							//이름 null 값 여부 	
 								window.alert("이름을 입력해주세요.");
 								return false;
@@ -94,15 +131,20 @@
 
 </head>
 <body>
+<div class="container" align="center">
 <% request.setCharacterEncoding("UTF-8"); %>
-	<h2>회원가입</h2>
+<h2 style="margin-top: 150px">회원가입</h2>
+<div class="container" style="width: 800px" align="left">
+	
 	<hr />
-	<form action="../member/mailAuth1.gg" id="mailAuthFrm" method="post">	
-		<table>
+	<table style="margin-left: 200px">
+		<form action="../member/mailAuth1.gg" id="mailAuthFrm" method="post">
 			<tr>
 				<td>아이디</td>
 				<td><input type="text" id="id" name="id" value="${id}"/>
 					<input id="idChk" type="button" value="중복확인" />
+					</td>
+					<td>
 				<c:if test="${msg=='fail'}">
 					<span>중복되는 아이디 입니다.</span>
 				</c:if>
@@ -113,20 +155,20 @@
 			</tr>
 			<tr>
 				<td>이메일</td>
-				<td><input type="email" id="email" name="email" value="${email}"/>
-				<input id="mailAuth" type="button" value="인증번호 받기" />
-				</td>
+				<td><input type="email" id="email" name="email"
+					value="${email}" /> <input id="emailBtn" type="button"
+					value="인증번호 받기" /></td>
+					<td></td>
 			</tr>
-	</form>
+		</form>
 			<tr>
 				<td>인증번호</td>
-				<td><input id="chkNum" type="text">
-					<input id="mailAuthChk" type="button" value="인증번호 확인"/>
-					<input type="hidden" id="conNum" value="${num}" />
-				</td>
+				<td><input id="emailNum" type="text" /> <input id="confirmChk"
+					type="button" value="인증번호 확인" /></td>
+					<td></td>
 			</tr>
 			
-	<form action="../member/joinProc.gg" id="joinFrm" method="post" >
+		<form action="../member/joinProc.gg" id="joinFrm" method="post" >
 			<tr>
 				<td>비밀번호</td>
 				<td><input type="password" id="pw" name="pw"/></td>
@@ -138,14 +180,17 @@
 				<td><input type="password" id="pw2" name="pw2"/>
 				<span id="pwChk"></span>
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>이름</td>
 				<td><input type="text" id="name" name="name" /></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
 				<td><input type="date" id="birth" name="birth" /></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>성별</td>
@@ -153,6 +198,7 @@
 					<input type="radio" id="f" name="gender" value="여자">&nbsp;여자</input>
 					<input type="radio" id="n" name="gender" value=""  checked="checked">&nbsp;선택 안함</input>
 				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>선호팀</td>
@@ -168,16 +214,19 @@
 						<option value="삼성">삼성</option>
 						<option value="SK">SK</option>
 						<option value="한화">한화</option>
-				</select>
-			</tr>	
-			<tr>
+				</select></td>
 				<td></td>
+			</tr>	
+			<tr align="center">
 				<td colspan="2" class="center">
 					<input type="reset" value="취소" onclick="location.href='../'" />&nbsp;
-					<input id="joinProc" type="button" value="가입" /></a>
+					<input id="joinProc" type="button" value="가입" />
 				</td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
+	</div>
+	</div>
 </body>
 </html>

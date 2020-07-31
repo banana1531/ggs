@@ -33,15 +33,16 @@ public class TeamInfoService {
 	public TeamInfoDTO teamDetail(String name) {
 		//기본정보 가져오기
 		TeamInfoDTO teamDetail = teamInfoDAO.teamDetail(name);
-		//실적가져오기
-		TeamInfoDTO teamRecord = teamRecordDAO.teamScore(name);
-		System.out.println(teamRecord);
-		
-		teamDetail.setWin(teamRecord.getWin());
-		teamDetail.setDraw(teamRecord.getDraw());
-		teamDetail.setLose(teamRecord.getLose());
-		teamDetail.setScore(teamRecord.getScore());
-		teamDetail.setLoss(teamRecord.getLoss());
+		if(!teamDetail.getTeamName().equals("없음")) {
+			//실적가져오기
+			TeamInfoDTO teamRecord = teamRecordDAO.teamScore(name);
+			System.out.println(teamRecord);
+			teamDetail.setWin(teamRecord.getWin());
+			teamDetail.setDraw(teamRecord.getDraw());
+			teamDetail.setLose(teamRecord.getLose());
+			teamDetail.setScore(teamRecord.getScore());
+			teamDetail.setLoss(teamRecord.getLoss());
+		}
 		return teamDetail;	
 	}
 	
@@ -74,7 +75,5 @@ public class TeamInfoService {
 		teamRecordDTO.setStart(start);
 		return teamRecordDAO.schmatchList(teamRecordDTO);
 	}
-	
-	//마이페이지용
 	
 }

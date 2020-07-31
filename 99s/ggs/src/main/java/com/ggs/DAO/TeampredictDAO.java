@@ -30,13 +30,10 @@ public class TeampredictDAO {
 		return session.selectList("Members.MembersRanking",ppoint);
 	}
 
-	//해당날짜의 해당경기번호읽기
-	public List<TeamRecordDTO> getTodayMatchGno(Integer gno) {
-		return session.selectList("todaymatch.todaymatch",gno);
-	}
+	
 	
 	//홈팀 어웨이팀 가져오기
-	public List<TeamRecordDTO> getTodayMatch(String ateamname, String bteamname) {
+	public List<TeamRecordDTO> getTodayMatch() {
 		return session.selectList("todaymatch.todaymatch");
 	}
 	

@@ -51,7 +51,7 @@
 	
 	<!-- 팀 실적 가져오기 -->
 	<select id="teamScore" resultType="com.ggs.DTO.TeamInfoDTO">
-	SELECT w.team AS teamName, win, score, lose, loss, draw, (win)/(win+lose) AS rate
+	SELECT w.team AS teamName, win, score, lose, loss, draw, round((win)/(win+lose),2) rate
 	FROM 
 		(SELECT team, sum(cnt) lose, sum(score) loss FROM 
 			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
@@ -86,8 +86,53 @@
 		ORDER BY rate DESC;
 	</select>
 	
+	<!-- 팀실적 가져오기, 분석정보 포함 -->
+	<select id="teamscoreD" resultType="com.ggs.DTO.TeamInfoDTO">
+	SELECT aa.teamname, avgScore, maxScore, avgLoss, maxLoss, zeroLoss, zeroScore, lose, loss, win, score, draw, round(win/(win+lose),3) rate FROM
+		(SELECT ROUND(avg(score),2)  AS avgScore, MAX(score) maxScore, teamname FROM 
+		(SELECT gno, ascore score, gdate, ateamname teamname FROM teamRecord WHERE (ascore&gt;bscore)
+		union
+		SELECT gno, bscore score, gdate, bteamname teamname FROM teamRecord WHERE (bscore&gt;ascore)) AS a GROUP BY teamname) AS aa,
+		(SELECT ROUND(avg(score),2) avgLoss, MAX(score) maxLoss, teamname FROM 
+		(SELECT gno, ascore score, gdate,ateamname teamname FROM teamRecord WHERE (ascore&lt;bscore)
+		union
+		SELECT gno, bscore score, gdate,bteamname teamname FROM teamRecord WHERE (bscore&lt;ascore)) AS b GROUP BY teamname) AS bb,
+		(SELECT SUM(cnt) zeroLoss, teamname FROM 
+		(SELECT COUNT(*) cnt,ateamname teamname  FROM teamRecord WHERE (ascore&gt;bscore AND bscore=0) GROUP BY ateamname
+		UNION
+		SELECT COUNT(*) cnt, bteamname teamname FROM teamRecord WHERE (bscore&gt;ascore AND ascore=0 ) GROUP BY bteamname  ) AS c GROUP BY teamname) AS cc,
+		(SELECT SUM(cnt) zeroScore, teamname FROM
+		(SELECT COUNT(*) cnt, ateamname teamname FROM teamRecord WHERE (ascore&lt;bscore AND ascore=0) GROUP BY ateamname
+		UNION
+		SELECT COUNT(*) cnt, bteamname teamname FROM teamRecord WHERE (bscore&lt;ascore AND bscore=0) GROUP BY bteamname) AS d GROUP BY teamname) AS dd,
+		(SELECT COUNT(gno) lose, SUM(loss) loss, teamname FROM 
+		(SELECT gno, ascore loss, ateamname teamname FROM teamRecord WHERE (ascore&lt;bscore)
+		union
+		SELECT gno, bscore loss, bteamname teamname FROM teamRecord WHERE (bscore&lt;ascore)) AS e GROUP BY teamname) AS ee,
+		(SELECT COUNT(gno) win, SUM(score) score, teamname FROM
+		(SELECT gno, ascore score, ateamname teamname  FROM teamRecord WHERE (ascore&gt;bscore )
+		UNION
+		SELECT gno, bscore score, bteamname teamname  FROM teamRecord WHERE (bscore&gt;ascore )) AS f GROUP BY teamname) AS ff,
+		(SELECT c.teamname, draw FROM 
+		(SELECT ateamname teamname FROM teamRecord GROUP BY ateamname) AS c LEFT JOIN 
+		(SELECT COUNT(*) draw, g.teamname FROM 
+		(SELECT gno, ateamname teamname FROM teamRecord WHERE (ascore=bscore AND ascore&gt;-1)AND DATEDIFF(gdate, date(NOW()))&lt;0
+		UNION all
+		SELECT gno, bteamname teamname FROM teamRecord WHERE (ascore=bscore AND ascore&gt;-1)AND DATEDIFF(gdate, date(NOW()))&lt;0) AS g GROUP BY teamname) AS kk
+		ON c.teamname=kk.teamname) AS gg
+		WHERE aa.teamname=bb.teamname AND
+		aa.teamname=cc.teamname AND
+		aa.teamname=dd.teamname AND
+		aa.teamname=ee.teamname AND
+		aa.teamname=ff.teamname AND
+		aa.teamname=gg.teamname AND
+		aa.teamname!='경기없음'
+		GROUP BY aa.teamname
+		<if test="teamName!=null">having aa.teamname=#{teamName}</if>
+		order by rate desc
+	</select>	
 	
-	
+	<!-- 경기 기록 가져오기 -->
 	<select id="schmatchList" resultType="com.ggs.DTO.TeamRecordDTO">
 		SELECT gno, gdate, gtime, team as ateamname, tscore as ascore, vteam as bteamname, vscore as bscore, stadium, totalcnt 
 		FROM
@@ -122,5 +167,15 @@
 		where gno=#{gno} 
 	</update>
 	
+	<!-- 경기 기록 수정 -->
+	<update id="updateTeamRecord" parameterType="com.ggs.DTO.TeamRecordDTO">
+		update teamRecord set ascore=#{ascore}, bscore=#{bscore}
+		where gdate=#{ggdate} and (ateamname=#{ateamname} and bteamname=#{bteamname})
+	</update>
+	
+	<!-- 경기번호 가져오기 -->
+	<select id="getGno" resultType="java.lang.String">
+		SELECT gno FROM teamRecord WHERE  DATEDIFF(gdate, DATE(NOW()))=0;
+	</select>
 </mapper>
 

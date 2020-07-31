@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import="com.ggs.DTO.TeamRecordDTO" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>	
@@ -17,7 +20,7 @@ $(function(){
 	})
 	$(".dto").click(function(){
 		var gno = $(this).find("#gno").val()
-		location = "/teampredict//rltmatchDetail.gg?gno="+gno
+		location = "/teampredict/rltmatchDetail.gg?gno="+gno
 	})
 	
 })
@@ -51,32 +54,57 @@ $(function(){
 			<tr  align="center">
 				<td>경기날짜</td>
 				<td>경기시간</td>
-				<td>경기일정</td>
+				<td colspan="5" width="60%">경기일정</td>
 				<td>구장</td>
 			</tr>
 			</thead>
-			<c:if test="${error!=null}">
-			<tr><td>${error }</td></tr></c:if>
+			<c:if test="${error!=null}"><tr><td>${error }</td></tr></c:if>
+			
 			<c:forEach items="${SchMatchList}" var="list">
-				<tr align="center" class="dto">
+				<tr align="center" class="dto">	
 					<td width="15%"><fmt:formatDate value="${list.gdate}" pattern="yyyy-MM-dd" /></td>
 					<td width="15%">${list.gtime}</td>
-					<td>
-					<img width="50" height="30" src="/resources/img/${list.ateamname}.jpg">
-					${list.ateamname}${list.ascore} vs ${list.bscore}
-						${list.bteamname}
-						<img width="50" height="30" src="/resources/img/${list.bteamname}.jpg"></td>
+					<td  align="right" width="18%">${list.ateamname}</td>
+					<c:choose>
+						<c:when test="${list.ascore < 0 }">
+							<td colspan="3" align="center">
+								<img width="50" height="30" src="/resources/img/${list.ateamname}.jpg">
+								경기 취소
+								<img width="50" height="30" src="/resources/img/${list.bteamname}.jpg">
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td align="right" width="50">
+								<img width="50" height="30" src="/resources/img/${list.ateamname}.jpg"> 
+								<b>${list.ascore }</b>
+							</td>
+							<td width="5">vs</td>
+							<td align="left" width="50">
+								<b>${list.bscore }</b>
+								<img width="50" height="30" src="/resources/img/${list.bteamname}.jpg">
+							</td>
+						</c:otherwise>
+					</c:choose>
+					<td align="left" width="18%">${list.bteamname}</td>
 					<td>${list.stadium}
 					<input type="hidden" id="gno" value="${list.gno }">
 					</td>
+					
+					
 				</tr>
 			</c:forEach>
 			<tfoot>
 			<tr align="center">
-				<td colspan="4"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
+				<td colspan="8"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
 					<c:forEach var="i" begin="${pageInfo.startPage}"
 						end="${pageInfo.endPage}">
-					[<a class="btn">${i}</a>]
+					<c:choose>
+						<c:when test="${pageInfo.nowPage==i}"><b>[<a class="btn">${i}</a>]</b></c:when>
+					<c:otherwise>[<a class="btn">${i}</a>]</c:otherwise>
+					
+					</c:choose>
+					
+					
 				</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
 				</td>
 			</tr>

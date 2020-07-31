@@ -15,6 +15,8 @@ $(function(){
 		var pageNo = $(this).text()
 		$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+pageNo)
 	})
+	
+	
 })
 </script>
 </head>
@@ -36,7 +38,7 @@ $(function(){
 				<td>${team.location }</td>
 				<td>${team.stadium }</td>
 				<td>${team.director }</td>
-				<td>${team.homepage }</td>
+				<td><a href="https://${team.homepage }">${team.homepage }</a></td>
 			</tr>
 			<tr>
 				<th>승수</th>

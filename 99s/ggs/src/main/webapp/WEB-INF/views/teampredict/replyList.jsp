@@ -39,7 +39,7 @@ $(function(){
 	<table class="table">
 		<tr>
 			<td width="15%"><input id="id" value="${UID}"
-				style="border: none; width: 60px"></td>
+				style="border: none; width: 80px"></td>
 			<td><input type="text" id="contents" style="width: 350px"></td>
 			<td width="15%"><button class="btn">등록</button></td>
 		</tr>
