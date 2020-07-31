@@ -4,9 +4,9 @@ public class AhFiveDTO {
 
 	private String 	years;		//년도
 	
-	private String	samsung;
-	private int		samsungt;
-	private int		samsunga;
+	private String	samsung; //팀이름
+	private int		samsungt; //삼성의 연도별 홈경기 전체 관중
+	private int		samsunga; //삼성의 연도별 홈경기 평균 관중
 	
 	private String	kia;
 	private int		kiat;
@@ -44,10 +44,10 @@ public class AhFiveDTO {
 	private int		ktt;
 	private int		kta;
 	
-	private int 	totalt;
-	private int		totala;
+	private int 	totalt; //연도별 10개팀 전체 관중
+	private int		totala; //10개  팀 연도별 평균 관중들의 평균
 	
-	private int		totalsamsungt;
+	private int		totalsamsungt; //삼성의 37년(kbo 1982~2019 시즌 까지) 전체 관중 
 	private int		totalkiat;
 	private int		totallottet;
 	private int		totallgt;
@@ -57,10 +57,10 @@ public class AhFiveDTO {
 	private int		totalkiwoomt;
 	private int		totalnct;
 	private int		totalktt;
-	private int		totaltotalt;
+	private int		totaltotalt;	//kbo37년 전체 관중 수
 	
 
-	private int		avgsamsunga;
+	private int		avgsamsunga; //삼성의 37년(kbo 1982~2019 시즌 까지)간의 연도별 홈경기 평균 관중
 	private int		avgkiaa;
 	private int		avglottea;
 	private int		avglga;
@@ -70,12 +70,12 @@ public class AhFiveDTO {
 	private int		avgkiwooma;
 	private int		avgnca;
 	private int		avgkta;
-	private int		avgtotala;
+	private int		avgtotala;	//kbo 37년간의 각 경기장 평균 관중
 	
-	private String	yearsChar;
-	private String	totaltChar;
+	private String	yearsChar;	// 차트 표현용 
+	private String	totaltChar;	// 차트 표현용(totalt:int 타입)
 	
-	private String samsungtChar;
+	private String samsungtChar; // 차트 표현용(samsungt:int 타입)
 	private String kiatChar;
 	private String lottetChar;
 	private String lgtChar;
