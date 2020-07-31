@@ -72,7 +72,21 @@ public class AhFiveDTO {
 	private int		avgkta;
 	private int		avgtotala;
 	
-	//---------------------------------
+	private String	yearsChar;
+	private String	totaltChar;
+	
+	private String samsungtChar;
+	private String kiatChar;
+	private String lottetChar;
+	private String lgtChar;
+	private String doosantChar;
+	private String hanwhatChar;
+	private String sktChar;
+	private String kiwoomtChar;
+	private String nctChar;
+	private String kttChar;
+	
+	//------------------------------------------
 	public String getYears() {
 		return years;
 	}
@@ -403,10 +417,78 @@ public class AhFiveDTO {
 	public void setAvgtotala(int avgtotala) {
 		this.avgtotala = avgtotala;
 	}
-
-	
-	//------------------------------------------
-	
+	public String getYearsChar() {
+		return yearsChar;
+	}
+	public void setYearsChar(String yearsChar) {
+		this.yearsChar = yearsChar;
+	}
+	public String getTotaltChar() {
+		return totaltChar;
+	}
+	public void setTotaltChar(String totaltChar) {
+		this.totaltChar = totaltChar;
+	}
+	public String getSamsungtChar() {
+		return samsungtChar;
+	}
+	public void setSamsungtChar(String samsungtChar) {
+		this.samsungtChar = samsungtChar;
+	}
+	public String getKiatChar() {
+		return kiatChar;
+	}
+	public void setKiatChar(String kiatChar) {
+		this.kiatChar = kiatChar;
+	}
+	public String getLottetChar() {
+		return lottetChar;
+	}
+	public void setLottetChar(String lottetChar) {
+		this.lottetChar = lottetChar;
+	}
+	public String getLgtChar() {
+		return lgtChar;
+	}
+	public void setLgtChar(String lgtChar) {
+		this.lgtChar = lgtChar;
+	}
+	public String getDoosantChar() {
+		return doosantChar;
+	}
+	public void setDoosantChar(String doosantChar) {
+		this.doosantChar = doosantChar;
+	}
+	public String getHanwhatChar() {
+		return hanwhatChar;
+	}
+	public void setHanwhatChar(String hanwhatChar) {
+		this.hanwhatChar = hanwhatChar;
+	}
+	public String getSktChar() {
+		return sktChar;
+	}
+	public void setSktChar(String sktChar) {
+		this.sktChar = sktChar;
+	}
+	public String getKiwoomtChar() {
+		return kiwoomtChar;
+	}
+	public void setKiwoomtChar(String kiwoomtChar) {
+		this.kiwoomtChar = kiwoomtChar;
+	}
+	public String getNctChar() {
+		return nctChar;
+	}
+	public void setNctChar(String nctChar) {
+		this.nctChar = nctChar;
+	}
+	public String getKttChar() {
+		return kttChar;
+	}
+	public void setKttChar(String kttChar) {
+		this.kttChar = kttChar;
+	}
 	@Override
 	public String toString() {
 		return "AhFiveDTO [years=" + years + ", samsung=" + samsung + ", samsungt=" + samsungt + ", samsunga="
@@ -422,9 +504,27 @@ public class AhFiveDTO {
 				+ totalktt + ", totaltotalt=" + totaltotalt + ", avgsamsunga=" + avgsamsunga + ", avgkiaa=" + avgkiaa
 				+ ", avglottea=" + avglottea + ", avglga=" + avglga + ", avgdoosana=" + avgdoosana + ", avghanwhaa="
 				+ avghanwhaa + ", avgska=" + avgska + ", avgkiwooma=" + avgkiwooma + ", avgnca=" + avgnca + ", avgkta="
-				+ avgkta + ", avgtotala=" + avgtotala + "]";
+				+ avgkta + ", avgtotala=" + avgtotala + ", yearsChar=" + yearsChar + ", totaltChar=" + totaltChar
+				+ ", samsungtChar=" + samsungtChar + ", kiatChar=" + kiatChar + ", lottetChar=" + lottetChar
+				+ ", lgtChar=" + lgtChar + ", doosantChar=" + doosantChar + ", hanwhatChar=" + hanwhatChar
+				+ ", sktChar=" + sktChar + ", kiwoomtChar=" + kiwoomtChar + ", nctChar=" + nctChar + ", kttChar="
+				+ kttChar + "]";
 	}
 	
+	
+	//---------------------------------
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//---------------------------
+	
+	
+	
 	
 }

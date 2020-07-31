@@ -28,9 +28,9 @@
 		FROM ahFive
 	</select>
 	
-<!-- 	<select id="historyListChart" resultType="AhFiveDTO">
-		SELECT years,totalt FROM ahFive
-	</select> -->
+	<select id="crowdHistoryGraph" resultType="AhFiveDTO">
+		SELECT years AS yearsChar, totalt AS totaltChar FROM ahFive
+	</select>
 <!-- 	<select id="historyList" resultType="com.ggs.DTO.AudienceHistoryDTO"> 
 	select cno from authorsHistory 
 	</select> -->
