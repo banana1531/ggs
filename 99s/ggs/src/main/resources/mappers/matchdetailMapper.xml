@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="matchdetail">
+		<select id="matchdetail" resultType="com.ggs.DTO.TeamRecordDTO">
+		SELECT *
+		FROM teamRecord
+		WHERE gno = #{gno}
+		</select>
+</mapper>

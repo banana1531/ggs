@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="memberMapper">
+	
+	<select id="board" resultType="com.ggs.DTO.BoardDTO">
+	 	SELECT * 
+			FROM
+			(
+				SELECT *
+				FROM freeboard 
+				WHERE id=#{uid} 
+				UNION SELECT * 
+				FROM inforerrorboard 
+				WHERE id=#{uid} 
+				ORDER BY writedate DESC
+			) t
+			WHERE t.isvisible=1 LIMIT 5 ;
+	</select>
+
+</mapper>
+

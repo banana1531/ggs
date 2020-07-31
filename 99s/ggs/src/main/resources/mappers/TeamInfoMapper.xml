@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="team">
+	
+	<!-- 팀 기본정보 가져오기 -->
+	<select id="teamDetail" resultType="com.ggs.DTO.TeamInfoDTO">
+		SELECT * FROM teaminfo where teamname=#{name}
+	</select>
+	
+	<!-- 팀 기본정보 목록 가져오기 -->
+	<select id="teamList" resultType="com.ggs.DTO.TeamInfoDTO">
+		select * from teaminfo where teamName !='경기없음' and teamName !='없음';
+	</select>
+	
+	<!-- 팀 목록 가져오기 -->
+	<select id="getTeamList" resultType="com.ggs.DTO.TeamInfoDTO">
+	SELECT w.team AS teamName, win, score, lose, loss, draw 
+	FROM 
+		(SELECT team, sum(cnt) draw FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt 
+			FROM teamRecord 
+			WHERE ascore = bscore AND ascore &gt; -1 GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt 
+			FROM teamRecord 
+			WHERE bscore = ascore and ascore &gt; -1 GROUP BY bteamname) AS dd
+			GROUP BY team) AS d, 
+		(SELECT team, sum(cnt) lose, sum(score) loss FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
+			FROM teamRecord 
+			WHERE ascore &lt; bscore GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
+			FROM teamRecord 
+			WHERE bscore &lt; ascore GROUP BY bteamname) AS ll
+			GROUP BY team) AS l,
+		(SELECT team, sum(cnt) win, sum(score) score FROM 
+			(SELECT ateamname team, COUNT(ateamname) cnt, SUM(ascore) score 
+			FROM teamRecord 
+			WHERE ascore &gt; bscore GROUP BY ateamname
+			union
+			SELECT bteamname team, COUNT(bteamname) cnt, SUM(bscore) score 
+			FROM teamRecord 
+			WHERE bscore &gt; ascore GROUP BY bteamname) AS ww
+			GROUP BY team) AS w 
+		WHERE w.team!='경기없음' AND w.team=d.team AND w.team=l.team 
+		GROUP BY teamName
+		ORDER BY teamName DESC;
+	</select>
+	
+	
+		
+	<select id="getKIAWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="KIA" AND ascore > bscore) OR (bteamname="KIA" AND bscore > ascore)
+	</select>
+	
+	<select id="getKIADraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="KIA" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="KIA" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getKIALose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="KIA" AND bscore > ascore) OR (bteamname="KIA" AND ascore > bscore)
+	</select>
+
+	<select id="getKIAScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="KIA") AS score
+		FROM teamRecord
+		WHERE ateamname="KIA";
+	</select>
+	
+	<select id="getKIALoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="KIA") AS loss
+		FROM teamRecord
+		WHERE ateamname="KIA";
+	</select>
+	
+	<select id="getKTWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="KT" AND ascore > bscore) OR (bteamname="KT" AND bscore > ascore)
+	</select>
+	
+	<select id="getKTDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="KT" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="KT" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getKTLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="KT" AND bscore > ascore) OR (bteamname="KT" AND ascore > bscore)
+	</select>
+	
+	<select id="getKTScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="KT") AS score
+		FROM teamRecord
+		WHERE ateamname="KT";
+	</select>
+	
+	<select id="getKTLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="KT") AS loss
+		FROM teamRecord
+		WHERE ateamname="KT";
+	</select>
+	
+	<select id="getLGWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="LG" AND ascore > bscore) OR (bteamname="LG" AND bscore > ascore)
+	</select>
+	
+	<select id="getLGDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="LG" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="LG" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getLGLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="LG" AND bscore > ascore) OR (bteamname="LG" AND ascore > bscore)
+	</select>
+	
+	<select id="getLGScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="LG") AS score
+		FROM teamRecord
+		WHERE ateamname="LG";
+	</select>
+	
+	<select id="getLGLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="LG") AS loss
+		FROM teamRecord
+		WHERE ateamname="LG";
+	</select>
+	
+	<select id="getNCWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="NC" AND ascore > bscore) OR (bteamname="NC" AND bscore > ascore)
+	</select>
+	
+	<select id="getNCDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="NC" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="NC" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getNCLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="NC" AND bscore > ascore) OR (bteamname="NC" AND ascore > bscore)
+	</select>
+	
+	<select id="getNCScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="NC") AS score
+		FROM teamRecord
+		WHERE ateamname="NC";
+	</select>
+	
+	<select id="getNCLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="NC") AS loss
+		FROM teamRecord
+		WHERE ateamname="NC";
+	</select>
+	
+	<select id="getSKWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="SK" AND ascore > bscore) OR (bteamname="SK" AND bscore > ascore)
+	</select>
+	
+	<select id="getSKDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="SK" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="SK" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getSKLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="SK" AND bscore > ascore) OR (bteamname="SK" AND ascore > bscore)
+	</select>
+
+	<select id="getSKScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="SK") AS score
+		FROM teamRecord
+		WHERE ateamname="SK";
+	</select>
+	
+	<select id="getSKLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="SK") AS loss
+		FROM teamRecord
+		WHERE ateamname="SK";
+	</select>
+	
+	<select id="getDSWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="두산" AND ascore > bscore) OR (bteamname="두산" AND bscore > ascore)
+	</select>
+	
+	<select id="getDSDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="두산" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="두산" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getDSLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="두산" AND bscore > ascore) OR (bteamname="두산" AND ascore > bscore)
+	</select>
+
+	<select id="getDSScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="두산") AS score
+		FROM teamRecord
+		WHERE ateamname="두산";
+	</select>
+	
+	<select id="getDSLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="두산") AS loss
+		FROM teamRecord
+		WHERE ateamname="두산";
+	</select>
+	
+	<select id="getLTWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="롯데" AND ascore > bscore) OR (bteamname="롯데" AND bscore > ascore)
+	</select>
+	
+	<select id="getLTDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="롯데" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="롯데" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getLTLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="롯데" AND bscore > ascore) OR (bteamname="롯데" AND ascore > bscore)
+	</select>
+
+	<select id="getLTScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="롯데") AS score
+		FROM teamRecord
+		WHERE ateamname="롯데";
+	</select>
+	
+	<select id="getLTLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="롯데") AS loss
+		FROM teamRecord
+		WHERE ateamname="롯데";
+	</select>
+	
+	<select id="getSSWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="삼성" AND ascore > bscore) OR (bteamname="삼성" AND bscore > ascore)
+	</select>
+	
+	<select id="getSSDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="삼성" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="삼성" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getSSLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="삼성" AND bscore > ascore) OR (bteamname="삼성" AND ascore > bscore)
+	</select>
+
+	<select id="getSSScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="삼성") AS score
+		FROM teamRecord
+		WHERE ateamname="삼성";
+	</select>
+	
+	<select id="getSSLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="삼성") AS loss
+		FROM teamRecord
+		WHERE ateamname="삼성";
+	</select>
+	
+	<select id="getKUWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="키움" AND ascore > bscore) OR (bteamname="키움" AND bscore > ascore)
+	</select>
+	
+	<select id="getKUDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="키움" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="키움" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getKULose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="키움" AND bscore > ascore) OR (bteamname="키움" AND ascore > bscore)
+	</select>
+
+	<select id="getKUScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="키움") AS score
+		FROM teamRecord
+		WHERE ateamname="키움";
+	</select>
+	
+	<select id="getKULoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="키움") AS loss
+		FROM teamRecord
+		WHERE ateamname="키움";
+	</select>
+	
+	<select id="getHHWin" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as win
+		FROM teamRecord
+		WHERE (ateamname="한화" AND ascore > bscore) OR (bteamname="한화" AND bscore > ascore)
+	</select>
+	
+	<select id="getHHDraw" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as draw
+		FROM teamRecord
+		WHERE (ateamname="한화" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+		OR
+		(bteamname="한화" and ascore = bscore and ascore!="취소" AND ascore!=" ")
+	</select>
+	
+	<select id="getHHLose" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT count(*) as lose
+		FROM teamRecord
+		WHERE (ateamname="한화" AND bscore > ascore) OR (bteamname="한화" AND ascore > bscore)
+	</select>
+
+	<select id="getHHScore" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(ascore)+
+		(SELECT sum(bscore) FROM teamRecord WHERE bteamname="한화") AS score
+		FROM teamRecord
+		WHERE ateamname="한화";
+	</select>
+	
+	<select id="getHHLoss" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT sum(bscore)+
+		(SELECT sum(ascore) FROM teamRecord WHERE bteamname="한화") AS loss
+		FROM teamRecord
+		WHERE ateamname="한화";
+	</select>
+	
+	<select id="getInfoKIA" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="KIA";
+	</select>
+	
+	<select id="getKIACnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="KIA" OR bteamname="KIA"
+	</select>
+	
+	<select id="getScheduleKIA" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="KIA" OR bteamname="KIA"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5	
+	</select>
+	
+	<select id="getInfoKT" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="KT";
+	</select>
+	
+	<select id="getKTCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="KT" OR bteamname="KT"
+	</select>
+	
+	<select id="getScheduleKT" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="KT" OR bteamname="KT"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoLG" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="LG";
+	</select>
+	
+	<select id="getLGCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="LG" OR bteamname="LG"
+	</select>
+	
+	<select id="getScheduleLG" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="LG" OR bteamname="LG"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoNC" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="NC";
+	</select>
+	
+	<select id="getNCCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="NC" OR bteamname="NC"
+	</select>
+	
+	<select id="getScheduleNC" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="NC" OR bteamname="NC"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoSK" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="SK";
+	</select>
+	
+	<select id="getSKCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="SK" OR bteamname="SK"
+	</select>
+	
+	<select id="getScheduleSK" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="SK" OR bteamname="SK"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoDS" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="두산";
+	</select>
+	
+	<select id="getDSCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="두산" OR bteamname="두산"
+	</select>
+	
+	<select id="getScheduleDS" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="두산" OR bteamname="두산"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoLT" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="롯데";
+	</select>
+	
+	<select id="getLTCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="롯데" OR bteamname="롯데"
+	</select>
+	
+	<select id="getScheduleLT" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="롯데" OR bteamname="롯데"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoSS" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="삼성";
+	</select>
+	
+	<select id="getSSCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="삼성" OR bteamname="삼성"
+	</select>
+	
+	<select id="getScheduleSS" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="삼성" OR bteamname="삼성"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoKU" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="키움";
+	</select>
+	
+	<select id="getKUCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="키움" OR bteamname="키움"
+	</select>
+	
+	<select id="getScheduleKU" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="키움" OR bteamname="키움"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+	
+	<select id="getInfoHH" parameterType="TeamInfoDTO" resultType="TeamInfoDTO">
+		SELECT *
+		FROM teaminfo
+		WHERE teamname="한화";
+	</select>
+	
+	<select id="getHHCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM teamRecord
+		WHERE ateamname="한화" OR bteamname="한화"
+	</select>
+	
+	<select id="getScheduleHH" parameterType="TeamRecordDTO" resultType="TeamRecordDTO">
+		SELECT *
+        FROM teamRecord
+        WHERE ateamname="한화" OR bteamname="한화"
+        ORDER BY gno DESC
+        LIMIT #{start}, 5
+	</select>
+
+	<!-- 팀 상세 정보 수정 -->
+	<update id="updateInfo">
+		UPDATE teaminfo SET
+		tel=#{tel}, homepage=#{homepage},
+		birth=#{birth},location=#{location},
+		stadium=#{stadium},towner=#{towner},
+		ceo=#{ceo},head=#{head},director=#{director},
+		history=#{history}
+		WHERE teamName=#{teamName};
+	</update>
+</mapper>
+
+
+
+

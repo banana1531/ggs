@@ -1,0 +1,42 @@
+package com.ggs.util;
+
+import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ggs.DAO.VisitCountDAO;
+
+/**
+ * Application Lifecycle Listener implementation class SessionCounter
+ *
+ */
+@WebListener
+public class SessionCounter implements HttpSessionListener {
+	
+	/*private VisitCountDAO visitCountDAO = VisitCountDAO.getInstance();*/
+	
+	/*@Autowired
+	private VisitCountDAO visitCountDAO;*/
+	
+    public SessionCounter() {
+    	System.out.println("SessionCounter.SessionCounter() 생성되었습니다.");
+    }
+
+	/**
+     * @see HttpSessionListener#sessionCreated(HttpSessionEvent)
+     */
+    public void sessionCreated(HttpSessionEvent se)  { 
+         System.out.println("SessionCounter.sessionCreated() 생성되었습니다.");
+        // visitCountDAO.insertVisitor();      
+    }
+
+	/**
+     * @see HttpSessionListener#sessionDestroyed(HttpSessionEvent)
+     */
+    public void sessionDestroyed(HttpSessionEvent se)  { 
+         // TODO Auto-generated method stub
+    }
+	
+}

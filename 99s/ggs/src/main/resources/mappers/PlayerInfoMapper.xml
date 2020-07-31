@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="player">
+	
+	
+	<!-- 투수 경기 기록 가져오기 -->
+	<select id="pitcher" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
+		SELECT *
+		FROM playerRecord
+		WHERE pno=#{pno}
+		ORDER BY gdate DESC
+		LIMIT #{start}, 10
+	</select>
+
+	<select id="batter" parameterType="PlayerRecordDTO" resultType="PlayerRecordDTO">
+		SELECT *
+		FROM playerRecord
+		WHERE pno=#{pno}
+		ORDER BY gdate DESC
+		LIMIT #{start}, 10
+	</select>
+
+	<select id="PlayerPage" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerRecord
+		WHERE pno=#{pno}
+	</select>
+
+	<select id="ranking" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, sum(anta)/sum(tasu) AS tayul
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "타자"
+		GROUP BY pno
+		ORDER BY tayul DESC
+		LIMIT 5
+	</select>
+
+	<select id="ranking2" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, sum(home_run) AS home_run
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "타자"
+		GROUP BY pno
+		ORDER BY home_run DESC
+		LIMIT 5
+	</select>
+	
+	<select id="ranking3" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, sum(tajum) AS tajum
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "타자"
+		GROUP BY pno
+		ORDER BY tajum DESC
+		LIMIT 5
+	</select>
+	
+	<select id="ranking4" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, count(*) AS sunbal
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "투수"
+		GROUP BY pno
+		ORDER BY sunbal DESC
+		LIMIT 5
+	</select>
+	
+	<select id="ranking5" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, SUM(samjin) AS samjin
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "투수"
+		GROUP BY pno
+		ORDER BY samjin DESC
+		LIMIT 5
+	</select>
+	
+	<select id="ranking6" resultType="PlayerRecordDTO">
+		SELECT r.pno, i.name, i.teamname, SUM(anta)/SUM(tasu) AS sunbal
+		FROM playerRecord r, playerinfo i
+		WHERE r.pno=i.pno AND r.ptype = "투수"
+		GROUP BY pno
+		ORDER BY sunbal ASC
+		LIMIT 5
+	</select>
+	
+	<select id="common" parameterType="int" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE pno=#{pno}
+	</select>
+	
+	<select id="pitcher2" parameterType="int" resultType="PlayerRecordDTO">
+		select count(*) as sunbal, sum(samjin) as samjin, sum(anta) as anta,
+		(sum(ball4)+sum(go4)+sum(sagu)) as sagu, sum(jachak) as jachak,
+		sum(home_run) as home_run
+		from playerRecord
+		where pno=#{pno}
+	</select>
+	
+	<select id="batter2" parameterType="int" resultType="PlayerRecordDTO">
+		select sum(anta)/sum(tasu) as tayul, count(*) as sunbal, sum(djum) as djum,
+		sum(anta) as anta, sum(home_run) as home_run, sum(tajum) as tajum,
+		sum(samjin) as samjin, (sum(ball4)+sum(go4)+sum(sagu)) as sagu,
+		sum(doru) as doru
+		from playerRecord
+		where pno=#{pno}
+	</select>
+	
+	<select id="getTeamCnt" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM playerinfo
+		WHERE teamname=#{teamname}
+	</select>
+	
+	<select id="getTeamList" parameterType="PlayerInfoDTO" resultType="PlayerInfoDTO">
+		SELECT *
+		FROM playerinfo
+		WHERE teamname=#{teamname}
+		ORDER BY labelno ASC
+		LIMIT #{start}, 10
+	</select>
+	
+	<select id="ining" resultType="PlayerRecordDTO">
+		SELECT ining
+		FROM playerRecord
+		WHERE pno=#{pno}
+	</select>
+	
+	<select id="iningCount" resultType="PlayerRecordDTO">
+		SELECT count(*) as gsc
+		FROM playerRecord
+		WHERE pno=#{pno}
+	</select>
+	
+	
+	<!-- 선수 명단 가져오기 팀 무시 -->
+	<select id="playerList" resultType="com.ggs.DTO.PlayerInfoDTO">
+		select pno, name, labelno, position, teamname, totalcnt from playerinfo, (
+		select count(*) as totalcnt from playerinfo 
+			<choose>
+			<when test="name != null"> where name=#{name}</when>
+			<when test="position != null"> where position like concat('%',#{position},'%')</when>
+			<when test="teamname != null"> where teamname=#{teamname}</when>
+		</choose>
+		) as c
+		<choose>
+			<when test="name != null"> where name=#{name}</when>
+			<when test="position != null"> where position  like concat('%',#{position},'%')</when>
+			<when test="teamname != null"> where teamname=#{teamname}</when>
+		</choose>
+		order by name limit #{start}, 10;
+	</select>
+	
+	<!-- 선수 상세 정보 가져오기 -->
+	<select id="playerDetail" resultType="com.ggs.DTO.PlayerInfoDTO">
+		SELECT * FROM playerinfo WHERE pno=#{pno}
+	</select>
+	
+	<!-- 선수 정보 업데이트 -->
+	<update id="playerUpdate">
+		update playerinfo set name=#{name},labelno=#labelno},
+		birth=#{birth},
+		position=#{position},
+		height=#{height},
+		weight=#{weight},
+		joinday=#{joinday},
+		teamname=#{teamname},
+		bmi=#{bmi}
+		where pno=#{pno}
+	</update>
+	
+	<!-- 선수 경기 상세 보기 -->
+	<select id="playerRecordDetail" resultType="com.ggs.DTO.PlayerRecordDTO">
+		select * from playerRecord where pgno=#{pgno}
+	</select>
+	
+	<!-- 선수 경기 수정하기 -->
+	<update id="playerRecordUpdate">
+		update playerRecord set gresult=#{gresult}
+		where pgno=#{pgno}
+	</update>
+	
+	
+	<!-- playerRecord 중복데이터 체크 /투수-->
+	<select id="precordChk" resultType="java.lang.Integer" parameterType="java.util.List">
+	select count(*) AS cntr from playerRecord where pno=
+	<foreach collection="list" item="list" index="index" >	
+      <if test="index==28 ">     
+            #{list[28]} 
+      </if> 
+	</foreach>
+	AND gdate=
+		<foreach collection="list" item="list" index="index" >	
+      <if test="index==0 ">     
+            #{list[0]} 
+      </if> 
+	</foreach>
+	</select> 
+	
+	
+	<!-- playerRecord 중복데이터 체크 /타자-->
+	<select id="precordChkJ" resultType="java.lang.Integer" parameterType="java.util.List">
+	select count(*) AS cntr from playerRecord where pno=
+	<foreach collection="list" item="list" index="index" >	
+      <if test="index==30 ">     
+            #{list[30]} 
+      </if> 
+	</foreach>
+	AND gdate=
+		<foreach collection="list" item="list" index="index" >	
+      <if test="index==0 ">     
+            #{list[0]} 
+      </if> 
+	</foreach>
+	</select> 	
+	
+	
+	<!-- playerRecord insert /투수 -->
+	<insert id="prInsert" parameterType="java.util.List">
+		insert into playerRecord (gdate,vs,sunbal, ining, siljum, jachak,taja,tasu,anta,eta,
+								  samta, home_run,ball4,go4,sagu,samjin,tugu,whip, tayul, culu, ops,era, avli, re24,
+								  wpa, gsc,gdec,gangyuk,pno,teamname,gresult,ptype)
+		values(
+		<foreach collection="list" item="list" index="index" separator="," >	         
+	            #{list}   
+		</foreach>
+		)
+	</insert>
+	
+	
+	<!-- playerRecord insert /타자 -->
+	<insert id="prInsertJ" parameterType="java.util.List">
+		insert into playerRecord (gdate,vs,tasun,p,sunbal,tasu,djum,anta,eta,samta,
+								  home_run,ruta,tajum,doru,dosil,ball4,go4,sagu,
+								  samjin,byungsal,hita,hibi,tayul,culu,jangta,ops,tugu,avli,re24,wpa,
+								  pno,teamname,gresult,ptype)
+		values(
+		<foreach collection="list" item="list" index="index" separator="," >	         
+	            #{list}   
+		</foreach>
+		)
+	</insert>
+
+	
+</mapper>
+

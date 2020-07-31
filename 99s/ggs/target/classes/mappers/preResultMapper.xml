@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="preresult">
+	
+	<!-- 최근 승부예측 가져오기 -->
+	<select id="mypredict" parameterType="com.ggs.DTO.PreResultDTO"  resultType="com.ggs.DTO.PreResultDTO">
+	SELECT * FROM
+		(SELECT preresult.gno, gdate, ateamname, ascore, bteamname, bscore, id,  predict, ppoint 
+		from teamRecord, preresult 
+		where teamRecord.gno=preresult.gno AND id=#{id}) AS a,
+		(SELECT COUNT(*) totalcnt, ROUND( COUNT(ppoint)/COUNT(*),2)*100 rate FROM preresult WHERE id=#{id}) AS b order by gdate desc
+					<choose>
+					<when test="bteamname==null">limit 5</when>
+					<otherwise>limit #{start}, 10</otherwise>
+					</choose>
+	</select>
+	
+	<!-- 승부예측 등록 -->
+	<insert id="preresult" parameterType="com.ggs.DTO.PreResultDTO">
+	INSERT into preresult(id,gno,predict)
+	VALUES (#{id},#{gno},#{predict});
+	</insert>
+	
+	<!-- 승부예측 수량 집계 -->
+	<select id="predictcountview" parameterType="com.ggs.DTO.TeamRecordDTO" resultType="com.ggs.DTO.PreResultDTO">
+	SELECT * FROM
+		(SELECT COUNT(predict) AS totalcnt FROM preresult WHERE predict = #{ateamname} AND gno=#{gno}) AS a,
+		(SELECT COUNT(predict) AS totalpp FROM preresult WHERE predict = '무승부' AND gno=#{gno}) AS d,
+		(SELECT COUNT(predict) AS precount FROM preresult WHERE predict = #{bteamname} AND gno=#{gno}) AS b;
+	</select>
+
+	<!-- 승부예측 참여 여부 확인 -->
+	<select id="checkList" resultType="com.ggs.DTO.PreResultDTO">
+		select * from preresult where gno=#{gno} and id=#{id}
+	</select>
+	
+	
+	<!-- 경기 결과 번호 및 팀이름 가져오기-->
+	
+	<select id="getList" resultType="com.ggs.DTO.PreResultDTO">
+		SELECT * FROM 
+		(SELECT gno, gdate, ateamname FROM teamRecord WHERE ascore>bscore AND DATEDIFF(gdate, DATE(NOW()))=-1
+		union
+		SELECT gno, gdate, bteamname ateamname FROM teamRecord WHERE bscore>ascore AND DATEDIFF(gdate, DATE(NOW()))=-1
+		union
+		SELECT gno, gdate, '무승부' ateamname FROM teamRecord WHERE ascore=bscore AND ascore>-1 AND DATEDIFF(gdate, DATE(NOW()))=-1
+		UNION
+		SELECT gno, gdate, '경기취소' ateamname FROM teamRecord WHERE ascore=-1 AND DATEDIFF(gdate, DATE(NOW()))=-1) AS a
+		GROUP BY gno
+	</select>
+	
+	
+	<!-- 경기번호를 받아서 전체  지급 포인트 계산하기 -->
+	<select id="totalPoint" parameterType="com.ggs.DTO.PreResultDTO"  resultType="java.lang.Integer">
+		SELECT ifnull(round(total*10+200/p),0) total FROM 
+			(SELECT COUNT(*) p FROM preresult WHERE gno=#{gno} AND predict=#{ateamname}) AS a,
+			(SELECT COUNT(*) total  FROM preresult WHERE gno=#{gno}) AS b
+	</select>
+	
+	
+	<!-- 경기별 승부예측 맞춘사람 명단 가져오기 -->
+	<select id="correctList" resultType="com.ggs.DTO.PreResultDTO">
+		SELECT id, ino FROM preresult WHERE gno=#{gno} 
+		<if test="ateamname!='경기취소'">AND predict=#{ateamname}</if>
+	</select>
+	
+	
+	<!-- 포인트 지급하기 -->
+	<update id="updatePPoint" parameterType="com.ggs.DTO.PreResultDTO">
+		 UPDATE preresult SET ppoint=#{ppoint} WHERE ino=#{ino};
+	</update>
+</mapper>
+
