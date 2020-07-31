@@ -36,23 +36,15 @@ public class CrowdService {
 
 
 	public List crowdHistoryGraph(AhFiveDTO afDTO) {
-	
 		List crowdHistoryGraph = crDAO.crowdHistoryGraph(afDTO);
 		System.out.println("111 crowdHistoryGraph = "+crowdHistoryGraph);		
-		
-//		int totalt = afDTO.getTotalt();
-//		String totaltChar = afDTO.getTotaltChar(); 
-//		totaltChar = "[" + afDTO.getTotalt() + "]";
-//		
-//		String years = afDTO.getYears();
-//		String yearsChar = afDTO.getYearsChar();
-//		yearsChar = "[" + afDTO.getYearsChar() + "]";
-
-		System.out.println("222 서비스 crowdHistoryGraph = "+crowdHistoryGraph);
-		
-
-		
 		return crowdHistoryGraph;
+	}
+	
+	public List crowdHistoryGraph2(AhFiveDTO afDTO) {
+		List crowdHistoryGraph2 = crDAO.crowdHistoryGraph2(afDTO);
+		System.out.println("111 crowdHistoryGraph2 = "+crowdHistoryGraph2);		
+		return crowdHistoryGraph2;
 	}
 
 	

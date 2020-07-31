@@ -30,5 +30,10 @@ public class CrowdDAO {
 		System.out.println("3CrowdDAO의 crowdHistoryGraph 진입");
 		return session.selectList("crowd.crowdHistoryGraph", afDTO);
 	}
+	
+	public List crowdHistoryGraph2(AhFiveDTO afDTO) {
+		System.out.println("4CrowdDAO의 crowdHistoryGraph2 진입");
+		return session.selectList("crowd.crowdHistoryGraph2", afDTO);
+	}
 
 }

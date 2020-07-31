@@ -31,6 +31,23 @@
 	<select id="crowdHistoryGraph" resultType="AhFiveDTO">
 		SELECT years AS yearsChar, totalt AS totaltChar FROM ahFive
 	</select>
+	
+	<select id="crowdHistoryGraph2" resultType="AhFiveDTO">
+		SELECT 
+				years AS yearsChar, 
+				totalt AS totaltChar, 
+				samsungt AS samsungtChar,
+				kiat AS kiatChar,
+				lottet AS lottetChar,
+				lgt AS lgtChar,
+				doosant AS doosantChar,
+				hanwhat AS hanwhatChar,
+				skt AS sktChar,
+				kiwoomt AS kiwoomtChar,
+				nct AS nctChar,
+				ktt AS kttChar
+ 		FROM ahFive
+	</select>
 <!-- 	<select id="historyList" resultType="com.ggs.DTO.AudienceHistoryDTO"> 
 	select cno from authorsHistory 
 	</select> -->

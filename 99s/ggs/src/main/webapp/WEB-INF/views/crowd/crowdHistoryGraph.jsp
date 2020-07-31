@@ -12,6 +12,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 <style type="text/css">
+
 .highcharts-figure, .highcharts-data-table table {
   min-width: 310px; 
   max-width: 800px;
@@ -19,7 +20,7 @@
 }
 
 #container {
-  height: 400px;
+  height: 700px;
 }
 
 .highcharts-data-table table {
@@ -60,7 +61,7 @@ Highcharts.chart('container', {
 	    text: '연도별 관중 현황'
 	  },
 	  subtitle: {
-	    text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+	    text: 'Source: <a href="https://www.koreabaseball.com">kbo</a>'
 	  },
 	  xAxis: {
 	    categories: ${yearList},
@@ -71,7 +72,7 @@ Highcharts.chart('container', {
 	  yAxis: {
 	    min: 0,
 	    title: {
-	      text: 'Population (millions)',
+	      text: '관중수(명)		SK:쌍방울+SK, 키움:삼미+청보+태평양+현대+넥센 관객 총합',
 	      align: 'high'
 	    },
 	    labels: {
@@ -79,7 +80,7 @@ Highcharts.chart('container', {
 	    }
 	  },
 	  tooltip: {
-	    valueSuffix: ' millions'
+	    valueSuffix: ' 명'
 	  },
 	  plotOptions: {
 	    bar: {
@@ -113,19 +114,20 @@ Highcharts.chart('container', {
 </head>
 <body>
 	<a href="../admin/adminMain.gg">메인으로</a>
+	<a href="../crowd/crowdHistory.gg">역대 관중 현황</a>
+	<a href="../crowd/crowdHistoryGraph2.gg">팀별 역대 관중 비율</a>
+	
+	
 	<h3>crowdHistory</h3>
 	<h3>역대 관중 현황 그래프</h3>
-	<h3>주석추가,세자리 쉼표, M밀리언표시 대신 명, 연도 2년씩표시->1년씩 표시</h3>
+	<br>
+	<h3>세자리 쉼표</h3>
 	<br>
 	<br>
 
 <figure class="highcharts-figure">
   <div id="container"></div>
-  <p class="highcharts-description">
-    Bar chart showing horizontal columns. This chart type is often
-    beneficial for smaller screens, as the user can scroll through the data
-    vertically, and axis labels are easy to read.
-  </p>
+  <p class="highcharts-description"></p>
 </figure>
 
 	<br>
