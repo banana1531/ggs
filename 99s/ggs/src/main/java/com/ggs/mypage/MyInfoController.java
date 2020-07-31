@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.plaf.metal.MetalMenuBarUI;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ggs.DTO.MembersDTO;
 import com.ggs.util.ConfirmMail;
@@ -101,20 +104,21 @@ public class MyInfoController {
 	// -------------------------------------------
 	// 회원탈퇴 폼 보여주기
 	@RequestMapping("/leaveForm.gg")
-	public String leaveForm() {
-
-		// 파라미터
-		// 회원정보(id)
-
+	public String leaveForm(@RequestParam(value="email") String email,
+							HttpServletRequest request) {
+		request.setAttribute("email", email);
 		return "myPage/leave";
 	}
 
 	// 인증번호 보내기
-	@RequestMapping("/sendNum.gg")
-	public String sendNum(Model model) {
+	@ResponseBody
+	@RequestMapping("/sendNum")
+	public JSONObject sendNum(@RequestParam(value="email") String email) {
+		System.out.println("sendNum / email = " + email);
+		JSONObject obj = new JSONObject();
 		ConfirmMail mail = new ConfirmMail();
-		model.addAttribute("num", mail.sendMail("desertfish@naver.com"));
-		return "myPage/leave";
+		obj.put("confirmNum", mail.sendMail(email));		
+		return obj;
 	}
 
 	// 회원탈퇴 하기

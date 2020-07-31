@@ -153,7 +153,7 @@ public class LoginController {
 	
 	// 회원가입시 - 아이디 중복체크
 	@RequestMapping("/mailAuth1.gg")
-	public ModelAndView mailAuth1(Model model, MembersDTO mdto, ModelAndView mv) {
+	public ModelAndView mailAuth1(MembersDTO mdto, ModelAndView mv) {
 		System.out.println("요청 함수 회원가입용 mailAuth1()!");
 
 		// 1.파라미터 받기
@@ -178,54 +178,58 @@ public class LoginController {
 	}
 
 	
-	//인증번호 보내기   이름-메일(아이디찾기) / id-메일 매칭(비밀번호찾기) 
-	@RequestMapping("/mailAuth.gg")
-	public ModelAndView mailAuth(Model model,MembersDTO mdto,ModelAndView mv) {
-		System.out.println("요청 함수 mailAuth()!"); 
+	// 이메일 인증번호 보내기 - 아이디 찾기, 비밀번호 찾기
+	@ResponseBody
+	@RequestMapping("/mailAuth")
+	public JSONObject emailAuth2(MembersDTO mdto) {
+		System.out.println("아이디 찾기, 비밀번호 찾기 emailAuth2() 진입");
 		ConfirmMail mail = new ConfirmMail();
-		//1.파라미터 받기
-		String id= mdto.getId();
-		String email=mdto.getEmail();
-		//2.비즈니스 로직
-		if(id==null) {		
+
+		// 1.파라미터 받기
+		String name= mdto.getName();
+		String id = mdto.getId();
+		String email = mdto.getEmail();
+		System.out.println(name+ "/" + id + "/" + email);
+		JSONObject obj = new JSONObject();
+
+		// 2.비즈니스 로직
+		if(id==null) {	
 		MembersDTO result = mService.mailAuth(mdto);
-		if (result != null) { 
-		//일치 성공
-			System.out.println("메일인증 매칭 성공 email= "+email);
-			model.addAttribute("num", mail.sendMail(email));	
-			mv.setViewName("member/idFindFrm2");
-			mv.addObject("result",result);
-		}
-		else {
-		//일치 실패 
-			System.out.println("메일인증 매칭실패");
-			mv.setViewName("member/idFindFrm");
-			mv.addObject("msg","fail");
-		}
+		// System.out.println("result=="+result);
+			if (result != null) { 
+				//일치 성공
+				System.out.println("메일인증 매칭 성공 email= "+email);
+				obj.put("confirmNum", mail.sendMail(email));
+				obj.put("result", result);
+			
+			}else {
+				//일치 실패 
+				System.out.println("메일인증 매칭실패");
+				obj.put("result", result);
+				
+			}
 		}else {
 			MembersDTO result = mService.mailAuth(mdto);
 			if (result != null) { 
 			//일치 성공
 				System.out.println("pwFind 메일인증 매칭 성공 email= "+email);
-				model.addAttribute("num", mail.sendMail(email));			
-				mv.setViewName("member/pwFindFrm");
-				mv.addObject("result",result);
+				obj.put("confirmNum", mail.sendMail(email));			
+				obj.put("result", result);
 			}
 			else {
 			//일치 실패 
 				System.out.println("메일인증 매칭실패");
-				mv.setViewName("member/pwFindFrm");
-				mv.addObject("msg","fail");
+				obj.put("result", result);
 			}
 		}
-		return mv;
+		return obj;
 	}
 	
 	
 	// 이메일 인증번호 보내기 - 회원가입
 		@ResponseBody
 		@RequestMapping("/mailAuth2")
-		public JSONObject emailAuth(MembersDTO mdto, Model model) {
+		public JSONObject emailAuth(MembersDTO mdto) {
 			System.out.println("회원가입 emailAuth() 진입");
 			ConfirmMail mail = new ConfirmMail();
 

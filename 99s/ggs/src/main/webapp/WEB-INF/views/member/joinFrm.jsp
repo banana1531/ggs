@@ -156,15 +156,14 @@
 					</tr>
 					<tr>
 						<td>이메일</td>
-						<td><input type="email" id="email" name="email"
-							value="${email}" /> <input id="emailBtn" type="button"
-							value="인증번호 받기" /></td>
+						<td><input type="email" id="email" name="email" value="${email}" /> 
+							<input id="emailBtn" type="button"value="인증번호 받기" /></td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>인증번호</td>
-						<td><input id="emailNum" type="text" /> <input
-							id="confirmChk" type="button" value="인증번호 확인" /></td>
+						<td><input id="emailNum" type="text" /> 
+							<input id="confirmChk" type="button" value="인증번호 확인" /></td>
 						<td></td>
 					</tr>
 	
@@ -175,8 +174,8 @@
 					</tr>
 					<tr>
 						<td>비밀번호 확인</td>
-						<td><input type="password" id="pw2" name="pw2" /> <span
-							id="pwChk"></span></td>
+						<td><input type="password" id="pw2" name="pw2" /> 
+						<span id="pwChk"></span></td>
 						<td></td>
 					</tr>
 					<tr>
