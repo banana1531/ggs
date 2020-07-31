@@ -28,7 +28,7 @@
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=삼성' "><img width="50" height="30" src="/resources/img/삼성.jpg"><br/>삼성</button>
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=키움' "><img width="50" height="30" src="/resources/img/키움.jpg"><br/>키움</button>
 	<button type="button" onclick="location.href='../player/teamList.gg?teamname=한화' "><img width="50" height="30" src="/resources/img/한화.jpg"><br/>한화</button>
-	<button type="button" onclick="location.href='./list.gg' ">선수 Top5</button>
+	<button type="button" onclick="location.href='./list.gg' "><img width="50" height="30" src="/resources/img/top5.PNG"><br/>선수 Top5</button>
 	<br/>
 	<hr/>
 	<h3>타자 순위 TOP5</h3>

@@ -105,5 +105,28 @@ public class PlayerInfoDAO {
 	public int playerRecordUpdate(PlayerRecordDTO playerRecordDTO) {
 		return session.update("player.playerRecordUpdate", playerRecordDTO);
 	}
+	
+	//playerRecord 중복데이터 체크 -투수
+	public int precordChk(ArrayList<String> list1) {
+		return session.selectOne("player.precordChk", list1);
+	}
+	//playerRecord 중복데이터 체크 -타자
+		public int precordChkJ(ArrayList<String> list1) {
+			return session.selectOne("player.precordChkJ", list1);
+		}
+	//playerRecord insert -투수
+	public void prInsert(ArrayList<String> list1) {
+		session.insert("player.prInsert", list1);
+	}
+	//playerRecord insert -타자
+	public void prInsertJ(ArrayList<String> list1) {
+		session.insert("player.prInsertJ", list1);
+	}
+	
+	
+	
+	
+	
+	
 
 }

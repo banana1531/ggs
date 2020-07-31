@@ -26,7 +26,12 @@ public class FreeboardController {
 	@GetMapping("/list")
 	public ModelAndView freeboardList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value ="result", defaultValue="0") int result,
 			ModelAndView mv) {
+		
+		if(result!=0) {
+			mv.addObject("result", "조회권한이 없습니다.");
+		}
 		
 		NoticePageUtil pInfo = fbService.freeboardPage(nowPage);
 		ArrayList<FreeboardDTO> freeboardList = fbService.freeboardList(pInfo);
@@ -47,8 +52,13 @@ public class FreeboardController {
 			@RequestParam(value="nowPage", defaultValue="1") int nowPage,
 			@RequestParam(value="views") int views,
 			@RequestParam(value = "nowPage2", required = false, defaultValue = "1") int nowPage2,
+			@RequestParam(value = "re", defaultValue="0") int re,
 			String result,
 			ModelAndView mv) {
+		
+		if(re!=0) mv.addObject("re", "조작 권한이 없습니다.");
+		
+		
 		System.out.println("freeboardDetail. result="+result);
 		fbService.hit(views,writeno);
 		

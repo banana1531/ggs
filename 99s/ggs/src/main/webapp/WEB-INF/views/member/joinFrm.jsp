@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head title="회원가입">
 <meta http-equiv="Content=Type" content="text/html; charset=UTF-8">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
 	$(function(){
 		//아이디중복 체크
@@ -132,61 +131,78 @@
 
 </head>
 <body>
-	<%
-		request.setCharacterEncoding("UTF-8");
-	%>
-	<h2>회원가입</h2>
+<div class="container" align="center">
+<% request.setCharacterEncoding("UTF-8"); %>
+<h2 style="margin-top: 150px">회원가입</h2>
+<div class="container" style="width: 800px" align="left">
+	
 	<hr />
-	<form action="../member/joinProc.gg" id="joinFrm" method="post">
-		<table>
+	<table style="margin-left: 200px">
+		<form action="../member/mailAuth1.gg" id="mailAuthFrm" method="post">
 			<tr>
 				<td>아이디</td>
-				<td><input type="text" id="id" name="id" value="${id}" /> <input
-					id="idChk" type="button" value="중복확인" /> <c:if
-						test="${msg=='fail'}">
-						<span>중복되는 아이디 입니다.</span>
-					</c:if> <c:if test="${msg=='notmember'}">
-						<span>사용할 수 있는 아이디 입니다.</span>
-					</c:if></td>
+				<td><input type="text" id="id" name="id" value="${id}"/>
+					<input id="idChk" type="button" value="중복확인" />
+					</td>
+					<td>
+				<c:if test="${msg=='fail'}">
+					<span>중복되는 아이디 입니다.</span>
+				</c:if>
+				<c:if test="${msg=='notmember'}">
+					<span>사용할 수 있는 아이디 입니다.</span>
+				</c:if>
+				</td>
 			</tr>
 			<tr>
 				<td>이메일</td>
 				<td><input type="email" id="email" name="email"
 					value="${email}" /> <input id="emailBtn" type="button"
 					value="인증번호 받기" /></td>
+					<td></td>
 			</tr>
+		</form>
 			<tr>
 				<td>인증번호</td>
 				<td><input id="emailNum" type="text" /> <input id="confirmChk"
 					type="button" value="인증번호 확인" /></td>
+					<td></td>
 			</tr>
+			
+		<form action="../member/joinProc.gg" id="joinFrm" method="post" >
 			<tr>
 				<td>비밀번호</td>
-				<td><input type="password" id="pw" name="pw" /></td>
+				<td><input type="password" id="pw" name="pw"/></td>
+				<td><input type="hidden" name="id" value="${id}" />
+					<input type="hidden" name="email" value="${email}" /></td>
 			</tr>
 			<tr>
 				<td>비밀번호 확인</td>
-				<td><input type="password" id="pw2" name="pw2" /> <span
-					id="pwChk"></span></td>
+				<td><input type="password" id="pw2" name="pw2"/>
+				<span id="pwChk"></span>
+				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>이름</td>
 				<td><input type="text" id="name" name="name" /></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>생년월일</td>
 				<td><input type="date" id="birth" name="birth" /></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>성별</td>
 				<td><input type="radio" id="m" name="gender" value="남자">&nbsp;남자</input>
 					<input type="radio" id="f" name="gender" value="여자">&nbsp;여자</input>
-					<input type="radio" id="n" name="gender" value="" checked="checked">&nbsp;선택
-					안함</input></td>
+					<input type="radio" id="n" name="gender" value=""  checked="checked">&nbsp;선택 안함</input>
+				</td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>선호팀</td>
-				<td><select id="team" name="team">
+				<td><select id="team" name="team" >
 						<option value="없음" selected>없음</option>
 						<option value="두산">두산</option>
 						<option value="KT">KT</option>
@@ -198,15 +214,19 @@
 						<option value="삼성">삼성</option>
 						<option value="SK">SK</option>
 						<option value="한화">한화</option>
-				</select>
-			</tr>
-			<tr>
+				</select></td>
 				<td></td>
-				<td colspan="2" class="center"><input type="reset" value="취소"
-					onclick="location.href='../'" />&nbsp; <input id="joinProc"
-					type="button" value="가입" /></a></td>
+			</tr>	
+			<tr align="center">
+				<td colspan="2" class="center">
+					<input type="reset" value="취소" onclick="location.href='../'" />&nbsp;
+					<input id="joinProc" type="button" value="가입" />
+				</td>
+				<td></td>
 			</tr>
 		</table>
 	</form>
+	</div>
+	</div>
 </body>
 </html>

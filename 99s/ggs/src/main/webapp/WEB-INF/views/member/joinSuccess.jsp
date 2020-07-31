@@ -5,7 +5,8 @@
 <head title="회원가입완료">
 </head>
 <body>
-	<h2>회원가입</h2>
+<div class="container" align="center">
+	<h2 style="margin-top: 200px">회원가입</h2>
 	<hr/>
 	<table>
 		<tr>
@@ -16,6 +17,7 @@
 				<button type="button" onclick="location.href='../member/loginFrm.gg'">&nbsp;로그인&nbsp;</button>
 			</td>
 		</tr>
-	</table>	
+	</table>
+	</div>	
 </body>
 </html>

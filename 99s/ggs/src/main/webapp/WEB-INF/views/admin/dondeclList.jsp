@@ -10,14 +10,26 @@
 <script>
 $(function(){
 	$(".dto").click(function(){
-		var no = $(this).find(".no").text();
-		var boardname = $(this).find(".bname").text();
-		location="/admin/declDetail.gg?boardname=" + boardname + "&writeno=" + no;
+		var wNo = $(this).find("#wNo").val();
+		var fno = $(this).find(".no").text();
+		var boardname = $(this).find("#bname").val();
+		location="/admin/declDetail.gg?wno=" + wNo+"&fno="+fno+"&boardname="+boardname;
 	});
 	$(".page").click(function(){
 		var pageNo=$(this).text();
 		location="/admin/dondeclList.gg?pageNo="+pageNo
 	})
+	$("#next").click(function(){
+		var pageNo = $("#nextv").val();
+		var name   = $("#names").text();
+		location="/admin/teamRecordP?name="+name+"&pageNo="+pageNo;
+	})
+	$("#prev").click(function(){
+		var pageNo = $("#prevv").val();
+		var name   = $("#names").text();
+		location="/admin/teamRecordP?name="+name+"&pageNo="+pageNo;
+	})
+		
 });
 </script>
 </head>
@@ -57,6 +69,7 @@ $(function(){
 				<tr class="dto">
 					<td>
 					<input type="hidden" id="bname" value="${list.boardname}">
+					<input type="hidden" id="wNo" value="${list.wNo}">
 					<c:choose>
 						<c:when test="${list.boardname=='freeboard'}">자유게시판</c:when>
 						<c:otherwise>정보오류 신고</c:otherwise>
@@ -72,13 +85,23 @@ $(function(){
 				</tr>
 			</c:forEach>
 			<tr>
-				<td align="center" colspan="7">
-				<c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
-				<c:forEach var="i"
-						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-					[<a class="page">${i}</a>]
+				<td align="center" colspan="8">
+				<a id="prev">
+				<c:if test="${pageInfo.startPage>1}">
+					<input type="hidden" id="prevv" value="${pageInfo.nowPage-1}">&lt;prev
+				</c:if>
+				</a>
+				<c:forEach var="i"	begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+					<c:choose>
+						<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
+						<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+					</c:choose>
 				</c:forEach>
-				<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+				<a id="next">
+					<c:if test="${pageInfo.endPage<pageInfo.totalPage}">
+						<input type="hidden" id="nextv" value="${pageInfo.nowPage+1}">next&gt;
+					</c:if>
+				</a>
 				</td>
 			</tr>
 		</table>

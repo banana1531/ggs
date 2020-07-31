@@ -32,16 +32,4 @@ public class MyTeamDetailController {
 			return "myPage/myTeamDetail";
 		}
 		
-		//상대팀 자료 가져오기 --> ajax로 구현
-		@RequestMapping("/vsTeamDetail.gg")
-		public void vsTeamDetail() {
-			
-			//파라미터
-			//팀정보(이름)
-			
-			//비즈니스
-			//비교 자료 가져오기
-			
-		}
-		
 }

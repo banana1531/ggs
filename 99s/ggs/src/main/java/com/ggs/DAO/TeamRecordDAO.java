@@ -30,12 +30,13 @@ public class TeamRecordDAO {
 	public TeamInfoDTO teamScore(String name) {
 		TeamInfoDTO dto = new TeamInfoDTO();
 		dto.setTeamName(name);
-		return session.selectOne("teamRecord.teamScore", dto);
+		System.out.println("teamScore() dto="+dto);
+		return session.selectOne("teamRecord.teamscoreD", dto);
 	}
 	
 	//팀 목록 가져오기
 	public List<TeamInfoDTO> teamScoreList() {
-		return session.selectList("teamRecord.teamScore");
+		return session.selectList("teamRecord.teamscoreD");
 	}
 
 	
@@ -43,6 +44,14 @@ public class TeamRecordDAO {
 	public List schmatchList(TeamRecordDTO teamRecordDTO) {
 		return session.selectList("teamRecord.schmatchList", teamRecordDTO);
 	}
+
+	
+	//팀 경기 정보 업데이트
+	public int updateTeamRecord(TeamRecordDTO teamRecordDTO) {
+		return session.update("teamRecord.updateTeamRecord", teamRecordDTO);		
+	}
+
+	
 	
 	
 }

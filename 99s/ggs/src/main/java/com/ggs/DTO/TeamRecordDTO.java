@@ -12,7 +12,15 @@ public class TeamRecordDTO {
 	private String 	bteamname;		//b팀번호
 	private String 	bscore;			//b팀점수
 	private String 	stadium;		//경기장
+	private String  ggdate;         //quartz 실행을 위한 변수
 	
+	public String getGgdate() {
+		return ggdate;
+	}
+
+	public void setGgdate(String ggdate) {
+		this.ggdate = ggdate;
+	}
 	private int win;
 	private int draw;
 	private int lose;
@@ -24,6 +32,26 @@ public class TeamRecordDTO {
 	private int 	totalcnt;		//전체 데이터 숫자
 	private int		month;          //월단위 조회시
 	
+	
+	
+	
+	public TeamRecordDTO() {
+		super();
+	}
+	
+	
+	public TeamRecordDTO(String gtime, String ateamname, String ascore, String bteamname, String bscore, String stadium,
+			String ggdate) {
+		super();
+		this.gtime = gtime;
+		this.ateamname = ateamname;
+		this.ascore = ascore;
+		this.bteamname = bteamname;
+		this.bscore = bscore;
+		this.stadium = stadium;
+		this.ggdate = ggdate;
+	}
+
 	public int getMonth() {
 		return month;
 	}
@@ -130,8 +158,9 @@ public class TeamRecordDTO {
 	public String toString() {
 		return "TeamRecordDTO [gno=" + gno + ", gdate=" + gdate + ", gtime=" + gtime + ", ateamname=" + ateamname
 				+ ", ascore=" + ascore + ", bteamname=" + bteamname + ", bscore=" + bscore + ", stadium=" + stadium
-				+ ", win=" + win + ", draw=" + draw + ", lose=" + lose + ", score=" + score + ", loss=" + loss
-				+ ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + "]";
+				+ ", ggdate=" + ggdate + ", win=" + win + ", draw=" + draw + ", lose=" + lose + ", score=" + score
+				+ ", loss=" + loss + ", start=" + start + ", end=" + end + ", totalcnt=" + totalcnt + ", month=" + month
+				+ "]";
 	}
 	
 	

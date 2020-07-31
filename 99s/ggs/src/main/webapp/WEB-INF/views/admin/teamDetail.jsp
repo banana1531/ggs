@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,18 +12,14 @@
 $(function(){
 	var name=$("#name").find("input").val()
 	$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+1)
-/* 	$(".btn").click(function(){
-		var pageNo = $(this).text()
-		$("#list").load("/admin/teamRecordP?name="+name+"&pageNo="+pageNo)
-	}) */
 })
 </script>
 </head>
 <body>
    <div class="container" style="margin-top: 20px">
-	   <button><a href="/admin/teamList.gg">팀 목록</a></button>
-	   <button><a href="/admin/playerList.gg">선수 목록</a></button>
-	   <button><a href="/admin/gameList.gg">경기 목록</a></button>
+	   <a href="/admin/teamList.gg"><button>팀 목록</button></a>
+	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
+	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
    </div>
 	<div class="container">
 		<form class="form form-inline" action="/admin/teamInfoUpdate.gg">

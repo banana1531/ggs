@@ -20,13 +20,26 @@ public class TeamInfoDTO {
 	private int score;			//승점
 	private int loss;			//패점
 	private float rate;			//승률
+	private float avgScore;		//평균 득점
+	private float avgLoss;		//평균 실점
+	private int zeroScore;		//무득점
+	private int zeroLoss;       //무실점
+	private int maxScore;   	//최다득점
+	private int maxLoss;		//최다실점
 	
 	
-	public float getRate() {
-		return rate;
+	
+	public int getMaxScore() {
+		return maxScore;
 	}
-	public void setRate(float rate) {
-		this.rate = rate;
+	public void setMaxScore(int maxScore) {
+		this.maxScore = maxScore;
+	}
+	public int getMaxLoss() {
+		return maxLoss;
+	}
+	public void setMaxLoss(int maxLoss) {
+		this.maxLoss = maxLoss;
 	}
 	public String getTeamName() {
 		return teamName;
@@ -124,12 +137,47 @@ public class TeamInfoDTO {
 	public void setLoss(int loss) {
 		this.loss = loss;
 	}
+	public float getRate() {
+		return rate;
+	}
+	public void setRate(float rate) {
+		this.rate = rate;
+	}
+	public float getAvgScore() {
+		return avgScore;
+	}
+	public void setAvgScore(float avgScore) {
+		this.avgScore = avgScore;
+	}
+	public float getAvgLoss() {
+		return avgLoss;
+	}
+	public void setAvgLoss(float avgLoss) {
+		this.avgLoss = avgLoss;
+	}
+	public int getZeroScore() {
+		return zeroScore;
+	}
+	public void setZeroScore(int zeroScore) {
+		this.zeroScore = zeroScore;
+	}
+	public int getZeroLoss() {
+		return zeroLoss;
+	}
+	public void setZeroLoss(int zeroLoss) {
+		this.zeroLoss = zeroLoss;
+	}
 	@Override
 	public String toString() {
 		return "TeamInfoDTO [teamName=" + teamName + ", tel=" + tel + ", homepage=" + homepage + ", birth=" + birth
 				+ ", location=" + location + ", towner=" + towner + ", ceo=" + ceo + ", head=" + head + ", director="
 				+ director + ", history=" + history + ", stadium=" + stadium + ", win=" + win + ", draw=" + draw
-				+ ", lose=" + lose + ", score=" + score + ", loss=" + loss + "]";
+				+ ", lose=" + lose + ", score=" + score + ", loss=" + loss + ", rate=" + rate + ", avgScore=" + avgScore
+				+ ", avgLoss=" + avgLoss + ", zeroScore=" + zeroScore + ", zeroLoss=" + zeroLoss + ", maxScore="
+				+ maxScore + ", maxLoss=" + maxLoss + "]";
 	}
+	
+	
+	
 	
 }

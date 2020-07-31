@@ -2,6 +2,7 @@ package com.ggs.mypage;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.metal.MetalMenuBarUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,14 +40,17 @@ public class MyInfoController {
 
 	// 내정보 수정하기
 	@PostMapping("/myInfoModify.gg")
-	public String myInfoModify(Model model, MembersDTO member) {
+	public String myInfoModify(Model model, MembersDTO member, HttpServletRequest request) {
 		if (myInfoService.updateMyInfo(member) > 0) {
 			model.addAttribute("result", "정보가 수정되었습니다.");}
 		else {
 			model.addAttribute("result", "정보을 실패하였습니다.");}
 		
-		// 모델 지정
-		model.addAttribute("myinfo", myPageService.getMyInfo(member.getId()));
+		MembersDTO dto = myPageService.getMyInfo(member.getId());
+		HttpSession session = request.getSession();
+		session.setAttribute("UTEAM", dto.getTeam());		
+
+		model.addAttribute("myinfo", dto);
 
 		return "/myPage/myInfoModify";
 	}

@@ -35,10 +35,8 @@ public class DecService {
 	}
 
 	// 신고글 상세 내용 가져오기
-	public DeclarationDetailDTO getDetail(DeclarationDTO dto) {
-
+	public DeclarationDetailDTO getDetail(DeclarationDetailDTO dto) {
 		DeclarationDetailDTO re = declarationDAO.getDetail(dto);
-		System.out.println(re);
 		return re;
 	}
 

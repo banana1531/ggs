@@ -1,6 +1,8 @@
 package com.ggs.DAO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -35,20 +37,5 @@ public class GraphDAO {
 		//고도비만범위
 		return (ArrayList)session.selectList("graph.tBmi3", pidto);
 	}
-	//playerRecord 중복데이터 체크 -투수
-	public int precordChk(ArrayList<String> list1) {
-		return session.selectOne("graph.precordChk", list1);
-	}
-	//playerRecord 중복데이터 체크 -타자
-		public int precordChkJ(ArrayList<String> list1) {
-			return session.selectOne("graph.precordChkJ", list1);
-		}
-	//playerRecord insert -투수
-	public void prInsert(ArrayList<String> list1) {
-		session.insert("graph.prInsert", list1);
-	}
-	//playerRecord insert -타자
-	public void prInsertJ(ArrayList<String> list1) {
-		session.insert("graph.prInsertJ", list1);
-	}
+	
 }

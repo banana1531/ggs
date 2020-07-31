@@ -21,6 +21,8 @@ $(function(){
 	<a href="/admin/teamList.gg"><button>팀 목록</button></a>
 	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
 	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
+	   <a href="/admin/dataUpdate.gg?uri=teamlist"><button>경기 데이터 업데이트</button></a>
+	   <a href="/datac/c.gg?uri=playerlist"><button>선수 데이터 업데이트</button></a>
    </div>
    
    <div class="container" id="body">

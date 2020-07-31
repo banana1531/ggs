@@ -11,16 +11,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ggs.DTO.PlayerInfoDTO;
+import com.ggs.admin.DataManageService;
 import com.ggs.graph.Graphservice;
 
 @Controller
 @RequestMapping("/datac")
 public class DataCrawl {
+	
 	@Autowired
-	Graphservice gService;
+	private Graphservice gService;
+	
+	@Autowired
+	private DataManageService dataManageService;
 
 	@RequestMapping("/c.gg")
-	public void datac(PlayerInfoDTO pidto) {
+	public String datac(PlayerInfoDTO pidto, String uri) {
 		System.out.println("요청 함수 datac()!");
 
 		// 1.for 를 통해 차례대로 플레이어 인포에서 선수정보를 뽑아온다
@@ -86,10 +91,10 @@ public class DataCrawl {
 								list1.add(ptype);
 			
 								// 7.리스트를 DB와 중복확인 한다
-								int cntr = gService.precordChk(list1);
+								int cntr = dataManageService.precordChk(list1);
 								// 8. 중복이 아닐 시 insert를 진행한다
 								if (cntr == 0) {
-									gService.prInsert(list1);	
+									dataManageService.prInsert(list1);	
 								} 
 								list1.clear();
 							} 
@@ -127,10 +132,10 @@ public class DataCrawl {
 									list1.add(ptype);
 	
 									// 7-2.리스트를 DB와 중복확인 한다
-									int cntr = gService.precordChkJ(list1);									
+									int cntr = dataManageService.precordChkJ(list1);									
 									// 8-2. 중복이 아닐 시 insert를 진행한다
 									if (cntr == 0) {
-										gService.prInsertJ(list1);	
+										dataManageService.prInsertJ(list1);	
 									} 
 									list1.clear();								
 								} 
@@ -150,6 +155,10 @@ public class DataCrawl {
 			} // end try=catch 
 		} // end-for :선수정보 
 
+		if(uri.equals("gamelist"))return "redirect:/admin/gameList.gg";
+		else if(uri.equals("playerlist"))return "redirect:/admin/playerList.gg";
+		else return "redirect:/admin/teamList.gg";
+		
 	}// end-datac 
 
 }

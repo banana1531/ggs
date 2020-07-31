@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.ggs.DTO.FreeboardDTO;
+import com.ggs.DTO.BoardDTO;
 import com.ggs.DTO.InfoErrorBoardDTO;
 import com.ggs.DTO.ReplyDTO;
 import com.ggs.util.NoticePageUtil;
@@ -27,7 +27,12 @@ public class InfoErrorBoardController {
 	@GetMapping("/list")
 	public ModelAndView InfoErrorBoardList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value ="result", defaultValue="0") int result,
 			ModelAndView mv) {
+		
+		if(result!=0) {
+			mv.addObject("result", "조회권한이 없습니다.");
+		}
 		
 		NoticePageUtil pInfo = ieService.InfoErrorBoardPage(nowPage);
 		ArrayList<InfoErrorBoardDTO> InfoErrorBoardList = ieService.InfoErrorBoardList(pInfo);
@@ -42,19 +47,17 @@ public class InfoErrorBoardController {
 	
 	//게시물보기 & 댓글보기
 	@GetMapping("/detail")
-	public ModelAndView InfoErrorBoardDetail(
-			@RequestParam(value="writeno") int writeno,
+	public ModelAndView InfoErrorBoardDetail(BoardDTO boardDTO,
 			@RequestParam(value="nowPage", defaultValue="1") int nowPage,
-			@RequestParam(value="views") int views,
 			@RequestParam(value = "nowPage2", required = false, defaultValue = "1") int nowPage2,
 			ModelAndView mv) {
 		
-		ieService.hit(views,writeno);
+		ieService.hit(boardDTO.getViews(),boardDTO.getWriteno());
 		
-		ArrayList<InfoErrorBoardDTO> InfoErrorBoardDetail = ieService.InfoErrorBoardDetail(writeno, nowPage);
+		ArrayList<InfoErrorBoardDTO> InfoErrorBoardDetail = ieService.InfoErrorBoardDetail(boardDTO.getWriteno(), nowPage);
 		
-		NoticePageUtil pInfo = ieService.ReplyPage(nowPage2, writeno);
-		ArrayList<ReplyDTO> InfoErrorBoardReply = ieService.InfoErrorBoardReply(writeno, pInfo);
+		NoticePageUtil pInfo = ieService.ReplyPage(nowPage2, boardDTO.getWriteno());
+		ArrayList<ReplyDTO> InfoErrorBoardReply = ieService.InfoErrorBoardReply(boardDTO.getWriteno(), pInfo);
 		
 		mv.addObject("InfoErrorBoardDetail",InfoErrorBoardDetail);
 		mv.addObject("InfoErrorBoardReply",InfoErrorBoardReply);

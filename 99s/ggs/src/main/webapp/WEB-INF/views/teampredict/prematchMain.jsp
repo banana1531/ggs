@@ -11,9 +11,9 @@
 <body>
 	<!-- 이동버튼 -->
 	<div class="container">
-		<button><a href="/teampredict/prematchMain.gg">승부예측</a></button>
-		<button><a href="/teampredict/schmatchList.gg">경기일정</a></button>
-		<button><a href="/teampredict/rltmatchList.gg">경기결과</a></button>
+		<a href="/teampredict/prematchMain.gg"><button>승부예측</button></a>
+		<a href="/teampredict/schmatchList.gg"><button>경기일정</button></a>
+		<a href="/teampredict/rltmatchList.gg"><button>경기결과</button></a>
 	</div>
 	
 	<hr/>

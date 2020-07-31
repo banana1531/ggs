@@ -18,9 +18,28 @@ public class PreResultDTO {
 	private int     totalcnt;	//내가 참여한 횟수
 	private int 	totalpp;	//포인트 합계
 	private int 	precount;	//투표수
-	
-	
-	
+	private int 	total;		//포인트 계산을 위한 임시 변수
+	private int     start;		//목록 시작번호
+	private int 	rate;		//적중률
+		
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+	public int getStart() {
+		return start;
+	}
+	public void setStart(int start) {
+		this.start = start;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
 	public int getPrecount() {
 		return precount;
 	}
@@ -103,7 +122,8 @@ public class PreResultDTO {
 	public String toString() {
 		return "PreResultDTO [ino=" + ino + ", id=" + id + ", gno=" + gno + ", predict=" + predict + ", ppoint="
 				+ ppoint + ", gdate=" + gdate + ", bteamname=" + bteamname + ", bscore=" + bscore + ", ateamname="
-				+ ateamname + ", ascore=" + ascore + "]";
+				+ ateamname + ", ascore=" + ascore + ", totalcnt=" + totalcnt + ", totalpp=" + totalpp + ", precount="
+				+ precount + ", total=" + total + ", start=" + start + ", rate=" + rate + "]";
 	}
 	
 	

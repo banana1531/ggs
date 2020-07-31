@@ -18,5 +18,7 @@
 		<pattern>/Freeboard/*</pattern>
 		<pattern>/graph/*</pattern>
 		<pattern>/inforerrorboard/*</pattern>
+		<pattern>/home.gg</pattern>
+		<pattern>/crowd/*</pattern>
 	</decorator>
 </decorators>

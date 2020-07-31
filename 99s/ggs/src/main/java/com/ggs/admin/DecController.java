@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ggs.DTO.BoardDTO;
 import com.ggs.DTO.DeclarationDTO;
+import com.ggs.DTO.DeclarationDetailDTO;
 import com.ggs.DTO.DeclarationListDTO;
 import com.ggs.util.PageUtil;
 
@@ -43,20 +44,7 @@ public class DecController {
 		return "/admin/deSummary";
 	}
 	
-	//신고글 접수
-	@RequestMapping("/decInsert.gg")
-	public String decInsert(DeclarationDTO declarationDTO, Model model, int nowPage, int views) {
-		System.out.println("DecController.decInsert");
-		System.out.println("declarationDTO="+declarationDTO);
-		if(service.decInsert(declarationDTO)>0)
-			model.addAttribute("result", "신고가 정상적으로 접수되었습니다.");
-		else model.addAttribute("result", "신고 접수에 실패하였습니다. 다시 시도해주시기 바랍니다.");
-		
-		if(declarationDTO.getBoardname().equals("freeboard"))
-			return "redirect:/freeboard/list";
-		else
-			return "redirect:/inforerrorboard/list";
-	}
+	
 	
 	//미처리건 목록 보기
 	@RequestMapping("/declList.gg")
@@ -73,7 +61,7 @@ public class DecController {
 	
 	//미처리건 - 신고처리 화면보기
 	@RequestMapping("/declDetail.gg")
-	public String declDetail(Model model, DeclarationDTO dto) {
+	public String declDetail(Model model, DeclarationDetailDTO dto) {
 		model.addAttribute("detail", service.getDetail(dto));
 		return "/admin/declDetail";
 	}

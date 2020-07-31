@@ -15,6 +15,16 @@ $(function(){
 		var month = $("#month").val();
 		location="/admin/gameList.gg?pageNo="+pageNo+"&month="+month
 	})
+	$("#prev").click(function(){
+		var pageNo = $("#prevv").val();
+		var month = $("#month").val();
+		location="/admin/gameList.gg?pageNo="+pageNo+"&month="+month
+	})
+	$("#next").click(function(){
+		var pageNo = $("#nextv").val();
+		var month = $("#month").val();
+		location="/admin/gameList.gg?pageNo="+pageNo+"&month="+month
+	})
 })
 </script>
 </head>
@@ -23,6 +33,8 @@ $(function(){
 	   <a href="/admin/teamList.gg"><button>팀 목록</button></a>
 	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
 	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
+	   <a href="/admin/dataUpdate.gg?uri=gamelist"><button>경기 데이터 업데이트</button></a>
+	   <a href="/datac/c.gg?uri=playerlist"><button>선수 데이터 업데이트</button></a>
    </div>
 
    <div class="container">
@@ -60,11 +72,22 @@ $(function(){
 					<td><fmt:formatDate value="${game.gdate }" pattern="yyyy-MM-dd"/></td>
 					<td>${game.gtime }</td>
 					<td>${game.ateamname }</td>
-					<td>${game.ascore }</td>
-					<td>${game.bscore }</td>
+					<c:choose>
+						<c:when test="${game.ascore<0 }">
+							<td colspan="2" style="padding-left: 60px">
+								경기 취소
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>${game.ascore }</td>
+							<td>${game.bscore }</td>
+						</c:otherwise>
+					</c:choose>
+					
+					
 					<td>${game.bteamname }</td>
 					<td>${game.stadium }</td>
-					<td><button type="button" class="btn " data-toggle="modal" data-target="#myModal${game.gno}">수정하기</button></td>
+					<td style="padding: 0"><button type="button" class="btn " data-toggle="modal" data-target="#myModal${game.gno}">수정하기</button></td>
 					
 					
 					<!-- Modal -->
@@ -102,16 +125,23 @@ $(function(){
 				</tr>
 			</c:forEach>
 			<tfoot>
-				<tr align="center"><td colspan="7">
-				<c:if test="${pageInfo.startPage>1}"> &lt;prev</c:if>
-					<c:forEach var="i"
-							begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
-						<c:choose>
-							<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
-							<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
-						</c:choose>
-					</c:forEach>
-					<c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+				<tr align="center"><td colspan="8">
+				<a id="prev">
+				<c:if test="${pageInfo.startPage>1}">
+					<input type="hidden" id="prevv" value="${pageInfo.nowPage-1}">&lt;prev
+				</c:if>
+				</a>
+				<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+					<c:choose>
+						<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
+						<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+					</c:choose>
+				</c:forEach>
+				<a id="next">
+					<c:if test="${pageInfo.endPage<pageInfo.totalPage}">
+						<input type="hidden" id="nextv" value="${pageInfo.nowPage+1}">next&gt;
+					</c:if>
+				</a>
 				</td></tr>
 			</tfoot>
 		</table>

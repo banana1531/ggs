@@ -18,7 +18,12 @@ public class GrantMCheck extends HandlerInterceptorAdapter {
 		if(boardM==null || boardM==0) {
 			//조회 권한 없음.
 			System.out.println("조작 권한 없음");
-			response.sendRedirect("/member/loginFrm.gg");
+			String uri = request.getRequestURI();
+			uri=(uri.substring(1));
+			uri=uri.substring(0, uri.indexOf("/"));
+			uri="/"+uri+"/detail?"+request.getQueryString()+"&re=1";
+			System.out.println(uri);
+			response.sendRedirect(uri);
 			return false;
 		}else {
 			//로그인이 된경우

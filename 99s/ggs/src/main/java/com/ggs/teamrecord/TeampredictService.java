@@ -3,10 +3,14 @@ package com.ggs.teamrecord;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ggs.DAO.MembersDAO;
 import com.ggs.DAO.PreResultDAO;
 import com.ggs.DAO.ReplyDAO;
 import com.ggs.DAO.SchMatchDAO;
@@ -38,6 +42,8 @@ public class TeampredictService {
 	@Autowired
 	private TeamRecordDAO teamRecordDAO;
 	
+	@Autowired
+	private MembersDAO membersDAO;
 	
 	//아이디와 포인트 가져오기
 	public List<MembersDTO> getRankingList(String id) {
@@ -47,13 +53,11 @@ public class TeampredictService {
 	public List<MembersDTO> getpointList(Integer ppoint) {
 		return teampredictdao.getppoint(ppoint);
 	}
-	public List<TeamRecordDTO> getTodayMatchGno(Integer gno) {
-		return teampredictdao.getTodayMatchGno(gno);
-	}
+	
 	
 	//오늘날짜에 해당하는 경기리스트 가져오기
-	public List<TeamRecordDTO> getTodayMatch(String ateamname, String bteamname) {
-		return teampredictdao.getTodayMatch(ateamname,bteamname);
+	public List<TeamRecordDTO> getTodayMatch() {
+		return teampredictdao.getTodayMatch();
 	}
 	//해당하는 경기리스트 출력해주기
 	
@@ -112,18 +116,22 @@ public class TeampredictService {
 			
 		}else{
 			result = "[['predict','precount'],['" + dto.getAteamname() + "'," + preResultDTO.getTotalcnt()
-					+ ",],['무승부'," + preResultDTO.getTotalpp() + ",],['" + dto.getBteamname() + "',"
-					+ preResultDTO.getPrecount() + ",]]";
-			System.out.println("result 길이는?=" + result.length());
+					+ "],['무승부'," + preResultDTO.getTotalpp() + "],['" + dto.getBteamname() + "',"
+					+ preResultDTO.getPrecount() + "]]";
 		}
 		return result;
 	}
 
 	 //투표결과 DB저장
-	public int insertRe(PreResultDTO dto) {
+	public int insertRe(PreResultDTO dto, HttpServletRequest request) {
 		int result = teampredictdao.checkList(dto).size();
 		System.out.println("insertRe() result="+result);
-		if(result<1) teampredictdao.insertRe(dto);
+		if(result<1) {
+			teampredictdao.insertRe(dto);
+			membersDAO.payPoint(dto);
+			HttpSession session = request.getSession();
+			session.setAttribute("UPOINT", (membersDAO.getMyInfo(dto.getId())).getPpoint());
+		}
 		return result;
 	}
 	

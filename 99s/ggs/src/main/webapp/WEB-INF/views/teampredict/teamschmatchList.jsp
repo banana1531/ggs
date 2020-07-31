@@ -56,7 +56,7 @@ $(function(){
 			<tr align="center">
 				<td>경기날짜</td>
 				<td>경기시간</td>
-				<td>경기일정</td>
+				<td colspan="5" width="60%">경기일정</td>
 				<td>구장</td>
 			</tr>
 			</thead>
@@ -66,10 +66,15 @@ $(function(){
 				<tr class="dto" align="center">
 					<td width="15%"><fmt:formatDate value="${list.gdate}" pattern="yyyy-MM-dd" /></td>
 					<td width="15%">${list.gtime}</td>
-					<td>
-					<img width="50" height="30" src="/resources/img/${list.ateamname}.jpg">
-					${list.ateamname} vs ${list.bteamname}
-					<img width="50" height="30" src="/resources/img/${list.bteamname}.jpg"></td>
+					<td  align="right" width="18%">${list.ateamname}</td>
+					<td align="right" width="50">
+						<img width="50" height="30" src="/resources/img/${list.ateamname}.jpg"> 
+					</td>
+					<td width="5">vs</td>
+					<td align="left" width="50">
+						<img width="50" height="30" src="/resources/img/${list.bteamname}.jpg">
+					</td>
+					<td align="left" width="18%">${list.bteamname}</td>
 					<td>${list.stadium}
 					<input type="hidden" id="ateamname" value="${list.ateamname}">
 					<input type="hidden" id="bteamname" value="${list.bteamname}">
@@ -79,11 +84,17 @@ $(function(){
 			</c:forEach>
 			<tfoot>
 			<tr align="center">
-				<td colspan="4"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
+				<td colspan="8"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
 					<c:forEach var="i" begin="${pageInfo.startPage}"
 						end="${pageInfo.endPage}">
-					[<a class="btn">${i}</a>]
-				</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+							<c:choose>
+								<c:when test="${pageInfo.nowPage==i}">
+									<b>[<a class="btn">${i}</a>]
+									</b>
+								</c:when>
+								<c:otherwise>[<a class="btn">${i}</a>]</c:otherwise>
+							</c:choose>
+						</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
 				</td>
 			</tr>
 			</tfoot>

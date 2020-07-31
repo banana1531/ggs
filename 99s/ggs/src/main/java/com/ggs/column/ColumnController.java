@@ -165,7 +165,12 @@ public class ColumnController {
 	@RequestMapping("/list")
 	public ModelAndView cBoardList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value ="result", defaultValue="0") int result,
 			ModelAndView mv) {
+		
+		if(result!=0) {
+			mv.addObject("result", "조회권한이 없습니다.");
+		}
 		
 		ColumnPageUtil cPinfo = cService.cBoardPage(nowPage);
 		ArrayList<BoardDTO> cBoardList = cService.cBoardList(cPinfo);

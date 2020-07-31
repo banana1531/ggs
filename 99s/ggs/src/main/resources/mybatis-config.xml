@@ -18,5 +18,7 @@
 		<typeAlias type="com.ggs.DTO.AhFiveDTO" alias="AhFiveDTO" />
 		<typeAlias type="java.lang.Integer" alias="int" />
 		<typeAlias type="java.lang.String" alias="string" />
+		
 	</typeAliases>
+	
 </configuration>

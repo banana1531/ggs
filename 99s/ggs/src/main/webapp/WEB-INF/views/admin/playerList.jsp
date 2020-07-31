@@ -19,7 +19,20 @@ $(function(){
 		var pno=$(this).find("#pno").val();
 		location = "/admin/playerDetail.gg?pno="+pno
 	})
+	$("#next").click(function(){
+		var pageNo = $("#nextv").val();
+		var option=$("#option").val();
+		var search=$("#dsearch").val();
+		location="/admin/playerList.gg?pageNo="+pageNo+"&option="+option+"&search="+search
+	})
+	$("#prev").click(function(){
+		var pageNo = $("#prevv").val();
+		var option=$("#option").val();
+		var search=$("#dsearch").val();
+		location="/admin/playerList.gg?pageNo="+pageNo+"&option="+option+"&search="+search	
+	})
 })
+
 </script>
 
 </head>
@@ -28,6 +41,8 @@ $(function(){
 <a href="/admin/teamList.gg"><button>팀 목록</button></a>
 	   <a href="/admin/playerList.gg"><button>선수 목록</button></a>
 	   <a href="/admin/gameList.gg"><button>경기 목록</button></a>
+	   <a href="/admin/dataUpdate.gg?uri=playerlist"><button>경기 데이터 업데이트</button></a>
+	   <a href="/datac/c.gg?uri=playerlist"><button>선수 데이터 업데이트</button></a>
    </div>
 
    <div class="container" id="body">
@@ -74,17 +89,24 @@ $(function(){
 						</tr>
 					</c:forEach>
 					<tr align="center">
-						<td colspan="4"><c:if test="${pageInfo.startPage>1}">&lt;prev</c:if>
-							<c:forEach var="i" begin="${pageInfo.startPage}"
-								end="${pageInfo.endPage}">
-								<c:choose>
-									<c:when test="${pageInfo.nowPage==i}">
-										<b>[<a class="page">${i}</a>]
-										</b>
-									</c:when>
-									<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
-								</c:choose>
-							</c:forEach> <c:if test="${pageInfo.endPage<pageInfo.totalPage}">next&gt;</c:if>
+						<td colspan="4">
+						<a id="prev">
+				<c:if test="${pageInfo.startPage>1}">
+					<input type="hidden" id="prevv" value="${pageInfo.nowPage-1}">&lt;prev
+				</c:if>
+				</a>
+				<c:forEach var="i"
+						begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+		<c:choose>
+							<c:when test="${pageInfo.nowPage==i}"><b>[<a class="page">${i}</a>]</b></c:when>
+							<c:otherwise>[<a class="page">${i}</a>]</c:otherwise>
+						</c:choose>
+				</c:forEach>
+				<a id="next">
+					<c:if test="${pageInfo.endPage<pageInfo.totalPage}">
+						<input type="hidden" id="nextv" value="${pageInfo.nowPage+1}">next&gt;
+					</c:if>
+				</a>
 						</td>
 					</tr>
 				</c:when>

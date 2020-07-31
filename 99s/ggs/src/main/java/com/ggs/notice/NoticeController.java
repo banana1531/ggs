@@ -29,7 +29,12 @@ public class NoticeController {
 	@RequestMapping("/list")
 	public ModelAndView noticeList(
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") int nowPage,
+			@RequestParam(value ="result", defaultValue="0") int result,
 			ModelAndView mv) {
+		
+		if(result!=0) {
+			mv.addObject("result", "조회권한이 없습니다.");
+		}
 		
 		NoticePageUtil pInfo = nService.noticePage(nowPage);
 		ArrayList<NoticeDTO> noticeList = nService.noticeList(pInfo);

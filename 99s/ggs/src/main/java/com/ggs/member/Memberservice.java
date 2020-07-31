@@ -33,14 +33,7 @@ public class Memberservice {
 			session.setAttribute("UBOARDV",result.getBoardV());
 			session.setAttribute("ULOGIN",result.getLogin());
 			session.setAttribute("UPOINT",result.getPpoint());
-			System.out.println("로그인 성공 "+session.getAttribute("UID")+"/"+session.getAttribute("UEMAIL"));
-			
-			//최종 로그인 시간 확인해서 1일이상 차이가 발생할 경우 db 업데이트
-			if(mDAO.chkLastLogin(result.getId())>0) {
-				mDAO.insertLoginDate(result.getId());
-				System.out.println(result.getId()+"의 최종 로그인 일자가 기록되었습니다.");
-			}
-						
+			System.out.println("로그인 성공 "+session.getAttribute("UID")+"/"+session.getAttribute("UEMAIL"));			
 		}
 		return result;	
 	}
@@ -68,5 +61,19 @@ public class Memberservice {
 	public void joinProc(MembersDTO mdto) {
 		System.out.println("Memberservice-joinProc()!");
 		mDAO.joinProc(mdto);
+	}
+	
+	//로그인 기록 체크
+	public int loginChk(MembersDTO result) {
+		System.out.println("result="+result);
+		//최종 로그인 시간 확인해서 1일이상 차이가 발생할 경우 db 업데이트
+		int r=mDAO.chkLastLogin(result.getId());
+		System.out.println("r="+r);
+		if(r==0||r>1) {
+			mDAO.insertLoginDate(result.getId());
+			mDAO.updatePPoint(result);
+			return r;
+		}
+		return 1;
 	}
 }

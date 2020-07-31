@@ -12,7 +12,7 @@
 	
 	<!-- 팀 기본정보 목록 가져오기 -->
 	<select id="teamList" resultType="com.ggs.DTO.TeamInfoDTO">
-		select * from teaminfo where teamName !='경기없음';
+		select * from teaminfo where teamName !='경기없음' and teamName !='없음';
 	</select>
 	
 	<!-- 팀 목록 가져오기 -->

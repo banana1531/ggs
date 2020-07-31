@@ -70,7 +70,7 @@
 	<!-- 회원가입 처리 -->
 	<insert id="joinProc" parameterType="com.ggs.DTO.MembersDTO">
 		insert into members
-		values(#{id},#{name},#{birth},#{team},#{pw},#{gender},#{email},1,1,1,0,NOW())
+		values(#{id},#{name},#{birth},#{team},#{pw},#{gender},#{email},1,1,1,50,NOW())
 	</insert>
 	
 	<!-- 회원탈퇴 처리 하기 -->
@@ -78,6 +78,19 @@
 		update members set login=0 where id=#{id}
 	</update>
 	
+	<!-- 회원 포인트 업데이트 하기 -->
+	<update id="updatePPoint" parameterType="com.ggs.DTO.PreResultDTO">
+		update members set ppoint=ppoint+#{ppoint} where id=#{id}
+	</update>
 	
+	<!-- 로그인으로 인한 포인트 추가하기 -->
+	<update id="updatePoint" parameterType="com.ggs.DTO.MembersDTO">
+		update members set ppoint=ppoint+10 where id=#{id}
+	</update>
+	
+	<!-- 승부예측 포인트 차감하기 -->
+	<update id="payPoint" parameterType="com.ggs.DTO.PreResultDTO">
+		update members set ppoint=ppoint-10 where id=#{id}
+	</update>
 </mapper>
 

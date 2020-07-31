@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.ggs.DTO.MemberStaticDTO;
 import com.ggs.DTO.MembersDTO;
+import com.ggs.DTO.PreResultDTO;
 
 @Repository
 public class MembersDAO {
@@ -106,4 +107,20 @@ public class MembersDAO {
 	public MemberStaticDTO memberSummary() {
 		return session.selectOne("loginCount.memberSummary");
 	}
+	
+	//승부예측 포인트 정리
+	public int updatePPoint(PreResultDTO dto2) {
+		return session.update("members.updatePPoint", dto2);	
+	}
+	
+	//로그인시 포인트 정리
+	public int updatePPoint(MembersDTO dto) {
+		return session.update("members.updatePoint", dto);	
+	}
+	
+	//승부예측 회원 포인트 차감하기
+	public int payPoint(PreResultDTO dto) {
+		return session.update("members.payPoint",dto);		
+	}
+	
 }
