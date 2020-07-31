@@ -102,7 +102,7 @@
 					<td colspan="2" align="center">
 						<button class="btn" style="width: 80px">수정하기</button>
 						<button type="reset" class="btn" style="width: 80px">취소</button>
-						<a href="/mypage/leaveForm.gg"><button type="button" class="btn" style="width: 80px">탈퇴하기</button></a>
+						<a href="/mypage/leaveForm.gg?email=${myinfo.email }"><button type="button" class="btn" style="width: 80px">탈퇴하기</button></a>
 					</td>
 				</tr>
 			</table>
