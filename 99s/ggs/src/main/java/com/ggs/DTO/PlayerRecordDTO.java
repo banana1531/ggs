@@ -1,4 +1,4 @@
-package com.ggs.DTO;
+﻿package com.ggs.DTO;
 
 //선수 경기 기록 DTO
 public class PlayerRecordDTO {
@@ -25,28 +25,28 @@ public class PlayerRecordDTO {
 	private String sagu;		//사구
 	private String samjin;		//삼진
 	private String tugu;		//투구수
-	private String whip;		//
-	private String tayul;		//
-	private String culu;		//
-	private String ops;			//
-	private String era;			//
-	private String avli;		//
-	private String re24;		//
-	private String wpa;			//
-	private String gsc;			//
-	private String gdec;		//
-	private String gangyuk;		//
-	private String tasun;		//
-	private String p;			//
-	private String djum;		//
-	private String ruta;		//
-	private String tajum;		//
-	private String doru;		//
-	private String dosil;		//
-	private String byungsal;	//
-	private String hita;		//
-	private String hibi;		//
-	private String jangta;		//
+	private String whip;		//(피안타+볼넷)/이닝
+	private String tayul;		//타율
+	private String culu;		//출루율
+	private String ops;			//출루율 + 장타율
+	private String era;			//평균자책점
+	private String avli;		//경기 중 만든 타석의 찬스 빈도 평균
+	private String re24;		//선수에 대해 관중이 느끼는 기대치 or 영양가
+	private String wpa;			//선수의 승리기여도
+	private String gsc;			//피득 점수 (기본 50으로 잡고 삼진이나 범퇴를 했을시 +1 출루를 혀용했을시 -2)
+	private String gdec;		//승리투수 횟수
+	private String gangyuk;		//간격
+	private String tasun;		//타순
+	private String p;			//상세포지션
+	private String djum;		//득점
+	private String ruta;		// *루타
+	private String tajum;		//타점
+	private String doru;		//도루
+	private String dosil;		//도루실패
+	private String byungsal;	//병살타
+	private String hita;		//희생타
+	private String hibi;		//희생 플라이(2사 미만에서 플라이발생시 3루주자가 득점하는 상황)
+	private String jangta;		//장타율
 	
 	private String name;
 	private int start;	        //페이지 시작번호
