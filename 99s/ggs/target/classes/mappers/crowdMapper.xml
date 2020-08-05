@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crowd">
+	
+	<!-- bmi 리스트  -->
+	<select id="historyList" resultType="AhFiveDTO"> 
+		SELECT years, samsungt, samsunga, kiat, kiaa, lottet, lottea, lgt, lga, doosant, doosana, hanwhat, hanwhaa, skt, ska, kiwoomt, kiwooma, nct, nca, ktt, kta, totalt, totala 
+		FROM ahFive
+		ORDER BY years DESC
+	</select>
+	
+	<select id="historyListFoot" resultType="AhFiveDTO">
+		SELECT 
+				sum(samsungt) totalsamsungt, round(AVG(samsunga)) avgsamsunga,
+				sum(kiat) 	  totalkiat,     round(AVG(kiaa)) 	  avgkiaa,
+				sum(lottet)   totallottet, 	 round(AVG(lottea))   avglottea,
+				sum(lgt) 	  totallgt, 	 round(AVG(lga)) 	  avglga,
+				sum(doosant)  totaldoosant,  round(AVG(doosana))  avgdoosana,
+				sum(hanwhat)  totalhanwhat,  round(AVG(hanwhaa))  avghanwhaa,
+				sum(skt) 	  totalskt, 	 round(AVG(ska)) 	  avgska,
+				sum(kiwoomt)  totalkiwoomt,  round(AVG(kiwooma))  avgkiwooma,
+				sum(nct) 	  totalnct, 	 round(AVG(nca)) 	  avgnca,
+				sum(ktt) 	  totalktt, 	 round(AVG(kta)) 	  avgkta,
+				sum(totalt)   totaltotalt, 	 round(AVG(totala))   avgtotala
+		FROM ahFive
+	</select>
+	
+	<select id="crowdHistoryGraph" resultType="AhFiveDTO">
+		SELECT years AS yearsChar, totalt AS totaltChar FROM ahFive
+	</select>
+	
+	<select id="crowdHistoryGraph2" resultType="AhFiveDTO">
+		SELECT 
+				years AS yearsChar, 
+				totalt AS totaltChar, 
+				samsungt AS samsungtChar,
+				kiat AS kiatChar,
+				lottet AS lottetChar,
+				lgt AS lgtChar,
+				doosant AS doosantChar,
+				hanwhat AS hanwhatChar,
+				skt AS sktChar,
+				kiwoomt AS kiwoomtChar,
+				nct AS nctChar,
+				ktt AS kttChar
+ 		FROM ahFive
+	</select>
+<!-- 	<select id="historyList" resultType="com.ggs.DTO.AudienceHistoryDTO"> 
+	select cno from authorsHistory 
+	</select> -->
+
+
+	
+</mapper>
+
